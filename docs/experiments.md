@@ -41,6 +41,8 @@ download, use a new directory rather than trusting a partial cache.
 All 100 network/property pairs are audited before any solving. Eligibility uses
 the existing verification grammar and never filenames, claimed labels, runtime,
 or solver results. Only explicit unsupported semantics justify exclusion.
+The full category uses original ONNX opset 9 models; support was completed before
+solving, with unchanged FLOAT32 Gemm/ReLU semantics and no opset conversion.
 Missing/corrupt artifacts and unexpected audit failures abort the preflight for
 repair, rather than reducing the eligible denominator. Conversion/solver errors,
 validation failures, and timeouts after selection remain eligible records.

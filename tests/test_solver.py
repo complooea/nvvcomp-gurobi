@@ -5,9 +5,10 @@ from nvvcomp_gurobi.verification import ExecutionLimits, verify
 pytestmark = pytest.mark.solver
 
 
-def test_relu_sat_with_independently_replayed_witness(instance_factory):
+@pytest.mark.parametrize("opset", [9, 17])
+def test_relu_sat_with_independently_replayed_witness(instance_factory, opset):
     result = verify(
-        instance_factory("(assert (>= Y_0 0.5))\n(assert (<= Y_1 0))"),
+        instance_factory("(assert (>= Y_0 0.5))\n(assert (<= Y_1 0))", opset=opset),
         ExecutionLimits(30),
     )
     assert result.outcome == "sat", result.diagnostic
@@ -24,8 +25,9 @@ def test_relu_sat_with_independently_replayed_witness(instance_factory):
 
 
 @pytest.mark.parametrize("assertion", ["(assert (<= Y_0 -2))", "(assert (>= Y_1 2))"])
-def test_unreachable_output_is_numerical_unsat(instance_factory, assertion):
-    result = verify(instance_factory(assertion), ExecutionLimits(30))
+@pytest.mark.parametrize("opset", [9, 17])
+def test_unreachable_output_is_numerical_unsat(instance_factory, assertion, opset):
+    result = verify(instance_factory(assertion, opset=opset), ExecutionLimits(30))
     assert result.outcome == "unsat", result.diagnostic
     assert result.reason == "infeasible"
     assert result.solver_status == 3

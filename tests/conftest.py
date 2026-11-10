@@ -69,7 +69,9 @@ def worker_startup(tmp_path: Path, monkeypatch):
 def instance_factory(tmp_path: Path):
     """Analytic network: Y_0 = X_0, Y_1 = max(X_1, 0)."""
 
-    def make(assertions: str, *, op: str = "Relu", trans_a: int = 0) -> Instance:
+    def make(
+        assertions: str, *, op: str = "Relu", trans_a: int = 0, opset: int = 17
+    ) -> Instance:
         nodes = [
             helper.make_node(
                 "Gemm", ["x", "w1", "b1"], ["h"], transB=1, transA=trans_a
@@ -94,7 +96,7 @@ def instance_factory(tmp_path: Path):
             ],
         )
         model = helper.make_model(
-            graph, opset_imports=[helper.make_opsetid("", 17)], ir_version=8
+            graph, opset_imports=[helper.make_opsetid("", opset)], ir_version=8
         )
         network = tmp_path / "network.onnx"
         onnx.save(model, network)

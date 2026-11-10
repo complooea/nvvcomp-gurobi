@@ -58,7 +58,7 @@ recorded separately. There is no memory limit parameter or automatic hardware tu
 
 The subset is deliberately smaller than general ONNX and VNN-LIB:
 
-- ONNX default-domain opsets 13–21; one FLOAT32 input and one FLOAT32 output of
+- ONNX default-domain opsets 9 and 13–21; one FLOAT32 input and one FLOAT32 output of
   static shape `[1, width]`, C-order variable indexing.
 - A connected sequential chain of `Gemm` layers, optionally followed by one
   `Relu` each, ending in `Gemm`. No branching, custom operators, local functions,
@@ -66,6 +66,11 @@ The subset is deliberately smaller than general ONNX and VNN-LIB:
 - Gemm weights are finite FLOAT32 matrix initializers; biases are finite FLOAT32
   initializers of shape `[width]` or `[1, width]`. `alpha=beta=1`, `transA=0`;
   `transB=0` and `transB=1` are supported and checked. ONNX consistency is validated.
+  Opset 9 is required by the audited SAT ReLU category. Its Gemm-9 and Relu-6
+  schemas have the same FLOAT32 affine/broadcast/ReLU semantics used here as
+  Gemm-13 and Relu-13; later optional-input and added-dtype differences are outside
+  our grammar. Original models are neither converted nor rewritten for solving
+  or replay. Tiny known-answer SAT/UNSAT tests exercise opset 9 directly.
 - Exactly one declaration `(declare-const X_i Real)` / `(declare-const Y_i Real)`
   for each contiguous zero-based model variable, before its use.
 - Repeated assertions form the **conjunction**. Each assertion is

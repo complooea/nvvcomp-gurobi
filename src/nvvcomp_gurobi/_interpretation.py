@@ -119,9 +119,9 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
     if (
         len(model.opset_import) != 1
         or model.opset_import[0].domain not in ("", "ai.onnx")
-        or not 13 <= model.opset_import[0].version <= 21
+        or model.opset_import[0].version not in (9, *range(13, 22))
     ):
-        raise Unsupported("Supported ONNX default opsets are 13 through 21")
+        raise Unsupported("Supported ONNX default opsets are 9 and 13 through 21")
     sizes = []
     for value in [graph.input[0], graph.output[0]]:
         tensor = value.type.tensor_type
