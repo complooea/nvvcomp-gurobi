@@ -16,3 +16,6 @@ wheels/
 .coverage.*
 coverage.xml
 htmlcov/
+
+# Original benchmark downloads; inventories/hashes are retained with experiments.
+.benchmarks/

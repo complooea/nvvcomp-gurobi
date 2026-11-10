@@ -6,7 +6,8 @@ provide an initial comparison; no performance winner is presumed.
 
 The initial verifier supports narrow sequential FLOAT32 affine/ReLU ONNX networks
 and conjunctive VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
-pinned VNN-COMP validation code. Experiment orchestration is separate future work.
+pinned VNN-COMP validation code. Manifest-driven experiments retain per-instance
+records and produce reports without rerunning the solver.
 
 ## Getting started
 
@@ -32,6 +33,9 @@ print(result.outcome, result.reason, result.validation)
 
 See [the verification contract](docs/verification.md) for supported syntax,
 numerical assumptions, result meanings, dependencies, and competition scripts.
+
+See [experiment instructions](docs/experiments.md) for the pinned full-category
+audit, local execution, saved records, and solver-free reports.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for checks, testing, CI, and the solo
 development workflow, and [GLOSSARY.md](GLOSSARY.md) for domain terminology.
