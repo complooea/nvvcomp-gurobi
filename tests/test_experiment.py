@@ -202,3 +202,24 @@ def test_interrupted_invocation_is_recorded_not_silently_retried(
     run_experiment(manifest, output, verification=interrupted)
     summary = report_experiment(output)
     assert summary["unresolved_reasons"] == {"interrupted": 1}
+
+
+def test_report_retains_unavailable_preparation_time_without_inventing_zero(
+    tmp_path, instance_factory
+):
+    instance_factory("(assert (>= Y_0 0))")
+    manifest = tmp_path / "instances.csv"
+    manifest.write_text("network.onnx,property.vnnlib,100\n")
+    output = tmp_path / "experiment"
+    run_experiment(
+        manifest, output, verification=lambda *_: VerificationResult(reason="error")
+    )
+    path = output / "records/0000.json"
+    record = json.loads(path.read_text())
+    record["preparation_seconds"] = None
+    path.write_text(json.dumps(record))
+    summary = report_experiment(output)
+    assert summary["recorded"] == 1
+    assert summary["corrupt"] == []
+    assert summary["preparation_seconds"]["count"] == 0
+    assert summary["preparation_seconds"]["median"] is None

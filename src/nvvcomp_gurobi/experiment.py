@@ -413,7 +413,8 @@ def report_experiment(output: Path) -> dict:
         validation[result["validation"] or "none"] += 1
         if record["invocation_seconds"] is not None:
             invocation_times.append(record["invocation_seconds"])
-        preparation_times.append(record["preparation_seconds"])
+        if record["preparation_seconds"] is not None:
+            preparation_times.append(record["preparation_seconds"])
         if runtime is not None:
             runtimes.append(runtime)
         if result["outcome"] != "unknown":
@@ -427,6 +428,7 @@ def report_experiment(output: Path) -> dict:
         )
     eligible = sum(entry["eligible"] for entry in audit["instances"])
     summary = {
+        "reporter_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "listed": len(audit["instances"]),
         "eligible": eligible,
         "excluded": sum(exclusions.values()),
