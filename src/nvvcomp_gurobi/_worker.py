@@ -91,6 +91,10 @@ def run(request: dict) -> VerificationResult:
             onnx.shape_inference.InferenceError,
         ) as exc:
             raise Unsupported(str(exc)) from exc
+        result.provenance["replay_property"] = {
+            "normalization": "Whitespace/comments only; statement and operand order preserved",
+            "sha256": hashlib.sha256(prop.replay_text.encode("utf-8")).hexdigest(),
+        }
         result.timings[stage] = time.monotonic() - stage_start
         _checkpoint(request, result)
         _remaining(request)
@@ -191,9 +195,9 @@ def run(request: dict) -> VerificationResult:
                     )
 
                     network = Path("original.onnx")
-                    property_file = Path("original.vnnlib")
+                    property_file = Path("replay.vnnlib")
                     network.write_bytes(contents["onnx"])
-                    property_file.write_bytes(contents["vnnlib"])
+                    property_file.write_text(prop.replay_text)
                     candidate = np.asarray(inputs.getAttr("X"), dtype=np.float32)
                     replay = predict_with_onnxruntime(str(network), candidate)
                     if (

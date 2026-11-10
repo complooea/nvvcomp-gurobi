@@ -25,6 +25,7 @@ class Property:
     lower: list[float]
     upper: list[float]
     comparisons: list[Comparison]
+    replay_text: str
 
 
 def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property:
@@ -32,6 +33,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
     text = re.sub(r";[^\n]*", "", text)
     declarations: set[str] = set()
     comparisons = []
+    replay_statements = []
     lower, upper = [-math.inf] * num_inputs, [math.inf] * num_inputs
     expected = {f"X_{i}" for i in range(num_inputs)} | {
         f"Y_{i}" for i in range(num_outputs)
@@ -58,6 +60,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
             if name not in expected or name in declarations:
                 raise Unsupported(f"Duplicate or out-of-range declaration: {name}")
             declarations.add(name)
+            replay_statements.append(f"(declare-const {name} Real)")
         elif assertion:
             operator, left, right = assertion.groups()
             if left not in declarations:
@@ -91,6 +94,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
                     upper[variable] = min(upper[variable], value)
             else:
                 comparisons.append(Comparison(left, operator, value))
+            replay_statements.append(f"(assert ({operator} {left} {right}))")
         else:
             raise Unsupported(f"Unsupported VNN-LIB statement: {statement}")
     if declarations != expected:
@@ -99,7 +103,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
         raise Unsupported("Every input requires finite lower and upper box bounds")
     if not comparisons:
         raise Unsupported("At least one asserted output comparison is required")
-    return Property(lower, upper, comparisons)
+    return Property(lower, upper, comparisons, "\n".join(replay_statements) + "\n")
 
 
 def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:

@@ -169,3 +169,18 @@ gp.MVar.getAttr = get_attr
     assert result.solver_status == 2
     assert result.validation == "strict"
     assert "validation" in result.timings
+
+
+@pytest.mark.parametrize("layout", ["single_line", "closing_whitespace"])
+def test_accepted_whitespace_layout_replays_the_same_property(instance_factory, layout):
+    instance = instance_factory("(assert (>= Y_0 0.5))\n(assert (<= Y_1 0))")
+    original = instance.vnnlib_path.read_text()
+    if layout == "single_line":
+        original = original.replace("\n", " ")
+    else:
+        original = original.replace(")", " \t)")
+    instance.vnnlib_path.write_text(original)
+    result = verify(instance, ExecutionLimits(30))
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
+    assert instance.vnnlib_path.read_text() == original

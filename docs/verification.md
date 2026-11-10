@@ -80,6 +80,13 @@ The subset is deliberately smaller than general ONNX and VNN-LIB:
   expressed using both non-strict inequalities. Distinct-output restriction also
   avoids the pinned validator's self-comparison coefficient-overwrite behavior.
 
+For replay, whitespace/comments are normalized into one statement per line,
+without changing statement order, operands, numeric spellings, declarations, or
+assertions. This accommodates the pinned validator's line-oriented parser even
+when the original uses multiple statements per line or spaces before `)`. The
+original artifact is unchanged and its hash retained; provenance also records the
+normalized replay property's hash. No semantic normalization is performed.
+
 Example for a two-input/two-output model:
 
 ```lisp
