@@ -173,6 +173,76 @@ sat
  (Y_1 0))
 ```
 
+### Automated runner/archive integration
+
+Use the repo-owned **runner-copy adapter**, rather than the unmodified pinned
+runner. It removes the result header only when archiving a SAT counterexample;
+`result.txt` and its structured JSON remain unchanged. Both upstream
+`check_results.sh` and `export_results.sh` copy/gzip that same witness-only archive,
+so the pinned V1 validator can consume it directly. There is no ignored sidecar or
+manual witness extraction step. Preparation, verification, deadlines, and numerical
+policy are unchanged; extraction happens after the measured invocation.
+
+Generate a standalone runner (Python standard library only):
+
+```sh
+curl -fL https://raw.githubusercontent.com/VNN-COMP/vnn-eval-platform/3d5a8848169fc5f0cc03ab9722865235e9857f16/vnn_comp/scripts/toolkit/run_instances.sh -o /path/run_instances.upstream.sh
+uv run --locked python scripts/adapt_runner.py /path/run_instances.upstream.sh /path/staging/run_instances.sh
+```
+
+The adapter checks the **entire upstream file's SHA256**, rejects any other
+revision/content, and refuses to overwrite its output. It never edits an external
+checkout. The generated file embeds the extraction code and needs only `python3`
+on the node, not an import from this repository. In a platform deployment, use this
+generated file in the staged toolkit: the pinned `run_benchmark.sh` executes/ships
+the `run_instances.sh` beside itself. Stage copies of the platform scripts; do not
+point the launcher back at its original, unadapted runner. Keep the scorer pinned
+to `eea564f5d0a8751d8321a409214db14d03f452b8`. No check/export/validator patch is needed.
+
+For a direct local replay, on Linux with Bash, GNU `date`, `timeout`, `awk`, and
+Python 3, first install this tool (`./install_tool.sh v1`). Use a fresh node folder
+and stage a benchmark directory containing its relative-path `instances.csv`:
+
+```sh
+mkdir -p /path/node/toolkit
+ln -s /absolute/path/to/this/repo /path/node/toolkit/gurobi
+# Copy the benchmark to /path/node/vnncomp2026_benchmarks/benchmarks/sat_relu/1.0.
+# Minimal console helpers for standalone replay; platform deployments supply their own.
+cat > /path/staging/console.sh <<'SH'
+log_superstage() { echo "$@"; }
+log_stage() { echo "$@"; }
+log_info() { echo "$@"; }
+log_box_open() { echo "$@"; }
+log_box_note() { echo "$@"; }
+log_box_close() { :; }
+log_wall() { cat; }
+SH
+NVVCOMP_BASE_DIR=/path/node \
+NVVCOMP_BENCH_REL=vnncomp2026_benchmarks/benchmarks/sat_relu/1.0 \
+NVVCOMP_NO_REPORT=1 COMP_LOG_LIB=/path/staging/console.sh \
+competition_year=2026 benchmark_name=sat_relu vnnlib_version=1.0 \
+script_dir=gurobi run_networks=all run_as_root=false task_id=local \
+bash /path/staging/run_instances.sh
+```
+
+`NVVCOMP_BASE_DIR`/`NVVCOMP_BENCH_REL` relocate the pinned loop; without them its
+platform paths are unchanged. `NVVCOMP_NO_REPORT=1` disables only backend HTTP
+callbacks. `TMPDIR` optionally relocates its standard `result_<task_id>.txt`.
+Use unique task IDs and fresh run directories, as with upstream. Results land in
+`/path/node/logs/results_sat_relu.csv`, with witness-only `.counterexample` files
+in `logs/counterexamples/sat_relu/`. Gzip those files unchanged for the pinned
+scorer's archive layout. This is compression only, not format repair.
+
+Missing witnesses or malformed/nonfinite/duplicate SAT assignments produce no counterexample
+and an `error_invalid_counterexample` CSV verdict, never a credited SAT or UNSAT.
+Structural checks are not semantic validation: the pinned validator remains the
+acceptance authority. Non-SAT results create no counterexample, and an old witness
+at that instance's archive path is removed. The integration test runs the actual
+hash-pinned runner through the actual tool scripts, compresses its archive exactly
+as check/export do, and passes that archive directly to pinned `get_ce_diff`.
+This establishes tiny V1 integration, not an AWS/backend deployment test or full
+report-generation/scoring test.
+
 Pinned primary sources:
 
 | Source | Revision |
@@ -194,14 +264,10 @@ Known upstream discrepancies are kept explicit:
 2. Prose mentions output agreement within `1e-3` relative and constraints within
    `1e-4` absolute. Executable V1 validation ignores supplied Y values and allows
    tolerance only on input bounds. We follow that pinned executable policy.
-3. The runner copies the entire SAT result to `.counterexample`, but the pinned
-   V1 validator's `get_ce_diff` expects only the parenthesized witness (no `sat`
-   header). Direct validation must strip **exactly the first result line**, e.g.
-   `tail -n +2 result.txt > result.witness`. Our executable-output test feeds that
-   witness body to the pinned validator. Unmodified raw archives from that runner
-   cannot be passed directly to this validator; deployment needs this extraction
-   at the archive/validation boundary. We do not alter the official result format
-   or silently patch the upstream validator to conceal the mismatch.
+3. The unmodified runner archives the SAT header, whereas pinned V1 validation
+   expects only the witness. The runner-copy adapter above resolves this mismatch
+   automatically at the archive boundary without changing either the standard
+   result format or the upstream validator. Use that entry point for integration.
 4. Scoring subtracts observed startup overhead before its timeout comparison. Our
    local results retain actual whole-run time and reject late solves regardless;
    any future experiment summaries must retain this distinction.

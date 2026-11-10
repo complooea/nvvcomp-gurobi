@@ -1,5 +1,5 @@
-# Preserve upstream validator source, including its original whitespace.
-exclude: ^src/nvvcomp_gurobi/_vendor/(counterexamples\.py|vnnlib_v1\.py)$
+# Preserve upstream source and test fixtures, including their original whitespace.
+exclude: ^(src/nvvcomp_gurobi/_vendor/(counterexamples\.py|vnnlib_v1\.py)|tests/fixtures/runner/run_instances\.sh)$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
