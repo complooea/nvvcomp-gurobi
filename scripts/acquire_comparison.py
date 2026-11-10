@@ -43,6 +43,7 @@ def main():
         }
 
     paths = [
+        "LICENSE",
         "README.md",
         "SCORING/process_results.py",
         "SCORING/settings.py",

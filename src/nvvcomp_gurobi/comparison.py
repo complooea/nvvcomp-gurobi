@@ -29,6 +29,68 @@ def _statistics(values):
     }
 
 
+def _local_measurement(entry: dict, record) -> dict | None:
+    if not isinstance(record, dict) or any(
+        record.get(k) != v for k, v in entry.items()
+    ):
+        return None
+    result = record.get("result")
+    if not isinstance(result, dict) or not isinstance(result.get("timings"), dict):
+        return None
+    if (
+        result.get("outcome") not in ("sat", "unsat", "unknown")
+        or "validation" not in result
+        or result["validation"] not in (None, "strict", "tolerance_only", "invalid")
+    ):
+        return None
+    measurement = {
+        "outcome": result["outcome"],
+        "validation": result["validation"],
+        "reason": result.get("reason", "unavailable"),
+        "run_seconds": result["timings"].get("total"),
+        "preparation_seconds": record.get("preparation_seconds"),
+    }
+    return _measurement(measurement, entry["timeout_seconds"])
+
+
+def _measurement(measurement: dict, timeout: float) -> dict | None:
+    if measurement.get("outcome") not in (
+        "sat",
+        "unsat",
+        "unknown",
+        "error",
+        "timeout",
+    ) or not all(
+        _valid_time(measurement.get(k)) for k in ("run_seconds", "preparation_seconds")
+    ):
+        return None
+    accepted = measurement["outcome"] == "unsat" or (
+        measurement["outcome"] == "sat"
+        and measurement.get("validation") in ("strict", "tolerance_only")
+    )
+    runtime = measurement.get("run_seconds")
+    return {
+        **measurement,
+        "solved": accepted and (runtime is None or runtime <= timeout),
+    }
+
+
+def _runtime_population(
+    instances: list[dict], tool: str, population: str, field: str
+) -> dict:
+    rows = [
+        r
+        for r in instances
+        if tool in r
+        and r[tool].get(field) is not None
+        and (population != "solved" or r[tool]["solved"])
+    ]
+    return {
+        "ids": [r["id"] for r in rows],
+        "seconds": _statistics([r[tool][field] for r in rows]),
+    }
+
+
 def compare(audit: dict, records: dict, published: dict) -> dict:
     """Compare an audited experiment with normalized published measurements.
 
@@ -43,12 +105,16 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
     used = set()
     for entry in audit["instances"]:
         ident = entry["id"]
-        matches = [
+        path_matches = [
             r
             for r in published["records"]
             if r["network"] == entry["network"] and r["property"] == entry["property"]
         ]
-        used.update(i for i, r in enumerate(published["records"]) if r in matches)
+        matches = [
+            r
+            for r in path_matches
+            if r["category"] == audit["category"] and r["version"] == audit["version"]
+        ]
         row = {
             "id": ident,
             "network": entry["network"],
@@ -62,12 +128,29 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         if not entry["eligible"]:
             row["comparison"] = "excluded"
             continue
+        local_measurement = _local_measurement(entry, records.get(ident))
+        local_status = (
+            "missing_gurobi"
+            if ident not in records
+            else "corrupt_gurobi"
+            if local_measurement is None
+            else None
+        )
+        if local_measurement is not None:
+            row["gurobi"] = local_measurement
         if len(matches) != 1:
             row["comparison"] = "ambiguous_abc" if matches else "missing_abc"
+            if not matches and path_matches:
+                row["match"] = "version_mismatch"
+                row["comparison"] = "not_comparable"
             continue
+        used.update(i for i, r in enumerate(published["records"]) if r is matches[0])
         match = "unmatched"
         abc = matches[0] if len(matches) == 1 else None
         if abc is not None:
+            abc_measurement = _measurement(abc, entry["timeout_seconds"])
+            if abc_measurement is not None:
+                row["abc"] = abc_measurement
             hashes = abc.get("artifact_sha256", {})
             if (
                 abc["version"] != audit["version"]
@@ -97,95 +180,52 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         candidates.append(ident)
         if abc["execution_artifact_binding"]:
             bound.append(ident)
-        local = records.get(ident)
-        if local is None:
-            row["comparison"] = "missing_gurobi"
+        if local_status is not None:
+            row["comparison"] = local_status
             continue
-        if any(local.get(k) != v for k, v in entry.items()) or not isinstance(
-            local.get("result"), dict
-        ):
-            row["comparison"] = "corrupt_gurobi"
-            continue
+        local = records[ident]
         result = local["result"]
-        if (
-            not isinstance(result.get("timings"), dict)
-            or result.get("outcome") not in ("sat", "unsat", "unknown")
-            or result.get("validation")
-            not in (None, "strict", "tolerance_only", "invalid")
-            or not all(
-                _valid_time(t)
-                for t in (
-                    result.get("timings", {}).get("total"),
-                    local.get("preparation_seconds"),
-                )
-            )
-        ):
-            row["comparison"] = "corrupt_gurobi"
-            continue
-        if abc.get("outcome") not in (
-            "sat",
-            "unsat",
-            "unknown",
-            "error",
-            "timeout",
-        ) or not all(
-            _valid_time(t)
-            for t in (abc.get("run_seconds"), abc.get("preparation_seconds"))
-        ):
+        if "abc" not in row:
             row["comparison"] = "corrupt_abc"
             continue
-        gs = result["outcome"] == "unsat" or (
-            result["outcome"] == "sat"
-            and result["validation"] in ("strict", "tolerance_only")
-        )
-        abcs = abc["outcome"] == "unsat" or (
-            abc["outcome"] == "sat"
-            and abc["validation"] in ("strict", "tolerance_only")
-        )
-        run = result["timings"].get("total")
-        arun = abc.get("run_seconds")
-        gs = gs and (run is None or run <= entry["timeout_seconds"])
-        abcs = abcs and (arun is None or arun <= entry["timeout_seconds"])
-        same = gs and abcs and result["outcome"] == abc["outcome"]
+        gurobi_solved = row["gurobi"]["solved"]
+        abc_solved = row["abc"]["solved"]
+        gurobi_run = row["gurobi"]["run_seconds"]
+        abc_run = row["abc"]["run_seconds"]
+        same = gurobi_solved and abc_solved and result["outcome"] == abc["outcome"]
         comparison = (
             "both_same_answer"
             if same
             else "disagreement"
-            if gs and abcs
+            if gurobi_solved and abc_solved
             else "gurobi_only"
-            if gs
+            if gurobi_solved
             else "abc_only"
-            if abcs
+            if abc_solved
             else "neither"
         )
         conflict = "none"
-        if comparison == "disagreement":
+        if {result["outcome"], abc["outcome"]} == {"sat", "unsat"}:
             witness = result if result["outcome"] == "sat" else abc
             conflict = (
                 "strict_witness_refutes_unsat"
                 if witness["validation"] == "strict"
                 else "tolerance_only_does_not_refute_unsat"
+                if witness["validation"] == "tolerance_only"
+                else "unvalidated_witness_does_not_refute_unsat"
             )
-        if same and run is not None and run > 0 and arun is not None:
+        if same and gurobi_run is not None and gurobi_run > 0 and abc_run is not None:
             paired.append(ident)
-        gp, ap = local.get("preparation_seconds"), abc.get("preparation_seconds")
-        ratio = arun / run if ident in paired else None
+        gurobi_prep, abc_prep = (
+            local.get("preparation_seconds"),
+            abc.get("preparation_seconds"),
+        )
+        ratio = abc_run / gurobi_run if ident in paired else None
         total_ratio = (
-            (arun + ap) / (run + gp)
-            if ident in paired and ap is not None and gp is not None
+            (abc_run + abc_prep) / (gurobi_run + gurobi_prep)
+            if ident in paired and abc_prep is not None and gurobi_prep is not None
             else None
         )
-        accepted_sat = False
-        for tool, res, solved in (("gurobi", result, gs), ("abc", abc, abcs)):
-            if solved and res["outcome"] == "sat":
-                sat_points[tool] += 10
-                accepted_sat = True
-        if accepted_sat:
-            sat_ids.append(ident)
-        if (gs and result["outcome"] == "unsat") or (
-            abcs and abc["outcome"] == "unsat"
-        ):
-            unsat_ids.append(ident)
         row.update(
             {
                 "id": ident,
@@ -197,19 +237,32 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 else "source_verified_execution_unbound",
                 "comparison": comparison,
                 "conflict": conflict,
-                "gurobi": {
-                    "outcome": result["outcome"],
-                    "validation": result["validation"],
-                    "reason": result.get("reason", "unavailable"),
-                    "run_seconds": run,
-                    "preparation_seconds": gp,
-                    "solved": gs,
-                },
-                "abc": {**abc, "solved": abcs},
+                "conflict_execution_bound": ident in bound,
                 "abc_over_gurobi_run_ratio": ratio,
                 "abc_over_gurobi_prepare_plus_run_ratio": total_ratio,
             }
         )
+    sat_ids_by_tool = {"gurobi": [], "abc": []}
+    for row in instances:
+        for tool in ("gurobi", "abc"):
+            measurement = row.get(tool)
+            if measurement is None or (tool == "abc" and row["id"] not in candidates):
+                continue
+            if (
+                measurement["solved"]
+                and measurement["outcome"] == "sat"
+                and measurement.get("run_seconds") is not None
+            ):
+                sat_points[tool] += 10
+                sat_ids_by_tool[tool].append(row["id"])
+                if row["id"] not in sat_ids:
+                    sat_ids.append(row["id"])
+            if (
+                measurement["solved"]
+                and measurement["outcome"] == "unsat"
+                and row["id"] not in unsat_ids
+            ):
+                unsat_ids.append(row["id"])
     ratios = [
         r["abc_over_gurobi_run_ratio"]
         for r in instances
@@ -246,8 +299,8 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         for row in rows:
             row["structural_width_group"] = f"W{len(groups):02d}"
     pair_rows = [r for r in instances if r["id"] in paired]
-    gt = [r["gurobi"]["run_seconds"] for r in pair_rows]
-    at = [r["abc"]["run_seconds"] for r in pair_rows]
+    gurobi_paired_times = [r["gurobi"]["run_seconds"] for r in pair_rows]
+    abc_paired_times = [r["abc"]["run_seconds"] for r in pair_rows]
     total_ratios = [
         r["abc_over_gurobi_prepare_plus_run_ratio"]
         for r in pair_rows
@@ -287,6 +340,8 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 "ids": sat_ids,
                 "gurobi_points": sat_points["gurobi"],
                 "abc_points": sat_points["abc"],
+                "ids_by_tool": sat_ids_by_tool,
+                "abc_execution_binding_required": True,
             },
             "unassessed_unsat_ids": unsat_ids,
             "full_subset_points": None,
@@ -298,24 +353,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         "runtime": {
             "per_tool": {
                 tool: {
-                    population: {
-                        "ids": [
-                            r["id"]
-                            for r in instances
-                            if tool in r
-                            and r[tool].get(field) is not None
-                            and (population != "solved" or r[tool]["solved"])
-                        ],
-                        "seconds": _statistics(
-                            [
-                                r[tool][field]
-                                for r in instances
-                                if tool in r
-                                and r[tool].get(field) is not None
-                                and (population != "solved" or r[tool]["solved"])
-                            ]
-                        ),
-                    }
+                    population: _runtime_population(instances, tool, population, field)
                     for population, field in (
                         ("all_recorded", "run_seconds"),
                         ("solved", "run_seconds"),
@@ -326,9 +364,12 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
             },
             "paired_same_answer": {
                 "ids": paired,
-                "gurobi_run_seconds": _statistics(gt),
-                "abc_run_seconds": _statistics(at),
-                "abc_over_gurobi_ratio_of_sums": sum(at) / sum(gt) if gt else None,
+                "gurobi_run_seconds": _statistics(gurobi_paired_times),
+                "abc_run_seconds": _statistics(abc_paired_times),
+                "abc_over_gurobi_ratio_of_sums": sum(abc_paired_times)
+                / sum(gurobi_paired_times)
+                if gurobi_paired_times
+                else None,
                 "median_abc_over_gurobi_run_ratio": median(ratios) if ratios else None,
                 "prepare_plus_run_ratio_ids": [
                     r["id"]

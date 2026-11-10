@@ -71,7 +71,10 @@ identity. No fresh witness replay is performed.
   explicitly conditional, including ABC SAT-only scoring contributions.
 - Every audited instance remains in `instances`; missing, excluded, ambiguous,
   corrupt, mismatched and identity-unverified cases are visible. Extra published
-  rows remain in `unmatched_abc`, including smoke tests.
+  rows remain in `unmatched_abc`, including smoke tests and other versions. Full
+  category/version/path context selects candidates before ambiguity is assessed.
+  Each tool's available measurements contribute independently to its outcome and
+  timing summaries, even if the other tool's record is missing or corrupt.
 - Solved counts mean accepted SAT witness or numerical UNSAT claim within the raw
   run deadline when known. They do not certify correctness. Unsupported/unvalidated
   SAT is not counted as an accepted solve. Outcome summaries retain raw claims.
@@ -88,6 +91,11 @@ identity. No fresh witness replay is performed.
   time bonuses disabled. Only strict witnesses refute UNSAT. Full points and
   category-normalized scores remain unavailable without execution-bound identity
   and complete participating-tool conflict evidence. Agreement is not ground truth.
+  SAT-only contributions require available run timing; missing timing receives no
+  assumed credit. Correctness conflicts are evaluated independently of solve-time
+  eligibility: a late strict witness still contradicts a matching UNSAT claim,
+  without earning deadline-qualified solve credit. Execution binding qualifies
+  the conflict separately.
 - Architecture descriptors come from the preceding audit, not filenames.
   `structural_width_groups` / `Wxx` hold input/output dimensions, operation
   sequence, and hidden-layer count fixed while hidden widths vary. These are

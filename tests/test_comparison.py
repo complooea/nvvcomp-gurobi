@@ -137,6 +137,65 @@ def test_extra_published_rows_and_missing_abc_are_explicit():
     assert evidence["unmatched_abc"][0]["network"] == "onnx/smoke.onnx"
 
 
+def test_exact_context_selects_v1_and_preserves_other_version_as_unmatched():
+    audit, records, published = saved_pair()
+    other = copy.deepcopy(published["records"][0])
+    other["version"] = "2.0"
+    published["records"].insert(0, other)
+    evidence = compare(audit, records, published)
+    assert evidence["counts"] == {"both_same_answer": 1}
+    assert evidence["unmatched_abc"] == [other]
+
+
+@pytest.mark.parametrize("missing_tool", ["gurobi", "abc"])
+def test_missing_measurement_never_erases_available_other_tool_statistics(missing_tool):
+    audit, records, published = saved_pair()
+    if missing_tool == "gurobi":
+        records.clear()
+    else:
+        published["records"].clear()
+    evidence = compare(audit, records, published)
+    available_tool = "abc" if missing_tool == "gurobi" else "gurobi"
+    assert evidence["outcomes"][available_tool] == {"sat": 1}
+    assert evidence["runtime"]["per_tool"][available_tool]["all_recorded"]["ids"] == [
+        "0000"
+    ]
+    assert evidence["counts"] == {"missing_" + missing_tool: 1}
+    assert evidence["scoring"]["accepted_sat_subset"][available_tool + "_points"] == 10
+
+
+@pytest.mark.parametrize("record", [None, [], "text", 12, {}, {"result": {}}])
+def test_present_nonobject_and_malformed_records_are_corrupt_not_missing(record):
+    audit, records, published = saved_pair()
+    records["0000"] = record
+    evidence = compare(audit, records, published)
+    assert evidence["counts"] == {"corrupt_gurobi": 1}
+    assert evidence["outcomes"]["abc"] == {"sat": 1}
+
+
+@pytest.mark.parametrize(
+    "validation,expected",
+    [
+        ("strict", "strict_witness_refutes_unsat"),
+        ("tolerance_only", "tolerance_only_does_not_refute_unsat"),
+    ],
+)
+def test_late_witnesses_keep_correctness_conflicts_without_solve_credit(
+    validation, expected
+):
+    audit, records, published = saved_pair()
+    records["0000"]["result"]["validation"] = validation
+    records["0000"]["result"]["timings"]["total"] = 101
+    published["records"][0].update(outcome="unsat", validation=None)
+    evidence = compare(audit, records, published)
+    row = evidence["instances"][0]
+    assert row["comparison"] == "abc_only"
+    assert row["conflict"] == expected
+    assert row["conflict_execution_bound"] is False
+    assert row["abc_over_gurobi_run_ratio"] is None
+    assert evidence["scoring"]["accepted_sat_subset"]["gurobi_points"] == 0
+
+
 @pytest.mark.parametrize(
     "runtime,preparation,expected,ratio",
     [
@@ -328,6 +387,11 @@ def test_cli_regenerates_evidence_from_raw_saved_files_without_networks(
     saved = (output / "evidence.json").read_bytes()
     subprocess.run(command, check=True, capture_output=True, text=True)
     assert (output / "evidence.json").read_bytes() == saved
+    (experiment / "records/0000.json").write_text("[]")
+    subprocess.run(command, check=True, capture_output=True, text=True)
+    corrupt_evidence = json.loads((output / "evidence.json").read_text())
+    assert corrupt_evidence["counts"] == {"corrupt_gurobi": 1}
+    assert corrupt_evidence["outcomes"]["abc"] == {"sat": 1}
     (source_dir / "results.csv").write_text("tampered")
     failure = subprocess.run(command, capture_output=True, text=True)
     assert failure.returncode != 0
