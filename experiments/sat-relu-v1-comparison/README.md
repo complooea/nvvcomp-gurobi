@@ -258,3 +258,28 @@ by filtering `evidence.json:instances` by `architecture.hidden_widths[0]`,
 `gurobi.outcome`, `abc.outcome`, and `comparison`. See
 [durable comparison instructions](../../docs/comparisons.md) for acquisition,
 interface contracts and test commands.
+
+## Completion checks and review
+
+- `uv run --locked pytest tests/test_comparison.py`: **42 passed**.
+- `uv run --locked pytest tests`: **90 passed, 25 skipped**. Solver-dependent
+  tests were deliberately not enabled: this comparison executed neither verifier.
+- `uv run --locked prek run --all-files`: all checks passed, including lint,
+  formatting and typechecking.
+- Solver-free evidence regeneration was independently reproduced byte-for-byte.
+- Review baseline: task-start commit
+  `f7bf4d00f1b73967192f5705d1c70b1c68bcb4db`. Implementation commits:
+  `1512141` and `b2fc6f4`.
+
+### Standards review
+
+GPT-6 Astra medium: **no remaining actionable findings**. Initial findings about
+non-object saved records, context selection, measurement naming and repeated
+population selection were addressed with regression tests and localized cleanup.
+
+### Spec review
+
+GPT-6 Astra medium: **no remaining actionable findings**. Mixed-version matching,
+asymmetric missing-record statistics and late-witness conflict handling were fixed
+test-first. The reviewer verified the actual report's populations, timing ratios,
+width bins and 16 descriptor groups against the saved evidence.
