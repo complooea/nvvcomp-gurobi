@@ -1,0 +1,131 @@
+{
+  "id": "0033",
+  "network": "onnx/unsat_v29_c167_k33.onnx",
+  "property": "vnnlib/unsat_v29_c167_k33.vnnlib",
+  "timeout_seconds": 100.0,
+  "artifacts": {
+    "onnx": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/unsat_v29_c167_k33.onnx.gz",
+      "sha256": "8bf1fd9ba8c4ef73b869db984e5695c236010ab2b5dc19dc4affe1dee982cd84",
+      "uncompressed_sha256": "adbb056f6da5f0ebcc90ac15c627cbd06723695fdf8bd85d4d85e4c9346a7a64",
+      "bytes": 2515
+    },
+    "vnnlib": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/unsat_v29_c167_k33.vnnlib.gz",
+      "sha256": "4db59a18f4cbf7a8da855b6b5395d0ffecf36cf867d41287e85ab0c8490a06ee",
+      "uncompressed_sha256": "797626926a622a77f1ca009638a154be2e94f9b69d9457f9f32530ebb4a3dc55",
+      "bytes": 430
+    }
+  },
+  "eligible": true,
+  "exclusion_reason": null,
+  "architecture": {
+    "inputs": 29,
+    "outputs": 2,
+    "operations": [
+      "Gemm",
+      "Relu",
+      "Gemm"
+    ],
+    "hidden_widths": [
+      225
+    ],
+    "initializer_elements": 7202,
+    "output_comparisons": 2
+  },
+  "preparation_seconds": 0.0,
+  "preparation_analysis": false,
+  "started_utc": "2026-11-10T15:29:10.865194+00:00",
+  "invocation_seconds": 1.1147764171473682,
+  "result": {
+    "outcome": "unsat",
+    "reason": "infeasible",
+    "diagnostic": "Gurobi status 3, solutions 0",
+    "solver_status": 3,
+    "witness": null,
+    "validation": null,
+    "timings": {
+      "interpretation": 0.19152366602793336,
+      "construction": 0.2515893329400569,
+      "solve": 0.43375420779921114,
+      "total": 1.1146073339041322
+    },
+    "provenance": {
+      "tooling_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "python": "3.12.16",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "logical_cpus": 10,
+      "formulation": "gurobi-machinelearning ONNX; constant-objective feasibility",
+      "artifacts": {
+        "onnx": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/unsat_v29_c167_k33.onnx",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/unsat_v29_c167_k33.onnx.gz",
+          "sha256": "8bf1fd9ba8c4ef73b869db984e5695c236010ab2b5dc19dc4affe1dee982cd84",
+          "uncompressed_sha256": "adbb056f6da5f0ebcc90ac15c627cbd06723695fdf8bd85d4d85e4c9346a7a64"
+        },
+        "vnnlib": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/unsat_v29_c167_k33.vnnlib",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/unsat_v29_c167_k33.vnnlib.gz",
+          "sha256": "4db59a18f4cbf7a8da855b6b5395d0ffecf36cf867d41287e85ab0c8490a06ee",
+          "uncompressed_sha256": "797626926a622a77f1ca009638a154be2e94f9b69d9457f9f32530ebb4a3dc55"
+        }
+      },
+      "packages": {
+        "gurobipy": "13.0.1",
+        "gurobi-machinelearning": "1.7.0",
+        "onnx": "1.21.0",
+        "onnxruntime": "1.26.0",
+        "numpy": "2.2.6",
+        "cachier": "2.2.2"
+      },
+      "replay_settings": {
+        "provider": "CPUExecutionProvider",
+        "intra_op_threads": 12,
+        "inter_op_threads": 12,
+        "input_dtype": "float32",
+        "strict_input_tolerance": 0.0,
+        "tolerant_input_tolerance": 0.0001,
+        "output_tolerance": 0.0
+      },
+      "replay_property": {
+        "normalization": "Whitespace/comments only; statement and operand order preserved",
+        "sha256": "b547871bcae5e154aeeeac46e6408d993fd30e61038057bfb182875dfa542657"
+      },
+      "solver_settings": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "NumericFocus": 0,
+        "IntegralityFocus": 0,
+        "ScaleFlag": -1,
+        "MarkowitzTol": 0.0078125,
+        "MIPGap": 0.0001,
+        "MIPGapAbs": 1e-10,
+        "DualReductions": 1,
+        "Threads": 1,
+        "TimeLimit": 99.42480350006372,
+        "OutputFlag": 0
+      },
+      "gurobi_version": [
+        13,
+        0,
+        1
+      ],
+      "limits": {
+        "timeout_seconds": 100.0,
+        "threads": 1
+      },
+      "requested_artifacts": {
+        "onnx": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/unsat_v29_c167_k33.onnx",
+        "vnnlib": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/unsat_v29_c167_k33.vnnlib"
+      }
+    }
+  }
+}

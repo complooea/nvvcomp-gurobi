@@ -1,0 +1,181 @@
+{
+  "id": "0074",
+  "network": "onnx/sat_v42_c119_k74.onnx",
+  "property": "vnnlib/sat_v42_c119_k74.vnnlib",
+  "timeout_seconds": 100.0,
+  "artifacts": {
+    "onnx": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/sat_v42_c119_k74.onnx.gz",
+      "sha256": "d7c8b4db868ef5650da2bc43037119d73953ebf47206449edfd87d26a56a1dee",
+      "uncompressed_sha256": "8f652a61da48b85f7131737d2f9e53884f5dd09b13d55fe67d90670e3a7fb033",
+      "bytes": 3119
+    },
+    "vnnlib": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/sat_v42_c119_k74.vnnlib.gz",
+      "sha256": "dbaa4df9ef35ecb69c4b7a29f7a072c4b52b7d7a437be2828d5f9800e2f6d1ea",
+      "uncompressed_sha256": "2cd7d641e6f2d3476e33386f0d5afb5994fb918a3df45777c1b2de249af47e31",
+      "bytes": 520
+    }
+  },
+  "eligible": true,
+  "exclusion_reason": null,
+  "architecture": {
+    "inputs": 42,
+    "outputs": 2,
+    "operations": [
+      "Gemm",
+      "Relu",
+      "Gemm"
+    ],
+    "hidden_widths": [
+      203
+    ],
+    "initializer_elements": 9137,
+    "output_comparisons": 2
+  },
+  "preparation_seconds": 0.0,
+  "preparation_analysis": false,
+  "started_utc": "2026-11-10T15:41:25.758208+00:00",
+  "invocation_seconds": 0.824125292012468,
+  "result": {
+    "outcome": "sat",
+    "reason": "validated_witness",
+    "diagnostic": "Gurobi status 2, solutions 1; correct: Solver-provided output values ignored; ONNX CPU replay output satisfies the property with strict input bounds.\nChecking if spec was actually violated (input_tol=0.0, output_tol=0.0)\nCE input X was inside box #0; max input violation=0.0\nprop #0 violated:\n[0. 0.]",
+    "solver_status": 2,
+    "witness": {
+      "inputs": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "outputs": [
+        1.0,
+        0.0
+      ]
+    },
+    "validation": "strict",
+    "timings": {
+      "interpretation": 0.19649729109369218,
+      "construction": 0.25349516700953245,
+      "solve": 0.01173604209907353,
+      "validation": 0.12181362509727478,
+      "total": 0.8239486671518534
+    },
+    "provenance": {
+      "tooling_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "python": "3.12.16",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "logical_cpus": 10,
+      "formulation": "gurobi-machinelearning ONNX; constant-objective feasibility",
+      "artifacts": {
+        "onnx": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/sat_v42_c119_k74.onnx",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/sat_v42_c119_k74.onnx.gz",
+          "sha256": "d7c8b4db868ef5650da2bc43037119d73953ebf47206449edfd87d26a56a1dee",
+          "uncompressed_sha256": "8f652a61da48b85f7131737d2f9e53884f5dd09b13d55fe67d90670e3a7fb033"
+        },
+        "vnnlib": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/sat_v42_c119_k74.vnnlib",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/sat_v42_c119_k74.vnnlib.gz",
+          "sha256": "dbaa4df9ef35ecb69c4b7a29f7a072c4b52b7d7a437be2828d5f9800e2f6d1ea",
+          "uncompressed_sha256": "2cd7d641e6f2d3476e33386f0d5afb5994fb918a3df45777c1b2de249af47e31"
+        }
+      },
+      "packages": {
+        "gurobipy": "13.0.1",
+        "gurobi-machinelearning": "1.7.0",
+        "onnx": "1.21.0",
+        "onnxruntime": "1.26.0",
+        "numpy": "2.2.6",
+        "cachier": "2.2.2"
+      },
+      "replay_settings": {
+        "provider": "CPUExecutionProvider",
+        "intra_op_threads": 12,
+        "inter_op_threads": 12,
+        "input_dtype": "float32",
+        "strict_input_tolerance": 0.0,
+        "tolerant_input_tolerance": 0.0001,
+        "output_tolerance": 0.0
+      },
+      "replay_property": {
+        "normalization": "Whitespace/comments only; statement and operand order preserved",
+        "sha256": "fba2bf7f96f39cb883dde103ebb79b3d5c732ea14f90632e9a8f7ed46759aba4"
+      },
+      "solver_settings": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "NumericFocus": 0,
+        "IntegralityFocus": 0,
+        "ScaleFlag": -1,
+        "MarkowitzTol": 0.0078125,
+        "MIPGap": 0.0001,
+        "MIPGapAbs": 1e-10,
+        "DualReductions": 1,
+        "Threads": 1,
+        "TimeLimit": 99.41623175004497,
+        "OutputFlag": 0
+      },
+      "gurobi_version": [
+        13,
+        0,
+        1
+      ],
+      "limits": {
+        "timeout_seconds": 100.0,
+        "threads": 1
+      },
+      "requested_artifacts": {
+        "onnx": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/onnx/sat_v42_c119_k74.onnx",
+        "vnnlib": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/swift-gopher/.benchmarks/sat-relu-v1/vnnlib/sat_v42_c119_k74.vnnlib"
+      }
+    }
+  }
+}
