@@ -1,8 +1,9 @@
 # nvvcomp-gurobi
 
 A research project measuring Gurobi-based neural network verification performance
-on a supported subset of VNN-COMP 2026 benchmarks. Published α,β-CROWN results will
-provide an initial comparison; no performance winner is presumed.
+on a supported subset of VNN-COMP 2026 benchmarks. Saved measurements support a
+preliminary comparison with published α,β-CROWN results; no performance winner is
+presumed.
 
 The initial verifier supports narrow sequential FLOAT32 affine/ReLU ONNX networks
 and conjunctive VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
@@ -36,6 +37,10 @@ numerical assumptions, result meanings, dependencies, and competition scripts.
 
 See [experiment instructions](docs/experiments.md) for the pinned full-category
 audit, local execution, saved records, and solver-free reports.
+
+See the [preliminary ABC comparison](experiments/sat-relu-v1-comparison/README.md)
+for coverage, observed runtimes, and network-scale descriptors, and
+[comparison instructions](docs/comparisons.md) to regenerate its evidence.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for checks, testing, CI, and the solo
 development workflow, and [GLOSSARY.md](GLOSSARY.md) for domain terminology.

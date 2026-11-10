@@ -1,5 +1,6 @@
-# Preserve upstream source and test fixtures, including their original whitespace.
-exclude: ^(src/nvvcomp_gurobi/_vendor/(counterexamples\.py|vnnlib_v1\.py)|tests/fixtures/runner/run_instances\.sh)$
+# Preserve upstream source, fixtures, and hash-pinned comparison reference bytes.
+# The comparison snapshots are data, never imported or executed as project code.
+exclude: ^(src/nvvcomp_gurobi/_vendor/(counterexamples\.py|vnnlib_v1\.py)|tests/fixtures/runner/run_instances\.sh|experiments/sat-relu-v1-comparison/published/raw/.*)$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
