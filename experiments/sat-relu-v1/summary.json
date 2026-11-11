@@ -1,0 +1,66 @@
+{
+  "reporter_sha256": "3c3a8e3a9fa9a86deadca9af1a16ff13635c1bbc18f2f7c314d03c36b6436505",
+  "listed": 100,
+  "eligible": 100,
+  "excluded": 0,
+  "exclusion_reasons": {},
+  "recorded": 100,
+  "missing": 0,
+  "missing_ids": [],
+  "corrupt": [],
+  "solved_reported": 83,
+  "outcomes": {
+    "sat": 50,
+    "unsat": 33,
+    "unknown": 17
+  },
+  "validation": {
+    "strict": 50,
+    "none": 50
+  },
+  "unresolved_reasons": {
+    "timeout": 17
+  },
+  "runtime_seconds": {
+    "all": {
+      "count": 100,
+      "sum": 1769.4100494189188,
+      "min": 0.1951379580423236,
+      "median": 0.8744456875137985,
+      "max": 100.01528854086064
+    },
+    "solved": {
+      "count": 83,
+      "sum": 69.19981846422888,
+      "min": 0.1951379580423236,
+      "median": 0.8239486671518534,
+      "max": 1.9551102500408888
+    }
+  },
+  "invocation_seconds": {
+    "count": 100,
+    "sum": 1769.4249412054196,
+    "min": 0.19519870821386576,
+    "median": 0.8746254375437275,
+    "max": 100.01546137500554
+  },
+  "preparation_seconds": {
+    "count": 100,
+    "sum": 0.0,
+    "min": 0.0,
+    "median": 0.0,
+    "max": 0.0
+  },
+  "audit_seconds": 0.06804845808073878,
+  "scoring": {
+    "points": null,
+    "accepted_sat_subset_points": 500,
+    "accepted_sat_subset_instances": 50,
+    "reference_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+    "missing_inputs": [
+      "Artifact-matched other-tool outcomes and strict witness checks needed to assess conflicts and UNSAT correctness",
+      "Complete participating-tool context for category normalization; cross-tool caches do not bind benchmark artifact hashes"
+    ],
+    "policy": "Pinned get_score awards 10 per accepted solve; time bonus disabled. Strict witnesses can refute UNSAT; tolerance-only witnesses earn SAT credit but cannot refute UNSAT. No score inferred from our own verdicts or filenames."
+  }
+}

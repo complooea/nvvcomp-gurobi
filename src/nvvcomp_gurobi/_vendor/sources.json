@@ -1,0 +1,10 @@
+{
+  "repository": "VNN-COMP/vnncomp2026_results",
+  "revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+  "upstream_sha256": {
+    "SCORING/counterexamples.py": "1d8ba5bca8fd1568a0da9f612d3bc1c3b725a7c0261064c3198abd2d0ce14a87",
+    "SCORING/vnnlib_v1.py": "f1731b74d3c20419cf5a70a7065b772f585a1ba2f82a1bcd0b1fc7b5c8d3c576",
+    "LICENSE": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c"
+  },
+  "changes": "V1 replay dependency closure only; relative import and CPU provider constant. No replay logic changes."
+}

@@ -1,0 +1,24 @@
+{
+  "benchmark": {
+    "category": "2026_sat_relu",
+    "network_field": "sat_v45_c216_k40",
+    "property_field": "sat_v45_c216_k40",
+    "version": "1.0"
+  },
+  "checker_version": "vnncomp2026-cex-1",
+  "classification": "correct",
+  "dependency_versions": {
+    "onnx": "1.21.0",
+    "onnxruntime": "1.26.0",
+    "python": "3.12.13"
+  },
+  "establishes_sat": true,
+  "provider": "CPUExecutionProvider",
+  "rationale": "Solver-provided output values ignored; ONNX CPU replay output satisfies the property with strict input bounds.\nChecking if spec was actually violated (input_tol=0.0, output_tol=0.0)\nCE input X was inside box #0; max input violation=0.0\nprop #0 violated:\n[0. 0.]",
+  "result": "correct",
+  "results_row_identity": "90b6df12207bcced90573ce31e94955157593f24e9a7e83e9c13a5ce74a1cb89",
+  "schema_version": 1,
+  "score_credit": true,
+  "witness_path": "../alpha_beta_crown/2026_sat_relu/sat_v45_c216_k40_sat_v45_c216_k40.counterexample.gz",
+  "witness_sha256": "3907a009048dd8b50b720142e74bc3e92a8254b85b8c2c4703c840de63e0b338"
+}

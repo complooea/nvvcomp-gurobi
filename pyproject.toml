@@ -6,8 +6,19 @@ readme = "README.md"
 authors = [
     { name = "Qingcheng Xu", email = "complooea@icloud.com" }
 ]
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "numpy==2.2.6",
+    "onnx==1.21.0",
+    "onnxruntime==1.26.0",
+    "cachier==2.2.2",
+]
+
+[project.optional-dependencies]
+solver = ["gurobipy==13.0.1", "gurobi-machinelearning==1.7.0"]
+
+[project.scripts]
+nvvcomp-gurobi = "nvvcomp_gurobi.competition:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
@@ -23,7 +34,12 @@ dev = [
 ]
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
+extend-exclude = ["src/nvvcomp_gurobi/_vendor"]
+
+# Upstream replay code is preserved, not maintained or retyped here.
+[tool.ty.src]
+exclude = ["src/nvvcomp_gurobi/_vendor"]
 
 [tool.ruff.lint]
 select = [
@@ -35,10 +51,13 @@ select = [
 testpaths = ["tests"]
 addopts = "--import-mode=importlib"
 strict = true
+markers = ["solver: requires the pinned Gurobi integration and bundled license"]
 
 [tool.coverage.run]
 branch = true
 source = ["nvvcomp_gurobi"]
+patch = ["subprocess"]
+omit = ["*/_vendor/*"]
 
 [tool.coverage.report]
 show_missing = true

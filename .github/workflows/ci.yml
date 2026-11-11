@@ -12,27 +12,26 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    env:
-      ALLOW_NO_TESTS: "true" # Remove with the bootstrap conditional when adding tests/.
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           version: "0.13.6"
-          python-version: "3.11"
+          python-version: "3.12"
       - name: Install locked dependencies
-        run: uv sync --locked
+        run: uv sync --locked --extra solver
       - name: Check all tracked files
         run: uv run --locked prek run --all-files
       - name: Tests with branch coverage
-        shell: bash
-        run: |
-          if [[ "${ALLOW_NO_TESTS:-false}" == "true" ]]; then
-            if [[ -e tests ]]; then
-              echo "::error::Remove ALLOW_NO_TESTS and this bootstrap conditional when introducing tests/."
-              exit 1
-            fi
-            echo "Tests not yet introduced; bootstrap allowance is active."
-          else
-            uv run --locked pytest tests --cov --cov-report=term-missing
-          fi
+        run: uv run --locked --extra solver pytest tests --solver --cov --cov-report=term-missing
+
+  non-solver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.6"
+          python-version: "3.12"
+      - run: uv sync --locked
+      - run: uv run --locked pytest tests

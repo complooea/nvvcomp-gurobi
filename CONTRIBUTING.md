@@ -9,7 +9,7 @@ and dependency conventions below. Tool settings live in `pyproject.toml`,
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
 
 ```sh
-uv sync --locked
+uv sync --locked --extra solver
 uv run --locked prek install
 uv run --locked prek run --all-files
 ```
@@ -28,13 +28,19 @@ aligned with their locked development versions.
 Add meaningful tests under `tests/` alongside functionality. Run:
 
 ```sh
-uv run --locked pytest tests
-uv run --locked pytest tests --cov --cov-report=term-missing
+uv sync --locked
+uv run --locked pytest tests                          # no solver installation needed
+uv sync --locked --extra solver
+uv run --locked --extra solver pytest tests --solver --cov --cov-report=term-missing
 ```
 
-**Temporary — remove this paragraph when adding `tests/`.** In that same change,
-remove `ALLOW_NO_TESTS` and the bootstrap conditional from
-`.github/workflows/ci.yml`, leaving the pytest coverage command unconditional.
+Solver tests run only with `--solver`. Requesting them without the pinned solver
+extra is an error, not a skip. They isolate the home directory and unset
+`GRB_LICENSE_FILE` so personal license credentials are not needed. CI runs both
+the full tiny real-Gurobi suite and an independent environment without the solver
+extra. Typechecking (including the ty hook) installs the solver extra so its SDK
+types are available. Coverage includes verification subprocesses and excludes
+vendored upstream source. No coverage percentage is used as a correctness gate.
 
 - Validate solver behavior with tiny real-Gurobi tests and analytically known
   outcomes. Keep encoded models within the [bundled license limits](https://support.gurobi.com/hc/en-us/articles/360051597492)
