@@ -60,7 +60,7 @@ Nonblocking observation: the first full-run query overlapped approximately
 16 seconds of routine tests. This is transparently documented and does not
 violate reporting actual resources/timing without claiming matched conditions.
 
-## Disposition
+## Initial disposition
 
 No correctness or standards fix was required. The low-priority regex
 deduplication suggestion is deferred: no current defect was demonstrated, and
@@ -68,3 +68,14 @@ the experiment-bound implementation remains unchanged and hash-identifiable.
 
 Summary: Standards — 1 low-priority smell, 0 documented violations;
 Spec — 0 findings.
+
+## Follow-up
+
+The user requested the suggested cleanup. Comparison and conjunction regex
+fragments are now shared by both full-statement validation and clause extraction;
+the supported property grammar is unchanged. The complete archive was renamed
+from `relusplitter-v1-full` to canonical `relusplitter-v1`, and the redundant pilot
+was removed from the current tree (it remains available in Git history). All 120
+full-run records, audit/source hashes, manifest, and generated reports were
+preserved byte-for-byte. Their provenance continues to identify the measured
+implementation commit, not the later grammar refactor.

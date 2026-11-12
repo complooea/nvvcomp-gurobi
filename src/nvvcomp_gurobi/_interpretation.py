@@ -8,6 +8,11 @@ import numpy as np
 import onnx
 from onnx import TensorProto, numpy_helper
 
+_COMPARISON = re.compile(r"\( (<=|>=) ([^\s()]+) ([^\s()]+) \)")
+_ASSERTION = re.compile(rf"\( assert {_COMPARISON.pattern} \)")
+_CONJUNCTION = re.compile(rf"\( and (?:{_COMPARISON.pattern} )+\)")
+_DISJUNCTION = re.compile(rf"\( assert \( or (?:{_CONJUNCTION.pattern} )+\) \)")
+
 
 class Unsupported(ValueError):
     pass
@@ -54,7 +59,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
         declaration = re.fullmatch(
             r"\( declare-const ([XY]_(?:0|[1-9][0-9]*)) Real \)", statement
         )
-        assertion = re.fullmatch(r"\( assert \( (<=|>=) (\S+) (\S+) \) \)", statement)
+        assertion = _ASSERTION.fullmatch(statement)
         if depth != 0:
             raise Unsupported("Unbalanced VNN-LIB parentheses")
         if declaration:
@@ -63,10 +68,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
                 raise Unsupported(f"Duplicate or out-of-range declaration: {name}")
             declarations.add(name)
             replay_statements.append(f"(declare-const {name} Real)")
-        elif assertion or re.fullmatch(
-            r"\( assert \( or (?:\( and (?:\( (?:<=|>=) [^\s()]+ [^\s()]+ \) )+\) )+\) \)",
-            statement,
-        ):
+        elif assertion or _DISJUNCTION.fullmatch(statement):
             # Replay accepts this same narrow DNF grammar. Keep the original
             # assertion order and scalar spellings, normalizing whitespace only.
             replay_statements.append(statement.replace("( ", "(").replace(" )", ")"))
@@ -74,11 +76,8 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
                 clauses = [[assertion.groups()]]
             else:
                 clauses = [
-                    re.findall(r"\( (<=|>=) (\S+) (\S+) \)", clause)
-                    for clause in re.findall(
-                        r"\( and ((?:\( (?:<=|>=) [^\s()]+ [^\s()]+ \) )+)\)",
-                        statement,
-                    )
+                    _COMPARISON.findall(clause.group(0))
+                    for clause in _CONJUNCTION.finditer(statement)
                 ]
             alternatives = []
             for clause in clauses:

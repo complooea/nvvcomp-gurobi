@@ -1,9 +1,9 @@
 # Verification experiment report
 
 Listed: 120; eligible: 120; excluded: 0.
-Recorded eligible results: 1; Missing records: 119; corrupt records: 0.
-Solver-reported, accepted solves: 0. Outcomes: {'unknown': 1}.
-Validation: {'none': 1}. Unresolved reasons: {'timeout': 1}.
+Recorded eligible results: 120; Missing records: 0; corrupt records: 0.
+Solver-reported, accepted solves: 3. Outcomes: {'unknown': 117, 'unsat': 1, 'sat': 2}.
+Validation: {'none': 118, 'strict': 2}. Unresolved reasons: {'timeout': 117}.
 
 ## Interpretation
 
@@ -13,9 +13,9 @@ SAT is accepted only after pinned FLOAT32 ONNX replay. Strict and tolerance-only
 
 Whole-run time includes subprocess startup, reads/decompression, interpretation, encoding, solving, and validation. No startup overhead is subtracted; no kill-grace result gets solve credit. Invocation wall time additionally includes supervising/cleanup overhead. Preparation is a no-op (0 seconds); category eligibility audit is separately measured, not hidden preparation or cached solving analysis.
 
-Runtime seconds: `{'all': {'count': 1, 'sum': 180.01287941704504, 'min': 180.01287941704504, 'median': 180.01287941704504, 'max': 180.01287941704504}, 'solved': {'count': 0, 'sum': 0, 'min': None, 'median': None, 'max': None}}`.
-Invocation seconds: `{'count': 1, 'sum': 180.0129315839149, 'min': 180.0129315839149, 'median': 180.0129315839149, 'max': 180.0129315839149}`.
-Audit seconds: 1.091024.
+Runtime seconds: `{'all': {'count': 120, 'sum': 21217.76457855315, 'min': 22.28398908278905, 'median': 180.0162144789938, 'max': 180.01982333301567}, 'solved': {'count': 3, 'sum': 156.06316304183565, 'min': 22.28398908278905, 'median': 60.26639241701923, 'max': 73.51278154202737}}`.
+Invocation seconds: `{'count': 120, 'sum': 21217.786657297052, 'min': 22.284187084063888, 'median': 180.0163973539602, 'max': 180.0200067081023}`.
+Audit seconds: 1.188444.
 Resources: `{'platform': 'macOS-26.6.2-arm64-arm-64bit', 'machine': 'arm64', 'processor': 'arm', 'logical_cpus': 10, 'hw.memsize': '17179869184', 'hw.physicalcpu': '10', 'machdep.cpu.brand_string': 'Apple M4'}`; execution: `{'threads': 1, 'sequential': True, 'preparation_analysis': False}`.
 Pinned replay uses 12 intra/inter-op CPU threads separately from the Gurobi Threads limit. No memory cap, performance tuning, or numerical tolerance tuning is applied.
 
@@ -27,7 +27,7 @@ Gurobi numerical defaults are unchanged; effective settings, package versions, w
 ## Competition scoring
 
 Subset score unavailable: Artifact-matched other-tool outcomes and strict witness checks needed to assess conflicts and UNSAT correctness; Complete participating-tool context for category normalization; cross-tool caches do not bind benchmark artifact hashes.
-Accepted SAT-only subset contribution: 0 points across 0 instances (10 each under pinned get_score; not the full eligible/category score). Numerical UNSAT contributions remain unassessed without artifact-matched cross-tool strict-witness evidence.
+Accepted SAT-only subset contribution: 20 points across 2 instances (10 each under pinned get_score; not the full eligible/category score). Numerical UNSAT contributions remain unassessed without artifact-matched cross-tool strict-witness evidence.
 Pinned get_score awards 10 per accepted solve; time bonus disabled. Strict witnesses can refute UNSAT; tolerance-only witnesses earn SAT credit but cannot refute UNSAT. No score inferred from our own verdicts or filenames.
 No ABC speed ratio or hardware-independent performance claim is made without matching artifacts and execution resources.
 
@@ -37,126 +37,126 @@ Manifest order identifies rows; original names and artifact hashes are in experi
 
 | ID | Outcome | Reason | Validation | Whole-run seconds |
 | --- | --- | --- | --- | --- |
-| 0000 | unknown | timeout | — | 180.01287941704504 |
-| 0001 | missing | not recorded | — | — |
-| 0002 | missing | not recorded | — | — |
-| 0003 | missing | not recorded | — | — |
-| 0004 | missing | not recorded | — | — |
-| 0005 | missing | not recorded | — | — |
-| 0006 | missing | not recorded | — | — |
-| 0007 | missing | not recorded | — | — |
-| 0008 | missing | not recorded | — | — |
-| 0009 | missing | not recorded | — | — |
-| 0010 | missing | not recorded | — | — |
-| 0011 | missing | not recorded | — | — |
-| 0012 | missing | not recorded | — | — |
-| 0013 | missing | not recorded | — | — |
-| 0014 | missing | not recorded | — | — |
-| 0015 | missing | not recorded | — | — |
-| 0016 | missing | not recorded | — | — |
-| 0017 | missing | not recorded | — | — |
-| 0018 | missing | not recorded | — | — |
-| 0019 | missing | not recorded | — | — |
-| 0020 | missing | not recorded | — | — |
-| 0021 | missing | not recorded | — | — |
-| 0022 | missing | not recorded | — | — |
-| 0023 | missing | not recorded | — | — |
-| 0024 | missing | not recorded | — | — |
-| 0025 | missing | not recorded | — | — |
-| 0026 | missing | not recorded | — | — |
-| 0027 | missing | not recorded | — | — |
-| 0028 | missing | not recorded | — | — |
-| 0029 | missing | not recorded | — | — |
-| 0030 | missing | not recorded | — | — |
-| 0031 | missing | not recorded | — | — |
-| 0032 | missing | not recorded | — | — |
-| 0033 | missing | not recorded | — | — |
-| 0034 | missing | not recorded | — | — |
-| 0035 | missing | not recorded | — | — |
-| 0036 | missing | not recorded | — | — |
-| 0037 | missing | not recorded | — | — |
-| 0038 | missing | not recorded | — | — |
-| 0039 | missing | not recorded | — | — |
-| 0040 | missing | not recorded | — | — |
-| 0041 | missing | not recorded | — | — |
-| 0042 | missing | not recorded | — | — |
-| 0043 | missing | not recorded | — | — |
-| 0044 | missing | not recorded | — | — |
-| 0045 | missing | not recorded | — | — |
-| 0046 | missing | not recorded | — | — |
-| 0047 | missing | not recorded | — | — |
-| 0048 | missing | not recorded | — | — |
-| 0049 | missing | not recorded | — | — |
-| 0050 | missing | not recorded | — | — |
-| 0051 | missing | not recorded | — | — |
-| 0052 | missing | not recorded | — | — |
-| 0053 | missing | not recorded | — | — |
-| 0054 | missing | not recorded | — | — |
-| 0055 | missing | not recorded | — | — |
-| 0056 | missing | not recorded | — | — |
-| 0057 | missing | not recorded | — | — |
-| 0058 | missing | not recorded | — | — |
-| 0059 | missing | not recorded | — | — |
-| 0060 | missing | not recorded | — | — |
-| 0061 | missing | not recorded | — | — |
-| 0062 | missing | not recorded | — | — |
-| 0063 | missing | not recorded | — | — |
-| 0064 | missing | not recorded | — | — |
-| 0065 | missing | not recorded | — | — |
-| 0066 | missing | not recorded | — | — |
-| 0067 | missing | not recorded | — | — |
-| 0068 | missing | not recorded | — | — |
-| 0069 | missing | not recorded | — | — |
-| 0070 | missing | not recorded | — | — |
-| 0071 | missing | not recorded | — | — |
-| 0072 | missing | not recorded | — | — |
-| 0073 | missing | not recorded | — | — |
-| 0074 | missing | not recorded | — | — |
-| 0075 | missing | not recorded | — | — |
-| 0076 | missing | not recorded | — | — |
-| 0077 | missing | not recorded | — | — |
-| 0078 | missing | not recorded | — | — |
-| 0079 | missing | not recorded | — | — |
-| 0080 | missing | not recorded | — | — |
-| 0081 | missing | not recorded | — | — |
-| 0082 | missing | not recorded | — | — |
-| 0083 | missing | not recorded | — | — |
-| 0084 | missing | not recorded | — | — |
-| 0085 | missing | not recorded | — | — |
-| 0086 | missing | not recorded | — | — |
-| 0087 | missing | not recorded | — | — |
-| 0088 | missing | not recorded | — | — |
-| 0089 | missing | not recorded | — | — |
-| 0090 | missing | not recorded | — | — |
-| 0091 | missing | not recorded | — | — |
-| 0092 | missing | not recorded | — | — |
-| 0093 | missing | not recorded | — | — |
-| 0094 | missing | not recorded | — | — |
-| 0095 | missing | not recorded | — | — |
-| 0096 | missing | not recorded | — | — |
-| 0097 | missing | not recorded | — | — |
-| 0098 | missing | not recorded | — | — |
-| 0099 | missing | not recorded | — | — |
-| 0100 | missing | not recorded | — | — |
-| 0101 | missing | not recorded | — | — |
-| 0102 | missing | not recorded | — | — |
-| 0103 | missing | not recorded | — | — |
-| 0104 | missing | not recorded | — | — |
-| 0105 | missing | not recorded | — | — |
-| 0106 | missing | not recorded | — | — |
-| 0107 | missing | not recorded | — | — |
-| 0108 | missing | not recorded | — | — |
-| 0109 | missing | not recorded | — | — |
-| 0110 | missing | not recorded | — | — |
-| 0111 | missing | not recorded | — | — |
-| 0112 | missing | not recorded | — | — |
-| 0113 | missing | not recorded | — | — |
-| 0114 | missing | not recorded | — | — |
-| 0115 | missing | not recorded | — | — |
-| 0116 | missing | not recorded | — | — |
-| 0117 | missing | not recorded | — | — |
-| 0118 | missing | not recorded | — | — |
-| 0119 | missing | not recorded | — | — |
+| 0000 | unknown | timeout | — | 180.01203208393417 |
+| 0001 | unknown | timeout | — | 180.0169420419261 |
+| 0002 | unknown | timeout | — | 180.0162879161071 |
+| 0003 | unknown | timeout | — | 180.00956525001675 |
+| 0004 | unknown | timeout | — | 180.0119787498843 |
+| 0005 | unknown | timeout | — | 180.01759241707623 |
+| 0006 | unknown | timeout | — | 180.0159585000947 |
+| 0007 | unknown | timeout | — | 180.01769404206425 |
+| 0008 | unknown | timeout | — | 180.0175594999455 |
+| 0009 | unknown | timeout | — | 180.01665175007656 |
+| 0010 | unknown | timeout | — | 180.01774862478487 |
+| 0011 | unknown | timeout | — | 180.01696308306418 |
+| 0012 | unknown | timeout | — | 180.01649366691709 |
+| 0013 | unknown | timeout | — | 180.00689691700973 |
+| 0014 | unknown | timeout | — | 180.01614104188047 |
+| 0015 | unknown | timeout | — | 180.01630983292125 |
+| 0016 | unknown | timeout | — | 180.01639374997467 |
+| 0017 | unknown | timeout | — | 180.01589041715488 |
+| 0018 | unknown | timeout | — | 180.0106278329622 |
+| 0019 | unknown | timeout | — | 180.011552833952 |
+| 0020 | unknown | timeout | — | 180.01178349996917 |
+| 0021 | unknown | timeout | — | 180.00932008307427 |
+| 0022 | unknown | timeout | — | 180.01009133295156 |
+| 0023 | unknown | timeout | — | 180.00994687504135 |
+| 0024 | unknown | timeout | — | 180.00877033290453 |
+| 0025 | unknown | timeout | — | 180.014886375051 |
+| 0026 | unknown | timeout | — | 180.0167749999091 |
+| 0027 | unknown | timeout | — | 180.01796520897187 |
+| 0028 | unknown | timeout | — | 180.01060391706415 |
+| 0029 | unknown | timeout | — | 180.01753654214554 |
+| 0030 | unknown | timeout | — | 180.0163757498376 |
+| 0031 | unknown | timeout | — | 180.0179415838793 |
+| 0032 | unknown | timeout | — | 180.00893004098907 |
+| 0033 | unknown | timeout | — | 180.01734745898284 |
+| 0034 | unknown | timeout | — | 180.01094029215164 |
+| 0035 | unknown | timeout | — | 180.01705270819366 |
+| 0036 | unknown | timeout | — | 180.01028308295645 |
+| 0037 | unknown | timeout | — | 180.01368149998598 |
+| 0038 | unknown | timeout | — | 180.01686891703866 |
+| 0039 | unknown | timeout | — | 180.0170511668548 |
+| 0040 | unknown | timeout | — | 180.01351120811887 |
+| 0041 | unknown | timeout | — | 180.01574758300558 |
+| 0042 | unknown | timeout | — | 180.01669691712596 |
+| 0043 | unknown | timeout | — | 180.01693795900792 |
+| 0044 | unknown | timeout | — | 180.0167437500786 |
+| 0045 | unknown | timeout | — | 180.01672483282164 |
+| 0046 | unknown | timeout | — | 180.0164941670373 |
+| 0047 | unknown | timeout | — | 180.01486120885238 |
+| 0048 | unknown | timeout | — | 180.01484249997884 |
+| 0049 | unknown | timeout | — | 180.01547641702928 |
+| 0050 | unknown | timeout | — | 180.01823620893992 |
+| 0051 | unknown | timeout | — | 180.01068591699004 |
+| 0052 | unknown | timeout | — | 180.01112679205835 |
+| 0053 | unknown | timeout | — | 180.0136837910395 |
+| 0054 | unknown | timeout | — | 180.0165500000585 |
+| 0055 | unknown | timeout | — | 180.01663912506774 |
+| 0056 | unknown | timeout | — | 180.01640120800585 |
+| 0057 | unknown | timeout | — | 180.01654808409512 |
+| 0058 | unknown | timeout | — | 180.01655358402058 |
+| 0059 | unknown | timeout | — | 180.0167519999668 |
+| 0060 | unknown | timeout | — | 180.0174632500857 |
+| 0061 | unknown | timeout | — | 180.01291866693646 |
+| 0062 | unknown | timeout | — | 180.01686695800163 |
+| 0063 | unknown | timeout | — | 180.0172228750307 |
+| 0064 | unknown | timeout | — | 180.0155318749603 |
+| 0065 | unknown | timeout | — | 180.01171774999239 |
+| 0066 | unsat | infeasible | — | 22.28398908278905 |
+| 0067 | unknown | timeout | — | 180.01107775000855 |
+| 0068 | unknown | timeout | — | 180.0168818330858 |
+| 0069 | unknown | timeout | — | 180.01671704207547 |
+| 0070 | unknown | timeout | — | 180.0069646248594 |
+| 0071 | unknown | timeout | — | 180.0176355841104 |
+| 0072 | unknown | timeout | — | 180.0096826250665 |
+| 0073 | unknown | timeout | — | 180.01030249986798 |
+| 0074 | sat | validated_witness | strict | 60.26639241701923 |
+| 0075 | sat | validated_witness | strict | 73.51278154202737 |
+| 0076 | unknown | timeout | — | 180.01968104206026 |
+| 0077 | unknown | timeout | — | 180.01982333301567 |
+| 0078 | unknown | timeout | — | 180.00830429210328 |
+| 0079 | unknown | timeout | — | 180.0140559170395 |
+| 0080 | unknown | timeout | — | 180.01073400001042 |
+| 0081 | unknown | timeout | — | 180.01738958409987 |
+| 0082 | unknown | timeout | — | 180.00818508304656 |
+| 0083 | unknown | timeout | — | 180.01774416700937 |
+| 0084 | unknown | timeout | — | 180.01751533313654 |
+| 0085 | unknown | timeout | — | 180.01730974996462 |
+| 0086 | unknown | timeout | — | 180.01719912490807 |
+| 0087 | unknown | timeout | — | 180.01925929100253 |
+| 0088 | unknown | timeout | — | 180.01257504103705 |
+| 0089 | unknown | timeout | — | 180.01504174992442 |
+| 0090 | unknown | timeout | — | 180.01777520799078 |
+| 0091 | unknown | timeout | — | 180.01084587490186 |
+| 0092 | unknown | timeout | — | 180.01146245910786 |
+| 0093 | unknown | timeout | — | 180.01732583297417 |
+| 0094 | unknown | timeout | — | 180.00970970792696 |
+| 0095 | unknown | timeout | — | 180.0097540419083 |
+| 0096 | unknown | timeout | — | 180.01725466689095 |
+| 0097 | unknown | timeout | — | 180.01153575000353 |
+| 0098 | unknown | timeout | — | 180.0160380420275 |
+| 0099 | unknown | timeout | — | 180.01383104198612 |
+| 0100 | unknown | timeout | — | 180.00726937502623 |
+| 0101 | unknown | timeout | — | 180.00872899987735 |
+| 0102 | unknown | timeout | — | 180.01643475005403 |
+| 0103 | unknown | timeout | — | 180.00696366699412 |
+| 0104 | unknown | timeout | — | 180.01104420912452 |
+| 0105 | unknown | timeout | — | 180.01688537513837 |
+| 0106 | unknown | timeout | — | 180.0094767920673 |
+| 0107 | unknown | timeout | — | 180.01772954198532 |
+| 0108 | unknown | timeout | — | 180.01908733393066 |
+| 0109 | unknown | timeout | — | 180.01822337508202 |
+| 0110 | unknown | timeout | — | 180.01792545896024 |
+| 0111 | unknown | timeout | — | 180.01779549987987 |
+| 0112 | unknown | timeout | — | 180.01851062499918 |
+| 0113 | unknown | timeout | — | 180.0185662501026 |
+| 0114 | unknown | timeout | — | 180.01245799986646 |
+| 0115 | unknown | timeout | — | 180.01723925000988 |
+| 0116 | unknown | timeout | — | 180.01302270800807 |
+| 0117 | unknown | timeout | — | 180.0094819169026 |
+| 0118 | unknown | timeout | — | 180.0183251670096 |
+| 0119 | unknown | timeout | — | 180.01226837513968 |
 
 ## Reproduce
 

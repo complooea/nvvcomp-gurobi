@@ -38,6 +38,9 @@ numerical assumptions, result meanings, dependencies, and competition scripts.
 See [experiment instructions](docs/experiments.md) for the pinned full-category
 audit, local execution, saved records, and solver-free reports.
 
+The [ReLUSplitter results](experiments/relusplitter-v1/README.md) archive all
+120 queries, including unresolved outcomes and reproduction instructions.
+
 See the [preliminary ABC comparison](experiments/sat-relu-v1-comparison/README.md)
 for coverage, observed runtimes, and network-scale descriptors, and
 [comparison instructions](docs/comparisons.md) to regenerate its evidence.

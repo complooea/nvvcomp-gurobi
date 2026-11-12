@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_utc": "2026-11-12T08:02:50.993012+00:00",
+  "created_utc": "2026-11-12T08:05:02.309939+00:00",
   "manifest_sha256": "6bfee9ef7debe3ad419662d1b9a2f07e42e068866c572b8be60ef2e30bff5b9e",
   "manifest_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/instances.csv",
   "instances": [
@@ -40,7 +40,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_2_2.onnx",
+        "original_model_group": "model_2_2",
         "hidden_widths": [
           128,
           256,
@@ -357,7 +357,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -690,7 +690,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -1023,7 +1023,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -1354,7 +1354,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_2_2.onnx",
+        "original_model_group": "model_2_2",
         "hidden_widths": [
           128,
           256,
@@ -1669,7 +1669,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_0_0.onnx",
+        "original_model_group": "model_0_0",
         "hidden_widths": [
           128,
           256,
@@ -1986,7 +1986,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -2319,7 +2319,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -2652,7 +2652,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -2985,7 +2985,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -3318,7 +3318,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -3649,7 +3649,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_2_2.onnx",
+        "original_model_group": "model_2_2",
         "hidden_widths": [
           128,
           256,
@@ -3966,7 +3966,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -4299,7 +4299,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -4630,7 +4630,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_0_0.onnx",
+        "original_model_group": "model_0_0",
         "hidden_widths": [
           128,
           256,
@@ -4947,7 +4947,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -5278,7 +5278,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 4,
-        "original_model_group": "model_2_2.onnx",
+        "original_model_group": "model_2_2",
         "hidden_widths": [
           128,
           256,
@@ -5595,7 +5595,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -5928,7 +5928,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_3_3.onnx",
+        "original_model_group": "model_3_3",
         "hidden_widths": [
           128,
           256,
@@ -6261,7 +6261,7 @@
           "Gemm"
         ],
         "hidden_relu_layers": 5,
-        "original_model_group": "model_1_1.onnx",
+        "original_model_group": "model_1_1",
         "hidden_widths": [
           128,
           256,
@@ -6557,7 +6557,7 @@
       }
     }
   ],
-  "audit_seconds": 1.0910240828525275,
+  "audit_seconds": 1.1884442090522498,
   "support_policy": "Verification contract grammar; unsupported semantics only. No filename verdicts or outcome-based exclusions.",
   "execution": {
     "threads": 1,
@@ -7207,7 +7207,7 @@
   },
   "python": "3.12.16",
   "revision": {
-    "git_commit": "e40e792f82f05cbe8219fbd265fbbb6428b12143",
+    "git_commit": "2ba2eb4242bd55cda799867d41e82a6a96b237d2",
     "source_sha256": {
       "src/nvvcomp_gurobi/__init__.py": "5037aeb736fd12183790bd49ba11511a5d4fdaef51682895c7513700898bdbc8",
       "src/nvvcomp_gurobi/_format.py": "257baa7a2053e6bfd820cc105d55295be59baee7ad4aedaaf7a81968ff15d6e4",
@@ -7220,7 +7220,7 @@
       "src/nvvcomp_gurobi/_worker.py": "8c9bd6b13dfe8c598f34f1c100e049f972ca00393ea19cb005eebc891ef6997e",
       "src/nvvcomp_gurobi/comparison.py": "fb1d7bce1eb31ff73f590a93ef75d03ba9e94ba61c2dac60316ba5a34dfc14d4",
       "src/nvvcomp_gurobi/competition.py": "4aea8500609af76ffe11ca1349dc27d275042fb1c55e12a3eeca8cf5f77f2472",
-      "src/nvvcomp_gurobi/experiment.py": "a8eb936f8604991fc3a56c7a3f96e45b9fc074b60df7e75b95f1fabdeefea453",
+      "src/nvvcomp_gurobi/experiment.py": "9bd98e15499bf396e7079bafc17ded36600043f38be580605da7784fb53680f0",
       "src/nvvcomp_gurobi/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "src/nvvcomp_gurobi/verification.py": "6fd8455dbc8ebf7b8da67c039879c2d05a4539e022bbefd04354292e89f7bc56",
       "uv.lock": "f429e6502e43024f9132aae8042dc83a2a0fb99d298f1ce39cbb2e88a7bf9d2b"
