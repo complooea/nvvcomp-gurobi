@@ -26,7 +26,7 @@ The operation returns `VerificationResult`, serializable with `dataclasses.asdic
 an accepted competition SAT report, **not** a strictly established SAT instance:
 the pinned scorer gives it credit but does not use it to refute an UNSAT report.
 `unsat` requires Gurobi's definitive `INFEASIBLE` status (3) on the complete encoded
-conjunction. It is a floating-point numerical verdict, not an exact-real proof or
+query (including every disjunct). It is a floating-point numerical verdict, not an exact-real proof or
 independently checkable UNSAT certificate.
 
 Reasons include `unsupported`, `input_error`, `prerequisite_error`, `worker_error`,
@@ -79,7 +79,16 @@ The subset is deliberately smaller than general ONNX and VNN-LIB:
   are finite signed decimal/scientific-notation scalars or a *distinct* declared
   output variable. At least one output comparison is required. Comments and
   multiline statements are allowed; constants must have magnitude below `1e100`.
-- Strict comparisons, `=`, arithmetic expressions, `and`/`or`/`not`, mixed
+- Output disjunction assertions may additionally use exactly
+  `(assert (or (and comparison ...) (and comparison ...) ...))`, with one or
+  more nonempty alternatives and one or more supported output comparisons per
+  alternative. Input bounds cannot occur inside an alternative. Each OR uses
+  binary selectors and native Gurobi indicator constraints; at least one selector
+  must be active. Comparisons outside OR remain unconditional, including those
+  asserted before or after it. Multiple OR assertions are conjunctive. There is
+  one optimization and one original-query deadline, not a budget per alternative.
+- Strict comparisons, `=`, arithmetic expressions, standalone `and`, bare OR
+  comparisons without `and` wrappers, arbitrary nested Boolean expressions, `not`, mixed
   input/output comparisons, input-variable comparisons, undeclared variables,
   extra commands, and other syntax are explicitly unsupported. Equality can be
   expressed using both non-strict inequalities. Distinct-output restriction also

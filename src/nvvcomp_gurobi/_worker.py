@@ -95,6 +95,13 @@ def run(request: dict) -> VerificationResult:
             "normalization": "Whitespace/comments only; statement and operand order preserved",
             "sha256": hashlib.sha256(prop.replay_text.encode("utf-8")).hexdigest(),
         }
+        if prop.disjunctions:
+            result.provenance["formulation"] += (
+                "; unconditional output constraints plus native binary indicators for OR-of-AND output clauses"
+            )
+        result.provenance["output_disjunction_alternatives"] = [
+            len(alternatives) for alternatives in prop.disjunctions
+        ]
         result.timings[stage] = time.monotonic() - stage_start
         _checkpoint(request, result)
         _remaining(request)
@@ -147,17 +154,42 @@ def run(request: dict) -> VerificationResult:
                     (1, num_outputs), lb=-gp.GRB.INFINITY, name="Y"
                 )
                 add_predictor_constr(optimization, model, inputs, outputs)
-                for comparison in prop.comparisons:
-                    left = outputs[0, int(comparison.left[2:])]
+
+                def constraint(comparison):
+                    left = outputs[0, int(comparison.left[2:])].item()
                     right = (
-                        outputs[0, int(comparison.right[2:])]
+                        outputs[0, int(comparison.right[2:])].item()
                         if isinstance(comparison.right, str)
                         else comparison.right
                     )
-                    optimization.addConstr(
+                    return (
                         left <= right if comparison.operator == "<=" else left >= right
                     )
+
+                for comparison in prop.comparisons:
+                    optimization.addConstr(constraint(comparison))
+                for alternatives in prop.disjunctions:
+                    selectors = optimization.addVars(
+                        len(alternatives), vtype=gp.GRB.BINARY
+                    )
+                    optimization.addConstr(selectors.sum() >= 1)
+                    for index, branch in enumerate(alternatives):
+                        for comparison in branch:
+                            optimization.addConstr(
+                                (selectors[index] == 1) >> constraint(comparison)
+                            )
                 optimization.setObjective(0.0)
+                optimization.update()
+                result.provenance["formulation_size"] = {
+                    name: int(optimization.getAttr(name))
+                    for name in (
+                        "NumVars",
+                        "NumBinVars",
+                        "NumConstrs",
+                        "NumGenConstrs",
+                        "NumNZs",
+                    )
+                }
                 result.timings[stage] = time.monotonic() - stage_start
                 optimization.Params.TimeLimit = _remaining(request)
                 result.provenance["solver_settings"].update(

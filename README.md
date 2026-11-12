@@ -6,7 +6,7 @@ preliminary comparison with published α,β-CROWN results; no performance winner
 presumed.
 
 The initial verifier supports narrow sequential FLOAT32 affine/ReLU ONNX networks
-and conjunctive VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
+and conjunctive / output OR-of-AND VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
 pinned VNN-COMP validation code. Manifest-driven experiments retain per-instance
 records and produce reports without rerunning the solver.
 
