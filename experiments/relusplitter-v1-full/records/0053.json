@@ -1,0 +1,161 @@
+{
+  "id": "0053",
+  "network": "onnx/model_1_1~d1_eps_0.09_sample_7_label_7~pct1.0~cnt128~seed157191271.onnx",
+  "property": "vnnlib/d1_eps_0.09_sample_7_label_7.vnnlib",
+  "timeout_seconds": 180.0,
+  "artifacts": {
+    "onnx": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1~d1_eps_0.09_sample_7_label_7~pct1.0~cnt128~seed157191271.onnx.gz",
+      "sha256": "9d93741d8af728335e03abe2611fb037034fab2a6bf484876ff108799cf3226f",
+      "uncompressed_sha256": "56b22e57e99d069b3e4a3518c3b1c3f2e1eb4a22399b5c85f49af94c6551c9df",
+      "bytes": 1613615
+    },
+    "vnnlib": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.09_sample_7_label_7.vnnlib.gz",
+      "sha256": "1684b56aaf9d13c7ae946545d46a5442dc9b8ec710ccd83dc975b729d4e41b86",
+      "uncompressed_sha256": "116cd4069b688903d3db6e02169ad30562216be2e10396c04f6b47530a37c96b",
+      "bytes": 8131
+    }
+  },
+  "eligible": true,
+  "exclusion_reason": null,
+  "architecture": {
+    "inputs": 784,
+    "outputs": 10,
+    "operations": [
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm"
+    ],
+    "hidden_relu_layers": 6,
+    "original_model_group": "model_1_1",
+    "hidden_widths": [
+      256,
+      128,
+      256,
+      256,
+      256,
+      256
+    ],
+    "initializer_elements": 466826,
+    "output_comparisons": 9,
+    "output_disjunction_alternatives": [
+      9
+    ]
+  },
+  "preparation_seconds": 0.0,
+  "preparation_analysis": false,
+  "started_utc": "2026-11-12T10:45:22.970955+00:00",
+  "invocation_seconds": 180.0138566668611,
+  "result": {
+    "outcome": "unknown",
+    "reason": "timeout",
+    "diagnostic": "Whole-run deadline exceeded; late results are not accepted. Gurobi status 9, solutions 0; worker exit -9: ",
+    "solver_status": 9,
+    "witness": null,
+    "validation": null,
+    "timings": {
+      "interpretation": 0.24020733311772346,
+      "construction": 0.37538220919668674,
+      "solve": 179.2129266669508,
+      "total": 180.0136837910395
+    },
+    "provenance": {
+      "tooling_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "python": "3.12.16",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "logical_cpus": 10,
+      "formulation": "gurobi-machinelearning ONNX; constant-objective feasibility; unconditional output constraints plus native binary indicators for OR-of-AND output clauses",
+      "artifacts": {
+        "onnx": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1~d1_eps_0.09_sample_7_label_7~pct1.0~cnt128~seed157191271.onnx",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1~d1_eps_0.09_sample_7_label_7~pct1.0~cnt128~seed157191271.onnx.gz",
+          "sha256": "9d93741d8af728335e03abe2611fb037034fab2a6bf484876ff108799cf3226f",
+          "uncompressed_sha256": "56b22e57e99d069b3e4a3518c3b1c3f2e1eb4a22399b5c85f49af94c6551c9df"
+        },
+        "vnnlib": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.09_sample_7_label_7.vnnlib",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.09_sample_7_label_7.vnnlib.gz",
+          "sha256": "1684b56aaf9d13c7ae946545d46a5442dc9b8ec710ccd83dc975b729d4e41b86",
+          "uncompressed_sha256": "116cd4069b688903d3db6e02169ad30562216be2e10396c04f6b47530a37c96b"
+        }
+      },
+      "packages": {
+        "gurobipy": "13.0.1",
+        "gurobi-machinelearning": "1.7.0",
+        "onnx": "1.21.0",
+        "onnxruntime": "1.26.0",
+        "numpy": "2.2.6",
+        "cachier": "2.2.2"
+      },
+      "replay_settings": {
+        "provider": "CPUExecutionProvider",
+        "intra_op_threads": 12,
+        "inter_op_threads": 12,
+        "input_dtype": "float32",
+        "strict_input_tolerance": 0.0,
+        "tolerant_input_tolerance": 0.0001,
+        "output_tolerance": 0.0
+      },
+      "replay_property": {
+        "normalization": "Whitespace/comments only; statement and operand order preserved",
+        "sha256": "20528fb24a10465cd6e3ed892ac25f0a6dc740e0f14e4e094e421099cf14019c"
+      },
+      "output_disjunction_alternatives": [
+        9
+      ],
+      "solver_settings": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "NumericFocus": 0,
+        "IntegralityFocus": 0,
+        "ScaleFlag": -1,
+        "MarkowitzTol": 0.0078125,
+        "MIPGap": 0.0001,
+        "MIPGapAbs": 1e-10,
+        "DualReductions": 1,
+        "Threads": 1,
+        "TimeLimit": 179.2507586670108,
+        "OutputFlag": 0
+      },
+      "gurobi_version": [
+        13,
+        0,
+        1
+      ],
+      "formulation_size": {
+        "NumVars": 3619,
+        "NumBinVars": 9,
+        "NumConstrs": 1419,
+        "NumGenConstrs": 1417,
+        "NumNZs": 434323
+      },
+      "limits": {
+        "timeout_seconds": 180.0,
+        "threads": 1
+      },
+      "requested_artifacts": {
+        "onnx": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1~d1_eps_0.09_sample_7_label_7~pct1.0~cnt128~seed157191271.onnx",
+        "vnnlib": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.09_sample_7_label_7.vnnlib"
+      }
+    }
+  }
+}
