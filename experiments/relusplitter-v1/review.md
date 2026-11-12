@@ -79,3 +79,8 @@ was removed from the current tree (it remains available in Git history). All 120
 full-run records, audit/source hashes, manifest, and generated reports were
 preserved byte-for-byte. Their provenance continues to identify the measured
 implementation commit, not the later grammar refactor.
+
+Follow-up validation: all 20 original benchmark properties produce identical
+parsed semantics and replay text before/after the refactor; all 124 tests pass.
+Both independent GPT-6 Astra medium reviewers rechecked commit `e285acd`:
+Standards — 0 documented breaches or actionable smells; Spec — 0 findings.
