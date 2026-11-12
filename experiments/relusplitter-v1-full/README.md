@@ -96,6 +96,8 @@ experiment. The sequential experiment runner itself never overlaps its queries.
   status, witness/replay evidence where available, actual formulation, model size
   after successful construction, effective numerical settings, and environment.
 - `summary.json`, `report.md`: solver-free reports regenerated from those records.
+- `review.md`: independent Standards/Spec reviews using GPT-6 Astra medium,
+  including the reviewed baseline, findings, and disposition.
 
 The separate `../relusplitter-v1/` directory retains the first pilot invocation and
 its original audit. That audit exposed inconsistent group naming for originals
