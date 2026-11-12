@@ -70,3 +70,10 @@ rewritten or rerun.
 
 **Summary:** Standards: two initial findings, both resolved, none remaining.
 Spec: zero initial or follow-up findings.
+
+## Final validation
+
+After the review fixes, `uv run --locked --extra solver pytest tests --solver
+--cov --cov-report=term-missing` passed all **134 tests** (87% branch-inclusive
+coverage). Typechecking, lint and commit hooks also passed. The working tree was
+clean after committing the review record. No benchmark results were changed.
