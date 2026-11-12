@@ -55,7 +55,7 @@ benchmark revision. The worst-case query budget is six hours, plus acquisition,
 audit and supervision overhead. These are experiments, never routine tests.
 The audit inspects every original graph and property using the execution
 interpreter. Descriptors record hidden ReLU depth and widths, output alternative
-counts, and original-model group (filename prefix before `~`, not a functional
+counts, and original-model group (filename prefix before `~`, with `.onnx` removed, not a functional
 equivalence claim). Generated variants can vary width and stability as well as
 depth. Per-result provenance records the actual formulation, pre-presolve model
 size, solver defaults and environment. Construction failures remain unresolved

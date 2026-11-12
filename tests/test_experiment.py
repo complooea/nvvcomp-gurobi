@@ -8,12 +8,15 @@ from nvvcomp_gurobi.verification import VerificationResult
 
 
 def test_disjunction_audit_matches_execution_grammar(tmp_path, instance_factory):
-    instance_factory(
+    instance = instance_factory(
         "(assert (>= Y_0 0.5))\n"
         "(assert (or (and (<= Y_0 -2)) (and (>= Y_0 0.75) (<= Y_1 0))))"
     )
+    (tmp_path / "network~variant.onnx").write_bytes(instance.onnx_path.read_bytes())
     manifest = tmp_path / "instances.csv"
-    manifest.write_text("network.onnx,property.vnnlib,180\n")
+    manifest.write_text(
+        "network.onnx,property.vnnlib,180\nnetwork~variant.onnx,property.vnnlib,180\n"
+    )
     audit = run_experiment(manifest, tmp_path / "experiment", audit_only=True)
     entry = audit["instances"][0]
     assert entry["eligible"] is True
@@ -21,7 +24,8 @@ def test_disjunction_audit_matches_execution_grammar(tmp_path, instance_factory)
     assert entry["architecture"]["hidden_relu_layers"] == 1
     assert entry["architecture"]["output_comparisons"] == 4
     assert entry["architecture"]["output_disjunction_alternatives"] == [2]
-    assert entry["architecture"]["original_model_group"] == "network.onnx"
+    assert entry["architecture"]["original_model_group"] == "network"
+    assert audit["instances"][1]["architecture"]["original_model_group"] == "network"
 
 
 def test_run_accounts_for_manifest_and_saves_before_next_instance(

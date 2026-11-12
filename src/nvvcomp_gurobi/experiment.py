@@ -197,7 +197,8 @@ def _audit(manifest: Path, threads: int) -> dict:
                     # A source-name grouping, not a claim of functional equivalence.
                     "original_model_group": Path(network)
                     .name.split("~", 1)[0]
-                    .removesuffix(".gz"),
+                    .removesuffix(".gz")
+                    .removesuffix(".onnx"),
                     "hidden_widths": [
                         next(
                             t.dims[-1]
