@@ -156,6 +156,27 @@ def test_unsupported_smooth_metadata_is_rejected(smooth_instance_factory, damage
     assert result.solver_status is None
 
 
+@pytest.mark.parametrize("output_kind", ["sigmoid", "reshape_only"])
+def test_trailing_reshape_requires_affine_output(smooth_instance_factory, output_kind):
+    import onnx
+    from onnx import helper
+
+    instance = smooth_instance_factory("(assert (>= Y_0 0))")
+    model = onnx.load(instance.onnx_path)
+    if output_kind == "sigmoid":
+        del model.graph.node[-1]
+        model.graph.node.append(helper.make_node("Reshape", ["s", "shape"], ["y"]))
+    else:
+        del model.graph.node[2:]
+        model.graph.node[1].output[0] = "y"
+        model.graph.output[0].type.tensor_type.shape.dim[1].dim_value = 4
+    onnx.save(model, instance.onnx_path)
+    result = verify(instance, ExecutionLimits(10))
+    assert result.reason == "unsupported", result.diagnostic
+    assert "affine output" in result.diagnostic
+    assert result.solver_status is None
+
+
 @pytest.mark.parametrize("timeout", [0, -1, float("nan"), float("inf")])
 def test_invalid_execution_limits_are_caller_errors(timeout):
     with pytest.raises(ValueError, match="positive and finite"):

@@ -18,8 +18,12 @@ class Unsupported(ValueError):
     pass
 
 
+def uses_native_construction(model) -> bool:
+    return any(n.op_type in ("Sigmoid", "Reshape") for n in model.graph.node)
+
+
 def network_formulation(model) -> str:
-    if any(n.op_type in ("Sigmoid", "Reshape") for n in model.graph.node):
+    if uses_native_construction(model):
         return "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility"
     return "gurobi-machinelearning ONNX; constant-objective feasibility"
 
@@ -196,6 +200,7 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
     shape = tuple(d.dim_value for d in graph.input[0].type.tensor_type.shape.dim)
     seen = set(constants) | {previous}
     last_op = None
+    last_computation = None
     for node in graph.node:
         if (
             node.domain not in ("", "ai.onnx")
@@ -292,10 +297,12 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
         else:
             raise Unsupported(f"Unsupported ONNX operation: {node.op_type}")
         last_op = node.op_type
+        if node.op_type != "Reshape":
+            last_computation = node.op_type
         previous = node.output[0]
         seen.add(previous)
     if (
-        last_op not in ("Gemm", "Reshape")
+        last_computation != "Gemm"
         or previous != graph.output[0].name
         or shape
         != tuple(d.dim_value for d in graph.output[0].type.tensor_type.shape.dim)

@@ -8,9 +8,11 @@ import gurobipy as gp
 from gurobi_ml import add_predictor_constr
 from onnx import helper, numpy_helper
 
+from ._interpretation import uses_native_construction
+
 
 def construct(optimization, model, inputs, outputs):
-    if not any(n.op_type in ("Sigmoid", "Reshape") for n in model.graph.node):
+    if not uses_native_construction(model):
         add_predictor_constr(optimization, model, inputs, outputs)
         return
     constants = {t.name: numpy_helper.to_array(t) for t in model.graph.initializer}
