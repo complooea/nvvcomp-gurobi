@@ -119,11 +119,39 @@ def test_unsupported_property_is_not_silently_approximated(instance_factory, ass
     assert result.solver_status is None
 
 
-@pytest.mark.parametrize("options", [{"op": "Sigmoid"}, {"trans_a": 1}])
+@pytest.mark.parametrize("options", [{"op": "Tanh"}, {"trans_a": 1}])
 def test_unsupported_network_operations_and_attributes(instance_factory, options):
     result = verify(
         instance_factory("(assert (>= Y_0 0))", **options), ExecutionLimits(10)
     )
+    assert result.reason == "unsupported", result.diagnostic
+    assert result.solver_status is None
+
+
+@pytest.mark.parametrize(
+    "damage", ["opset", "shape_type", "shape_count", "dynamic_shape"]
+)
+def test_unsupported_smooth_metadata_is_rejected(smooth_instance_factory, damage):
+    import numpy as np
+    import onnx
+    from onnx import numpy_helper
+
+    instance = smooth_instance_factory("(assert (>= Y_0 0))")
+    model = onnx.load(instance.onnx_path)
+    if damage == "opset":
+        model.opset_import[1].version = 13
+    elif damage == "dynamic_shape":
+        model.graph.node[1].input[1] = "x"
+    else:
+        value = (
+            np.array([1, 3], dtype=np.int64)
+            if damage == "shape_count"
+            else np.array([1, 4], dtype=np.float32)
+        )
+        model.graph.node[0].attribute[0].t.CopyFrom(numpy_helper.from_array(value))
+    onnx.save(model, instance.onnx_path)
+    result = verify(instance, ExecutionLimits(10))
+    assert result.outcome == "unknown"
     assert result.reason == "unsupported", result.diagnostic
     assert result.solver_status is None
 

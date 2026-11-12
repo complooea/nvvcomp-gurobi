@@ -77,7 +77,12 @@ def run(request: dict) -> VerificationResult:
         import onnx
         from google.protobuf.message import DecodeError
 
-        from ._interpretation import Unsupported, interpret_network, interpret_property
+        from ._interpretation import (
+            Unsupported,
+            interpret_network,
+            interpret_property,
+            network_formulation,
+        )
 
         try:
             model, num_inputs, num_outputs = interpret_network(contents["onnx"])
@@ -95,6 +100,8 @@ def run(request: dict) -> VerificationResult:
             "normalization": "Whitespace/comments only; statement and operand order preserved",
             "sha256": hashlib.sha256(prop.replay_text.encode("utf-8")).hexdigest(),
         }
+        # The descriptor and construction dispatch cover the same interpreted graph.
+        result.provenance["formulation"] = network_formulation(model)
         if prop.disjunctions:
             result.provenance["formulation"] += (
                 "; unconditional output constraints plus native binary indicators for OR-of-AND output clauses"
@@ -109,7 +116,8 @@ def run(request: dict) -> VerificationResult:
         try:
             import gurobipy as gp
             import numpy as np
-            from gurobi_ml import add_predictor_constr
+
+            from ._construction import construct
         except ImportError as exc:
             result.reason = "prerequisite_error"
             result.diagnostic = f"Install the pinned solver extra: uv sync --locked --extra solver ({exc})"
@@ -153,7 +161,7 @@ def run(request: dict) -> VerificationResult:
                 outputs = optimization.addMVar(
                     (1, num_outputs), lb=-gp.GRB.INFINITY, name="Y"
                 )
-                add_predictor_constr(optimization, model, inputs, outputs)
+                construct(optimization, model, inputs, outputs)
 
                 def constraint(comparison):
                     left = outputs[0, int(comparison.left[2:])].item()
@@ -230,7 +238,13 @@ def run(request: dict) -> VerificationResult:
                     property_file = Path("replay.vnnlib")
                     network.write_bytes(contents["onnx"])
                     property_file.write_text(prop.replay_text)
-                    candidate = np.asarray(inputs.getAttr("X"), dtype=np.float32)
+                    input_shape = tuple(
+                        d.dim_value
+                        for d in model.graph.input[0].type.tensor_type.shape.dim
+                    )
+                    candidate = np.asarray(
+                        inputs.getAttr("X"), dtype=np.float32
+                    ).reshape(input_shape, order="C")
                     replay = predict_with_onnxruntime(str(network), candidate)
                     if (
                         not np.isfinite(candidate).all()

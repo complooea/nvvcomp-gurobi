@@ -58,10 +58,15 @@ recorded separately. There is no memory limit parameter or automatic hardware tu
 
 The subset is deliberately smaller than general ONNX and VNN-LIB:
 
-- ONNX default-domain opsets 9 and 13–21; one FLOAT32 input and one FLOAT32 output of
-  static shape `[1, width]`, C-order variable indexing.
+- ONNX default-domain opsets 9, 11 and 13–21, including duplicate imports with
+  identical versions; one static FLOAT32 input and output with batch size one,
+  C-order variable indexing. Replay restores the original input shape.
 - A connected sequential chain of `Gemm` layers, optionally followed by one
-  `Relu` each, ending in `Gemm`. No branching, custom operators, local functions,
+  `Relu` or `Sigmoid` each, ending in `Gemm` (optionally reshaped). Constant-shape
+  `Reshape` preserves C order; its INT64 vector may be an initializer or inline
+  `Constant`. Zero dimensions copy the corresponding input dimension; a single
+  `-1` infers a dimension with unchanged element count. Gemm data is `[1,width]`.
+  No branching, custom operators, local functions,
   sparse/external tensors, or implicit topology approximations.
 - Gemm weights are finite FLOAT32 matrix initializers; biases are finite FLOAT32
   initializers of shape `[width]` or `[1, width]`. `alpha=beta=1`, `transA=0`;
@@ -118,7 +123,12 @@ Example for a two-input/two-output model:
 
 The asserted formula is encoded directly as feasibility constraints with a
 constant zero objective, never negated or replaced by a classification objective.
-Gurobi-machinelearning supplies the network constraints. Gurobi numerical defaults
+Gurobi-machinelearning supplies existing affine/ReLU constraints. Smooth/reshape
+graphs use native affine equalities, max/ReLU constraints and logistic relations
+with `FuncNonlinear=1` (global nonlinear solving, not a fixed piecewise
+approximation). Sigmoid outputs have the valid conservative bounds `[0,1]`;
+affine values are free and ReLU outputs are nonnegative. No physical or heuristic
+domain restrictions are added. Gurobi numerical defaults
 are unchanged; only logging, Threads, and remaining TimeLimit are set. Effective
 tolerances and relevant numerical controls are recorded. Default tolerances and
 FLOAT32 replay are not exact-real arithmetic; encoding feasibility alone is not SAT.

@@ -20,7 +20,12 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ._interpretation import Unsupported, interpret_network, interpret_property
+from ._interpretation import (
+    Unsupported,
+    interpret_network,
+    interpret_property,
+    network_formulation,
+)
 from ._worker import TOOLING
 from .verification import ExecutionLimits, Instance, VerificationResult, verify
 
@@ -37,7 +42,11 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
     Existing files must match the acquisition inventory; no silent overwrite.
     Downloads are not solver preparation and have their own elapsed time.
     """
-    selections = {"sat_relu": (100, 100), "relusplitter_2026": (120, 180)}
+    selections = {
+        "sat_relu": (100, 100),
+        "relusplitter_2026": (120, 180),
+        "dist_shift_2023": (72, 300),
+    }
     if category not in selections:
         raise ValueError(f"Unsupported pinned category: {category}")
     expected_rows, expected_budget = selections[category]
@@ -86,6 +95,8 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
             f"Pinned category must have {expected_rows} rows with {expected_budget}-second budgets"
         )
     for row in rows:
+        if category == "dist_shift_2023" and row[0] != "./onnx/mnist_concat.onnx":
+            raise ValueError("Pinned smooth selection requires mnist_concat only")
         for name in row[:2]:
             if name in files or name + ".gz" in files:
                 continue
@@ -188,6 +199,15 @@ def _audit(manifest: Path, threads: int) -> dict:
                     content["vnnlib"].decode(), inputs, outputs
                 )
                 entry["architecture"] = {
+                    "formulation": network_formulation(model),
+                    "input_shape": [
+                        d.dim_value
+                        for d in model.graph.input[0].type.tensor_type.shape.dim
+                    ],
+                    "output_shape": [
+                        d.dim_value
+                        for d in model.graph.output[0].type.tensor_type.shape.dim
+                    ],
                     "inputs": inputs,
                     "outputs": outputs,
                     "operations": [node.op_type for node in model.graph.node],
@@ -510,7 +530,7 @@ def report_experiment(output: Path) -> dict:
         "",
         "## Architecture and numerical scope",
         "",
-        "Eligibility uses the verification contract's sequential FLOAT32 affine/ReLU and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row's architecture descriptor records the audited operations, hidden widths and ReLU depth, input/output dimensions, parameter count, and output comparison/alternative counts. Original-model groups are source-name groups, not evidence of functional equivalence. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
+        "Eligibility uses the verification contract's sequential FLOAT32 affine/ReLU/sigmoid/constant-reshape and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row's architecture descriptor records the actual formulation, tensor shapes, audited operations, hidden widths and ReLU depth, input/output dimensions, initializer count, and output comparison/alternative counts. Original-model groups are source-name groups, not evidence of functional equivalence. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
         "Gurobi numerical defaults are unchanged; effective settings, package versions, witnesses, and validation diagnostics are retained in individual records. These are floating-point results, not exact-arithmetic certification.",
         "",
         "## Competition scoring",
@@ -544,7 +564,9 @@ def main():
     acquire = commands.add_parser("acquire")
     acquire.add_argument("destination", type=Path)
     acquire.add_argument(
-        "--category", choices=["sat_relu", "relusplitter_2026"], default="sat_relu"
+        "--category",
+        choices=["sat_relu", "relusplitter_2026", "dist_shift_2023"],
+        default="sat_relu",
     )
     for operation in ("audit", "run"):
         command = commands.add_parser(operation)

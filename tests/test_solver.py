@@ -5,6 +5,33 @@ from nvvcomp_gurobi.verification import ExecutionLimits, verify
 pytestmark = pytest.mark.solver
 
 
+def test_smooth_reshape_sat_replays_original_tensor_order(smooth_instance_factory):
+    instance = smooth_instance_factory(
+        "(assert (>= Y_0 2.25))\n(assert (<= Y_0 2.27))\n"
+        "(assert (>= Y_1 -0.51))\n(assert (<= Y_1 -0.49))"
+    )
+    original = instance.onnx_path.read_bytes()
+    result = verify(instance, ExecutionLimits(30))
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
+    assert result.witness is not None
+    assert result.witness["inputs"] == [0, 1, 2, 3]
+    assert result.witness["outputs"] == pytest.approx([2.261594, -0.5], abs=1e-6)
+    assert instance.onnx_path.read_bytes() == original
+    assert "native" in result.provenance["formulation"]
+
+
+def test_smooth_output_above_analytic_range_is_unsat(smooth_instance_factory):
+    # 0 < sigmoid(z) < 1 implies Y_0 = s_0 + 2*s_1 < 3, independently
+    # of the affine input values. A missing/disconnected sigmoid cannot prove this.
+    result = verify(
+        smooth_instance_factory("(assert (>= Y_0 3.5))"), ExecutionLimits(30)
+    )
+    assert result.outcome == "unsat", result.diagnostic
+    assert result.reason == "infeasible"
+    assert result.solver_status == 3
+
+
 def test_later_disjunct_is_reachable_with_accepted_replay(instance_factory):
     result = verify(
         instance_factory(

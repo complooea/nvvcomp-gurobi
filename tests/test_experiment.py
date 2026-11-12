@@ -3,8 +3,59 @@ import json
 
 import pytest
 
-from nvvcomp_gurobi.experiment import report_experiment, run_experiment
+from nvvcomp_gurobi.experiment import (
+    acquire_category,
+    report_experiment,
+    run_experiment,
+)
 from nvvcomp_gurobi.verification import VerificationResult
+
+
+def test_acquire_pinned_mnist_only(tmp_path, monkeypatch):
+    import io
+
+    manifest = "".join(
+        f"./onnx/mnist_concat.onnx,./vnnlib/index{i}.vnnlib,300\n" for i in range(72)
+    ).encode()
+    urls = []
+
+    def download(url, timeout):
+        urls.append(url)
+        return io.BytesIO(manifest if url.endswith("instances.csv") else b"artifact")
+
+    monkeypatch.setattr("urllib.request.urlopen", download)
+    path = acquire_category(tmp_path / "mnist", category="dist_shift_2023")
+    assert path.read_bytes() == manifest
+    assert len(urls) == 74  # manifest, one original model, 72 properties
+    assert all("303f2327a8e8411efc4457da03d2016ce42733cf" in u for u in urls)
+    assert all("/dist_shift_2023/1.0/" in u for u in urls)
+    assert not any("alias" in u for u in urls)
+
+
+def test_smooth_audit_retains_shape_and_actual_formulation(
+    tmp_path, smooth_instance_factory
+):
+    import numpy as np
+    import onnx
+    from onnx import numpy_helper
+
+    instance = smooth_instance_factory("(assert (>= Y_0 0))")
+    # Equivalent initializer metadata also exercises zero-copy dimension semantics.
+    model = onnx.load(instance.onnx_path)
+    del model.graph.node[0]
+    model.graph.initializer.append(
+        numpy_helper.from_array(np.array([0, -1], dtype=np.int64), "shape")
+    )
+    onnx.save(model, instance.onnx_path)
+    manifest = tmp_path / "instances.csv"
+    manifest.write_text("smooth.onnx,smooth.vnnlib,300\n")
+    audit = run_experiment(manifest, tmp_path / "experiment", audit_only=True)
+    entry = audit["instances"][0]
+    assert entry["eligible"] is True
+    assert entry["architecture"]["input_shape"] == [1, 1, 2, 2]
+    assert entry["architecture"]["output_shape"] == [1, 2]
+    assert "FuncNonlinear=1" in entry["architecture"]["formulation"]
+    assert entry["timeout_seconds"] == 300
 
 
 def test_disjunction_audit_matches_execution_grammar(tmp_path, instance_factory):
