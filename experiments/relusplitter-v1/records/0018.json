@@ -1,0 +1,158 @@
+{
+  "id": "0018",
+  "network": "onnx/model_1_1.onnx",
+  "property": "vnnlib/d1_eps_0.01_sample_2_label_7.vnnlib",
+  "timeout_seconds": 180.0,
+  "artifacts": {
+    "onnx": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1.onnx.gz",
+      "sha256": "5408d56a296f0155ccb82465ff47d05d6ec1911d800f830b03c6d2a020e61263",
+      "uncompressed_sha256": "5b28e0e82d1c0fe245447304456abd1f413906ee8d72c6f0d8eebee40e34cce7",
+      "bytes": 1238837
+    },
+    "vnnlib": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.01_sample_2_label_7.vnnlib.gz",
+      "sha256": "0f3926e446e8ea8833d1aef02adeb4a9796d14fe7a72815b97b0b7cf2ca70f84",
+      "uncompressed_sha256": "03d820f52abaffdf64bd7be75110e42734cd3dd4781082a08368b585ed1eb322",
+      "bytes": 8032
+    }
+  },
+  "eligible": true,
+  "exclusion_reason": null,
+  "architecture": {
+    "inputs": 784,
+    "outputs": 10,
+    "operations": [
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm"
+    ],
+    "hidden_relu_layers": 5,
+    "original_model_group": "model_1_1",
+    "hidden_widths": [
+      128,
+      256,
+      256,
+      256,
+      256
+    ],
+    "initializer_elements": 333450,
+    "output_comparisons": 9,
+    "output_disjunction_alternatives": [
+      9
+    ]
+  },
+  "preparation_seconds": 0.0,
+  "preparation_analysis": false,
+  "started_utc": "2026-11-12T09:00:22.439937+00:00",
+  "invocation_seconds": 180.01084412494674,
+  "result": {
+    "outcome": "unknown",
+    "reason": "timeout",
+    "diagnostic": "Whole-run deadline exceeded; late results are not accepted. Gurobi status 9, solutions 0; worker exit -9: ",
+    "solver_status": 9,
+    "witness": null,
+    "validation": null,
+    "timings": {
+      "interpretation": 0.23508287500590086,
+      "construction": 0.34784487495198846,
+      "solve": 179.28295783302747,
+      "total": 180.0106278329622
+    },
+    "provenance": {
+      "tooling_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "python": "3.12.16",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "logical_cpus": 10,
+      "formulation": "gurobi-machinelearning ONNX; constant-objective feasibility; unconditional output constraints plus native binary indicators for OR-of-AND output clauses",
+      "artifacts": {
+        "onnx": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1.onnx",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1.onnx.gz",
+          "sha256": "5408d56a296f0155ccb82465ff47d05d6ec1911d800f830b03c6d2a020e61263",
+          "uncompressed_sha256": "5b28e0e82d1c0fe245447304456abd1f413906ee8d72c6f0d8eebee40e34cce7"
+        },
+        "vnnlib": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.01_sample_2_label_7.vnnlib",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.01_sample_2_label_7.vnnlib.gz",
+          "sha256": "0f3926e446e8ea8833d1aef02adeb4a9796d14fe7a72815b97b0b7cf2ca70f84",
+          "uncompressed_sha256": "03d820f52abaffdf64bd7be75110e42734cd3dd4781082a08368b585ed1eb322"
+        }
+      },
+      "packages": {
+        "gurobipy": "13.0.1",
+        "gurobi-machinelearning": "1.7.0",
+        "onnx": "1.21.0",
+        "onnxruntime": "1.26.0",
+        "numpy": "2.2.6",
+        "cachier": "2.2.2"
+      },
+      "replay_settings": {
+        "provider": "CPUExecutionProvider",
+        "intra_op_threads": 12,
+        "inter_op_threads": 12,
+        "input_dtype": "float32",
+        "strict_input_tolerance": 0.0,
+        "tolerant_input_tolerance": 0.0001,
+        "output_tolerance": 0.0
+      },
+      "replay_property": {
+        "normalization": "Whitespace/comments only; statement and operand order preserved",
+        "sha256": "c10df522648c8b39e42ec89b6fb24fb25d0fa9f20a19e7dddfcde934ae06a2a6"
+      },
+      "output_disjunction_alternatives": [
+        9
+      ],
+      "solver_settings": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "NumericFocus": 0,
+        "IntegralityFocus": 0,
+        "ScaleFlag": -1,
+        "MarkowitzTol": 0.0078125,
+        "MIPGap": 0.0001,
+        "MIPGapAbs": 1e-10,
+        "DualReductions": 1,
+        "Threads": 1,
+        "TimeLimit": 179.28378258296289,
+        "OutputFlag": 0
+      },
+      "gurobi_version": [
+        13,
+        0,
+        1
+      ],
+      "formulation_size": {
+        "NumVars": 3107,
+        "NumBinVars": 9,
+        "NumConstrs": 1163,
+        "NumGenConstrs": 1161,
+        "NumNZs": 333459
+      },
+      "limits": {
+        "timeout_seconds": 180.0,
+        "threads": 1
+      },
+      "requested_artifacts": {
+        "onnx": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/onnx/model_1_1.onnx",
+        "vnnlib": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/relusplitter-v1/vnnlib/d1_eps_0.01_sample_2_label_7.vnnlib"
+      }
+    }
+  }
+}

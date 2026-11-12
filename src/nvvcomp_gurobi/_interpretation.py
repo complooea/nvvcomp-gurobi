@@ -8,6 +8,11 @@ import numpy as np
 import onnx
 from onnx import TensorProto, numpy_helper
 
+_COMPARISON = re.compile(r"\( (<=|>=) ([^\s()]+) ([^\s()]+) \)")
+_ASSERTION = re.compile(rf"\( assert {_COMPARISON.pattern} \)")
+_CONJUNCTION = re.compile(rf"\( and (?:{_COMPARISON.pattern} )+\)")
+_DISJUNCTION = re.compile(rf"\( assert \( or (?:{_CONJUNCTION.pattern} )+\) \)")
+
 
 class Unsupported(ValueError):
     pass
@@ -25,6 +30,7 @@ class Property:
     lower: list[float]
     upper: list[float]
     comparisons: list[Comparison]
+    disjunctions: list[list[list[Comparison]]]
     replay_text: str
 
 
@@ -33,6 +39,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
     text = re.sub(r";[^\n]*", "", text)
     declarations: set[str] = set()
     comparisons = []
+    disjunctions = []
     replay_statements = []
     lower, upper = [-math.inf] * num_inputs, [math.inf] * num_inputs
     expected = {f"X_{i}" for i in range(num_inputs)} | {
@@ -52,7 +59,7 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
         declaration = re.fullmatch(
             r"\( declare-const ([XY]_(?:0|[1-9][0-9]*)) Real \)", statement
         )
-        assertion = re.fullmatch(r"\( assert \( (<=|>=) (\S+) (\S+) \) \)", statement)
+        assertion = _ASSERTION.fullmatch(statement)
         if depth != 0:
             raise Unsupported("Unbalanced VNN-LIB parentheses")
         if declaration:
@@ -61,49 +68,72 @@ def interpret_property(text: str, num_inputs: int, num_outputs: int) -> Property
                 raise Unsupported(f"Duplicate or out-of-range declaration: {name}")
             declarations.add(name)
             replay_statements.append(f"(declare-const {name} Real)")
-        elif assertion:
-            operator, left, right = assertion.groups()
-            if left not in declarations:
-                raise Unsupported(f"Undeclared variable or unsupported operand: {left}")
-            if right in declarations:
-                if (
-                    not left.startswith("Y_")
-                    or not right.startswith("Y_")
-                    or left == right
-                ):
-                    raise Unsupported(
-                        "Only distinct output-variable comparisons are supported"
-                    )
-                value: str | float = right
+        elif assertion or _DISJUNCTION.fullmatch(statement):
+            # Replay accepts this same narrow DNF grammar. Keep the original
+            # assertion order and scalar spellings, normalizing whitespace only.
+            replay_statements.append(statement.replace("( ", "(").replace(" )", ")"))
+            if assertion:
+                clauses = [[assertion.groups()]]
             else:
-                if not re.fullmatch(
-                    r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?", right
-                ):
-                    raise Unsupported(f"Unsupported scalar: {right}")
-                value = float(right)
-                if not math.isfinite(value) or abs(value) >= 1e100:
-                    raise Unsupported(
-                        "Scalar must be finite and smaller than Gurobi infinity"
+                clauses = [
+                    _COMPARISON.findall(clause.group(0))
+                    for clause in _CONJUNCTION.finditer(statement)
+                ]
+            alternatives = []
+            for clause in clauses:
+                branch = []
+                for operator, left, right in clause:
+                    comparison = _interpret_comparison(
+                        operator, left, right, declarations
                     )
-            if left.startswith("X_"):
-                assert isinstance(value, float)
-                variable = int(left[2:])
-                if operator == ">=":
-                    lower[variable] = max(lower[variable], value)
-                else:
-                    upper[variable] = min(upper[variable], value)
+                    if left.startswith("X_"):
+                        if not assertion:
+                            raise Unsupported(
+                                "Disjunctions support output comparisons only"
+                            )
+                        value = comparison.right
+                        assert isinstance(value, float)
+                        variable = int(left[2:])
+                        if operator == ">=":
+                            lower[variable] = max(lower[variable], value)
+                        else:
+                            upper[variable] = min(upper[variable], value)
+                    else:
+                        branch.append(comparison)
+                alternatives.append(branch)
+            if assertion:
+                comparisons.extend(alternatives[0])
             else:
-                comparisons.append(Comparison(left, operator, value))
-            replay_statements.append(f"(assert ({operator} {left} {right}))")
+                disjunctions.append(alternatives)
         else:
             raise Unsupported(f"Unsupported VNN-LIB statement: {statement}")
     if declarations != expected:
         raise Unsupported("Declare exactly the model's contiguous X and Y variables")
     if not all(math.isfinite(v) for v in lower + upper):
         raise Unsupported("Every input requires finite lower and upper box bounds")
-    if not comparisons:
+    if not comparisons and not disjunctions:
         raise Unsupported("At least one asserted output comparison is required")
-    return Property(lower, upper, comparisons, "\n".join(replay_statements) + "\n")
+    return Property(
+        lower, upper, comparisons, disjunctions, "\n".join(replay_statements) + "\n"
+    )
+
+
+def _interpret_comparison(operator, left, right, declarations) -> Comparison:
+    if left not in declarations:
+        raise Unsupported(f"Undeclared variable or unsupported operand: {left}")
+    if right in declarations:
+        if not left.startswith("Y_") or not right.startswith("Y_") or left == right:
+            raise Unsupported("Only distinct output-variable comparisons are supported")
+        value: str | float = right
+    else:
+        if not re.fullmatch(
+            r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?", right
+        ):
+            raise Unsupported(f"Unsupported scalar: {right}")
+        value = float(right)
+        if not math.isfinite(value) or abs(value) >= 1e100:
+            raise Unsupported("Scalar must be finite and smaller than Gurobi infinity")
+    return Comparison(left, operator, value)
 
 
 def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:

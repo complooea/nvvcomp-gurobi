@@ -1,4 +1,4 @@
-# SAT ReLU V1 experiments
+# Manifest-driven experiments
 
 Experiment execution owns selection, accounting, persistence, and reporting. It
 calls the unchanged [verification interface](verification.md) with original
@@ -37,6 +37,31 @@ directory, or a completed, hash-verified existing inventory. After an interrupte
 download, use a new directory rather than trusting a partial cache.
 
 ## Accounting and timing
+
+### ReLUSplitter 1.0
+
+Use the same workflow for the complete 120-row ReLUSplitter selection:
+
+```sh
+uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/relusplitter-v1 --category relusplitter_2026
+uv run --locked python -m nvvcomp_gurobi.experiment audit .benchmarks/relusplitter-v1/instances.csv experiments/relusplitter-v1
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/relusplitter-v1/instances.csv experiments/relusplitter-v1 --stop-after 1
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/relusplitter-v1/instances.csv experiments/relusplitter-v1
+uv run --locked python -m nvvcomp_gurobi.experiment report experiments/relusplitter-v1
+```
+
+Acquisition verifies 120 rows with 180-second deadlines at the same pinned
+benchmark revision. The worst-case query budget is six hours, plus acquisition,
+audit and supervision overhead. These are experiments, never routine tests.
+The audit inspects every original graph and property using the execution
+interpreter. Descriptors record hidden ReLU depth and widths, output alternative
+counts, and original-model group (filename prefix before `~`, with `.onnx` removed, not a functional
+equivalence claim). Generated variants can vary width and stability as well as
+depth. Per-result provenance records the actual formulation, pre-presolve model
+size, solver defaults and environment. Construction failures remain unresolved
+attempts, not exclusions or numerical UNSAT.
+
+### SAT ReLU 1.0
 
 All 100 network/property pairs are audited before any solving. Eligibility uses
 the existing verification grammar and never filenames, claimed labels, runtime,

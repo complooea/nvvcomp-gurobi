@@ -6,7 +6,7 @@ preliminary comparison with published α,β-CROWN results; no performance winner
 presumed.
 
 The initial verifier supports narrow sequential FLOAT32 affine/ReLU ONNX networks
-and conjunctive VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
+and conjunctive / output OR-of-AND VNN-LIB 1.0 queries. SAT witnesses are independently replayed with
 pinned VNN-COMP validation code. Manifest-driven experiments retain per-instance
 records and produce reports without rerunning the solver.
 
@@ -37,6 +37,9 @@ numerical assumptions, result meanings, dependencies, and competition scripts.
 
 See [experiment instructions](docs/experiments.md) for the pinned full-category
 audit, local execution, saved records, and solver-free reports.
+
+The [ReLUSplitter results](experiments/relusplitter-v1/README.md) archive all
+120 queries, including unresolved outcomes and reproduction instructions.
 
 See the [preliminary ABC comparison](experiments/sat-relu-v1-comparison/README.md)
 for coverage, observed runtimes, and network-scale descriptors, and

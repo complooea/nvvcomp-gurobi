@@ -5,6 +5,37 @@ from nvvcomp_gurobi.verification import ExecutionLimits, verify
 pytestmark = pytest.mark.solver
 
 
+def test_later_disjunct_is_reachable_with_accepted_replay(instance_factory):
+    result = verify(
+        instance_factory(
+            "(assert (>= Y_0 0.5))\n"
+            "(assert (or (and (<= Y_0 -2)) (and (>= Y_0 0.75) (>= Y_0 Y_1) (<= Y_1 0))))"
+        ),
+        ExecutionLimits(30),
+    )
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
+    assert result.witness is not None
+    assert 0.75 <= result.witness["outputs"][0] <= 1
+    assert result.witness["outputs"][1] == 0
+
+
+def test_all_disjuncts_impossible_with_unconditional_conjunct(instance_factory):
+    # Y_0=X_0 in [-1,1], Y_1=max(X_1,0) in [0,1]. The first
+    # alternative contradicts the unconditional conjunct; the second is negative.
+    result = verify(
+        instance_factory(
+            "(assert (or (and (>= Y_0 0.5)) (and (<= Y_1 -1))))\n(assert (<= Y_0 -0.5))"
+        ),
+        ExecutionLimits(30),
+    )
+    assert result.outcome == "unsat", result.diagnostic
+    assert result.reason == "infeasible"
+    assert result.solver_status == 3
+    assert result.validation is None
+    assert result.witness is None
+
+
 @pytest.mark.parametrize("opset", [9, 17])
 def test_relu_sat_with_independently_replayed_witness(instance_factory, opset):
     result = verify(

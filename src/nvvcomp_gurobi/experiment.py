@@ -31,17 +31,22 @@ BENCHMARK_URL = (
 )
 
 
-def acquire_category(destination: Path) -> Path:
+def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
     """Acquire the immutable category, retaining original compressed artifact bytes.
 
     Existing files must match the acquisition inventory; no silent overwrite.
     Downloads are not solver preparation and have their own elapsed time.
     """
+    selections = {"sat_relu": (100, 100), "relusplitter_2026": (120, 180)}
+    if category not in selections:
+        raise ValueError(f"Unsupported pinned category: {category}")
+    expected_rows, expected_budget = selections[category]
+    benchmark_url = BENCHMARK_URL.replace("/sat_relu/", f"/{category}/")
     destination = destination.resolve()
     inventory = destination / "acquisition.json"
     if inventory.exists():
         saved = json.loads(inventory.read_text())
-        if saved["benchmark_url"] != BENCHMARK_URL:
+        if saved["benchmark_url"] != benchmark_url:
             raise ValueError("Acquisition source differs")
         for name, identity in saved["files"].items():
             if (
@@ -60,7 +65,7 @@ def acquire_category(destination: Path) -> Path:
         path = destination / name
         if not path.resolve().is_relative_to(destination):
             raise ValueError("Remote manifest path escapes category")
-        url = f"{BENCHMARK_URL}/{name}"
+        url = f"{benchmark_url}/{name}"
         with urllib.request.urlopen(url, timeout=60) as response:
             content = response.read()
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -74,8 +79,12 @@ def acquire_category(destination: Path) -> Path:
 
     manifest = download("instances.csv")
     rows = list(csv.reader(manifest.decode().splitlines()))
-    if len(rows) != 100 or any(len(row) != 3 or float(row[2]) != 100 for row in rows):
-        raise ValueError("Pinned category must have 100 rows with 100-second budgets")
+    if len(rows) != expected_rows or any(
+        len(row) != 3 or float(row[2]) != expected_budget for row in rows
+    ):
+        raise ValueError(
+            f"Pinned category must have {expected_rows} rows with {expected_budget}-second budgets"
+        )
     for row in rows:
         for name in row[:2]:
             if name in files or name + ".gz" in files:
@@ -89,7 +98,7 @@ def acquire_category(destination: Path) -> Path:
     _save(
         inventory,
         {
-            "benchmark_url": BENCHMARK_URL,
+            "benchmark_url": benchmark_url,
             "benchmark_revision": TOOLING["benchmark"],
             "acquisition_seconds": time.monotonic() - started,
             "files": files,
@@ -182,6 +191,14 @@ def _audit(manifest: Path, threads: int) -> dict:
                     "inputs": inputs,
                     "outputs": outputs,
                     "operations": [node.op_type for node in model.graph.node],
+                    "hidden_relu_layers": sum(
+                        node.op_type == "Relu" for node in model.graph.node
+                    ),
+                    # A source-name grouping, not a claim of functional equivalence.
+                    "original_model_group": Path(network)
+                    .name.split("~", 1)[0]
+                    .removesuffix(".gz")
+                    .removesuffix(".onnx"),
                     "hidden_widths": [
                         next(
                             t.dims[-1]
@@ -194,7 +211,15 @@ def _audit(manifest: Path, threads: int) -> dict:
                     "initializer_elements": sum(
                         math.prod(t.dims) for t in model.graph.initializer
                     ),
-                    "output_comparisons": len(property_.comparisons),
+                    "output_comparisons": len(property_.comparisons)
+                    + sum(
+                        len(branch)
+                        for alternatives in property_.disjunctions
+                        for branch in alternatives
+                    ),
+                    "output_disjunction_alternatives": [
+                        len(alternatives) for alternatives in property_.disjunctions
+                    ],
                 }
             except Unsupported as exc:
                 entry["eligible"] = False
@@ -462,7 +487,7 @@ def report_experiment(output: Path) -> dict:
     }
     _save(output / "summary.json", summary)
     text = [
-        "# SAT ReLU V1 experiment report",
+        "# Verification experiment report",
         "",
         f"Listed: {summary['listed']}; eligible: {eligible}; excluded: {summary['excluded']}.",
         f"Recorded eligible results: {summary['recorded']}; Missing records: {len(missing)}; corrupt records: {len(corrupt)}.",
@@ -485,7 +510,7 @@ def report_experiment(output: Path) -> dict:
         "",
         "## Architecture and numerical scope",
         "",
-        "The pinned category has one hidden ReLU layer between two Gemm operations, two outputs, 5–95 inputs, hidden widths 29–1,071, and 234–100,676 stored weight/bias elements. This is width variation, not depth or architectural diversity. Eligibility uses the verification contract's sequential FLOAT32 affine/ReLU and conjunctive property grammar, independently of solve outcomes.",
+        "Eligibility uses the verification contract's sequential FLOAT32 affine/ReLU and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row's architecture descriptor records the audited operations, hidden widths and ReLU depth, input/output dimensions, parameter count, and output comparison/alternative counts. Original-model groups are source-name groups, not evidence of functional equivalence. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
         "Gurobi numerical defaults are unchanged; effective settings, package versions, witnesses, and validation diagnostics are retained in individual records. These are floating-point results, not exact-arithmetic certification.",
         "",
         "## Competition scoring",
@@ -518,6 +543,9 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     acquire = commands.add_parser("acquire")
     acquire.add_argument("destination", type=Path)
+    acquire.add_argument(
+        "--category", choices=["sat_relu", "relusplitter_2026"], default="sat_relu"
+    )
     for operation in ("audit", "run"):
         command = commands.add_parser(operation)
         command.add_argument("manifest", type=Path)
@@ -529,7 +557,7 @@ def main():
     report.add_argument("output", type=Path)
     args = parser.parse_args()
     if args.command == "acquire":
-        print(acquire_category(args.destination))
+        print(acquire_category(args.destination, category=args.category))
     elif args.command == "report":
         print(json.dumps(report_experiment(args.output), indent=2))
     else:
