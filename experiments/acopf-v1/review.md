@@ -50,3 +50,18 @@ exponents and division, including unused nodes.
 Summary: Standards — zero documented violations, one heuristic addressed;
 Spec — zero actionable findings. Numerical UNSAT remains solver-reported, not
 an independently checked exact-real certificate.
+
+## Final archive review
+
+After all 14 attempts and reporting, two fresh **GPT-6 Astra medium** reviews
+examined the complete diff through `0597714` against the same baseline.
+
+- **Standards: pass**, zero hard breaches or remaining actionable heuristics.
+  The relation-dispatch concern is resolved, and maintained guidance is separated
+  from measured archive history.
+- **Spec: pass**, zero actionable findings. The review checked all 14 identities,
+  deadlines, recorded source/artifact hashes, published source matching, measured
+  timing/size claims, class distinctions, and retention of property 3 as unknown.
+  Neither tests nor benchmarks were rerun during this archive review.
+
+Final summary: zero remaining findings on either axis; no worst outstanding issue.
