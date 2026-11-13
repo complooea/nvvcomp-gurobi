@@ -38,14 +38,12 @@ numerical assumptions, result meanings, dependencies, and competition scripts.
 See [experiment instructions](docs/experiments.md) for the pinned full-category
 audit, local execution, saved records, and solver-free reports.
 
-The [ReLUSplitter results](experiments/relusplitter-v1/README.md) archive all
-120 queries, including unresolved outcomes and reproduction instructions.
-
 See the [comprehensive Gurobi–ABC comparison](experiments/proof-comparison-analysis.md)
 for the shallow-ReLU MVP, ReLUSplitter, internal-sigmoid MNIST and IEEE-14 ACOPF,
 with separate proof coverage and common-proof timings for each workload.
-The [experiment index](experiments/README.md) maps reports, evidence and review
-records; [comparison instructions](docs/comparisons.md) explain reproduction.
+The [experiment index](experiments/README.md) links each study's reports and
+per-instance records, including unresolved outcomes, alongside comparison evidence
+and review records. See [comparison instructions](docs/comparisons.md) for reproduction.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for checks, testing, CI, and the solo
 development workflow, and [GLOSSARY.md](GLOSSARY.md) for domain terminology.
