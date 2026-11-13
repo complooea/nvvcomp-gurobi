@@ -488,7 +488,7 @@ unapproved combined ratios. Its retained inputs remain reproducible; do not
 overwrite the historical archive to obtain a purported byte-identical modern run.
 `provenance.experiment_sha256`, `published_source_sha256`, `record_sha256` and
 `published.files` retain the transitive input fingerprints. The review/check
-records are in [reviews/](reviews/): the [original analysis review](reviews/proof-comparison-analysis-review.md),
+records are in [reviews/](reviews/): the [analysis and consolidation reviews](reviews/proof-comparison-analysis-review.md),
 [#11 statistics implementation review](reviews/proof-comparison-statistics-review.md)
 and [historical MVP review](reviews/sat-relu-comparison-review.md) identify their
 respective reviewed revisions, not blanket approval of subsequent edits.

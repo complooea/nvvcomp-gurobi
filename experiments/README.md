@@ -23,6 +23,6 @@ Reviews are supporting process records, not alternative research reports:
 - [Statistics implementation review](reviews/proof-comparison-statistics-review.md):
   #11's shared calculation implementation.
 - [Analysis review](reviews/proof-comparison-analysis-review.md): #12's original
-  three-study narrative; its reviewed revision is explicitly recorded.
+  narrative and subsequent four-study consolidation, each scoped to its revision.
 
 See [comparison instructions](../docs/comparisons.md) for solver-free reproduction.
