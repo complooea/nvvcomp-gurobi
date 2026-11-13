@@ -7,6 +7,7 @@ or Boolean folding. This is deliberately not a general ONNX interpreter.
 
 import math
 from dataclasses import dataclass
+from typing import Literal
 
 import numpy as np
 from onnx import TensorProto, helper, numpy_helper
@@ -23,7 +24,7 @@ class Ref:
 
 @dataclass
 class Relation:
-    operation: str
+    operation: Literal["Affine", "Relu", "Sigmoid", "Sin", "Cos", "Mul", "Square"]
     arguments: tuple
     coefficients: tuple = ()
     bias: float = 0.0

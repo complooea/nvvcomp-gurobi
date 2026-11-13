@@ -10,7 +10,7 @@ import gurobipy as gp
 from gurobi_ml import add_predictor_constr
 
 from ._interpretation import uses_native_construction
-from ._tensor_dag import Ref, lower
+from ._tensor_dag import Ref, Unsupported, lower
 
 
 def _outward(value, direction):
@@ -44,9 +44,11 @@ def _bounds(relation, intervals):
             0.0 if a <= 0 <= b else max(0, _outward(min(a * a, b * b), -math.inf)),
             _outward(max(a * a, b * b), math.inf),
         )
-    c, d = args[1]
-    products = (a * c, a * d, b * c, b * d)
-    return _outward(min(products), -math.inf), _outward(max(products), math.inf)
+    if op == "Mul":
+        c, d = args[1]
+        products = (a * c, a * d, b * c, b * d)
+        return _outward(min(products), -math.inf), _outward(max(products), math.inf)
+    raise Unsupported(f"No interval semantics for relation: {op}")
 
 
 def construct(optimization, model, inputs, outputs):
