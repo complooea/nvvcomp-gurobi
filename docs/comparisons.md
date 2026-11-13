@@ -161,3 +161,8 @@ counted separately. Unlike studies are not pooled.
 JSON additionally retains exact population IDs, individual timing fields, and
 experiment hardware/resource/revision context alongside input hashes. The MVP
 archive remains the separate population for subsequent analysis relating to #2.
+
+See the [authored proof-comparison analysis](../experiments/proof-comparison-analysis.md)
+for interpretation of all three completed studies in relation to the MVP, exact
+evidence links, timing denominators and claim limitations. Regeneration does not
+overwrite this report; reconsider it if input fingerprints or definitions change.

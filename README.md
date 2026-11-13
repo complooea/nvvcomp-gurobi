@@ -45,5 +45,9 @@ See the [preliminary ABC comparison](experiments/sat-relu-v1-comparison/README.m
 for coverage, observed runtimes, and network-scale descriptors, and
 [comparison instructions](docs/comparisons.md) to regenerate its evidence.
 
+The [expanded proof-comparison analysis](experiments/proof-comparison-analysis.md)
+interprets ReLUSplitter, internal-sigmoid MNIST and IEEE-14 ACOPF against published
+ABC results and the MVP, with separate proof coverage and common-proof timings.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for checks, testing, CI, and the solo
 development workflow, and [GLOSSARY.md](GLOSSARY.md) for domain terminology.
