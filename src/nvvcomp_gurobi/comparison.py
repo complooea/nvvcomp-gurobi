@@ -9,6 +9,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import median
 
+_SOURCE_VERIFIED_MATCHES = ("execution_bound", "source_verified_execution_unbound")
+
 
 def _valid_time(value):
     return value is None or (
@@ -91,12 +93,34 @@ def _runtime_population(
     }
 
 
+def _paired_statistics(rows: list[dict]) -> dict:
+    """Summarize an already selected population with available paired run ratios."""
+    gurobi_times = [row["gurobi"]["run_seconds"] for row in rows]
+    abc_times = [row["abc"]["run_seconds"] for row in rows]
+    return {
+        "ids": [row["id"] for row in rows],
+        "gurobi_run_seconds": _statistics(gurobi_times),
+        "abc_run_seconds": _statistics(abc_times),
+        "abc_over_gurobi_ratio_of_sums": sum(abc_times) / sum(gurobi_times)
+        if rows
+        else None,
+        "median_abc_over_gurobi_run_ratio": median(
+            [row["abc_over_gurobi_run_ratio"] for row in rows]
+        )
+        if rows
+        else None,
+    }
+
+
 def _proof_summary(rows: list[dict]) -> dict:
     """Query-level populations; unverified ABC identity never earns proof credit."""
-    verified = ("execution_bound", "source_verified_execution_unbound")
 
     def measurement(row, tool):
-        return row.get(tool, {}) if tool == "gurobi" or row["match"] in verified else {}
+        return (
+            row.get(tool, {})
+            if tool == "gurobi" or row["match"] in _SOURCE_VERIFIED_MATCHES
+            else {}
+        )
 
     cross_tab = defaultdict(Counter)
     for row in rows:
@@ -110,12 +134,12 @@ def _proof_summary(rows: list[dict]) -> dict:
         and row["gurobi"]["outcome"] == "unsat"
         and row.get("abc_over_gurobi_run_ratio") is not None
     ]
-    g_times = [row["gurobi"]["run_seconds"] for row in paired]
-    abc_times = [row["abc"]["run_seconds"] for row in paired]
     summary = {
         "selected_count": len(rows),
         "ids": [row["id"] for row in rows],
-        "matched_ids": [row["id"] for row in rows if row["match"] in verified],
+        "matched_ids": [
+            row["id"] for row in rows if row["match"] in _SOURCE_VERIFIED_MATCHES
+        ],
         "outcome_cross_tab": {g: dict(counts) for g, counts in cross_tab.items()},
         **{
             name: {
@@ -150,19 +174,7 @@ def _proof_summary(rows: list[dict]) -> dict:
         "disagreement_ids": [
             row["id"] for row in rows if row["comparison"] == "disagreement"
         ],
-        "paired_unsat": {
-            "ids": [row["id"] for row in paired],
-            "gurobi_run_seconds": _statistics(g_times),
-            "abc_run_seconds": _statistics(abc_times),
-            "abc_over_gurobi_ratio_of_sums": sum(abc_times) / sum(g_times)
-            if paired
-            else None,
-            "median_abc_over_gurobi_run_ratio": median(
-                [row["abc_over_gurobi_run_ratio"] for row in paired]
-            )
-            if paired
-            else None,
-        },
+        "paired_unsat": _paired_statistics(paired),
     }
     summary["numerical_unsat_counts"] = {
         tool: len(ids) for tool, ids in summary["numerical_unsat_ids"].items()
@@ -183,8 +195,7 @@ def _cohorts(instances: list[dict], category: str) -> dict:
             if dimension == "published_outcome":
                 label = (
                     row.get("abc", {}).get("outcome", "unavailable")
-                    if row["match"]
-                    in ("execution_bound", "source_verified_execution_unbound")
+                    if row["match"] in _SOURCE_VERIFIED_MATCHES
                     else "unmatched"
                 )
             elif dimension == "property_class":
@@ -279,10 +290,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                     if abc["execution_artifact_binding"]
                     else "source_verified_execution_unbound"
                 )
-        if abc is None or match not in (
-            "execution_bound",
-            "source_verified_execution_unbound",
-        ):
+        if abc is None or match not in _SOURCE_VERIFIED_MATCHES:
             row["match"] = match
             continue
         row["match"] = match
@@ -375,11 +383,6 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 and row["id"] not in unsat_ids
             ):
                 unsat_ids.append(row["id"])
-    ratios = [
-        r["abc_over_gurobi_run_ratio"]
-        for r in instances
-        if r.get("abc_over_gurobi_run_ratio") is not None
-    ]
     shapes = defaultdict(list)
     for row in instances:
         a = row["architecture"]
@@ -411,8 +414,6 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         for row in rows:
             row["structural_width_group"] = f"W{len(groups):02d}"
     pair_rows = [r for r in instances if r["id"] in paired]
-    gurobi_paired_times = [r["gurobi"]["run_seconds"] for r in pair_rows]
-    abc_paired_times = [r["abc"]["run_seconds"] for r in pair_rows]
     total_ratios = [
         r["abc_over_gurobi_prepare_plus_run_ratio"]
         for r in pair_rows
@@ -486,14 +487,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 for tool in ("gurobi", "abc")
             },
             "paired_same_answer": {
-                "ids": paired,
-                "gurobi_run_seconds": _statistics(gurobi_paired_times),
-                "abc_run_seconds": _statistics(abc_paired_times),
-                "abc_over_gurobi_ratio_of_sums": sum(abc_paired_times)
-                / sum(gurobi_paired_times)
-                if gurobi_paired_times
-                else None,
-                "median_abc_over_gurobi_run_ratio": median(ratios) if ratios else None,
+                **_paired_statistics(pair_rows),
                 "prepare_plus_run_ratio_ids": [
                     r["id"]
                     for r in pair_rows

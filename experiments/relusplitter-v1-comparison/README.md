@@ -1,6 +1,7 @@
 # ReLUSplitter published-ABC comparison inputs and statistics
 
 Issue #11, part of #7. This is generated comparison evidence, not interpretation.
+The shared [implementation review](../proof-comparison-review.md) records both axes and final checks.
 The selected population is all **120** version-1.0 original manifest queries,
 180 seconds each. All 120 have unique pinned-source hash matches. The appended
 `test_nano` row remains in `unmatched_abc`, outside every selected denominator.

@@ -1,5 +1,7 @@
 # IEEE-14 ACOPF published-ABC comparison inputs and statistics
 
+See the shared [implementation review](../proof-comparison-review.md) for both review axes and final checks.
+
 Issue #11, part of #7. This archive contains comparison data, not interpretation.
 All **14** original version-1.0 queries for exactly `14_ieee_ml4acopf.onnx`,
 600 seconds each, have unique pinned-source hash matches. The full category CSV
