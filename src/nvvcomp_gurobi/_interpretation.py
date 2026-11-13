@@ -18,6 +18,16 @@ class Unsupported(ValueError):
     pass
 
 
+def uses_native_construction(model) -> bool:
+    return any(n.op_type in ("Sigmoid", "Reshape") for n in model.graph.node)
+
+
+def network_formulation(model) -> str:
+    if uses_native_construction(model):
+        return "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility"
+    return "gurobi-machinelearning ONNX; constant-objective feasibility"
+
+
 @dataclass(frozen=True)
 class Comparison:
     left: str
@@ -147,23 +157,29 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
     ):
         raise Unsupported("Expected one dense sequential input/output graph")
     if (
-        len(model.opset_import) != 1
-        or model.opset_import[0].domain not in ("", "ai.onnx")
-        or model.opset_import[0].version not in (9, *range(13, 22))
+        not model.opset_import
+        or any(
+            op.domain not in ("", "ai.onnx")
+            or op.version not in (9, 11, *range(13, 22))
+            for op in model.opset_import
+        )
+        or len({op.version for op in model.opset_import}) != 1
     ):
-        raise Unsupported("Supported ONNX default opsets are 9 and 13 through 21")
+        raise Unsupported(
+            "Expected compatible default-domain opsets: 9, 11, or 13 through 21"
+        )
     sizes = []
     for value in [graph.input[0], graph.output[0]]:
         tensor = value.type.tensor_type
         shape = [dim.dim_value for dim in tensor.shape.dim]
         if (
             tensor.elem_type != TensorProto.FLOAT
-            or len(shape) != 2
+            or len(shape) < 2
             or shape[0] != 1
-            or shape[1] < 1
+            or any(d < 1 for d in shape)
         ):
-            raise Unsupported("Expected FLOAT32 tensors of static shape [1, width]")
-        sizes.append(shape[1])
+            raise Unsupported("Expected static FLOAT32 tensors with batch size one")
+        sizes.append(math.prod(shape))
     constants = {}
     for initializer in graph.initializer:
         if (
@@ -171,15 +187,20 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
             or initializer.external_data
         ):
             raise Unsupported("External ONNX tensor data is not supported")
-        if initializer.name in constants or initializer.data_type != TensorProto.FLOAT:
-            raise Unsupported("Expected unique FLOAT32 initializers")
+        if initializer.name in constants or initializer.data_type not in (
+            TensorProto.FLOAT,
+            TensorProto.INT64,
+        ):
+            raise Unsupported("Expected unique FLOAT32 or INT64 initializers")
         array = numpy_helper.to_array(initializer)
         if not np.isfinite(array).all():
             raise Unsupported("Non-finite network constants")
         constants[initializer.name] = array
     previous, width = graph.input[0].name, sizes[0]
+    shape = tuple(d.dim_value for d in graph.input[0].type.tensor_type.shape.dim)
     seen = set(constants) | {previous}
     last_op = None
+    last_computation = None
     for node in graph.node:
         if (
             node.domain not in ("", "ai.onnx")
@@ -189,13 +210,29 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
             raise Unsupported(
                 "Expected a standard sequential graph with unique tensors"
             )
-        if not node.input or node.input[0] != previous:
-            raise Unsupported("Non-sequential or disconnected ONNX graph")
         attributes = {
             a.name: onnx.helper.get_attribute_value(a) for a in node.attribute
         }
         if len(attributes) != len(node.attribute):
             raise Unsupported("Duplicate ONNX attributes")
+        if node.op_type == "Constant":
+            value = attributes.get("value")
+            if (
+                node.input
+                or set(attributes) != {"value"}
+                or not isinstance(value, onnx.TensorProto)
+                or value.data_type != TensorProto.INT64
+                or value.external_data
+                or value.data_location == TensorProto.EXTERNAL
+            ):
+                raise Unsupported(
+                    "Constant supports inline INT64 reshape metadata only"
+                )
+            constants[node.output[0]] = numpy_helper.to_array(value)
+            seen.add(node.output[0])
+            continue
+        if not node.input or node.input[0] != previous:
+            raise Unsupported("Non-sequential or disconnected ONNX graph")
         if node.op_type == "Gemm":
             if (
                 set(attributes) - {"alpha", "beta", "transA", "transB"}
@@ -212,6 +249,12 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
             ):
                 raise Unsupported("Gemm requires initializer weights and bias")
             weights, bias = (constants[name] for name in node.input[1:])
+            if (
+                shape != (1, width)
+                or weights.dtype != np.float32
+                or bias.dtype != np.float32
+            ):
+                raise Unsupported("Gemm requires rank-two data and FLOAT32 parameters")
             if attributes.get("transB", 0):
                 weights = weights.T
             if weights.ndim != 2 or weights.shape[0] != width or weights.shape[1] < 1:
@@ -221,17 +264,49 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
             width = weights.shape[1]
             if bias.shape not in ((width,), (1, width)):
                 raise Unsupported("Gemm bias must have shape [width] or [1, width]")
-        elif node.op_type == "Relu":
+            shape = (1, width)
+        elif node.op_type in ("Relu", "Sigmoid"):
             if last_op != "Gemm" or len(node.input) != 1 or attributes:
                 raise Unsupported(
-                    "Relu must immediately follow a Gemm without attributes"
+                    "Activation must immediately follow a Gemm without attributes"
                 )
+        elif node.op_type == "Reshape":
+            if len(node.input) != 2 or attributes or node.input[1] not in constants:
+                raise Unsupported(
+                    "Reshape requires constant integer shape without attributes"
+                )
+            target = constants[node.input[1]]
+            if target.dtype != np.int64 or target.ndim != 1 or not target.size:
+                raise Unsupported("Reshape shape must be a nonempty INT64 vector")
+            dims = [int(d) for d in target]
+            if dims.count(-1) > 1 or any(d < -1 for d in dims):
+                raise Unsupported("Invalid inferred reshape dimensions")
+            for i, dim in enumerate(dims):
+                if dim == 0:
+                    if i >= len(shape):
+                        raise Unsupported("Reshape zero dimension outside input rank")
+                    dims[i] = shape[i]
+            known = math.prod(d for d in dims if d != -1)
+            if -1 in dims:
+                if known == 0 or width % known:
+                    raise Unsupported("Reshape element count differs")
+                dims[dims.index(-1)] = width // known
+            if math.prod(dims) != width or any(d < 1 for d in dims):
+                raise Unsupported("Reshape element count differs")
+            shape = tuple(dims)
         else:
             raise Unsupported(f"Unsupported ONNX operation: {node.op_type}")
         last_op = node.op_type
+        if node.op_type != "Reshape":
+            last_computation = node.op_type
         previous = node.output[0]
         seen.add(previous)
-    if last_op != "Gemm" or previous != graph.output[0].name or width != sizes[1]:
+    if (
+        last_computation != "Gemm"
+        or previous != graph.output[0].name
+        or shape
+        != tuple(d.dim_value for d in graph.output[0].type.tensor_type.shape.dim)
+    ):
         raise Unsupported("Sequential network must end in its declared affine output")
     onnx.checker.check_model(model, full_check=True)
     return model, sizes[0], sizes[1]

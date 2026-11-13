@@ -112,3 +112,62 @@ def instance_factory(tmp_path: Path):
         return Instance(network, prop)
 
     return make
+
+
+@pytest.fixture
+def smooth_instance_factory(tmp_path):
+    """C-order [0,1,2,3] gives z=[0,2], Y=[sigmoid(0)+2*sigmoid(2),-.5]."""
+
+    def make(assertions):
+        nodes = [
+            helper.make_node(
+                "Constant",
+                [],
+                ["shape"],
+                value=numpy_helper.from_array(np.array([1, -1], dtype=np.int64)),
+            ),
+            helper.make_node("Reshape", ["x", "shape"], ["flat"]),
+            helper.make_node("Gemm", ["flat", "w1", "b1"], ["z"]),
+            helper.make_node("Sigmoid", ["z"], ["s"]),
+            helper.make_node("Gemm", ["s", "w2", "b2"], ["y"]),
+        ]
+        arrays = {
+            "w1": [[1, 0], [2, -1], [-1, 0], [0, 1]],
+            "b1": [0, 0],
+            "w2": [[1, -1], [2, 0]],
+            "b2": [0, 0],
+        }
+        graph = helper.make_graph(
+            nodes,
+            "smooth",
+            [helper.make_tensor_value_info("x", TensorProto.FLOAT, [1, 1, 2, 2])],
+            [helper.make_tensor_value_info("y", TensorProto.FLOAT, [1, 2])],
+            [
+                numpy_helper.from_array(np.array(a, dtype=np.float32), name)
+                for name, a in arrays.items()
+            ],
+        )
+        model = helper.make_model(
+            graph,
+            opset_imports=[helper.make_opsetid("", 11), helper.make_opsetid("", 11)],
+            ir_version=8,
+        )
+        network = tmp_path / "smooth.onnx"
+        onnx.save(model, network)
+        prop = tmp_path / "smooth.vnnlib"
+        prop.write_text(
+            "\n".join(
+                [f"(declare-const X_{i} Real)" for i in range(4)]
+                + [f"(declare-const Y_{i} Real)" for i in range(2)]
+                + [
+                    f"(assert ({op} X_{i} {i}))"
+                    for i in range(4)
+                    for op in (">=", "<=")
+                ]
+            )
+            + "\n"
+            + assertions
+        )
+        return Instance(network, prop)
+
+    return make

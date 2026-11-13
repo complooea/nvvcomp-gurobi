@@ -38,6 +38,19 @@ download, use a new directory rather than trusting a partial cache.
 
 ## Accounting and timing
 
+### Sigmoid MNIST 1.0
+
+Use the same acquisition/audit/run/report commands with category
+`--category dist_shift_2023`, benchmark directory `.benchmarks/mnist-sigmoid-v1`
+and a fresh experiment output directory. Acquisition verifies exactly 72 rows,
+all naming `./onnx/mnist_concat.onnx`, with 300-second deadlines, from version
+1.0 at the pinned revision. It downloads no other models or version aliases.
+The worst-case query budget is six hours plus separately measured acquisition,
+audit and supervision overhead. The original duplicate opset-11 imports and
+INT64 reshape metadata are preserved. Native global nonlinear logistic
+relations represent internal sigmoids; original-shape FLOAT32 replay is required
+for SAT. See `experiments/mnist-sigmoid-v1/README.md` for the measured archive.
+
 ### ReLUSplitter 1.0
 
 Use the same workflow for the complete 120-row ReLUSplitter selection:

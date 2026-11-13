@@ -1,0 +1,161 @@
+{
+  "id": "0045",
+  "network": "./onnx/mnist_concat.onnx",
+  "property": "./vnnlib/index7963_delta0.13.vnnlib",
+  "timeout_seconds": 300.0,
+  "artifacts": {
+    "onnx": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+      "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+      "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+      "bytes": 1277123
+    },
+    "vnnlib": {
+      "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7963_delta0.13.vnnlib.gz",
+      "sha256": "99fff8f552ee6bbec440d5ca09e1a4dd38b24c8eb18dbcc8f4cef5016b36ce14",
+      "uncompressed_sha256": "b3abc52039be600161b5206eb7e09e222d50cccc4ec8222c4765b1b9e4e963c1",
+      "bytes": 7655
+    }
+  },
+  "eligible": true,
+  "exclusion_reason": null,
+  "architecture": {
+    "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+    "input_shape": [
+      1,
+      792
+    ],
+    "output_shape": [
+      1,
+      10
+    ],
+    "inputs": 792,
+    "outputs": 10,
+    "operations": [
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Sigmoid",
+      "Reshape",
+      "Reshape",
+      "Gemm",
+      "Relu",
+      "Gemm",
+      "Relu",
+      "Gemm"
+    ],
+    "hidden_relu_layers": 3,
+    "original_model_group": "mnist_concat",
+    "hidden_widths": [
+      200,
+      784,
+      32,
+      32
+    ],
+    "initializer_elements": 342696,
+    "output_comparisons": 1,
+    "output_disjunction_alternatives": []
+  },
+  "preparation_seconds": 0.0,
+  "preparation_analysis": false,
+  "started_utc": "2026-11-12T17:01:55.409382+00:00",
+  "invocation_seconds": 300.0136290839873,
+  "result": {
+    "outcome": "unknown",
+    "reason": "timeout",
+    "diagnostic": "Whole-run deadline exceeded; late results are not accepted. ; worker exit -9: ",
+    "solver_status": null,
+    "witness": null,
+    "validation": null,
+    "timings": {
+      "interpretation": 0.23330520908348262,
+      "construction": 0.29458700004033744,
+      "total": 300.0134409170132
+    },
+    "provenance": {
+      "tooling_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "python": "3.12.16",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "logical_cpus": 10,
+      "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+      "artifacts": {
+        "onnx": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad"
+        },
+        "vnnlib": {
+          "requested_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7963_delta0.13.vnnlib",
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7963_delta0.13.vnnlib.gz",
+          "sha256": "99fff8f552ee6bbec440d5ca09e1a4dd38b24c8eb18dbcc8f4cef5016b36ce14",
+          "uncompressed_sha256": "b3abc52039be600161b5206eb7e09e222d50cccc4ec8222c4765b1b9e4e963c1"
+        }
+      },
+      "packages": {
+        "gurobipy": "13.0.1",
+        "gurobi-machinelearning": "1.7.0",
+        "onnx": "1.21.0",
+        "onnxruntime": "1.26.0",
+        "numpy": "2.2.6",
+        "cachier": "2.2.2"
+      },
+      "replay_settings": {
+        "provider": "CPUExecutionProvider",
+        "intra_op_threads": 12,
+        "inter_op_threads": 12,
+        "input_dtype": "float32",
+        "strict_input_tolerance": 0.0,
+        "tolerant_input_tolerance": 0.0001,
+        "output_tolerance": 0.0
+      },
+      "replay_property": {
+        "normalization": "Whitespace/comments only; statement and operand order preserved",
+        "sha256": "b3abc52039be600161b5206eb7e09e222d50cccc4ec8222c4765b1b9e4e963c1"
+      },
+      "output_disjunction_alternatives": [],
+      "solver_settings": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "NumericFocus": 0,
+        "IntegralityFocus": 0,
+        "ScaleFlag": -1,
+        "MarkowitzTol": 0.0078125,
+        "MIPGap": 0.0001,
+        "MIPGapAbs": 1e-10,
+        "DualReductions": 1,
+        "Threads": 1,
+        "TimeLimit": 299.3381641251035,
+        "OutputFlag": 0
+      },
+      "gurobi_version": [
+        13,
+        0,
+        1
+      ],
+      "formulation_size": {
+        "NumVars": 2908,
+        "NumBinVars": 0,
+        "NumConstrs": 1069,
+        "NumGenConstrs": 1048,
+        "NumNZs": 342712
+      },
+      "limits": {
+        "timeout_seconds": 300.0,
+        "threads": 1
+      },
+      "requested_artifacts": {
+        "onnx": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx",
+        "vnnlib": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7963_delta0.13.vnnlib"
+      }
+    }
+  }
+}

@@ -1,0 +1,4682 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-12T14:50:03.533379+00:00",
+  "manifest_sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30",
+  "manifest_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/instances.csv",
+  "instances": [
+    {
+      "id": "0000",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2904_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2904_delta0.13.vnnlib.gz",
+          "sha256": "ecafb500ed27f8012d72581216615114ea4b1e5b151583a7f1595e30108fccf4",
+          "uncompressed_sha256": "47f00a6bdb5a9d79f8629de21013ed80eff4fc727fc4dc4ea520ac0c1ddf07b3",
+          "bytes": 7529
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0001",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4390_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4390_delta0.13.vnnlib.gz",
+          "sha256": "61c1b2c6f0e3b4c1276fa73adef4af131b58c58ac3afb6e9e2deda7ea3772cbe",
+          "uncompressed_sha256": "d376caaefd5142c4c7e9890cd7649a4042a9c0750373b54fd5c9a9f27f5f8091",
+          "bytes": 7600
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0002",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8883_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8883_delta0.13.vnnlib.gz",
+          "sha256": "18226bdc2bb0cef86700c41f1490e1c32f372881ffe9f083f6c08ccfc95b4347",
+          "uncompressed_sha256": "bdeb6f7f2e41baf5ce4ec03125d0c86503340b471bbdee01e36a1337e2e5525e",
+          "bytes": 7308
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0003",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8142_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8142_delta0.13.vnnlib.gz",
+          "sha256": "9ccea8c5f880521cffc66d8f684a228d1725714d2a0574215f2b6f97f5aaa08a",
+          "uncompressed_sha256": "5f06cd2643037f9ca19129b4422791f022b62503f4616947e3c60a6a9b0c9c77",
+          "bytes": 7477
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0004",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2184_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2184_delta0.13.vnnlib.gz",
+          "sha256": "9a91447394e75cf737ac0e6660d30e27eced26e20e52af714a0722d3baa8ca26",
+          "uncompressed_sha256": "8bf3cfdfa30a12c7ed12d36f2a05e0aa682ce208c630695453213d6a0eca24b6",
+          "bytes": 7565
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0005",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5197_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5197_delta0.13.vnnlib.gz",
+          "sha256": "b7406863dd873630735562847635d0d378c0281eb0b1d251af0c6901662e45dc",
+          "uncompressed_sha256": "f16fe9dc52c422861874fa6781b128c3f10887614585157558e0ae7ec64024c4",
+          "bytes": 7480
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0006",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index969_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index969_delta0.13.vnnlib.gz",
+          "sha256": "eff48f6b7ed784cfd7ec0044ca383585b334bb4a81e920ef8ee11b22f7aca670",
+          "uncompressed_sha256": "f19f4d78b10c6d28c59189d600dfb10c6681626ee796492e2de011c96d5cc33a",
+          "bytes": 7612
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0007",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3548_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3548_delta0.13.vnnlib.gz",
+          "sha256": "df49a9fc605653b4f6496e4dbdf87fa8f0ace09440d2c9b9e30b49e0afddff6b",
+          "uncompressed_sha256": "c43d57226a3b0b62fee623fd80e78997736fb2fd9ef3971b7e84b49e9529d4c6",
+          "bytes": 7617
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0008",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5778_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5778_delta0.13.vnnlib.gz",
+          "sha256": "13225b6f17a7958e3db6eb82abfff37d1559d9dc5fefab38b5026eaa67bf911e",
+          "uncompressed_sha256": "9e3b92a507afe219c19465646941a75870b623a017f297cc7af47678a267201a",
+          "bytes": 7494
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0009",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2523_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2523_delta0.13.vnnlib.gz",
+          "sha256": "afab7e1501a94aff5c0ca6887c757af285f49240c894350670cd75360f0d7039",
+          "uncompressed_sha256": "fccdc7254b71513ebb8a5c1c27c16d90b3f635874ef33b595ab740a4e3f38628",
+          "bytes": 6985
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0010",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9147_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9147_delta0.13.vnnlib.gz",
+          "sha256": "b9bdf71d0a0b1a4de51f0dad1bedbfc8ee48defbac848243723634c122bdcb67",
+          "uncompressed_sha256": "b8a97ba843566f3f7fef0370774d5079aa5d158ddd1b94c191288c50488a36e0",
+          "bytes": 7482
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0011",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index1332_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index1332_delta0.13.vnnlib.gz",
+          "sha256": "2023c91e1d2c8c620580d92f48a6bd96e7cd6c2a460eaeac6d3838bf66b95c61",
+          "uncompressed_sha256": "adaae38c82a20a1f4785b551a600a17f84958239ce59d554c14029aac0d64e3f",
+          "bytes": 7718
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0012",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8831_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8831_delta0.13.vnnlib.gz",
+          "sha256": "5deeb40afd46fc62570cd28e695e4c714fdc9fb23456f1448f9ce8159ba90963",
+          "uncompressed_sha256": "341c331084a0dc0dd304ce332081f78289e1d6c8cda54c39d3f50085b991620e",
+          "bytes": 7450
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0013",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4302_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4302_delta0.13.vnnlib.gz",
+          "sha256": "2c5d384a0aba6523ca93b9bac87e14b13416bc2ed64891c7440aaff3d9edcc90",
+          "uncompressed_sha256": "e69084e659d25820322c1a4e52ce7c5becdae8cf802f522647de416c49c70563",
+          "bytes": 7324
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0014",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index838_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index838_delta0.13.vnnlib.gz",
+          "sha256": "155134466fcfcb6c5f6f7f039596186cca06c50aa94268b7f74c07b5448227ad",
+          "uncompressed_sha256": "b3dc9d6329004459119a1b783989be8d76bb6b28e67f608f30bc51215d6089d8",
+          "bytes": 7455
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0015",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7475_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7475_delta0.13.vnnlib.gz",
+          "sha256": "a071fce537d78ac488d3f5863bb31d85b7c4ac06e3b6320258a558b00a018fdc",
+          "uncompressed_sha256": "63a47d9830ec789eaddf681dbc007f0c61369c9c9c9333621a4cbd8f903f03c4",
+          "bytes": 7547
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0016",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3774_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3774_delta0.13.vnnlib.gz",
+          "sha256": "3e372d92462dfeeb0f800c5127e59bb28a0ad5b78ab3f24ce41b5add51273cdf",
+          "uncompressed_sha256": "3b15917611dec2e85531f00b7eae5b6748694c9b15956b770371a515bec3e1eb",
+          "bytes": 7844
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0017",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index6667_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index6667_delta0.13.vnnlib.gz",
+          "sha256": "89977667a1f5d74168bc421524cbfc0b56fcfb2e8b965879e87feadaaa4aacd3",
+          "uncompressed_sha256": "a0f069d386af3dcf0cff5a7449d34fcd3d7f9274c07be34baa786a4fa249a688",
+          "bytes": 7675
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0018",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index398_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index398_delta0.13.vnnlib.gz",
+          "sha256": "5ad1f893b0cc337f3e81767c9c4611fcdee6e4d88bd772e8ded317be95d7fc9d",
+          "uncompressed_sha256": "1db13d6f3f15a18c1293a169c33fd8b362af73603b3edb3f22cf3b8b29fa2f5d",
+          "bytes": 7355
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0019",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3400_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3400_delta0.13.vnnlib.gz",
+          "sha256": "7e551dac6fbb4226836b60f28fa12e4190c5e62b91dcdd3d6bc1e8191164db1a",
+          "uncompressed_sha256": "6a3b055a0ecfa348e7dbae3c997bd1505e6dbfd58559ad329b71fba979e83340",
+          "bytes": 7143
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0020",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5396_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5396_delta0.13.vnnlib.gz",
+          "sha256": "85c6b0ad2538d4287344c464d87afca7d82b36742c7e15ee54ce5f8b1bff557e",
+          "uncompressed_sha256": "344bcd232cbe01a5bbb54aa7acd5b36f541ba06594555acc75f57756f04648db",
+          "bytes": 7355
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0021",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index1574_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index1574_delta0.13.vnnlib.gz",
+          "sha256": "dd28039fbb9c8aa258b7602995762113709420479648f9600f7b33497022a138",
+          "uncompressed_sha256": "a50033ae5235fc7f448f1c3ec29bd02ebcded3331a6bea11a70df1a7c97079e8",
+          "bytes": 7813
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0022",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index6292_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index6292_delta0.13.vnnlib.gz",
+          "sha256": "598259f8a2300e8638b63289aaf005d8c19e6c7a60db4503813e909d221fe13f",
+          "uncompressed_sha256": "71b8f1fd976da0340a680e55ca41e62c84a5a7441999a87a6dac8318ed54539c",
+          "bytes": 7478
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0023",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9903_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9903_delta0.13.vnnlib.gz",
+          "sha256": "6647a5ad819277ebf0a2b150c5aa0d664e3231dd730b0046b8f077a0d0537eee",
+          "uncompressed_sha256": "a1badad70deec60dd89da2246b1f3216218be4ce972220f8809e31604694365b",
+          "bytes": 7253
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0024",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2497_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2497_delta0.13.vnnlib.gz",
+          "sha256": "931a6c0fe6f6ed821e5ad0a0c703adc36d272cc66123e24d11d728d711dd7d27",
+          "uncompressed_sha256": "b670e60182fce3d56955f2a64630873d2ceb99cdd37be8a344f8d6b1d881126e",
+          "bytes": 7676
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0025",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7821_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7821_delta0.13.vnnlib.gz",
+          "sha256": "dd9dfab3c416771509ca96967ceef2310e1b689b460151ed7b589ce2658168f4",
+          "uncompressed_sha256": "db1b615b3abdf767834ad65214a68a2d87ca8b78a6d7790a789246c209f1352c",
+          "bytes": 7675
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0026",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5270_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5270_delta0.13.vnnlib.gz",
+          "sha256": "3c3ae5f281294a0edd34bc193009a40af5f29b1cbfb9a7182f33d2b59cc800c8",
+          "uncompressed_sha256": "4d3394075a628304001ed322fc9a13112917600a9e5211ff327f436ce5e13104",
+          "bytes": 7659
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0027",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index1053_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index1053_delta0.13.vnnlib.gz",
+          "sha256": "da716d96831c3764ef8811ff6c648d5baffe88a478c1b5a99dfb9d738f077bfe",
+          "uncompressed_sha256": "5e821269a5a06894e16100b2e9c1852b62f60fc596853ee9decf2ed3ace24b3f",
+          "bytes": 7623
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0028",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7861_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7861_delta0.13.vnnlib.gz",
+          "sha256": "7edc0bbb7ef6ea8e02b0df73593cf01f0af3c39a58bd92a3212eab0fd2c8f6da",
+          "uncompressed_sha256": "1e3719171df05e4d47df6a0acf066d51ac9a311a940f8275d6b9320c1ff62431",
+          "bytes": 7602
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0029",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3044_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3044_delta0.13.vnnlib.gz",
+          "sha256": "1d964a4dc8bcd5364d233d69b244e4bd5ad1c8e0a5110578a4c8a3620855bd00",
+          "uncompressed_sha256": "6bb8bd892ea640b28821a24d494841c02035c74153c8dbaf752874841e72bd96",
+          "bytes": 7486
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0030",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7472_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7472_delta0.13.vnnlib.gz",
+          "sha256": "c04dc8fab68fc869f1c5a2d04d7a458c069e1fa60271faa55dd7494f2284f5ed",
+          "uncompressed_sha256": "97fb0007484968aeadf08b5047a0ec596662a34224df5e989d78ff61031edd31",
+          "bytes": 7361
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0031",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index136_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index136_delta0.13.vnnlib.gz",
+          "sha256": "c7721275213d412013ab6467017adb18848ae7b04048dc19be558a8bb5578d92",
+          "uncompressed_sha256": "eec68079572bf30a870e39cd100d82123ae870909e45d9151de02cf9d82c43eb",
+          "bytes": 7508
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0032",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7947_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7947_delta0.13.vnnlib.gz",
+          "sha256": "3a6243b66373223e23085d191b6d406fe012e1d3933ec8f6c478788fb9b25d73",
+          "uncompressed_sha256": "7aaf842532880441492529dd879c24619fdf6dfd871ef686bf7442d65fc077d9",
+          "bytes": 7358
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0033",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8810_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8810_delta0.13.vnnlib.gz",
+          "sha256": "4ebc0d55139fde29551e9ab3f0bcb982d8387e0d072a6b9ee989157165fe0a57",
+          "uncompressed_sha256": "30fc21afed397d1eea03de578e605bf7c7d688cedd9ab9739d6dbd9d2357080f",
+          "bytes": 7223
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0034",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4089_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4089_delta0.13.vnnlib.gz",
+          "sha256": "cc085829b64bcfdb33d35b085baea9c05375e0593eea29f6d1472c2ebccff32b",
+          "uncompressed_sha256": "fdcb11843b262dd4b4fb1b07ce6a4febdcc1eae950657b2de53f2af2533537f9",
+          "bytes": 7356
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0035",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3006_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3006_delta0.13.vnnlib.gz",
+          "sha256": "3026785af466cfd6c4c4ae67c53c46e5ca4b64acec32618cda51813b3124f872",
+          "uncompressed_sha256": "4b016d28b16764741c05895701bc476c640b5be7cf61b1bd1441bc4e75ec5fdb",
+          "bytes": 7464
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0036",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3321_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3321_delta0.13.vnnlib.gz",
+          "sha256": "85bbb9d67f2ee450eed8ebbb451f54e112669c28e93909d05c8dbe02b7127628",
+          "uncompressed_sha256": "289d13b763d1b437290e558ce358452aba1f9f19091956bf2a6cd0aadd4ce453",
+          "bytes": 7654
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0037",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5483_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5483_delta0.13.vnnlib.gz",
+          "sha256": "51debdc791a42f95598ddd4a1a4822ab55e5beceb757cbde4d6a8a4ff3ba6cbc",
+          "uncompressed_sha256": "9df9c54476eeefdb9b108542cc4ae2f11289a5107f071ff52b73e5321a1be9ee",
+          "bytes": 7782
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0038",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3607_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3607_delta0.13.vnnlib.gz",
+          "sha256": "a2a49ebd35ab5b2e34a6522d069914b877cfe5a799c4e74ca1c5ad809a68883a",
+          "uncompressed_sha256": "3bd4a2b4ca0d72a89c56698ee79fb29c32a6b7d4d5e2c709022601e7b5280130",
+          "bytes": 7299
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0039",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7705_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7705_delta0.13.vnnlib.gz",
+          "sha256": "b3b32b083d8b6df72588d219af92c1d8bb93a0e8a7cc093af2f1859468d1225d",
+          "uncompressed_sha256": "baed6965b408c3df87dfb6153569d68ab62f276252b16416538d95b1ce0560b0",
+          "bytes": 7818
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0040",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4659_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4659_delta0.13.vnnlib.gz",
+          "sha256": "be157d3bc9943bfb718cc04328f70d9897be3426939cd989a86bb4b3984773a9",
+          "uncompressed_sha256": "eade01f4df615ec91f83c8fedfcdc64c15e50dfb7b3b70d4b0a4a522e970d3aa",
+          "bytes": 7696
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0041",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index6989_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index6989_delta0.13.vnnlib.gz",
+          "sha256": "9b8174869f3b83a9006cd3d5d142f0178cf298a80b334017cc6f383b267690e9",
+          "uncompressed_sha256": "5316441fff5d831a3ef00a766badb459291c7b668a683bd187144065001bb788",
+          "bytes": 7708
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0042",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8721_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8721_delta0.13.vnnlib.gz",
+          "sha256": "723b7db47830268fcd5871863c4a24f4277432d5a8aba5bab8ba47a0255ba7d8",
+          "uncompressed_sha256": "d3a1e40820f7f60b45b5c86cf7d5595b9e5f2b056eece8710b45f5f14968a395",
+          "bytes": 7530
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0043",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4403_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4403_delta0.13.vnnlib.gz",
+          "sha256": "02828fa56fc601a00654bb1931b953babb8366a147c44675fa683c7dbebb3c21",
+          "uncompressed_sha256": "9f0b89397fa2f5d1e501931f2de851b8b63e649362d2d69988b9d6a1f632a547",
+          "bytes": 7735
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0044",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3837_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3837_delta0.13.vnnlib.gz",
+          "sha256": "073b2b9a0ea99edcb5fbb82eff63e6a61e21bd06f5525da932915d1cabb600ce",
+          "uncompressed_sha256": "a2b6d0a031ebf76420770b82135a600c85f234f77b68c2a24f10814ea197e171",
+          "bytes": 7490
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0045",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7963_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7963_delta0.13.vnnlib.gz",
+          "sha256": "99fff8f552ee6bbec440d5ca09e1a4dd38b24c8eb18dbcc8f4cef5016b36ce14",
+          "uncompressed_sha256": "b3abc52039be600161b5206eb7e09e222d50cccc4ec8222c4765b1b9e4e963c1",
+          "bytes": 7655
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0046",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9041_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9041_delta0.13.vnnlib.gz",
+          "sha256": "36e0ad736ff3cf039ad2d5a7b4a51c077eb3fee62cb3239fa67f74af72af9e26",
+          "uncompressed_sha256": "9b5104ece84ed34a2d7e680ce2231bcfc429ab8edba569a018050ff08086c420",
+          "bytes": 7670
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0047",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2998_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2998_delta0.13.vnnlib.gz",
+          "sha256": "0009762698ffd0f190ae511d301a901e8455ca5edcf3c1d835cf65456b2a40bc",
+          "uncompressed_sha256": "f1ee81d6992d709b54b4242bd472be9d7622378ff51e17616f1c4d2ae8aa751e",
+          "bytes": 7308
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0048",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7393_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7393_delta0.13.vnnlib.gz",
+          "sha256": "ffb0cc13b810d595d8cd59e8eabd8f0923dfc778f0397b5b8f954ec565ad1cf1",
+          "uncompressed_sha256": "980cd07d9ae03d6f2216f9372d3a92d304f968daf6caa0bfd5c9bdce54144ac8",
+          "bytes": 7558
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0049",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3822_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3822_delta0.13.vnnlib.gz",
+          "sha256": "d18fc7a6160577accc7568abb50aeb385e49e476a9619d5710b15f210f6bd1f5",
+          "uncompressed_sha256": "9ef85d925329fcb9df106abb9480cbdaa14161c95b2f6150680e3b865aa8de4d",
+          "bytes": 7735
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0050",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9094_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9094_delta0.13.vnnlib.gz",
+          "sha256": "9e2907f80f65c8799eeac33f64779caa05c591c02a06c914af93b0c208b6e27b",
+          "uncompressed_sha256": "c84a56acf6327d8a7bb55906376d1ab1de18498657e1436b8b5e4d0342d498e1",
+          "bytes": 7366
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0051",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7137_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7137_delta0.13.vnnlib.gz",
+          "sha256": "b29b08302b9d38d0146a9ad184663961d844380c6274446370f1d19629c5da81",
+          "uncompressed_sha256": "a43996b0458a718e310ed88fd0f4cf48971a4961b915a3c33ec33bf9cade5836",
+          "bytes": 7629
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0052",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index8879_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index8879_delta0.13.vnnlib.gz",
+          "sha256": "21fe4270e93804b6170a505bd36dc8501e0ae3b2274cfea00f13547d1ca3e181",
+          "uncompressed_sha256": "0f47e50fe16bb658266bde1d25aec013ee6c11320919adff069bb0fdaf49f887",
+          "bytes": 7509
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0053",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index6230_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index6230_delta0.13.vnnlib.gz",
+          "sha256": "fb2b58b1eb2f86449dd0a9def35628acdd42ebfa339792aef76006a44abcfbe4",
+          "uncompressed_sha256": "c2c0ee9d1af0eed551747794f481da59b39f0df5b6771ec767735fff73845ac1",
+          "bytes": 7496
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0054",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5150_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5150_delta0.13.vnnlib.gz",
+          "sha256": "23731984a1b7be41a00886bc8916118b121612f93210b12d854dc20ad729eb28",
+          "uncompressed_sha256": "eabe4e14482edd1299ed4b02d31ffe9a765ae3b15f57893f5fbcaabae08e75a1",
+          "bytes": 7602
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0055",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9847_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9847_delta0.13.vnnlib.gz",
+          "sha256": "77790e2bd5cc660750a4595cb350deb5e2df5b91c6247d787abd064db07bc9de",
+          "uncompressed_sha256": "75912151eb284d59164ee43bbce072c681ed19fdd984251b900d87a8994b5556",
+          "bytes": 7535
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0056",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9973_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9973_delta0.13.vnnlib.gz",
+          "sha256": "81303c2b382ff2aa5af9ee5919e05e946d45c7ee53e3e6e3811baf06292d3bd9",
+          "uncompressed_sha256": "d61667598d173b4ae6c50c68dd3b52210275292d0926759f075f28f7d7ec90d2",
+          "bytes": 7665
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0057",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5054_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5054_delta0.13.vnnlib.gz",
+          "sha256": "a735c48a05d045386b9c7b0a9a4626567c38d72ba2d9553efd73203597985ed9",
+          "uncompressed_sha256": "d58f385b8e1257afc9df66c2a019427359916b04e6d3ad020f7a64e99cb852e0",
+          "bytes": 7763
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0058",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3082_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3082_delta0.13.vnnlib.gz",
+          "sha256": "a6f701b8aed58be7bbb463fc4e0d9625b1cce50ff1b3343eedc492d653d8e379",
+          "uncompressed_sha256": "e40f8f146700d28b2a0385b7d06912226f0c6ce14468bc1d16458401834202a4",
+          "bytes": 7481
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0059",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7169_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7169_delta0.13.vnnlib.gz",
+          "sha256": "2fa83e6fdcc0508057493c119241d6ba0776daf52fe05f1352596b37005531f5",
+          "uncompressed_sha256": "d993cd9208766c2b19e48b923def67130cad61aa46e0613a0f04fc67f43d9092",
+          "bytes": 7521
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0060",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index1949_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index1949_delta0.13.vnnlib.gz",
+          "sha256": "175648c416492fbe099fb9a80325b10fa286b7882a9d128c9a9f2c6e936d6b22",
+          "uncompressed_sha256": "5bbca457e1b369492dee5d088ce565931956a415f612bad434668d4268be5a0f",
+          "bytes": 7501
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0061",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index6982_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index6982_delta0.13.vnnlib.gz",
+          "sha256": "2cfd3e99b1b3218b81d6faff4ce975decd5b8e352f81c3d12f09c51f09bf2508",
+          "uncompressed_sha256": "d1611cce8594c7a5b661ab54e8e6765c27904fa41671b99ebd13702a757a99cf",
+          "bytes": 7443
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0062",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9080_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9080_delta0.13.vnnlib.gz",
+          "sha256": "d581e6cd5bb22b87866bf85ee5015e2983f51dc66a1fc8c67c560a0a48e6dceb",
+          "uncompressed_sha256": "3777e8dbc0e5c1b2c553ff673d1cbe4f7ffc19715dc33c7a74c37602dec68845",
+          "bytes": 7694
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0063",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index2734_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index2734_delta0.13.vnnlib.gz",
+          "sha256": "52a19850ffbdec9806d125f710a259631d661723caea3fd5f981c7ba225de2b0",
+          "uncompressed_sha256": "6bba655df74b1252305eee9f4ccb1231a242524d404c5b1f59e3d78ecf59e287",
+          "bytes": 6821
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0064",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5944_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5944_delta0.13.vnnlib.gz",
+          "sha256": "a210e299e78524807432caa0403966d29c5b3336b1e20ca71f3b65820dbee24d",
+          "uncompressed_sha256": "92ce838e3851a1fb2f0305c97f7d604fa593d64f9775587079ad9145bf4bb7e0",
+          "bytes": 7561
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0065",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index709_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index709_delta0.13.vnnlib.gz",
+          "sha256": "b636ff4cbb10a5dd7c11330d5f1894566d5ea1685f01a7e994ceebf8de4451a0",
+          "uncompressed_sha256": "d543e7894c1a4c74f5b932b8f3223c54f7787fc850debd97566999b6cace4791",
+          "bytes": 7664
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0066",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index1908_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index1908_delta0.13.vnnlib.gz",
+          "sha256": "d3c12995f4596f761df56dbd96ad956d38fe2995e33902e8a189f05ece5b19b4",
+          "uncompressed_sha256": "f20233718a5aa9bfa222f2f4a9f1a1ce57be8f089ee58665f6487a754f581aaa",
+          "bytes": 7565
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0067",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index9806_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index9806_delta0.13.vnnlib.gz",
+          "sha256": "0d3c634f85facb0f47618b9bc87694bd014fb4b8814efb90873980d2555aa321",
+          "uncompressed_sha256": "7100fd1db413209e08c205dbefc85a23d86bbea5a824768babeca88996a5f2d6",
+          "bytes": 7252
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0068",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index3343_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index3343_delta0.13.vnnlib.gz",
+          "sha256": "a665b8fbae9059d37163c9e6687476adde60b87452188b8f6552b546fac82d13",
+          "uncompressed_sha256": "40cd29e1df8cf49b98ed01e4628a860953b5dc8cf776dc70409dadf944403c4f",
+          "bytes": 7691
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0069",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index5146_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index5146_delta0.13.vnnlib.gz",
+          "sha256": "3eb155f2714b3997953f1cf71bc86dc54075989024d6ead6f8ac021c55abb63b",
+          "uncompressed_sha256": "7cbdc3e86ad4e56b66e4998f79010f09efce57a7733f4dc1ab2a37514d5946ea",
+          "bytes": 7528
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0070",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index4347_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index4347_delta0.13.vnnlib.gz",
+          "sha256": "1c6b53ba80c5e7250ae1ade171e82693e8a72312f1d141b661c6f4e4045a7c86",
+          "uncompressed_sha256": "34c4c5659d20cf58310cda6ee439e21c3b3735fd605f316d7eebe441d2c50e18",
+          "bytes": 7349
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    },
+    {
+      "id": "0071",
+      "network": "./onnx/mnist_concat.onnx",
+      "property": "./vnnlib/index7144_delta0.13.vnnlib",
+      "timeout_seconds": 300.0,
+      "artifacts": {
+        "onnx": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/onnx/mnist_concat.onnx.gz",
+          "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+          "uncompressed_sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+          "bytes": 1277123
+        },
+        "vnnlib": {
+          "path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/sharp-mongoose/.benchmarks/mnist-sigmoid-v1/vnnlib/index7144_delta0.13.vnnlib.gz",
+          "sha256": "a28816b3c6f47a4fab2146ebcf7fd9eb629f7c5136d259ebd245f77d336c5966",
+          "uncompressed_sha256": "ecb158862c01b41e41e490c30a905a503860dc0c156737b0b84d1d6701ac81f9",
+          "bytes": 7395
+        }
+      },
+      "eligible": true,
+      "exclusion_reason": null,
+      "architecture": {
+        "formulation": "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility",
+        "input_shape": [
+          1,
+          792
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "inputs": 792,
+        "outputs": 10,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Sigmoid",
+          "Reshape",
+          "Reshape",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm"
+        ],
+        "hidden_relu_layers": 3,
+        "original_model_group": "mnist_concat",
+        "hidden_widths": [
+          200,
+          784,
+          32,
+          32
+        ],
+        "initializer_elements": 342696,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      }
+    }
+  ],
+  "audit_seconds": 0.5872235419228673,
+  "support_policy": "Verification contract grammar; unsupported semantics only. No filename verdicts or outcome-based exclusions.",
+  "execution": {
+    "threads": 1,
+    "sequential": true,
+    "preparation_analysis": false
+  },
+  "hardware": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "logical_cpus": 10,
+    "hw.memsize": "17179869184",
+    "hw.physicalcpu": "10",
+    "machdep.cpu.brand_string": "Apple M4"
+  },
+  "acquisition": {
+    "benchmark_url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0",
+    "benchmark_revision": "303f2327a8e8411efc4457da03d2016ce42733cf",
+    "acquisition_seconds": 242.36304729199037,
+    "files": {
+      "instances.csv": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/instances.csv",
+        "sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30",
+        "bytes": 4675
+      },
+      "./onnx/mnist_concat.onnx.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./onnx/mnist_concat.onnx.gz",
+        "sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+        "bytes": 1277123
+      },
+      "./vnnlib/index2904_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2904_delta0.13.vnnlib.gz",
+        "sha256": "ecafb500ed27f8012d72581216615114ea4b1e5b151583a7f1595e30108fccf4",
+        "bytes": 7529
+      },
+      "./vnnlib/index4390_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4390_delta0.13.vnnlib.gz",
+        "sha256": "61c1b2c6f0e3b4c1276fa73adef4af131b58c58ac3afb6e9e2deda7ea3772cbe",
+        "bytes": 7600
+      },
+      "./vnnlib/index8883_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8883_delta0.13.vnnlib.gz",
+        "sha256": "18226bdc2bb0cef86700c41f1490e1c32f372881ffe9f083f6c08ccfc95b4347",
+        "bytes": 7308
+      },
+      "./vnnlib/index8142_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8142_delta0.13.vnnlib.gz",
+        "sha256": "9ccea8c5f880521cffc66d8f684a228d1725714d2a0574215f2b6f97f5aaa08a",
+        "bytes": 7477
+      },
+      "./vnnlib/index2184_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2184_delta0.13.vnnlib.gz",
+        "sha256": "9a91447394e75cf737ac0e6660d30e27eced26e20e52af714a0722d3baa8ca26",
+        "bytes": 7565
+      },
+      "./vnnlib/index5197_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5197_delta0.13.vnnlib.gz",
+        "sha256": "b7406863dd873630735562847635d0d378c0281eb0b1d251af0c6901662e45dc",
+        "bytes": 7480
+      },
+      "./vnnlib/index969_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index969_delta0.13.vnnlib.gz",
+        "sha256": "eff48f6b7ed784cfd7ec0044ca383585b334bb4a81e920ef8ee11b22f7aca670",
+        "bytes": 7612
+      },
+      "./vnnlib/index3548_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3548_delta0.13.vnnlib.gz",
+        "sha256": "df49a9fc605653b4f6496e4dbdf87fa8f0ace09440d2c9b9e30b49e0afddff6b",
+        "bytes": 7617
+      },
+      "./vnnlib/index5778_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5778_delta0.13.vnnlib.gz",
+        "sha256": "13225b6f17a7958e3db6eb82abfff37d1559d9dc5fefab38b5026eaa67bf911e",
+        "bytes": 7494
+      },
+      "./vnnlib/index2523_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2523_delta0.13.vnnlib.gz",
+        "sha256": "afab7e1501a94aff5c0ca6887c757af285f49240c894350670cd75360f0d7039",
+        "bytes": 6985
+      },
+      "./vnnlib/index9147_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9147_delta0.13.vnnlib.gz",
+        "sha256": "b9bdf71d0a0b1a4de51f0dad1bedbfc8ee48defbac848243723634c122bdcb67",
+        "bytes": 7482
+      },
+      "./vnnlib/index1332_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index1332_delta0.13.vnnlib.gz",
+        "sha256": "2023c91e1d2c8c620580d92f48a6bd96e7cd6c2a460eaeac6d3838bf66b95c61",
+        "bytes": 7718
+      },
+      "./vnnlib/index8831_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8831_delta0.13.vnnlib.gz",
+        "sha256": "5deeb40afd46fc62570cd28e695e4c714fdc9fb23456f1448f9ce8159ba90963",
+        "bytes": 7450
+      },
+      "./vnnlib/index4302_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4302_delta0.13.vnnlib.gz",
+        "sha256": "2c5d384a0aba6523ca93b9bac87e14b13416bc2ed64891c7440aaff3d9edcc90",
+        "bytes": 7324
+      },
+      "./vnnlib/index838_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index838_delta0.13.vnnlib.gz",
+        "sha256": "155134466fcfcb6c5f6f7f039596186cca06c50aa94268b7f74c07b5448227ad",
+        "bytes": 7455
+      },
+      "./vnnlib/index7475_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7475_delta0.13.vnnlib.gz",
+        "sha256": "a071fce537d78ac488d3f5863bb31d85b7c4ac06e3b6320258a558b00a018fdc",
+        "bytes": 7547
+      },
+      "./vnnlib/index3774_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3774_delta0.13.vnnlib.gz",
+        "sha256": "3e372d92462dfeeb0f800c5127e59bb28a0ad5b78ab3f24ce41b5add51273cdf",
+        "bytes": 7844
+      },
+      "./vnnlib/index6667_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index6667_delta0.13.vnnlib.gz",
+        "sha256": "89977667a1f5d74168bc421524cbfc0b56fcfb2e8b965879e87feadaaa4aacd3",
+        "bytes": 7675
+      },
+      "./vnnlib/index398_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index398_delta0.13.vnnlib.gz",
+        "sha256": "5ad1f893b0cc337f3e81767c9c4611fcdee6e4d88bd772e8ded317be95d7fc9d",
+        "bytes": 7355
+      },
+      "./vnnlib/index3400_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3400_delta0.13.vnnlib.gz",
+        "sha256": "7e551dac6fbb4226836b60f28fa12e4190c5e62b91dcdd3d6bc1e8191164db1a",
+        "bytes": 7143
+      },
+      "./vnnlib/index5396_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5396_delta0.13.vnnlib.gz",
+        "sha256": "85c6b0ad2538d4287344c464d87afca7d82b36742c7e15ee54ce5f8b1bff557e",
+        "bytes": 7355
+      },
+      "./vnnlib/index1574_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index1574_delta0.13.vnnlib.gz",
+        "sha256": "dd28039fbb9c8aa258b7602995762113709420479648f9600f7b33497022a138",
+        "bytes": 7813
+      },
+      "./vnnlib/index6292_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index6292_delta0.13.vnnlib.gz",
+        "sha256": "598259f8a2300e8638b63289aaf005d8c19e6c7a60db4503813e909d221fe13f",
+        "bytes": 7478
+      },
+      "./vnnlib/index9903_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9903_delta0.13.vnnlib.gz",
+        "sha256": "6647a5ad819277ebf0a2b150c5aa0d664e3231dd730b0046b8f077a0d0537eee",
+        "bytes": 7253
+      },
+      "./vnnlib/index2497_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2497_delta0.13.vnnlib.gz",
+        "sha256": "931a6c0fe6f6ed821e5ad0a0c703adc36d272cc66123e24d11d728d711dd7d27",
+        "bytes": 7676
+      },
+      "./vnnlib/index7821_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7821_delta0.13.vnnlib.gz",
+        "sha256": "dd9dfab3c416771509ca96967ceef2310e1b689b460151ed7b589ce2658168f4",
+        "bytes": 7675
+      },
+      "./vnnlib/index5270_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5270_delta0.13.vnnlib.gz",
+        "sha256": "3c3ae5f281294a0edd34bc193009a40af5f29b1cbfb9a7182f33d2b59cc800c8",
+        "bytes": 7659
+      },
+      "./vnnlib/index1053_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index1053_delta0.13.vnnlib.gz",
+        "sha256": "da716d96831c3764ef8811ff6c648d5baffe88a478c1b5a99dfb9d738f077bfe",
+        "bytes": 7623
+      },
+      "./vnnlib/index7861_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7861_delta0.13.vnnlib.gz",
+        "sha256": "7edc0bbb7ef6ea8e02b0df73593cf01f0af3c39a58bd92a3212eab0fd2c8f6da",
+        "bytes": 7602
+      },
+      "./vnnlib/index3044_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3044_delta0.13.vnnlib.gz",
+        "sha256": "1d964a4dc8bcd5364d233d69b244e4bd5ad1c8e0a5110578a4c8a3620855bd00",
+        "bytes": 7486
+      },
+      "./vnnlib/index7472_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7472_delta0.13.vnnlib.gz",
+        "sha256": "c04dc8fab68fc869f1c5a2d04d7a458c069e1fa60271faa55dd7494f2284f5ed",
+        "bytes": 7361
+      },
+      "./vnnlib/index136_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index136_delta0.13.vnnlib.gz",
+        "sha256": "c7721275213d412013ab6467017adb18848ae7b04048dc19be558a8bb5578d92",
+        "bytes": 7508
+      },
+      "./vnnlib/index7947_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7947_delta0.13.vnnlib.gz",
+        "sha256": "3a6243b66373223e23085d191b6d406fe012e1d3933ec8f6c478788fb9b25d73",
+        "bytes": 7358
+      },
+      "./vnnlib/index8810_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8810_delta0.13.vnnlib.gz",
+        "sha256": "4ebc0d55139fde29551e9ab3f0bcb982d8387e0d072a6b9ee989157165fe0a57",
+        "bytes": 7223
+      },
+      "./vnnlib/index4089_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4089_delta0.13.vnnlib.gz",
+        "sha256": "cc085829b64bcfdb33d35b085baea9c05375e0593eea29f6d1472c2ebccff32b",
+        "bytes": 7356
+      },
+      "./vnnlib/index3006_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3006_delta0.13.vnnlib.gz",
+        "sha256": "3026785af466cfd6c4c4ae67c53c46e5ca4b64acec32618cda51813b3124f872",
+        "bytes": 7464
+      },
+      "./vnnlib/index3321_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3321_delta0.13.vnnlib.gz",
+        "sha256": "85bbb9d67f2ee450eed8ebbb451f54e112669c28e93909d05c8dbe02b7127628",
+        "bytes": 7654
+      },
+      "./vnnlib/index5483_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5483_delta0.13.vnnlib.gz",
+        "sha256": "51debdc791a42f95598ddd4a1a4822ab55e5beceb757cbde4d6a8a4ff3ba6cbc",
+        "bytes": 7782
+      },
+      "./vnnlib/index3607_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3607_delta0.13.vnnlib.gz",
+        "sha256": "a2a49ebd35ab5b2e34a6522d069914b877cfe5a799c4e74ca1c5ad809a68883a",
+        "bytes": 7299
+      },
+      "./vnnlib/index7705_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7705_delta0.13.vnnlib.gz",
+        "sha256": "b3b32b083d8b6df72588d219af92c1d8bb93a0e8a7cc093af2f1859468d1225d",
+        "bytes": 7818
+      },
+      "./vnnlib/index4659_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4659_delta0.13.vnnlib.gz",
+        "sha256": "be157d3bc9943bfb718cc04328f70d9897be3426939cd989a86bb4b3984773a9",
+        "bytes": 7696
+      },
+      "./vnnlib/index6989_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index6989_delta0.13.vnnlib.gz",
+        "sha256": "9b8174869f3b83a9006cd3d5d142f0178cf298a80b334017cc6f383b267690e9",
+        "bytes": 7708
+      },
+      "./vnnlib/index8721_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8721_delta0.13.vnnlib.gz",
+        "sha256": "723b7db47830268fcd5871863c4a24f4277432d5a8aba5bab8ba47a0255ba7d8",
+        "bytes": 7530
+      },
+      "./vnnlib/index4403_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4403_delta0.13.vnnlib.gz",
+        "sha256": "02828fa56fc601a00654bb1931b953babb8366a147c44675fa683c7dbebb3c21",
+        "bytes": 7735
+      },
+      "./vnnlib/index3837_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3837_delta0.13.vnnlib.gz",
+        "sha256": "073b2b9a0ea99edcb5fbb82eff63e6a61e21bd06f5525da932915d1cabb600ce",
+        "bytes": 7490
+      },
+      "./vnnlib/index7963_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7963_delta0.13.vnnlib.gz",
+        "sha256": "99fff8f552ee6bbec440d5ca09e1a4dd38b24c8eb18dbcc8f4cef5016b36ce14",
+        "bytes": 7655
+      },
+      "./vnnlib/index9041_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9041_delta0.13.vnnlib.gz",
+        "sha256": "36e0ad736ff3cf039ad2d5a7b4a51c077eb3fee62cb3239fa67f74af72af9e26",
+        "bytes": 7670
+      },
+      "./vnnlib/index2998_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2998_delta0.13.vnnlib.gz",
+        "sha256": "0009762698ffd0f190ae511d301a901e8455ca5edcf3c1d835cf65456b2a40bc",
+        "bytes": 7308
+      },
+      "./vnnlib/index7393_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7393_delta0.13.vnnlib.gz",
+        "sha256": "ffb0cc13b810d595d8cd59e8eabd8f0923dfc778f0397b5b8f954ec565ad1cf1",
+        "bytes": 7558
+      },
+      "./vnnlib/index3822_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3822_delta0.13.vnnlib.gz",
+        "sha256": "d18fc7a6160577accc7568abb50aeb385e49e476a9619d5710b15f210f6bd1f5",
+        "bytes": 7735
+      },
+      "./vnnlib/index9094_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9094_delta0.13.vnnlib.gz",
+        "sha256": "9e2907f80f65c8799eeac33f64779caa05c591c02a06c914af93b0c208b6e27b",
+        "bytes": 7366
+      },
+      "./vnnlib/index7137_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7137_delta0.13.vnnlib.gz",
+        "sha256": "b29b08302b9d38d0146a9ad184663961d844380c6274446370f1d19629c5da81",
+        "bytes": 7629
+      },
+      "./vnnlib/index8879_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index8879_delta0.13.vnnlib.gz",
+        "sha256": "21fe4270e93804b6170a505bd36dc8501e0ae3b2274cfea00f13547d1ca3e181",
+        "bytes": 7509
+      },
+      "./vnnlib/index6230_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index6230_delta0.13.vnnlib.gz",
+        "sha256": "fb2b58b1eb2f86449dd0a9def35628acdd42ebfa339792aef76006a44abcfbe4",
+        "bytes": 7496
+      },
+      "./vnnlib/index5150_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5150_delta0.13.vnnlib.gz",
+        "sha256": "23731984a1b7be41a00886bc8916118b121612f93210b12d854dc20ad729eb28",
+        "bytes": 7602
+      },
+      "./vnnlib/index9847_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9847_delta0.13.vnnlib.gz",
+        "sha256": "77790e2bd5cc660750a4595cb350deb5e2df5b91c6247d787abd064db07bc9de",
+        "bytes": 7535
+      },
+      "./vnnlib/index9973_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9973_delta0.13.vnnlib.gz",
+        "sha256": "81303c2b382ff2aa5af9ee5919e05e946d45c7ee53e3e6e3811baf06292d3bd9",
+        "bytes": 7665
+      },
+      "./vnnlib/index5054_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5054_delta0.13.vnnlib.gz",
+        "sha256": "a735c48a05d045386b9c7b0a9a4626567c38d72ba2d9553efd73203597985ed9",
+        "bytes": 7763
+      },
+      "./vnnlib/index3082_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3082_delta0.13.vnnlib.gz",
+        "sha256": "a6f701b8aed58be7bbb463fc4e0d9625b1cce50ff1b3343eedc492d653d8e379",
+        "bytes": 7481
+      },
+      "./vnnlib/index7169_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7169_delta0.13.vnnlib.gz",
+        "sha256": "2fa83e6fdcc0508057493c119241d6ba0776daf52fe05f1352596b37005531f5",
+        "bytes": 7521
+      },
+      "./vnnlib/index1949_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index1949_delta0.13.vnnlib.gz",
+        "sha256": "175648c416492fbe099fb9a80325b10fa286b7882a9d128c9a9f2c6e936d6b22",
+        "bytes": 7501
+      },
+      "./vnnlib/index6982_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index6982_delta0.13.vnnlib.gz",
+        "sha256": "2cfd3e99b1b3218b81d6faff4ce975decd5b8e352f81c3d12f09c51f09bf2508",
+        "bytes": 7443
+      },
+      "./vnnlib/index9080_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9080_delta0.13.vnnlib.gz",
+        "sha256": "d581e6cd5bb22b87866bf85ee5015e2983f51dc66a1fc8c67c560a0a48e6dceb",
+        "bytes": 7694
+      },
+      "./vnnlib/index2734_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index2734_delta0.13.vnnlib.gz",
+        "sha256": "52a19850ffbdec9806d125f710a259631d661723caea3fd5f981c7ba225de2b0",
+        "bytes": 6821
+      },
+      "./vnnlib/index5944_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5944_delta0.13.vnnlib.gz",
+        "sha256": "a210e299e78524807432caa0403966d29c5b3336b1e20ca71f3b65820dbee24d",
+        "bytes": 7561
+      },
+      "./vnnlib/index709_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index709_delta0.13.vnnlib.gz",
+        "sha256": "b636ff4cbb10a5dd7c11330d5f1894566d5ea1685f01a7e994ceebf8de4451a0",
+        "bytes": 7664
+      },
+      "./vnnlib/index1908_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index1908_delta0.13.vnnlib.gz",
+        "sha256": "d3c12995f4596f761df56dbd96ad956d38fe2995e33902e8a189f05ece5b19b4",
+        "bytes": 7565
+      },
+      "./vnnlib/index9806_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index9806_delta0.13.vnnlib.gz",
+        "sha256": "0d3c634f85facb0f47618b9bc87694bd014fb4b8814efb90873980d2555aa321",
+        "bytes": 7252
+      },
+      "./vnnlib/index3343_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index3343_delta0.13.vnnlib.gz",
+        "sha256": "a665b8fbae9059d37163c9e6687476adde60b87452188b8f6552b546fac82d13",
+        "bytes": 7691
+      },
+      "./vnnlib/index5146_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index5146_delta0.13.vnnlib.gz",
+        "sha256": "3eb155f2714b3997953f1cf71bc86dc54075989024d6ead6f8ac021c55abb63b",
+        "bytes": 7528
+      },
+      "./vnnlib/index4347_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index4347_delta0.13.vnnlib.gz",
+        "sha256": "1c6b53ba80c5e7250ae1ade171e82693e8a72312f1d141b661c6f4e4045a7c86",
+        "bytes": 7349
+      },
+      "./vnnlib/index7144_delta0.13.vnnlib.gz": {
+        "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_benchmarks/303f2327a8e8411efc4457da03d2016ce42733cf/benchmarks/dist_shift_2023/1.0/./vnnlib/index7144_delta0.13.vnnlib.gz",
+        "sha256": "a28816b3c6f47a4fab2146ebcf7fd9eb629f7c5136d259ebd245f77d336c5966",
+        "bytes": 7395
+      }
+    }
+  },
+  "python": "3.12.16",
+  "revision": {
+    "git_commit": "3633256b54f1f3daf8e9e4d970e41a216b6c4341",
+    "source_sha256": {
+      "src/nvvcomp_gurobi/__init__.py": "5037aeb736fd12183790bd49ba11511a5d4fdaef51682895c7513700898bdbc8",
+      "src/nvvcomp_gurobi/_construction.py": "9a010d8f4db860235d50fa5b7cd9c0012484a275c49038a9c1ae2baf801dfb46",
+      "src/nvvcomp_gurobi/_format.py": "257baa7a2053e6bfd820cc105d55295be59baee7ad4aedaaf7a81968ff15d6e4",
+      "src/nvvcomp_gurobi/_interpretation.py": "cecc951558b4233336b2c15f5519fae696c679fed2a78535f61b6ac269f60761",
+      "src/nvvcomp_gurobi/_vendor/LICENSE": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c",
+      "src/nvvcomp_gurobi/_vendor/__init__.py": "3909efc44f5d14dcee5e61e3d4beed771d81c3111b588e5f33c2e39e2c528b1d",
+      "src/nvvcomp_gurobi/_vendor/counterexamples.py": "1f926f16d16ced7aa26d113b1f4fc3a2a1f383fffbe62c9e0acfdd760ca9bd28",
+      "src/nvvcomp_gurobi/_vendor/sources.json": "034078ea743311496ca6af16b3da3be9d6e5848f6a82015872f7e55c6ab1a259",
+      "src/nvvcomp_gurobi/_vendor/vnnlib_v1.py": "f1731b74d3c20419cf5a70a7065b772f585a1ba2f82a1bcd0b1fc7b5c8d3c576",
+      "src/nvvcomp_gurobi/_worker.py": "cc5904c50fe1044f496df497197a727b7a70a856def0209a5c2fa863b609258b",
+      "src/nvvcomp_gurobi/comparison.py": "fb1d7bce1eb31ff73f590a93ef75d03ba9e94ba61c2dac60316ba5a34dfc14d4",
+      "src/nvvcomp_gurobi/competition.py": "4aea8500609af76ffe11ca1349dc27d275042fb1c55e12a3eeca8cf5f77f2472",
+      "src/nvvcomp_gurobi/experiment.py": "0cda35a766009a5c21d49e8d0ab7723eb89c3775d1b35956dc7d6b679defe318",
+      "src/nvvcomp_gurobi/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/nvvcomp_gurobi/verification.py": "6fd8455dbc8ebf7b8da67c039879c2d05a4539e022bbefd04354292e89f7bc56",
+      "uv.lock": "f429e6502e43024f9132aae8042dc83a2a0fb99d298f1ce39cbb2e88a7bf9d2b"
+    }
+  },
+  "packages": {
+    "onnx": "1.21.0",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.26.0"
+  },
+  "reference_revisions": {
+    "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+    "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+    "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+    "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+  }
+}
