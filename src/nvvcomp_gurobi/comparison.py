@@ -9,6 +9,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import median
 
+_SOURCE_VERIFIED_MATCHES = ("execution_bound", "source_verified_execution_unbound")
+
 
 def _valid_time(value):
     return value is None or (
@@ -91,6 +93,122 @@ def _runtime_population(
     }
 
 
+def _paired_statistics(rows: list[dict]) -> dict:
+    """Summarize an already selected population with available paired run ratios."""
+    gurobi_times = [row["gurobi"]["run_seconds"] for row in rows]
+    abc_times = [row["abc"]["run_seconds"] for row in rows]
+    return {
+        "ids": [row["id"] for row in rows],
+        "gurobi_run_seconds": _statistics(gurobi_times),
+        "abc_run_seconds": _statistics(abc_times),
+        "abc_over_gurobi_ratio_of_sums": sum(abc_times) / sum(gurobi_times)
+        if rows
+        else None,
+        "median_abc_over_gurobi_run_ratio": median(
+            [row["abc_over_gurobi_run_ratio"] for row in rows]
+        )
+        if rows
+        else None,
+    }
+
+
+def _proof_summary(rows: list[dict]) -> dict:
+    """Query-level populations; unverified ABC identity never earns proof credit."""
+
+    def measurement(row, tool):
+        return (
+            row.get(tool, {})
+            if tool == "gurobi" or row["match"] in _SOURCE_VERIFIED_MATCHES
+            else {}
+        )
+
+    cross_tab = defaultdict(Counter)
+    for row in rows:
+        cross_tab[measurement(row, "gurobi").get("outcome", "missing_or_corrupt")][
+            measurement(row, "abc").get("outcome", "missing_or_corrupt")
+        ] += 1
+    paired = [
+        row
+        for row in rows
+        if row["comparison"] == "both_same_answer"
+        and row["gurobi"]["outcome"] == "unsat"
+        and row.get("abc_over_gurobi_run_ratio") is not None
+    ]
+    summary = {
+        "selected_count": len(rows),
+        "ids": [row["id"] for row in rows],
+        "matched_ids": [
+            row["id"] for row in rows if row["match"] in _SOURCE_VERIFIED_MATCHES
+        ],
+        "outcome_cross_tab": {g: dict(counts) for g, counts in cross_tab.items()},
+        **{
+            name: {
+                tool: [
+                    row["id"]
+                    for row in rows
+                    if measurement(row, tool).get("solved")
+                    and measurement(row, tool).get("outcome") == outcome
+                ]
+                for tool in ("gurobi", "abc")
+            }
+            for name, outcome in (
+                ("numerical_unsat_ids", "unsat"),
+                ("accepted_sat_ids", "sat"),
+            )
+        },
+        "unresolved_ids": {
+            tool: [
+                row["id"] for row in rows if not measurement(row, tool).get("solved")
+            ]
+            for tool in ("gurobi", "abc")
+        },
+        "timeout_ids": {
+            tool: [
+                row["id"]
+                for row in rows
+                if measurement(row, tool).get("outcome") == "timeout"
+                or measurement(row, tool).get("reason") == "timeout"
+            ]
+            for tool in ("gurobi", "abc")
+        },
+        "disagreement_ids": [
+            row["id"] for row in rows if row["comparison"] == "disagreement"
+        ],
+        "paired_unsat": _paired_statistics(paired),
+    }
+    summary["numerical_unsat_counts"] = {
+        tool: len(ids) for tool, ids in summary["numerical_unsat_ids"].items()
+    }
+    return summary
+
+
+def _cohorts(instances: list[dict], category: str) -> dict:
+    dimensions = {
+        "relusplitter_2026": ("hidden_relu_layers", "original_model_group"),
+        "dist_shift_2023": ("published_outcome",),
+        "ml4acopf_2024": ("property_class",),
+    }.get(category, ())
+    cohorts = {}
+    for dimension in dimensions:
+        groups = defaultdict(list)
+        for row in instances:
+            if dimension == "published_outcome":
+                label = (
+                    row.get("abc", {}).get("outcome", "unavailable")
+                    if row["match"] in _SOURCE_VERIFIED_MATCHES
+                    else "unmatched"
+                )
+            elif dimension == "property_class":
+                label = row.get(dimension, "unavailable")
+            else:
+                label = str(row["architecture"].get(dimension, "unavailable"))
+            groups[label].append(row)
+        cohorts[dimension] = {
+            label: _proof_summary(rows) for label, rows in groups.items()
+        }
+    return cohorts
+
+
 def compare(audit: dict, records: dict, published: dict) -> dict:
     """Compare an audited experiment with normalized published measurements.
 
@@ -108,7 +226,8 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         path_matches = [
             r
             for r in published["records"]
-            if r["network"] == entry["network"] and r["property"] == entry["property"]
+            if Path(r["network"]) == Path(entry["network"])
+            and Path(r["property"]) == Path(entry["property"])
         ]
         matches = [
             r
@@ -121,6 +240,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
             "property": entry["property"],
             "architecture": entry["architecture"],
             "exclusion_reason": entry["exclusion_reason"],
+            "property_class": entry.get("property_class"),
             "match": "unmatched",
             "comparison": "not_comparable",
         }
@@ -170,10 +290,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                     if abc["execution_artifact_binding"]
                     else "source_verified_execution_unbound"
                 )
-        if abc is None or match not in (
-            "execution_bound",
-            "source_verified_execution_unbound",
-        ):
+        if abc is None or match not in _SOURCE_VERIFIED_MATCHES:
             row["match"] = match
             continue
         row["match"] = match
@@ -223,7 +340,10 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         ratio = abc_run / gurobi_run if ident in paired else None
         total_ratio = (
             (abc_run + abc_prep) / (gurobi_run + gurobi_prep)
-            if ident in paired and abc_prep is not None and gurobi_prep is not None
+            if published.get("source", {}).get("prepare_plus_run_comparable") is True
+            and ident in paired
+            and abc_prep is not None
+            and gurobi_prep is not None
             else None
         )
         row.update(
@@ -263,11 +383,6 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 and row["id"] not in unsat_ids
             ):
                 unsat_ids.append(row["id"])
-    ratios = [
-        r["abc_over_gurobi_run_ratio"]
-        for r in instances
-        if r.get("abc_over_gurobi_run_ratio") is not None
-    ]
     shapes = defaultdict(list)
     for row in instances:
         a = row["architecture"]
@@ -299,8 +414,6 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
         for row in rows:
             row["structural_width_group"] = f"W{len(groups):02d}"
     pair_rows = [r for r in instances if r["id"] in paired]
-    gurobi_paired_times = [r["gurobi"]["run_seconds"] for r in pair_rows]
-    abc_paired_times = [r["abc"]["run_seconds"] for r in pair_rows]
     total_ratios = [
         r["abc_over_gurobi_prepare_plus_run_ratio"]
         for r in pair_rows
@@ -308,6 +421,17 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
     ]
     return {
         "instances": instances,
+        "proof": _proof_summary(instances),
+        "cohorts": _cohorts(instances, audit["category"]),
+        "definitions": {
+            "selected": "Every original audited query, including missing, corrupt, excluded and unresolved records. Property alternatives are not queries.",
+            "outcome_cross_tab": "Raw Gurobi claims versus uniquely source-hash-matched ABC claims; unavailable/corrupt/unverified ABC measurements use missing_or_corrupt.",
+            "numerical_unsat": "Recorded UNSAT with run time within the original deadline when known; no exact-real certificate. ABC additionally requires a unique source-hash match, not execution binding.",
+            "unresolved": "No deadline-qualified accepted solve, including missing/corrupt/identity-unverified measurements, errors, timeouts and rejected or unvalidated SAT.",
+            "paired_unsat": "Common deadline-qualified numerical UNSAT, both run times available, positive Gurobi time. Each summary includes exact IDs and timing counts; no timeout imputation.",
+            "ratios": "ABC/Gurobi observed run seconds, not matched-hardware speedups. Preparation is separate; combined ratios require explicit source.prepare_plus_run_comparable=true.",
+            "cohorts": "Audited ReLUSplitter depth/original-model descriptors, matched published MNIST outcome claims, or audited ACOPF property classes. Unavailable labels remain explicit. No cross-study pooling.",
+        },
         "structural_width_groups": groups,
         "unmatched_abc": [
             r for i, r in enumerate(published["records"]) if i not in used
@@ -363,14 +487,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
                 for tool in ("gurobi", "abc")
             },
             "paired_same_answer": {
-                "ids": paired,
-                "gurobi_run_seconds": _statistics(gurobi_paired_times),
-                "abc_run_seconds": _statistics(abc_paired_times),
-                "abc_over_gurobi_ratio_of_sums": sum(abc_paired_times)
-                / sum(gurobi_paired_times)
-                if gurobi_paired_times
-                else None,
-                "median_abc_over_gurobi_run_ratio": median(ratios) if ratios else None,
+                **_paired_statistics(pair_rows),
                 "prepare_plus_run_ratio_ids": [
                     r["id"]
                     for r in pair_rows
@@ -494,6 +611,81 @@ def _published(directory: Path) -> dict:
     return {"source": source, "records": records}
 
 
+def _statistics_markdown(evidence: dict) -> str:
+    lines = [
+        "# Proof-focused statistics",
+        "",
+        "Generated from saved records; source-matched ABC identity is not execution-bound. Ratios are ABC/Gurobi observed run time, not matched-hardware speedups. SAT claims and accepted SAT are retained separately in evidence.json. Preparation and run times are not combined.",
+        "",
+        "## Denominators",
+        "",
+        *[
+            f"- **{name}**: {definition}"
+            for name, definition in evidence["definitions"].items()
+        ],
+        "",
+        "## Query populations",
+        "",
+        "| Cohort | Selected | Matched | G UNSAT | ABC UNSAT | G accepted SAT | ABC accepted SAT | G unresolved | ABC unresolved | G timeout | ABC timeout | Disagreements | Common UNSAT timing n | ABC/G sum ratio | ABC/G median ratio |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    populations = [("all selected", evidence["proof"])] + [
+        (f"{dimension}: {label}", summary)
+        for dimension, groups in evidence["cohorts"].items()
+        for label, summary in sorted(groups.items())
+    ]
+    for label, summary in populations:
+        paired = summary["paired_unsat"]
+        cells = [label, summary["selected_count"], len(summary["matched_ids"])]
+        for field in (
+            "numerical_unsat_ids",
+            "accepted_sat_ids",
+            "unresolved_ids",
+            "timeout_ids",
+        ):
+            cells.extend(len(summary[field][tool]) for tool in ("gurobi", "abc"))
+        cells.extend(
+            [
+                len(summary["disagreement_ids"]),
+                len(paired["ids"]),
+                paired["abc_over_gurobi_ratio_of_sums"],
+                paired["median_abc_over_gurobi_run_ratio"],
+            ]
+        )
+        lines.append(
+            "| "
+            + " | ".join(str(cell) if cell is not None else "—" for cell in cells)
+            + " |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Outcome cross-tab (Gurobi / ABC)",
+            "",
+            "```json",
+            json.dumps(evidence["proof"]["outcome_cross_tab"], indent=2),
+            "```",
+            "",
+            "## Timing fields (seconds, separate populations)",
+            "",
+            "```json",
+            json.dumps(
+                {
+                    tool: {
+                        population: values["seconds"]
+                        for population, values in groups.items()
+                    }
+                    for tool, groups in evidence["runtime"]["per_tool"].items()
+                },
+                indent=2,
+            ),
+            "```",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("experiment", type=Path)
@@ -516,6 +708,20 @@ def main():
     published = _published(args.published)
     evidence = compare(audit, records, published)
     evidence["provenance"] = {
+        "experiment_context": {
+            key: audit[key]
+            for key in (
+                "hardware",
+                "execution",
+                "revision",
+                "packages",
+                "python",
+                "reference_revisions",
+                "audit_seconds",
+            )
+            if key in audit
+        },
+        "acquisition_seconds": audit.get("acquisition", {}).get("acquisition_seconds"),
         "published": published["source"],
         "experiment_sha256": hashlib.sha256(audit_path.read_bytes()).hexdigest(),
         "comparison_source_sha256": hashlib.sha256(
@@ -557,6 +763,7 @@ def main():
         ]
     )
     (args.output / "instances.md").write_text("\n".join(lines) + "\n")
+    (args.output / "statistics.md").write_text(_statistics_markdown(evidence))
 
 
 if __name__ == "__main__":

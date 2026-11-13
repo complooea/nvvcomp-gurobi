@@ -1,0 +1,578 @@
+{
+  "results_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+  "benchmark_revision": "303f2327a8e8411efc4457da03d2016ce42733cf",
+  "category": "dist_shift_2023",
+  "version": "1.0",
+  "results_csv": "raw/alpha_beta_crown/2026_dist_shift_2023/results.csv",
+  "benchmark_tree_url": "https://api.github.com/repos/VNN-COMP/vnncomp2026_benchmarks/git/trees/303f2327a8e8411efc4457da03d2016ce42733cf?recursive=1",
+  "benchmark_tree_sha256": "58e9fb79dafe91d662b7ca6efae7e13f298e375affb2b0402f52ed8c18d0bbb6",
+  "manifest_sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30",
+  "selected_manifest_sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30",
+  "selection": "entire version-1.0 manifest",
+  "acquisition_source_sha256": "9b15dd195fd7b1a3e81c91889845f1f0ce994b9d78b7eb03caec33b9a48f5ef4",
+  "artifacts": {
+    "onnx/mnist_concat.onnx": {
+      "sha256": "6a30950380488ce13b1550806f25738fe290758dc7a7396429fcff270b4cb5ad",
+      "stored_sha256": "c57a6895eb9541672ffdba954727b16b0f2a80276d5adcc18650d64348396a9e",
+      "git_blob": "f0a5ced510afc4c9914cdb1c5543fa5415474c34",
+      "source_path": "benchmarks/dist_shift_2023/1.0/onnx/mnist_concat.onnx.gz"
+    },
+    "vnnlib/index2904_delta0.13.vnnlib": {
+      "sha256": "47f00a6bdb5a9d79f8629de21013ed80eff4fc727fc4dc4ea520ac0c1ddf07b3",
+      "stored_sha256": "ecafb500ed27f8012d72581216615114ea4b1e5b151583a7f1595e30108fccf4",
+      "git_blob": "ab217264b0c4009899d5897cafb7a48508d211a1",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2904_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4390_delta0.13.vnnlib": {
+      "sha256": "d376caaefd5142c4c7e9890cd7649a4042a9c0750373b54fd5c9a9f27f5f8091",
+      "stored_sha256": "61c1b2c6f0e3b4c1276fa73adef4af131b58c58ac3afb6e9e2deda7ea3772cbe",
+      "git_blob": "ca0d670fa13f0dd3abcf438c99e7d4664a2274d4",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4390_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8883_delta0.13.vnnlib": {
+      "sha256": "bdeb6f7f2e41baf5ce4ec03125d0c86503340b471bbdee01e36a1337e2e5525e",
+      "stored_sha256": "18226bdc2bb0cef86700c41f1490e1c32f372881ffe9f083f6c08ccfc95b4347",
+      "git_blob": "2a61d805eb12129917d71f4e346d325ee8274248",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8883_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8142_delta0.13.vnnlib": {
+      "sha256": "5f06cd2643037f9ca19129b4422791f022b62503f4616947e3c60a6a9b0c9c77",
+      "stored_sha256": "9ccea8c5f880521cffc66d8f684a228d1725714d2a0574215f2b6f97f5aaa08a",
+      "git_blob": "c7741bcc1cb82a289bceb7a940ce14d4846a1bab",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8142_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index2184_delta0.13.vnnlib": {
+      "sha256": "8bf3cfdfa30a12c7ed12d36f2a05e0aa682ce208c630695453213d6a0eca24b6",
+      "stored_sha256": "9a91447394e75cf737ac0e6660d30e27eced26e20e52af714a0722d3baa8ca26",
+      "git_blob": "7e0d9f1afc98992d5fff5901bb8b5eb20975e3f3",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2184_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5197_delta0.13.vnnlib": {
+      "sha256": "f16fe9dc52c422861874fa6781b128c3f10887614585157558e0ae7ec64024c4",
+      "stored_sha256": "b7406863dd873630735562847635d0d378c0281eb0b1d251af0c6901662e45dc",
+      "git_blob": "667c3740f6d97ff1956726bb32eb0c3387e1414c",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5197_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index969_delta0.13.vnnlib": {
+      "sha256": "f19f4d78b10c6d28c59189d600dfb10c6681626ee796492e2de011c96d5cc33a",
+      "stored_sha256": "eff48f6b7ed784cfd7ec0044ca383585b334bb4a81e920ef8ee11b22f7aca670",
+      "git_blob": "b5ce202344d3bbd3279efb687da5e4311959155c",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index969_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3548_delta0.13.vnnlib": {
+      "sha256": "c43d57226a3b0b62fee623fd80e78997736fb2fd9ef3971b7e84b49e9529d4c6",
+      "stored_sha256": "df49a9fc605653b4f6496e4dbdf87fa8f0ace09440d2c9b9e30b49e0afddff6b",
+      "git_blob": "277cdb472a065a6e607eba9aefcbec2a105c3660",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3548_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5778_delta0.13.vnnlib": {
+      "sha256": "9e3b92a507afe219c19465646941a75870b623a017f297cc7af47678a267201a",
+      "stored_sha256": "13225b6f17a7958e3db6eb82abfff37d1559d9dc5fefab38b5026eaa67bf911e",
+      "git_blob": "6176b7b25c24ae9c7ab84df399df27e27c9a4aa2",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5778_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index2523_delta0.13.vnnlib": {
+      "sha256": "fccdc7254b71513ebb8a5c1c27c16d90b3f635874ef33b595ab740a4e3f38628",
+      "stored_sha256": "afab7e1501a94aff5c0ca6887c757af285f49240c894350670cd75360f0d7039",
+      "git_blob": "b560872c1cc06b815e769dd6f9b8e57b2ccd1f90",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2523_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9147_delta0.13.vnnlib": {
+      "sha256": "b8a97ba843566f3f7fef0370774d5079aa5d158ddd1b94c191288c50488a36e0",
+      "stored_sha256": "b9bdf71d0a0b1a4de51f0dad1bedbfc8ee48defbac848243723634c122bdcb67",
+      "git_blob": "1c189c1f3b5d7464582f9020e690aa1d6f481835",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9147_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index1332_delta0.13.vnnlib": {
+      "sha256": "adaae38c82a20a1f4785b551a600a17f84958239ce59d554c14029aac0d64e3f",
+      "stored_sha256": "2023c91e1d2c8c620580d92f48a6bd96e7cd6c2a460eaeac6d3838bf66b95c61",
+      "git_blob": "d968891f0aee087b8ec8dce53297b834cfba723a",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index1332_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8831_delta0.13.vnnlib": {
+      "sha256": "341c331084a0dc0dd304ce332081f78289e1d6c8cda54c39d3f50085b991620e",
+      "stored_sha256": "5deeb40afd46fc62570cd28e695e4c714fdc9fb23456f1448f9ce8159ba90963",
+      "git_blob": "a338ff34a93b259ac447def377abe41cde9c46d9",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8831_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4302_delta0.13.vnnlib": {
+      "sha256": "e69084e659d25820322c1a4e52ce7c5becdae8cf802f522647de416c49c70563",
+      "stored_sha256": "2c5d384a0aba6523ca93b9bac87e14b13416bc2ed64891c7440aaff3d9edcc90",
+      "git_blob": "9dea3cddaba00009a13178be7ff56c09eb80b665",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4302_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index838_delta0.13.vnnlib": {
+      "sha256": "b3dc9d6329004459119a1b783989be8d76bb6b28e67f608f30bc51215d6089d8",
+      "stored_sha256": "155134466fcfcb6c5f6f7f039596186cca06c50aa94268b7f74c07b5448227ad",
+      "git_blob": "08508da83fb5c4d41b2cb10752990fab79dfbd75",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index838_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7475_delta0.13.vnnlib": {
+      "sha256": "63a47d9830ec789eaddf681dbc007f0c61369c9c9c9333621a4cbd8f903f03c4",
+      "stored_sha256": "a071fce537d78ac488d3f5863bb31d85b7c4ac06e3b6320258a558b00a018fdc",
+      "git_blob": "0e9604adcadb5c418d915cdcb4b674828b4aeab1",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7475_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3774_delta0.13.vnnlib": {
+      "sha256": "3b15917611dec2e85531f00b7eae5b6748694c9b15956b770371a515bec3e1eb",
+      "stored_sha256": "3e372d92462dfeeb0f800c5127e59bb28a0ad5b78ab3f24ce41b5add51273cdf",
+      "git_blob": "d5bb118d416c413e40a68acec19f6159c1e11b20",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3774_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index6667_delta0.13.vnnlib": {
+      "sha256": "a0f069d386af3dcf0cff5a7449d34fcd3d7f9274c07be34baa786a4fa249a688",
+      "stored_sha256": "89977667a1f5d74168bc421524cbfc0b56fcfb2e8b965879e87feadaaa4aacd3",
+      "git_blob": "ed2a35239da6a7a7e47887dfa3763720faade21f",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index6667_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index398_delta0.13.vnnlib": {
+      "sha256": "1db13d6f3f15a18c1293a169c33fd8b362af73603b3edb3f22cf3b8b29fa2f5d",
+      "stored_sha256": "5ad1f893b0cc337f3e81767c9c4611fcdee6e4d88bd772e8ded317be95d7fc9d",
+      "git_blob": "03b760ac04e4e46b6af6f273f5707dc91736e2c9",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index398_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3400_delta0.13.vnnlib": {
+      "sha256": "6a3b055a0ecfa348e7dbae3c997bd1505e6dbfd58559ad329b71fba979e83340",
+      "stored_sha256": "7e551dac6fbb4226836b60f28fa12e4190c5e62b91dcdd3d6bc1e8191164db1a",
+      "git_blob": "7542d445e931abaee5eeb68207cb929f1727d98d",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3400_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5396_delta0.13.vnnlib": {
+      "sha256": "344bcd232cbe01a5bbb54aa7acd5b36f541ba06594555acc75f57756f04648db",
+      "stored_sha256": "85c6b0ad2538d4287344c464d87afca7d82b36742c7e15ee54ce5f8b1bff557e",
+      "git_blob": "2c5e730c03eca7d58d136331e56a7229a11d5133",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5396_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index1574_delta0.13.vnnlib": {
+      "sha256": "a50033ae5235fc7f448f1c3ec29bd02ebcded3331a6bea11a70df1a7c97079e8",
+      "stored_sha256": "dd28039fbb9c8aa258b7602995762113709420479648f9600f7b33497022a138",
+      "git_blob": "7419030e162ed5a5e64f6a902a8c13d47c9b5511",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index1574_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index6292_delta0.13.vnnlib": {
+      "sha256": "71b8f1fd976da0340a680e55ca41e62c84a5a7441999a87a6dac8318ed54539c",
+      "stored_sha256": "598259f8a2300e8638b63289aaf005d8c19e6c7a60db4503813e909d221fe13f",
+      "git_blob": "6a7638e9774c758e4b2e4497273e22d174d0eba3",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index6292_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9903_delta0.13.vnnlib": {
+      "sha256": "a1badad70deec60dd89da2246b1f3216218be4ce972220f8809e31604694365b",
+      "stored_sha256": "6647a5ad819277ebf0a2b150c5aa0d664e3231dd730b0046b8f077a0d0537eee",
+      "git_blob": "340f40bcf2d36ae20982fb6175e6f5ae43032789",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9903_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index2497_delta0.13.vnnlib": {
+      "sha256": "b670e60182fce3d56955f2a64630873d2ceb99cdd37be8a344f8d6b1d881126e",
+      "stored_sha256": "931a6c0fe6f6ed821e5ad0a0c703adc36d272cc66123e24d11d728d711dd7d27",
+      "git_blob": "48644b9af9e1d08852f55b195e3bc801c41fc079",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2497_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7821_delta0.13.vnnlib": {
+      "sha256": "db1b615b3abdf767834ad65214a68a2d87ca8b78a6d7790a789246c209f1352c",
+      "stored_sha256": "dd9dfab3c416771509ca96967ceef2310e1b689b460151ed7b589ce2658168f4",
+      "git_blob": "13f082d4e55b875f5cd97a33e0604ee32f62a788",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7821_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5270_delta0.13.vnnlib": {
+      "sha256": "4d3394075a628304001ed322fc9a13112917600a9e5211ff327f436ce5e13104",
+      "stored_sha256": "3c3ae5f281294a0edd34bc193009a40af5f29b1cbfb9a7182f33d2b59cc800c8",
+      "git_blob": "3d1169fd190e4fa957b6cadcf9ddf5ff14e0a2b8",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5270_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index1053_delta0.13.vnnlib": {
+      "sha256": "5e821269a5a06894e16100b2e9c1852b62f60fc596853ee9decf2ed3ace24b3f",
+      "stored_sha256": "da716d96831c3764ef8811ff6c648d5baffe88a478c1b5a99dfb9d738f077bfe",
+      "git_blob": "6185e8a47eadd540cf79aa20679b627d9108eba2",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index1053_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7861_delta0.13.vnnlib": {
+      "sha256": "1e3719171df05e4d47df6a0acf066d51ac9a311a940f8275d6b9320c1ff62431",
+      "stored_sha256": "7edc0bbb7ef6ea8e02b0df73593cf01f0af3c39a58bd92a3212eab0fd2c8f6da",
+      "git_blob": "d0f215bc4de6d4ea871b831ef8d866124c1e3dd5",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7861_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3044_delta0.13.vnnlib": {
+      "sha256": "6bb8bd892ea640b28821a24d494841c02035c74153c8dbaf752874841e72bd96",
+      "stored_sha256": "1d964a4dc8bcd5364d233d69b244e4bd5ad1c8e0a5110578a4c8a3620855bd00",
+      "git_blob": "f742df375008522ca805236ca6cf1649d3bac236",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3044_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7472_delta0.13.vnnlib": {
+      "sha256": "97fb0007484968aeadf08b5047a0ec596662a34224df5e989d78ff61031edd31",
+      "stored_sha256": "c04dc8fab68fc869f1c5a2d04d7a458c069e1fa60271faa55dd7494f2284f5ed",
+      "git_blob": "5817a816c5b1357b9efdfb52511aec042f661f9a",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7472_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index136_delta0.13.vnnlib": {
+      "sha256": "eec68079572bf30a870e39cd100d82123ae870909e45d9151de02cf9d82c43eb",
+      "stored_sha256": "c7721275213d412013ab6467017adb18848ae7b04048dc19be558a8bb5578d92",
+      "git_blob": "628228966ea3cdfad6c3c4387c3ac8281e49fc05",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index136_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7947_delta0.13.vnnlib": {
+      "sha256": "7aaf842532880441492529dd879c24619fdf6dfd871ef686bf7442d65fc077d9",
+      "stored_sha256": "3a6243b66373223e23085d191b6d406fe012e1d3933ec8f6c478788fb9b25d73",
+      "git_blob": "0421728cb90a037753a657ddbf8fd0772a2fa95e",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7947_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8810_delta0.13.vnnlib": {
+      "sha256": "30fc21afed397d1eea03de578e605bf7c7d688cedd9ab9739d6dbd9d2357080f",
+      "stored_sha256": "4ebc0d55139fde29551e9ab3f0bcb982d8387e0d072a6b9ee989157165fe0a57",
+      "git_blob": "2b27e87d140b5a6775261bad4c758233ef36e83f",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8810_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4089_delta0.13.vnnlib": {
+      "sha256": "fdcb11843b262dd4b4fb1b07ce6a4febdcc1eae950657b2de53f2af2533537f9",
+      "stored_sha256": "cc085829b64bcfdb33d35b085baea9c05375e0593eea29f6d1472c2ebccff32b",
+      "git_blob": "1d5c754120704907ed9726b124680e24637228fd",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4089_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3006_delta0.13.vnnlib": {
+      "sha256": "4b016d28b16764741c05895701bc476c640b5be7cf61b1bd1441bc4e75ec5fdb",
+      "stored_sha256": "3026785af466cfd6c4c4ae67c53c46e5ca4b64acec32618cda51813b3124f872",
+      "git_blob": "2426125cc0f239cd22bab81f85042172f9fb4b50",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3006_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3321_delta0.13.vnnlib": {
+      "sha256": "289d13b763d1b437290e558ce358452aba1f9f19091956bf2a6cd0aadd4ce453",
+      "stored_sha256": "85bbb9d67f2ee450eed8ebbb451f54e112669c28e93909d05c8dbe02b7127628",
+      "git_blob": "9aa270705ccc16c9160a57732738507239289775",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3321_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5483_delta0.13.vnnlib": {
+      "sha256": "9df9c54476eeefdb9b108542cc4ae2f11289a5107f071ff52b73e5321a1be9ee",
+      "stored_sha256": "51debdc791a42f95598ddd4a1a4822ab55e5beceb757cbde4d6a8a4ff3ba6cbc",
+      "git_blob": "31060422e80ee768e572227fe1e81c5b59d2f22d",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5483_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3607_delta0.13.vnnlib": {
+      "sha256": "3bd4a2b4ca0d72a89c56698ee79fb29c32a6b7d4d5e2c709022601e7b5280130",
+      "stored_sha256": "a2a49ebd35ab5b2e34a6522d069914b877cfe5a799c4e74ca1c5ad809a68883a",
+      "git_blob": "7b22581202e6a9f6f86cf083fbf0a5173609d105",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3607_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7705_delta0.13.vnnlib": {
+      "sha256": "baed6965b408c3df87dfb6153569d68ab62f276252b16416538d95b1ce0560b0",
+      "stored_sha256": "b3b32b083d8b6df72588d219af92c1d8bb93a0e8a7cc093af2f1859468d1225d",
+      "git_blob": "5b980da7b0343586105c527792f92e42bac26852",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7705_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4659_delta0.13.vnnlib": {
+      "sha256": "eade01f4df615ec91f83c8fedfcdc64c15e50dfb7b3b70d4b0a4a522e970d3aa",
+      "stored_sha256": "be157d3bc9943bfb718cc04328f70d9897be3426939cd989a86bb4b3984773a9",
+      "git_blob": "54426fc01defa1584191b848818b7bd78a86953c",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4659_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index6989_delta0.13.vnnlib": {
+      "sha256": "5316441fff5d831a3ef00a766badb459291c7b668a683bd187144065001bb788",
+      "stored_sha256": "9b8174869f3b83a9006cd3d5d142f0178cf298a80b334017cc6f383b267690e9",
+      "git_blob": "a76138f2a0b9f20f144fd35dc1ade68635874c08",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index6989_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8721_delta0.13.vnnlib": {
+      "sha256": "d3a1e40820f7f60b45b5c86cf7d5595b9e5f2b056eece8710b45f5f14968a395",
+      "stored_sha256": "723b7db47830268fcd5871863c4a24f4277432d5a8aba5bab8ba47a0255ba7d8",
+      "git_blob": "07476fd50b66b31e6f8fb5a6ad2aa7e1a08c5e26",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8721_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4403_delta0.13.vnnlib": {
+      "sha256": "9f0b89397fa2f5d1e501931f2de851b8b63e649362d2d69988b9d6a1f632a547",
+      "stored_sha256": "02828fa56fc601a00654bb1931b953babb8366a147c44675fa683c7dbebb3c21",
+      "git_blob": "2a4af7d3ea2d3d24cf9229f6bf5da7302c32ad48",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4403_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3837_delta0.13.vnnlib": {
+      "sha256": "a2b6d0a031ebf76420770b82135a600c85f234f77b68c2a24f10814ea197e171",
+      "stored_sha256": "073b2b9a0ea99edcb5fbb82eff63e6a61e21bd06f5525da932915d1cabb600ce",
+      "git_blob": "d674031c247dffeb4e0359107cc3ae7ea9b2a07e",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3837_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7963_delta0.13.vnnlib": {
+      "sha256": "b3abc52039be600161b5206eb7e09e222d50cccc4ec8222c4765b1b9e4e963c1",
+      "stored_sha256": "99fff8f552ee6bbec440d5ca09e1a4dd38b24c8eb18dbcc8f4cef5016b36ce14",
+      "git_blob": "ee866a04ac66e8c3b7f1678dbd01641594579e07",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7963_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9041_delta0.13.vnnlib": {
+      "sha256": "9b5104ece84ed34a2d7e680ce2231bcfc429ab8edba569a018050ff08086c420",
+      "stored_sha256": "36e0ad736ff3cf039ad2d5a7b4a51c077eb3fee62cb3239fa67f74af72af9e26",
+      "git_blob": "e5762d1deb250f81679464b844b55ef3f7055aee",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9041_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index2998_delta0.13.vnnlib": {
+      "sha256": "f1ee81d6992d709b54b4242bd472be9d7622378ff51e17616f1c4d2ae8aa751e",
+      "stored_sha256": "0009762698ffd0f190ae511d301a901e8455ca5edcf3c1d835cf65456b2a40bc",
+      "git_blob": "67ba7a9ead713a49e95d3615a87393e0bff1e5c2",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2998_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7393_delta0.13.vnnlib": {
+      "sha256": "980cd07d9ae03d6f2216f9372d3a92d304f968daf6caa0bfd5c9bdce54144ac8",
+      "stored_sha256": "ffb0cc13b810d595d8cd59e8eabd8f0923dfc778f0397b5b8f954ec565ad1cf1",
+      "git_blob": "c03e9495e0affb8c976b78617496d56c56beb14d",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7393_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3822_delta0.13.vnnlib": {
+      "sha256": "9ef85d925329fcb9df106abb9480cbdaa14161c95b2f6150680e3b865aa8de4d",
+      "stored_sha256": "d18fc7a6160577accc7568abb50aeb385e49e476a9619d5710b15f210f6bd1f5",
+      "git_blob": "bd648a582242c9e79cf1678d8535ef2f7f10816b",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3822_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9094_delta0.13.vnnlib": {
+      "sha256": "c84a56acf6327d8a7bb55906376d1ab1de18498657e1436b8b5e4d0342d498e1",
+      "stored_sha256": "9e2907f80f65c8799eeac33f64779caa05c591c02a06c914af93b0c208b6e27b",
+      "git_blob": "7f8637cdf615c7ebe525b3587cc8262b9949ae37",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9094_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7137_delta0.13.vnnlib": {
+      "sha256": "a43996b0458a718e310ed88fd0f4cf48971a4961b915a3c33ec33bf9cade5836",
+      "stored_sha256": "b29b08302b9d38d0146a9ad184663961d844380c6274446370f1d19629c5da81",
+      "git_blob": "d0bd3328b93ceef7a682993d6108310b9b9120c6",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7137_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index8879_delta0.13.vnnlib": {
+      "sha256": "0f47e50fe16bb658266bde1d25aec013ee6c11320919adff069bb0fdaf49f887",
+      "stored_sha256": "21fe4270e93804b6170a505bd36dc8501e0ae3b2274cfea00f13547d1ca3e181",
+      "git_blob": "a0fbbd56f0665ef4b856cb392b8d6a2ea8c6813b",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index8879_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index6230_delta0.13.vnnlib": {
+      "sha256": "c2c0ee9d1af0eed551747794f481da59b39f0df5b6771ec767735fff73845ac1",
+      "stored_sha256": "fb2b58b1eb2f86449dd0a9def35628acdd42ebfa339792aef76006a44abcfbe4",
+      "git_blob": "c6c3767bad35fae14654b4c2aa739548325ae5e5",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index6230_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5150_delta0.13.vnnlib": {
+      "sha256": "eabe4e14482edd1299ed4b02d31ffe9a765ae3b15f57893f5fbcaabae08e75a1",
+      "stored_sha256": "23731984a1b7be41a00886bc8916118b121612f93210b12d854dc20ad729eb28",
+      "git_blob": "a38cbe71356d5d2584af455d7be0dad2d4013a07",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5150_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9847_delta0.13.vnnlib": {
+      "sha256": "75912151eb284d59164ee43bbce072c681ed19fdd984251b900d87a8994b5556",
+      "stored_sha256": "77790e2bd5cc660750a4595cb350deb5e2df5b91c6247d787abd064db07bc9de",
+      "git_blob": "11535f6dc4eed2985c0f272b8d7effb161667503",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9847_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9973_delta0.13.vnnlib": {
+      "sha256": "d61667598d173b4ae6c50c68dd3b52210275292d0926759f075f28f7d7ec90d2",
+      "stored_sha256": "81303c2b382ff2aa5af9ee5919e05e946d45c7ee53e3e6e3811baf06292d3bd9",
+      "git_blob": "e9eee65cffb3d0354c6a6a9f5c0dab05693e8ac1",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9973_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5054_delta0.13.vnnlib": {
+      "sha256": "d58f385b8e1257afc9df66c2a019427359916b04e6d3ad020f7a64e99cb852e0",
+      "stored_sha256": "a735c48a05d045386b9c7b0a9a4626567c38d72ba2d9553efd73203597985ed9",
+      "git_blob": "ef78dd44cd1be987218c88ed5cf54dd6ecb181f4",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5054_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3082_delta0.13.vnnlib": {
+      "sha256": "e40f8f146700d28b2a0385b7d06912226f0c6ce14468bc1d16458401834202a4",
+      "stored_sha256": "a6f701b8aed58be7bbb463fc4e0d9625b1cce50ff1b3343eedc492d653d8e379",
+      "git_blob": "786844aeac589d20c3300c79db15b35ad1b53159",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3082_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7169_delta0.13.vnnlib": {
+      "sha256": "d993cd9208766c2b19e48b923def67130cad61aa46e0613a0f04fc67f43d9092",
+      "stored_sha256": "2fa83e6fdcc0508057493c119241d6ba0776daf52fe05f1352596b37005531f5",
+      "git_blob": "612e52980e3d685649b69b82db4176df0e5f0ef9",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7169_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index1949_delta0.13.vnnlib": {
+      "sha256": "5bbca457e1b369492dee5d088ce565931956a415f612bad434668d4268be5a0f",
+      "stored_sha256": "175648c416492fbe099fb9a80325b10fa286b7882a9d128c9a9f2c6e936d6b22",
+      "git_blob": "26a542e4a5ef9aee0caed070c2328e5ff62b31c1",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index1949_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index6982_delta0.13.vnnlib": {
+      "sha256": "d1611cce8594c7a5b661ab54e8e6765c27904fa41671b99ebd13702a757a99cf",
+      "stored_sha256": "2cfd3e99b1b3218b81d6faff4ce975decd5b8e352f81c3d12f09c51f09bf2508",
+      "git_blob": "961c5fb90b2ce66d26bc886172abf118a2c6d8e5",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index6982_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9080_delta0.13.vnnlib": {
+      "sha256": "3777e8dbc0e5c1b2c553ff673d1cbe4f7ffc19715dc33c7a74c37602dec68845",
+      "stored_sha256": "d581e6cd5bb22b87866bf85ee5015e2983f51dc66a1fc8c67c560a0a48e6dceb",
+      "git_blob": "d5ab666d661097032184054935990721b0084508",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9080_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index2734_delta0.13.vnnlib": {
+      "sha256": "6bba655df74b1252305eee9f4ccb1231a242524d404c5b1f59e3d78ecf59e287",
+      "stored_sha256": "52a19850ffbdec9806d125f710a259631d661723caea3fd5f981c7ba225de2b0",
+      "git_blob": "72be957c91b1a11931e650db1765678ed687a770",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index2734_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5944_delta0.13.vnnlib": {
+      "sha256": "92ce838e3851a1fb2f0305c97f7d604fa593d64f9775587079ad9145bf4bb7e0",
+      "stored_sha256": "a210e299e78524807432caa0403966d29c5b3336b1e20ca71f3b65820dbee24d",
+      "git_blob": "dcf8108bf9d9f30b5bb8cfecb60ddc034426907d",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5944_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index709_delta0.13.vnnlib": {
+      "sha256": "d543e7894c1a4c74f5b932b8f3223c54f7787fc850debd97566999b6cace4791",
+      "stored_sha256": "b636ff4cbb10a5dd7c11330d5f1894566d5ea1685f01a7e994ceebf8de4451a0",
+      "git_blob": "d10d25492d06be9926e3a4e44c81fd331f7d09ba",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index709_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index1908_delta0.13.vnnlib": {
+      "sha256": "f20233718a5aa9bfa222f2f4a9f1a1ce57be8f089ee58665f6487a754f581aaa",
+      "stored_sha256": "d3c12995f4596f761df56dbd96ad956d38fe2995e33902e8a189f05ece5b19b4",
+      "git_blob": "74126698d315fad79d94db6ec9b08ea3eb06eb13",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index1908_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index9806_delta0.13.vnnlib": {
+      "sha256": "7100fd1db413209e08c205dbefc85a23d86bbea5a824768babeca88996a5f2d6",
+      "stored_sha256": "0d3c634f85facb0f47618b9bc87694bd014fb4b8814efb90873980d2555aa321",
+      "git_blob": "4099836c454c04b272ca2e0e8fdc03f83cfc0df0",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index9806_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index3343_delta0.13.vnnlib": {
+      "sha256": "40cd29e1df8cf49b98ed01e4628a860953b5dc8cf776dc70409dadf944403c4f",
+      "stored_sha256": "a665b8fbae9059d37163c9e6687476adde60b87452188b8f6552b546fac82d13",
+      "git_blob": "2c8e830aa0b4c7a11426b46568c3d2189628cf04",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index3343_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index5146_delta0.13.vnnlib": {
+      "sha256": "7cbdc3e86ad4e56b66e4998f79010f09efce57a7733f4dc1ab2a37514d5946ea",
+      "stored_sha256": "3eb155f2714b3997953f1cf71bc86dc54075989024d6ead6f8ac021c55abb63b",
+      "git_blob": "f9095301b2f3bfaec6dda53d8d98d9666fd68a96",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index5146_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index4347_delta0.13.vnnlib": {
+      "sha256": "34c4c5659d20cf58310cda6ee439e21c3b3735fd605f316d7eebe441d2c50e18",
+      "stored_sha256": "1c6b53ba80c5e7250ae1ade171e82693e8a72312f1d141b661c6f4e4045a7c86",
+      "git_blob": "2df0649195e35a768dbf032bcd83ffa4daef1768",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index4347_delta0.13.vnnlib.gz"
+    },
+    "vnnlib/index7144_delta0.13.vnnlib": {
+      "sha256": "ecb158862c01b41e41e490c30a905a503860dc0c156737b0b84d1d6701ac81f9",
+      "stored_sha256": "a28816b3c6f47a4fab2146ebcf7fd9eb629f7c5136d259ebd245f77d336c5966",
+      "git_blob": "9df3e0c934bcc8538baea2bc203faf0f3529570c",
+      "source_path": "benchmarks/dist_shift_2023/1.0/vnnlib/index7144_delta0.13.vnnlib.gz"
+    }
+  },
+  "files": [
+    {
+      "path": "raw/LICENSE",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/LICENSE",
+      "sha256": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c"
+    },
+    {
+      "path": "raw/README.md",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/README.md",
+      "sha256": "cd83a8600ce489dc36d12bef663d748afe71775d2ec8a3affb2cbe18aa35579f"
+    },
+    {
+      "path": "raw/SCORING/process_results.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/process_results.py",
+      "sha256": "2d396e1aad58694cc9d1cae7c8a0bce2cdd92b0c89371b70f757b89181ddc2bc"
+    },
+    {
+      "path": "raw/SCORING/settings.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/settings.py",
+      "sha256": "dbd190e5cd127a1e1ef8caa19d6416cf6c0d2e94e7698b9b22e96d43661d2039"
+    },
+    {
+      "path": "raw/SCORING/cex_checks.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/cex_checks.py",
+      "sha256": "695fcd436ddf354d6dd206fdac64f7c52a045bfb56edf0f2bfaa8b30e7dacfc5"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/results.csv",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/results.csv",
+      "sha256": "a93a3415deee008a253909488dc27f5cd50c8a1b7e39fc8d264724037e84ad8c"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4390_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4390_delta0.13.counterexample.gz",
+      "sha256": "34b21e95177409bd3efdeec87bf3772a313ac50cfb1742170a9c6059e08f750a"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4390_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4390_delta0.13.counterexample.check.json",
+      "sha256": "71988425dc8663eacb9b19a5ccb2a787389a1bc5ae371e93da9750b3a1035fad"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index1332_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index1332_delta0.13.counterexample.gz",
+      "sha256": "6d225069b07dfa2d9da08d23914964740ff13e667093fe5c048e67228a72e2d9"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index1332_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index1332_delta0.13.counterexample.check.json",
+      "sha256": "5b30c1bfb43d78aaab88749ea5269ea4e280fd082c7880accb608c8ed5279501"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4302_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4302_delta0.13.counterexample.gz",
+      "sha256": "2e76c8e2fbaec7e4fdbac7fc8a2dfc5ff0e0556fd53cc4429c7ba8a5d23cab96"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4302_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4302_delta0.13.counterexample.check.json",
+      "sha256": "7dbba641f8ffc9a094ca252c20ae9414a31c6c68045583fde0933b3d043817b8"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index7821_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index7821_delta0.13.counterexample.gz",
+      "sha256": "ca1f8969bb471e5e677e6eaddf3c9e1bb621361c3b9f1684802ddacee0416e57"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index7821_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index7821_delta0.13.counterexample.check.json",
+      "sha256": "1869d0ba30e238aee2ca5721b5e746f82bb77f3722a32329b68c6eb4836b666b"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3607_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3607_delta0.13.counterexample.gz",
+      "sha256": "87ba04af8f9f3a7345c311c7af87d36c9bf208091eecda250b1fb699eecdc732"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3607_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3607_delta0.13.counterexample.check.json",
+      "sha256": "4e6be90667c82a35d0b07c8cc9e6557baf3aab64deb1b5b2212cf33885c0bbe5"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4403_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4403_delta0.13.counterexample.gz",
+      "sha256": "7e248ff33b6ccb89e69d178d4eb868ef27fd3ee5cdc0c2b112b59bcd97105ac9"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4403_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index4403_delta0.13.counterexample.check.json",
+      "sha256": "caa3dd9bdfbc88f6ff65e969daa3f20f00f1b8c501019709cdd5b8b3995f3acc"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index9847_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index9847_delta0.13.counterexample.gz",
+      "sha256": "fd890313f59338a4870f88289c8def026fac83486bbbfaa64c1165862304a285"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index9847_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index9847_delta0.13.counterexample.check.json",
+      "sha256": "751076a237468a7be22d25dcfd24d787823e37cf71b4d102a95c3ea4390f12d0"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3343_delta0.13.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3343_delta0.13.counterexample.gz",
+      "sha256": "4d0c5213a07cad70435c0dc8a5a052ba9bb1da8544386a9ae4b351f189f67916"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3343_delta0.13.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index3343_delta0.13.counterexample.check.json",
+      "sha256": "bc2905873e6cc67906c7463aafe5b5745f4ddab63e44178b606d2bc03b8c2e45"
+    },
+    {
+      "path": "source-instances.csv",
+      "sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30"
+    },
+    {
+      "path": "instances.csv",
+      "sha256": "c8a7358ded37fa2bf4f6824cc05eecd2537516d2e8cea2e47f37f601a2b4ca30"
+    }
+  ],
+  "execution_artifact_binding": false,
+  "limitations": [
+    "Published CSV and check caches do not pin execution benchmark bytes or commit",
+    "ABC execution hardware, resources, tool revision and environment are absent from this result folder"
+  ]
+}

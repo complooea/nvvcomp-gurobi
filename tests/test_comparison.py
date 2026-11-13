@@ -62,7 +62,7 @@ def saved_pair():
     published = {
         "category": "family",
         "version": "1.0",
-        "source": {"revision": "results-pin"},
+        "source": {"revision": "results-pin", "prepare_plus_run_comparable": True},
         "records": [abc],
     }
     return audit, {"0000": record}, published
@@ -79,6 +79,86 @@ def test_comparison_distinguishes_source_identity_from_execution_binding():
     assert evidence["populations"]["execution_bound"] == []
     assert evidence["populations"]["candidate_matched"] == ["0000"]
     assert evidence["runtime"]["paired_same_answer"]["ids"] == ["0000"]
+
+
+def test_proof_summary_counts_queries_and_pairs_only_common_unsat():
+    audit, records, published = saved_pair()
+    records["0000"]["result"].update(outcome="unsat", validation=None)
+    published["records"][0].update(outcome="unsat", validation=None)
+    evidence = compare(audit, records, published)
+    proof = evidence["proof"]
+    assert proof["selected_count"] == 1
+    assert proof["numerical_unsat_ids"] == {"gurobi": ["0000"], "abc": ["0000"]}
+    assert proof["outcome_cross_tab"] == {"unsat": {"unsat": 1}}
+    assert proof["paired_unsat"]["ids"] == ["0000"]
+    assert proof["paired_unsat"]["abc_over_gurobi_ratio_of_sums"] == 4
+    assert "prepare_plus_run" not in proof["paired_unsat"]
+    records["0000"]["result"].update(outcome="sat", validation="strict")
+    proof = compare(audit, records, published)["proof"]
+    assert proof["disagreement_ids"] == ["0000"]
+    assert proof["paired_unsat"]["ids"] == []
+    assert proof["accepted_sat_ids"]["gurobi"] == ["0000"]
+
+
+def test_proof_cohorts_retain_missing_ambiguous_timeout_and_unavailable_times():
+    audit, records, published = saved_pair()
+    audit["category"] = "relusplitter_2026"
+    published["records"][0]["category"] = audit["category"]
+    audit["instances"][0]["architecture"].update(
+        hidden_relu_layers=4, original_model_group="model_0_0"
+    )
+    records["0000"]["architecture"] = copy.deepcopy(
+        audit["instances"][0]["architecture"]
+    )
+    records["0000"]["result"].update(outcome="unsat", validation=None)
+    published["records"][0].update(outcome="unsat", validation=None)
+    for ident in ("0001", "0002", "0003", "0004"):
+        entry = copy.deepcopy(audit["instances"][0])
+        entry.update(id=ident, property=f"vnnlib/{ident}.vnnlib")
+        audit["instances"].append(entry)
+        records[ident] = {**copy.deepcopy(records["0000"]), **copy.deepcopy(entry)}
+        abc = {**published["records"][0], "property": entry["property"]}
+        published["records"].append(abc)
+    records["0001"]["result"].update(outcome="unknown", reason="timeout")
+    published["records"][2]["run_seconds"] = None
+    del records["0003"]
+    published["records"].append(copy.deepcopy(published["records"][4]))
+    evidence = compare(audit, records, published)
+    proof = evidence["proof"]
+    assert proof["selected_count"] == 5
+    assert proof["numerical_unsat_counts"] == {"gurobi": 3, "abc": 4}
+    assert proof["paired_unsat"]["ids"] == ["0000"]
+    assert proof["unresolved_ids"] == {"gurobi": ["0001", "0003"], "abc": ["0004"]}
+    assert proof["timeout_ids"]["gurobi"] == ["0001"]
+    assert proof["outcome_cross_tab"] == {
+        "unsat": {"unsat": 2, "missing_or_corrupt": 1},
+        "unknown": {"unsat": 1},
+        "missing_or_corrupt": {"unsat": 1},
+    }
+    assert evidence["cohorts"]["hidden_relu_layers"]["4"] == proof
+    assert evidence["cohorts"]["original_model_group"]["model_0_0"] == proof
+
+
+@pytest.mark.parametrize(
+    "category,dimension,label",
+    [
+        ("dist_shift_2023", "published_outcome", "sat"),
+        ("ml4acopf_2024", "property_class", "structural_output_bound"),
+    ],
+)
+def test_study_cohorts_use_matched_published_outcomes_and_audited_classes(
+    category, dimension, label
+):
+    audit, records, published = saved_pair()
+    audit["category"] = published["records"][0]["category"] = category
+    audit["instances"][0]["property_class"] = "structural_output_bound"
+    records["0000"]["property_class"] = "structural_output_bound"
+    evidence = compare(audit, records, published)
+    assert evidence["cohorts"][dimension][label]["ids"] == ["0000"]
+    if category == "dist_shift_2023":
+        published["records"][0]["artifact_sha256"] = {}
+        evidence = compare(audit, records, published)
+        assert evidence["cohorts"][dimension]["unmatched"]["ids"] == ["0000"]
 
 
 @pytest.mark.parametrize(
@@ -100,6 +180,24 @@ def test_identity_is_not_inferred_from_category_or_manifest_position(change, exp
     assert evidence["instances"][0]["match"] == expected
     assert evidence["populations"]["candidate_matched"] == []
     assert evidence["runtime"]["paired_same_answer"]["ids"] == []
+
+
+def test_manifest_dot_prefix_does_not_prevent_exact_artifact_matching():
+    audit, records, published = saved_pair()
+    for key in ("network", "property"):
+        audit["instances"][0][key] = "./" + audit["instances"][0][key]
+        records["0000"][key] = audit["instances"][0][key]
+    assert compare(audit, records, published)["populations"]["candidate_matched"] == [
+        "0000"
+    ]
+
+
+def test_preparation_is_not_automatically_combined_with_run_time():
+    audit, records, published = saved_pair()
+    published["source"].pop("prepare_plus_run_comparable")
+    evidence = compare(audit, records, published)
+    assert evidence["instances"][0]["abc_over_gurobi_prepare_plus_run_ratio"] is None
+    assert evidence["runtime"]["per_tool"]["abc"]["preparation"]["seconds"]["sum"] == 20
 
 
 @pytest.mark.parametrize(
@@ -384,6 +482,9 @@ def test_cli_regenerates_evidence_from_raw_saved_files_without_networks(
     assert evidence["counts"] == {status: 1}
     assert evidence["instances"][0]["abc"]["validation"] == classification
     assert "0000" in (output / "instances.md").read_text()
+    summary = (output / "statistics.md").read_text()
+    assert "Common UNSAT" in summary
+    assert "not matched-hardware" in summary
     saved = (output / "evidence.json").read_bytes()
     subprocess.run(command, check=True, capture_output=True, text=True)
     assert (output / "evidence.json").read_bytes() == saved

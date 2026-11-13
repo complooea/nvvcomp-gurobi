@@ -17,7 +17,7 @@ No network access, benchmark files, Gurobi installation/license, or ABC executio
 is required. Inputs are the original `experiment.json` and `records/*.json`, plus
 the retained published `source.json`, result CSV, witnesses and validation caches.
 The CLI checks published-file SHA256 identities and records input/source hashes.
-It overwrites only `evidence.json` and `instances.md`, not the authored report or
+It overwrites only `evidence.json`, `instances.md`, and `statistics.md`, not the authored report or
 original experiment. Repeated generation with unchanged inputs/source is identical.
 
 To reacquire published inputs into a **new** directory:
@@ -81,7 +81,10 @@ identity. No fresh witness replay is performed.
 - Runtime ratios use **same-answer mutual solves with available run times** and a
   positive Gurobi denominator. They exclude timeouts, failures and disagreements;
   per-tool solved and all-recorded populations are reported separately with IDs.
-  Preparation-plus-run ratios additionally require both preparation measurements.
+  Preparation-plus-run ratios additionally require both preparation measurements
+  and explicit `published.source.prepare_plus_run_comparable=true`; by default
+  they are null. The original MVP archive predates this opt-in and retains its
+  historical combined ratios; regeneration with current code leaves them null.
   All ratios are ABC/Gurobi: values above one mean lower Gurobi observed time.
 - No startup subtraction or timeout-budget imputation is applied. The pinned
   scoring code subtracts fastest-observed tool overhead for plots **and deadline
@@ -122,3 +125,39 @@ duplicates solver correctness, experiment persistence, or full-category executio
 
 See the [authored comparison report](../experiments/sat-relu-v1-comparison/README.md)
 for the actual observations and hardware/provenance limits.
+
+## Expanded proof studies (#11)
+
+The same `compare` and CLI seams produce `proof` and `cohorts` statistics for
+the three completed studies. Reproducible commands and input inventories are in:
+
+- [ReLUSplitter](../experiments/relusplitter-v1-comparison/README.md)
+- [Sigmoid MNIST](../experiments/mnist-sigmoid-v1-comparison/README.md)
+- [IEEE-14 ACOPF](../experiments/acopf-v1-comparison/README.md)
+
+Each archive includes the entire published category CSV (including unselected
+aliases and appended smoke rows), source/selected manifests, published SAT
+witness/check caches, and pinned-source artifact hashes. Acquisition now accepts
+`--category` for these categories; ACOPF verifies the full pinned source manifest
+before deriving its exact-model selection. It never executes ABC or a validator.
+
+`proof` and every cohort expose the selected-query denominator, matched IDs,
+raw outcome cross-tab, per-tool numerical UNSAT/accepted SAT/unresolved/timeout
+IDs, accepted-answer disagreements, and paired common-UNSAT timing statistics.
+Unavailable or ambiguous identities cannot earn ABC proof credit or enter paired
+timings. Available local measurements still contribute independently. Missing
+timing is not zero: it permits an outcome claim without a known deadline breach,
+but cannot enter a paired timing denominator. Numerical UNSAT remains a solver
+claim, not an exact-real certificate or an ABC bound-tightness measurement.
+
+ReLUSplitter cohorts use audited hidden ReLU depth and original-model group,
+not graph-node counts or assumed functional equivalence. MNIST cohorts use
+source-hash-matched published UNSAT/SAT claims, not correctness labels. ACOPF uses
+audited physical-residual versus structural-output-bound classes. Each cohort
+includes all its queries, regardless of difficulty; property branches are never
+counted separately. Unlike studies are not pooled.
+
+`statistics.md` is generated data and denominator guidance, not analysis. The
+JSON additionally retains exact population IDs, individual timing fields, and
+experiment hardware/resource/revision context alongside input hashes. The MVP
+archive remains the separate population for subsequent analysis relating to #2.
