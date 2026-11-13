@@ -1,0 +1,24 @@
+{
+  "benchmark": {
+    "category": "2026_dist_shift_2023",
+    "network_field": "mnist_concat",
+    "property_field": "index1332_delta0.13",
+    "version": "1.0"
+  },
+  "checker_version": "vnncomp2026-cex-1",
+  "classification": "correct",
+  "dependency_versions": {
+    "onnx": "1.21.0",
+    "onnxruntime": "1.26.0",
+    "python": "3.12.13"
+  },
+  "establishes_sat": true,
+  "provider": "CPUExecutionProvider",
+  "rationale": "Solver-provided output values ignored; ONNX CPU replay output satisfies the property with strict input bounds.\nChecking if spec was actually violated (input_tol=0.0, output_tol=0.0)\nCE input X was inside box #0; max input violation=0.0\nprop #0 violated:\n[-1.34888077]",
+  "result": "correct",
+  "results_row_identity": "d919910d2f68ffc7e15c7f7571c05b1274754e030d35ed45b77e670533df25c9",
+  "schema_version": 1,
+  "score_credit": true,
+  "witness_path": "../alpha_beta_crown/2026_dist_shift_2023/mnist_concat_index1332_delta0.13.counterexample.gz",
+  "witness_sha256": "6d225069b07dfa2d9da08d23914964740ff13e667093fe5c048e67228a72e2d9"
+}

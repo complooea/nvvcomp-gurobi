@@ -1,0 +1,24 @@
+{
+  "benchmark": {
+    "category": "2026_relusplitter_2026",
+    "network_field": "model_1_1~d1_eps_0.09_sample_7_label_7~pct0.2~cnt25~seed157191271",
+    "property_field": "d1_eps_0.09_sample_7_label_7",
+    "version": "1.0"
+  },
+  "checker_version": "vnncomp2026-cex-1",
+  "classification": "correct",
+  "dependency_versions": {
+    "onnx": "1.21.0",
+    "onnxruntime": "1.26.0",
+    "python": "3.12.13"
+  },
+  "establishes_sat": true,
+  "provider": "CPUExecutionProvider",
+  "rationale": "Solver-provided output values ignored; ONNX CPU replay output satisfies the property with strict input bounds.\nChecking if spec was actually violated (input_tol=0.0, output_tol=0.0)\nCE input X was inside box #0; max input violation=0.0\nprop #3 violated:\n[-0.64912128]",
+  "result": "correct",
+  "results_row_identity": "6e8e417e6916d4d45b60f0cde36c715bc13f23b751ebda1a3cbab02d57c77250",
+  "schema_version": 1,
+  "score_credit": true,
+  "witness_path": "../alpha_beta_crown/2026_relusplitter_2026/model_1_1~d1_eps_0.09_sample_7_label_7~pct0.2~cnt25~seed157191271_d1_eps_0.09_sample_7_label_7.counterexample.gz",
+  "witness_sha256": "6e231d2cdfc2d22519c557c1d5d79f8b45ac5a1b3f0a46564c34273b6a321217"
+}
