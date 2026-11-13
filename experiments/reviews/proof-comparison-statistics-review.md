@@ -1,4 +1,4 @@
-# Shared proof-comparison implementation review (#11)
+# Shared proof-comparison statistics implementation review (#11)
 
 Review model: **GPT-6 Astra, medium**, independently for Standards and Spec.
 Reviewed baseline: `1a41b27bd35fcd7f5e131a7ba9fa104faf8b3f97` (pre-implementation).

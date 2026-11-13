@@ -123,7 +123,7 @@ Behavior tests cross `compare`; a small CLI integration fixture tests loading,
 cache correspondence, hash validation, and deterministic output. Neither seam
 duplicates solver correctness, experiment persistence, or full-category execution.
 
-See the [authored comparison report](../experiments/sat-relu-v1-comparison/README.md)
+See the [comprehensive comparison report](../experiments/proof-comparison-analysis.md)
 for the actual observations and hardware/provenance limits.
 
 ## Expanded proof studies (#11)
@@ -162,7 +162,9 @@ JSON additionally retains exact population IDs, individual timing fields, and
 experiment hardware/resource/revision context alongside input hashes. The MVP
 archive remains the separate population for subsequent analysis relating to #2.
 
-See the [authored proof-comparison analysis](../experiments/proof-comparison-analysis.md)
-for interpretation of all three completed studies in relation to the MVP, exact
+See the [comprehensive comparison report](../experiments/proof-comparison-analysis.md)
+for interpretation of all four completed studies, exact
 evidence links, timing denominators and claim limitations. Regeneration does not
 overwrite this report; reconsider it if input fingerprints or definitions change.
+The [experiment index](../experiments/README.md) separates the research narrative,
+archived measurements/calculations and scoped review records.

@@ -1,7 +1,7 @@
 # ReLUSplitter published-ABC comparison inputs and statistics
 
 Issue #11, part of #7. This is generated comparison evidence, not interpretation.
-The shared [implementation review](../proof-comparison-review.md) records both axes and final checks.
+The shared [statistics implementation review](../reviews/proof-comparison-statistics-review.md) records both axes and final checks.
 The selected population is all **120** version-1.0 original manifest queries,
 180 seconds each. All 120 have unique pinned-source hash matches. The appended
 `test_nano` row remains in `unmatched_abc`, outside every selected denominator.
@@ -45,5 +45,5 @@ and audit are separate, and per-query preparation is zero. ABC preparation and
 run fields remain separate. No overhead subtraction, timeout imputation, combined
 prepare/run ratio, or matched-hardware claim is made. ABC execution hardware,
 resources and exact tool environment are unavailable in this folder. Do not pool
-this study with MNIST, ACOPF, or the [MVP](../sat-relu-v1-comparison/README.md);
-these separate archives supply inputs for subsequent analysis relating to #2.
+this study with MNIST, ACOPF, or the MVP. The [comprehensive report](../proof-comparison-analysis.md)
+interprets each population separately and connects the findings to #2.

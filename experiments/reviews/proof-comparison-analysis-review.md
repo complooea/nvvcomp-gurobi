@@ -6,7 +6,12 @@ Reviewed report commit: `4d37e7e`.
 Diff: `git diff d504ad1d1c4c8f9c47f51020d9d9c7f172e562b5...4d37e7e`.
 Review model: **GPT-6 Astra, medium**, separately for Standards and Spec.
 Spec: GitHub issue #12, with the scope and conventions of #7 and relation to #2.
-Report: [proof-comparison-analysis.md](proof-comparison-analysis.md).
+Report: [proof-comparison-analysis.md](../proof-comparison-analysis.md).
+
+Scope: the review below covers the original three-study report at `4d37e7e`,
+before consolidation with the MVP narrative. It is not a review of later report
+revisions. Historical MVP report checks/reviews are retained separately in
+[MVP comparison review](sat-relu-comparison-review.md).
 
 ## Validation
 

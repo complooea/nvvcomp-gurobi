@@ -1,6 +1,6 @@
 # IEEE-14 ACOPF published-ABC comparison inputs and statistics
 
-See the shared [implementation review](../proof-comparison-review.md) for both review axes and final checks.
+See the shared [statistics implementation review](../reviews/proof-comparison-statistics-review.md) for both review axes and final checks.
 
 Issue #11, part of #7. This archive contains comparison data, not interpretation.
 All **14** original version-1.0 queries for exactly `14_ieee_ml4acopf.onnx`,
@@ -46,6 +46,6 @@ and audit remain separate, per-query preparation is zero. ABC preparation and
 run times stay separate. No combined ratio, overhead subtraction, timeout
 imputation or matched-hardware claim is made; ABC execution hardware/resources
 and tool environment are unavailable. ACOPF is not pooled with MNIST,
-ReLUSplitter, or the [MVP](../sat-relu-v1-comparison/README.md). These archives
-supply inputs for subsequent analysis relating to #2, not ABC bound-tightness
-claims or predictions about other solver populations.
+ReLUSplitter, or the MVP. The [comprehensive report](../proof-comparison-analysis.md)
+interprets each population separately and connects the findings to #2, without
+ABC bound-tightness claims or predictions about other solver populations.
