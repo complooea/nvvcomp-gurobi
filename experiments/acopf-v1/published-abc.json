@@ -1,0 +1,126 @@
+{
+  "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+  "revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+  "source_sha256": "0e2c54bb6e504ed965583e30b39dc442e675324033bc6445adb927791912d6c5",
+  "selection": "exact version-1.0 onnx/14_ieee_ml4acopf.onnx; all 14 properties",
+  "selected_raw_rows": [
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop9.vnnlib",
+      "20.923695592",
+      "unsat",
+      "7.856594821"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop7.vnnlib",
+      "19.410763163",
+      "unsat",
+      "7.786240561"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop2.vnnlib",
+      "19.384077451",
+      "unsat",
+      "7.856244640"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop8.vnnlib",
+      "19.399243285",
+      "unsat",
+      "7.789269688"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop4.vnnlib",
+      "19.408319736",
+      "unsat",
+      "7.712828834"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop6.vnnlib",
+      "19.404003594",
+      "unsat",
+      "7.792860494"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop12.vnnlib",
+      "19.396861641",
+      "unsat",
+      "7.821793356"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop13.vnnlib",
+      "19.421875595",
+      "unsat",
+      "7.783760477"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop11.vnnlib",
+      "19.374815062",
+      "unsat",
+      "7.784515062"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop1.vnnlib",
+      "19.386315647",
+      "unsat",
+      "7.808368088"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop3.vnnlib",
+      "19.401580151",
+      "unsat",
+      "8.029991616"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop14.vnnlib",
+      "19.401177175",
+      "unsat",
+      "7.800394806"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop10.vnnlib",
+      "19.418756841",
+      "unsat",
+      "7.799210904"
+    ],
+    [
+      "ml4acopf_2024",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/onnx/14_ieee_ml4acopf.onnx",
+      "vnncomp2026_benchmarks/benchmarks/ml4acopf_2024/1.0/vnnlib/14_ieee_prop5.vnnlib",
+      "19.367899858",
+      "unsat",
+      "7.785914656"
+    ]
+  ],
+  "execution_artifact_binding": false,
+  "limitations": [
+    "Source-name/version matching, not ABC execution-bound benchmark artifact hashes",
+    "Published outcomes are not certificates or correctness oracles",
+    "No matched-hardware or matched-accounting claim"
+  ]
+}

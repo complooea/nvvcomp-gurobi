@@ -115,6 +115,63 @@ def instance_factory(tmp_path: Path):
 
 
 @pytest.fixture
+def dag_instance_factory(tmp_path):
+    """Shared u=x+offset; y=sum(u² + u*reverse(u) + sin(u)+cos(u)).
+
+    At x=[0,0], offset=[0,1], y=2+sin(1)+cos(1)=3.3817733.
+    For x in [0,1]^2: u_0 in [0,1], u_1 in [1,2], so y > .5.
+    """
+
+    def make(assertions, *, fixed=False):
+        nodes = [
+            helper.make_node("Add", ["x", "offset"], ["u"]),
+            helper.make_node("Gather", ["u", "reverse"], ["v"], axis=1),
+            helper.make_node("Mul", ["u", "v"], ["product"]),
+            helper.make_node("Pow", ["u", "two"], ["square"]),
+            helper.make_node("Sin", ["u"], ["sine"]),
+            helper.make_node("Cos", ["u"], ["cosine"]),
+            helper.make_node("Add", ["product", "square"], ["a"]),
+            helper.make_node("Add", ["sine", "cosine"], ["b"]),
+            helper.make_node("Add", ["a", "b"], ["c"]),
+            helper.make_node("MatMul", ["c", "ones"], ["y"]),
+        ]
+        arrays = {
+            "offset": np.array([0, 1], np.float32),
+            "reverse": np.array([1, 0], np.int64),
+            "two": np.array(2, np.float32),
+            "ones": np.ones((2, 1), np.float32),
+        }
+        graph = helper.make_graph(
+            nodes,
+            "shared-dag",
+            [helper.make_tensor_value_info("x", TensorProto.FLOAT, [1, 2])],
+            [helper.make_tensor_value_info("y", TensorProto.FLOAT, [1, 1])],
+            [numpy_helper.from_array(a, n) for n, a in arrays.items()],
+        )
+        model = helper.make_model(
+            graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=8
+        )
+        network, prop = tmp_path / "dag.onnx", tmp_path / "dag.vnnlib"
+        onnx.save(model, network)
+        prop.write_text(
+            "\n".join(
+                [f"(declare-const X_{i} Real)" for i in range(2)]
+                + ["(declare-const Y_0 Real)"]
+                + [
+                    f"(assert ({op} X_{i} {value}))"
+                    for i in range(2)
+                    for op, value in ((">=", 0), ("<=", 0 if fixed else 1))
+                ]
+            )
+            + "\n"
+            + assertions
+        )
+        return Instance(network, prop)
+
+    return make
+
+
+@pytest.fixture
 def smooth_instance_factory(tmp_path):
     """C-order [0,1,2,3] gives z=[0,2], Y=[sigmoid(0)+2*sigmoid(2),-.5]."""
 

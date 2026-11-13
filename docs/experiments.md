@@ -38,6 +38,25 @@ download, use a new directory rather than trusting a partial cache.
 
 ## Accounting and timing
 
+### IEEE-14 ACOPF 1.0
+
+Use the same workflow with `--category ml4acopf_2024`, benchmark directory
+`.benchmarks/acopf-v1`, and a fresh experiment output directory. Acquisition
+selects exactly `./onnx/14_ieee_ml4acopf.onnx` and its 14 properties at the pinned
+revision, excluding linear/residual aliases and other models. It preserves the
+complete original category manifest as `source-instances.csv` and records the
+exact-model selection used to derive the 14-row execution `instances.csv`.
+The audit retains original artifact hashes, full tensor-DAG operations and scalar
+relation counts, and the distinction between properties 3/4 (structural output
+bounds) and the other 12 (physical residuals). All deadlines are 600 seconds;
+the worst-case query budget is 140 minutes plus separately measured overhead.
+
+Review the implementation and tiny solver-backed cases, then inspect all 14 audit
+entries before the full run. Do not substitute a property-2 encoder or discard
+unsupported/failed cases to reduce this study. Actual construction/solve failures
+and timeouts belong in the archive. Published ABC outcomes are comparison evidence,
+not independent certificates or correctness oracles.
+
 ### Sigmoid MNIST 1.0
 
 Use the same acquisition/audit/run/report commands with category
@@ -106,7 +125,8 @@ measures supervision and cleanup. No startup subtraction or kill-grace credit.
 - `experiment.json`: complete pre-solve audit, semantic exclusions, architecture
   dimensions, original/compressed and decompressed hashes, acquisition inventory,
   source and lockfile hashes, reference revisions, packages, hardware, resources.
-- `instances.csv`: exact original manifest bytes.
+- `instances.csv`: original manifest bytes, or the documented exact-model
+  selection for ACOPF (with its full source manifest in the acquisition inventory).
 - `records/<id>.json`: manifest-order identity, eligibility, artifact hashes,
   preparation/invocation times, structured verification result, raw status,
   witness, strict/tolerance-only/invalid classification, diagnostics, stage times,

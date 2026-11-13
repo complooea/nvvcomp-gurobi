@@ -128,6 +128,30 @@ def test_unsupported_network_operations_and_attributes(instance_factory, options
     assert result.solver_status is None
 
 
+@pytest.mark.parametrize("operation", ["Equal", "Where", "Pow", "Div"])
+def test_data_dependent_scaffolding_and_general_arithmetic_fail_closed(
+    dag_instance_factory, operation
+):
+    import numpy as np
+    import onnx
+    from onnx import helper, numpy_helper
+
+    instance = dag_instance_factory("(assert (>= Y_0 0))")
+    model = onnx.load(instance.onnx_path)
+    model.graph.initializer.append(
+        numpy_helper.from_array(np.array([True, False]), "condition")
+    )
+    operands = ["condition", "x", "offset"] if operation == "Where" else ["x", "x"]
+    # Even an unused unsupported node is checked: there is no output-cone pruning.
+    model.graph.node.insert(0, helper.make_node(operation, operands, ["unsupported"]))
+    onnx.save(model, instance.onnx_path)
+    result = verify(instance, ExecutionLimits(10))
+    assert result.outcome == "unknown"
+    assert result.reason == "unsupported", result.diagnostic
+    assert operation in result.diagnostic or "square exponents" in result.diagnostic
+    assert result.solver_status is None
+
+
 @pytest.mark.parametrize(
     "damage", ["opset", "shape_type", "shape_count", "dynamic_shape"]
 )
@@ -157,7 +181,8 @@ def test_unsupported_smooth_metadata_is_rejected(smooth_instance_factory, damage
 
 
 @pytest.mark.parametrize("output_kind", ["sigmoid", "reshape_only"])
-def test_trailing_reshape_requires_affine_output(smooth_instance_factory, output_kind):
+@pytest.mark.solver
+def test_tensor_dag_allows_non_affine_output(smooth_instance_factory, output_kind):
     import onnx
     from onnx import helper
 
@@ -170,11 +195,15 @@ def test_trailing_reshape_requires_affine_output(smooth_instance_factory, output
         del model.graph.node[2:]
         model.graph.node[1].output[0] = "y"
         model.graph.output[0].type.tensor_type.shape.dim[1].dim_value = 4
+        instance.vnnlib_path.write_text(
+            "(declare-const Y_2 Real)\n(declare-const Y_3 Real)\n"
+            + instance.vnnlib_path.read_text()
+        )
     onnx.save(model, instance.onnx_path)
     result = verify(instance, ExecutionLimits(10))
-    assert result.reason == "unsupported", result.diagnostic
-    assert "affine output" in result.diagnostic
-    assert result.solver_status is None
+    # DAG support intentionally removes the sequential affine-output restriction.
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
 
 
 @pytest.mark.parametrize("timeout", [0, -1, float("nan"), float("inf")])

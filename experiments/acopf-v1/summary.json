@@ -1,0 +1,78 @@
+{
+  "reporter_sha256": "2106178378fe1c0fe1e89fc2d808157a3e221036154ced3702c14590ef990140",
+  "listed": 14,
+  "eligible": 14,
+  "excluded": 0,
+  "exclusion_reasons": {},
+  "recorded": 14,
+  "missing": 0,
+  "missing_ids": [],
+  "corrupt": [],
+  "solved_reported": 13,
+  "outcomes": {
+    "unsat": 13,
+    "unknown": 1
+  },
+  "validation": {
+    "none": 13,
+    "invalid": 1
+  },
+  "unresolved_reasons": {
+    "validation_failed": 1
+  },
+  "property_classes": {
+    "physical_residual": {
+      "listed": 12,
+      "eligible": 12,
+      "unsat": 12
+    },
+    "structural_output_bound": {
+      "listed": 2,
+      "eligible": 2,
+      "unsat": 1,
+      "unknown": 1
+    }
+  },
+  "runtime_seconds": {
+    "all": {
+      "count": 14,
+      "sum": 2.5975029156543314,
+      "min": 0.14026904106140137,
+      "median": 0.15033941704314202,
+      "max": 0.3224193751811981
+    },
+    "solved": {
+      "count": 13,
+      "sum": 2.332472457550466,
+      "min": 0.14026904106140137,
+      "median": 0.15032975003123283,
+      "max": 0.3224193751811981
+    }
+  },
+  "invocation_seconds": {
+    "count": 14,
+    "sum": 2.598174456972629,
+    "min": 0.1403166251257062,
+    "median": 0.15038556256331503,
+    "max": 0.3224718749988824
+  },
+  "preparation_seconds": {
+    "count": 14,
+    "sum": 0.0,
+    "min": 0.0,
+    "median": 0.0,
+    "max": 0.0
+  },
+  "audit_seconds": 0.17087329202331603,
+  "scoring": {
+    "points": null,
+    "accepted_sat_subset_points": 0,
+    "accepted_sat_subset_instances": 0,
+    "reference_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+    "missing_inputs": [
+      "Artifact-matched other-tool outcomes and strict witness checks needed to assess conflicts and UNSAT correctness",
+      "Complete participating-tool context for category normalization; cross-tool caches do not bind benchmark artifact hashes"
+    ],
+    "policy": "Pinned get_score awards 10 per accepted solve; time bonus disabled. Strict witnesses can refute UNSAT; tolerance-only witnesses earn SAT credit but cannot refute UNSAT. No score inferred from our own verdicts or filenames."
+  }
+}
