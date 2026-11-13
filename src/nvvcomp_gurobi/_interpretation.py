@@ -1,12 +1,13 @@
-"""Private, solver-independent interpretation of the declared MVP grammar."""
+"""Private, solver-independent interpretation of the declared verification grammar."""
 
 import math
 import re
 from dataclasses import dataclass
 
-import numpy as np
 import onnx
-from onnx import TensorProto, numpy_helper
+from onnx import TensorProto
+
+from ._tensor_dag import Unsupported, lower
 
 _COMPARISON = re.compile(r"\( (<=|>=) ([^\s()]+) ([^\s()]+) \)")
 _ASSERTION = re.compile(rf"\( assert {_COMPARISON.pattern} \)")
@@ -14,17 +15,34 @@ _CONJUNCTION = re.compile(rf"\( and (?:{_COMPARISON.pattern} )+\)")
 _DISJUNCTION = re.compile(rf"\( assert \( or (?:{_CONJUNCTION.pattern} )+\) \)")
 
 
-class Unsupported(ValueError):
-    pass
-
-
 def uses_native_construction(model) -> bool:
-    return any(n.op_type in ("Sigmoid", "Reshape") for n in model.graph.node)
+    previous = model.graph.input[0].name
+    last = None
+    for node in model.graph.node:
+        if (
+            node.op_type not in ("Gemm", "Relu")
+            or not node.input
+            or node.input[0] != previous
+            or (node.op_type == "Relu" and last != "Gemm")
+        ):
+            return True
+        previous, last = node.output[0], node.op_type
+    return last != "Gemm" or previous != model.graph.output[0].name
 
 
 def network_formulation(model) -> str:
     if uses_native_construction(model):
-        return "native Gurobi affine/max/logistic (FuncNonlinear=1); C-order reshape; constant-objective feasibility"
+        operations = sorted({r.operation for r in lower(model).relations})
+        nonlinear = (
+            "; nonlinear functions FuncNonlinear=1"
+            if set(operations) & {"Sigmoid", "Sin", "Cos"}
+            else ""
+        )
+        return (
+            f"native Gurobi shared tensor DAG; relations: {', '.join(operations)}"
+            f"{nonlinear}; quadratic squares/products; radians; C-order static tensor views; "
+            "constant-only shape/Boolean folding; constant-objective feasibility"
+        )
     return "gurobi-machinelearning ONNX; constant-objective feasibility"
 
 
@@ -155,7 +173,7 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
         or len(graph.input) != 1
         or len(graph.output) != 1
     ):
-        raise Unsupported("Expected one dense sequential input/output graph")
+        raise Unsupported("Expected one dense input/output tensor DAG")
     if (
         not model.opset_import
         or any(
@@ -180,133 +198,9 @@ def interpret_network(content: bytes) -> tuple[onnx.ModelProto, int, int]:
         ):
             raise Unsupported("Expected static FLOAT32 tensors with batch size one")
         sizes.append(math.prod(shape))
-    constants = {}
-    for initializer in graph.initializer:
-        if (
-            initializer.data_location == TensorProto.EXTERNAL
-            or initializer.external_data
-        ):
-            raise Unsupported("External ONNX tensor data is not supported")
-        if initializer.name in constants or initializer.data_type not in (
-            TensorProto.FLOAT,
-            TensorProto.INT64,
-        ):
-            raise Unsupported("Expected unique FLOAT32 or INT64 initializers")
-        array = numpy_helper.to_array(initializer)
-        if not np.isfinite(array).all():
-            raise Unsupported("Non-finite network constants")
-        constants[initializer.name] = array
-    previous, width = graph.input[0].name, sizes[0]
-    shape = tuple(d.dim_value for d in graph.input[0].type.tensor_type.shape.dim)
-    seen = set(constants) | {previous}
-    last_op = None
-    last_computation = None
-    for node in graph.node:
-        if (
-            node.domain not in ("", "ai.onnx")
-            or len(node.output) != 1
-            or node.output[0] in seen
-        ):
-            raise Unsupported(
-                "Expected a standard sequential graph with unique tensors"
-            )
-        attributes = {
-            a.name: onnx.helper.get_attribute_value(a) for a in node.attribute
-        }
-        if len(attributes) != len(node.attribute):
-            raise Unsupported("Duplicate ONNX attributes")
-        if node.op_type == "Constant":
-            value = attributes.get("value")
-            if (
-                node.input
-                or set(attributes) != {"value"}
-                or not isinstance(value, onnx.TensorProto)
-                or value.data_type != TensorProto.INT64
-                or value.external_data
-                or value.data_location == TensorProto.EXTERNAL
-            ):
-                raise Unsupported(
-                    "Constant supports inline INT64 reshape metadata only"
-                )
-            constants[node.output[0]] = numpy_helper.to_array(value)
-            seen.add(node.output[0])
-            continue
-        if not node.input or node.input[0] != previous:
-            raise Unsupported("Non-sequential or disconnected ONNX graph")
-        if node.op_type == "Gemm":
-            if (
-                set(attributes) - {"alpha", "beta", "transA", "transB"}
-                or attributes.get("alpha", 1) != 1
-                or attributes.get("beta", 1) != 1
-                or attributes.get("transA", 0) != 0
-                or attributes.get("transB", 0) not in (0, 1)
-            ):
-                raise Unsupported(
-                    "Gemm requires alpha=beta=1, transA=0 and transB in {0,1}"
-                )
-            if len(node.input) != 3 or any(
-                name not in constants for name in node.input[1:]
-            ):
-                raise Unsupported("Gemm requires initializer weights and bias")
-            weights, bias = (constants[name] for name in node.input[1:])
-            if (
-                shape != (1, width)
-                or weights.dtype != np.float32
-                or bias.dtype != np.float32
-            ):
-                raise Unsupported("Gemm requires rank-two data and FLOAT32 parameters")
-            if attributes.get("transB", 0):
-                weights = weights.T
-            if weights.ndim != 2 or weights.shape[0] != width or weights.shape[1] < 1:
-                raise Unsupported(
-                    "Gemm weight dimensions do not match the sequential tensor"
-                )
-            width = weights.shape[1]
-            if bias.shape not in ((width,), (1, width)):
-                raise Unsupported("Gemm bias must have shape [width] or [1, width]")
-            shape = (1, width)
-        elif node.op_type in ("Relu", "Sigmoid"):
-            if last_op != "Gemm" or len(node.input) != 1 or attributes:
-                raise Unsupported(
-                    "Activation must immediately follow a Gemm without attributes"
-                )
-        elif node.op_type == "Reshape":
-            if len(node.input) != 2 or attributes or node.input[1] not in constants:
-                raise Unsupported(
-                    "Reshape requires constant integer shape without attributes"
-                )
-            target = constants[node.input[1]]
-            if target.dtype != np.int64 or target.ndim != 1 or not target.size:
-                raise Unsupported("Reshape shape must be a nonempty INT64 vector")
-            dims = [int(d) for d in target]
-            if dims.count(-1) > 1 or any(d < -1 for d in dims):
-                raise Unsupported("Invalid inferred reshape dimensions")
-            for i, dim in enumerate(dims):
-                if dim == 0:
-                    if i >= len(shape):
-                        raise Unsupported("Reshape zero dimension outside input rank")
-                    dims[i] = shape[i]
-            known = math.prod(d for d in dims if d != -1)
-            if -1 in dims:
-                if known == 0 or width % known:
-                    raise Unsupported("Reshape element count differs")
-                dims[dims.index(-1)] = width // known
-            if math.prod(dims) != width or any(d < 1 for d in dims):
-                raise Unsupported("Reshape element count differs")
-            shape = tuple(dims)
-        else:
-            raise Unsupported(f"Unsupported ONNX operation: {node.op_type}")
-        last_op = node.op_type
-        if node.op_type != "Reshape":
-            last_computation = node.op_type
-        previous = node.output[0]
-        seen.add(previous)
-    if (
-        last_computation != "Gemm"
-        or previous != graph.output[0].name
-        or shape
-        != tuple(d.dim_value for d in graph.output[0].type.tensor_type.shape.dim)
-    ):
-        raise Unsupported("Sequential network must end in its declared affine output")
     onnx.checker.check_model(model, full_check=True)
+    try:
+        lower(model)
+    except (ValueError, IndexError, TypeError, OverflowError) as exc:
+        raise Unsupported(str(exc)) from exc
     return model, sizes[0], sizes[1]

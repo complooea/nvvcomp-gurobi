@@ -61,16 +61,27 @@ The subset is deliberately smaller than general ONNX and VNN-LIB:
 - ONNX default-domain opsets 9, 11 and 13–21, including duplicate imports with
   identical versions; one static FLOAT32 input and output with batch size one,
   C-order variable indexing. Replay restores the original input shape.
-- A connected sequential chain of `Gemm` layers, optionally followed by one
-  `Relu` or `Sigmoid` each, ending in `Gemm` (optionally reshaped). Constant-shape
-  `Reshape` preserves C order; its INT64 vector may be an initializer or inline
-  `Constant`. Zero dimensions copy the corresponding input dimension; a single
-  `-1` infers a dimension with unchanged element count. Gemm data is `[1,width]`.
-  No branching, custom operators, local functions,
-  sparse/external tensors, or implicit topology approximations.
-- Gemm weights are finite FLOAT32 matrix initializers; biases are finite FLOAT32
-  initializers of shape `[width]` or `[1, width]`. `alpha=beta=1`, `transA=0`;
-  `transB=0` and `transB=1` are supported and checked. ONNX consistency is validated.
+- Static tensor DAGs with shared intermediates, `Gemm`, rank-two constant-weight
+  `MatMul` (including sparse-valued dense weights on either side), affine
+  `Add`/`Sub`/`Neg`, broadcast `Mul`, `Relu`, `Sigmoid`, constant exponent-two
+  `Pow`, `Sin` and `Cos`. Variable products and squares are native quadratic
+  equalities; trigonometry uses radians. The complete model is constructed for
+  every property, without required output-cone pruning or property-specific encoders.
+  General exponents, variable division, custom operators, local functions,
+  sparse/external tensors, and implicit topology approximations remain unsupported.
+- Static tensor views support `Slice` with constant INT64 metadata, `Gather`
+  with constant INT64 indices, `Concat`, `Transpose`, constant-shape `Expand`,
+  and C-order `Reshape`. Reshape's INT64 shape vector may be an initializer or
+  inline `Constant`; zero copies the corresponding input dimension and one `-1`
+  infers a dimension with unchanged element count. Tensor views retain shared
+  scalar references rather than reconstructing their producers. No affine-final
+  layer restriction applies to DAG outputs.
+- `Shape` on a static tensor, inline FLOAT32/INT64/BOOL `Constant`, and constant
+  `ConstantOfShape`/`Equal`/`Where` scaffolding are folded. Only semantically
+  constant Boolean expressions are supported, not data-dependent Equal/Where.
+- Gemm weights and bias must be finite FLOAT32 constants, with rank-two data
+  and weights and a bias broadcastable to the matrix output. `alpha=beta=1`,
+  `transA=0`; `transB=0` and `transB=1` are checked. ONNX consistency is validated.
   Opset 9 is required by the audited SAT ReLU category. Its Gemm-9 and Relu-6
   schemas have the same FLOAT32 affine/broadcast/ReLU semantics used here as
   Gemm-13 and Relu-13; later optional-input and added-dtype differences are outside
@@ -123,12 +134,17 @@ Example for a two-input/two-output model:
 
 The asserted formula is encoded directly as feasibility constraints with a
 constant zero objective, never negated or replaced by a classification objective.
-Gurobi-machinelearning supplies existing affine/ReLU constraints. Smooth/reshape
-graphs use native affine equalities, max/ReLU constraints and logistic relations
+Gurobi-machinelearning supplies existing sequential affine/ReLU constraints. Other
+supported graphs use the same scalar DAG interpretation, with native affine
+equalities, max/ReLU constraints, quadratic squares/products and logistic/sine/cosine relations
 with `FuncNonlinear=1` (global nonlinear solving, not a fixed piecewise
 approximation). Sigmoid outputs have the valid conservative bounds `[0,1]`;
-affine values are free and ReLU outputs are nonnegative. No physical or heuristic
-domain restrictions are added. Gurobi numerical defaults
+ReLU outputs are nonnegative, sine/cosine outputs lie in `[-1,1]`, and squares
+are nonnegative. Construction propagates conservative intervals from the original
+input box, rounding arithmetic interval endpoints outward; overflow/unbounded
+estimates fall back to unrestricted bounds. No physical or heuristic domain
+restrictions are added. Constant-only arithmetic is folded using NumPy with the
+original ONNX dtypes. Gurobi numerical defaults
 are unchanged; only logging, Threads, and remaining TimeLimit are set. Effective
 tolerances and relevant numerical controls are recorded. Default tolerances and
 FLOAT32 replay are not exact-real arithmetic; encoding feasibility alone is not SAT.

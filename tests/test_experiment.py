@@ -11,6 +11,34 @@ from nvvcomp_gurobi.experiment import (
 from nvvcomp_gurobi.verification import VerificationResult
 
 
+def test_acquire_pinned_acopf_exact_model_only(tmp_path, monkeypatch):
+    import io
+
+    selected = "".join(
+        f"./onnx/14_ieee_ml4acopf.onnx,./vnnlib/14_ieee_prop{i}.vnnlib,600\n"
+        for i in range(1, 15)
+    ).encode()
+    manifest = (
+        b"./onnx/14_ieee_ml4acopf-linear-residual.onnx,./vnnlib/alias.vnnlib,600\n"
+        + selected
+        + b"./onnx/118_ieee_ml4acopf.onnx,./vnnlib/other.vnnlib,600\n"
+    )
+    urls = []
+
+    def download(url, timeout):
+        urls.append(url)
+        return io.BytesIO(manifest if url.endswith("instances.csv") else b"artifact")
+
+    monkeypatch.setattr("urllib.request.urlopen", download)
+    path = acquire_category(tmp_path / "acopf", category="ml4acopf_2024")
+    assert path.read_bytes() == selected
+    assert (path.parent / "source-instances.csv").read_bytes() == manifest
+    assert len(urls) == 16
+    assert not any("linear-residual.onnx" in u or "118_ieee" in u for u in urls)
+    assert all("/303f2327a8e8411efc4457da03d2016ce42733cf/" in u for u in urls)
+    assert acquire_category(path.parent, category="ml4acopf_2024") == path
+
+
 def test_acquire_pinned_mnist_only(tmp_path, monkeypatch):
     import io
 
@@ -30,6 +58,37 @@ def test_acquire_pinned_mnist_only(tmp_path, monkeypatch):
     assert all("303f2327a8e8411efc4457da03d2016ce42733cf" in u for u in urls)
     assert all("/dist_shift_2023/1.0/" in u for u in urls)
     assert not any("alias" in u for u in urls)
+
+
+def test_acopf_audit_and_report_distinguish_property_classes(
+    tmp_path, dag_instance_factory
+):
+    instance = dag_instance_factory("(assert (<= Y_0 0))")
+    (tmp_path / "14_ieee_ml4acopf.onnx").write_bytes(instance.onnx_path.read_bytes())
+    for i in (3, 5):
+        (tmp_path / f"14_ieee_prop{i}.vnnlib").write_bytes(
+            instance.vnnlib_path.read_bytes()
+        )
+    manifest = tmp_path / "instances.csv"
+    manifest.write_text(
+        "".join(f"14_ieee_ml4acopf.onnx,14_ieee_prop{i}.vnnlib,600\n" for i in (3, 5))
+    )
+    output = tmp_path / "experiment"
+    audit = run_experiment(
+        manifest,
+        output,
+        verification=lambda *_: VerificationResult(
+            outcome="unsat", reason="infeasible"
+        ),
+    )
+    assert all(e["eligible"] for e in audit["instances"])
+    assert audit["instances"][0]["architecture"]["scalar_relations"]["Sin"] == 2
+    assert audit["instances"][0]["property_class"] == "structural_output_bound"
+    assert audit["instances"][1]["property_class"] == "physical_residual"
+    assert report_experiment(output)["property_classes"] == {
+        "structural_output_bound": {"listed": 1, "eligible": 1, "unsat": 1},
+        "physical_residual": {"listed": 1, "eligible": 1, "unsat": 1},
+    }
 
 
 def test_smooth_audit_retains_shape_and_actual_formulation(

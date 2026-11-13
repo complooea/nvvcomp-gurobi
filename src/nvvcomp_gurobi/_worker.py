@@ -195,6 +195,7 @@ def run(request: dict) -> VerificationResult:
                         "NumBinVars",
                         "NumConstrs",
                         "NumGenConstrs",
+                        "NumQConstrs",
                         "NumNZs",
                     )
                 }

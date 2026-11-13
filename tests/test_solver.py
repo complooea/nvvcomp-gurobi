@@ -5,6 +5,101 @@ from nvvcomp_gurobi.verification import ExecutionLimits, verify
 pytestmark = pytest.mark.solver
 
 
+def test_shared_dag_sat_with_original_onnx_replay(dag_instance_factory):
+    result = verify(
+        dag_instance_factory(
+            "(assert (>= Y_0 3.38))\n(assert (<= Y_0 3.39))", fixed=True
+        ),
+        ExecutionLimits(30),
+    )
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
+    assert result.witness is not None
+    assert result.witness["inputs"] == [0, 0]
+    assert result.witness["outputs"] == pytest.approx([3.3817733], abs=1e-6)
+
+
+def test_shared_dag_output_below_independent_range_is_unsat(dag_instance_factory):
+    # u_0 in [0,1], u_1 in [1,2] radians: squares sum >= 1,
+    # products and sines >= 0, cos(u_0) > .5 and cos(u_1) >= -1.
+    # Thus y > .5. The threshold lies inside the coarse propagated interval,
+    # so this also requires actual trigonometric constraints, not just [-1,1].
+    result = verify(dag_instance_factory("(assert (<= Y_0 0))"), ExecutionLimits(30))
+    assert result.outcome == "unsat", result.diagnostic
+    assert result.reason == "infeasible"
+    assert result.solver_status == 3
+
+
+def test_static_views_and_constant_scaffold_preserve_coordinates(tmp_path):
+    import numpy as np
+    import onnx
+    from onnx import TensorProto, helper, numpy_helper
+
+    from nvvcomp_gurobi.verification import Instance
+
+    arrays = {
+        "shape": np.array([2, 3], np.int64),
+        "start": np.array([2], np.int64),
+        "end": np.array([-(2**63)], np.int64),
+        "axis": np.array([0], np.int64),
+        "step": np.array([-1], np.int64),
+        "indices": np.array([1, 0], np.int64),
+        "weights": np.array([[1, 0, 2]], np.float32),
+        "size": np.array([2], np.int64),
+        "target": np.array([-1, 2], np.int64),
+        "negative": np.array(-1, np.int64),
+        "seven": np.array(7, np.float32),
+    }
+    nodes = [
+        helper.make_node("Reshape", ["x", "shape"], ["matrix"]),
+        helper.make_node("Transpose", ["matrix"], ["transposed"], perm=[1, 0]),
+        helper.make_node(
+            "Slice", ["transposed", "start", "end", "axis", "step"], ["reversed"]
+        ),
+        helper.make_node("Gather", ["reversed", "indices"], ["gathered"], axis=1),
+        helper.make_node("MatMul", ["weights", "gathered"], ["weighted"]),
+        helper.make_node(
+            "ConstantOfShape",
+            ["size"],
+            ["ones"],
+            value=numpy_helper.from_array(np.array([1], np.int64)),
+        ),
+        helper.make_node("Mul", ["ones", "negative"], ["minus_ones"]),
+        helper.make_node("Equal", ["target", "minus_ones"], ["mask"]),
+        helper.make_node("Where", ["mask", "ones", "target"], ["expanded_shape"]),
+        helper.make_node("Expand", ["seven", "expanded_shape"], ["sevens"]),
+        helper.make_node("Concat", ["weighted", "sevens"], ["y"], axis=1),
+    ]
+    graph = helper.make_graph(
+        nodes,
+        "views",
+        [helper.make_tensor_value_info("x", TensorProto.FLOAT, [1, 6])],
+        [helper.make_tensor_value_info("y", TensorProto.FLOAT, [1, 4])],
+        [numpy_helper.from_array(a, n) for n, a in arrays.items()],
+    )
+    model = helper.make_model(
+        graph, opset_imports=[helper.make_opsetid("", 14)], ir_version=8
+    )
+    network, prop = tmp_path / "views.onnx", tmp_path / "views.vnnlib"
+    onnx.save(model, network)
+    prop.write_text(
+        "\n".join(
+            [f"(declare-const X_{i} Real)" for i in range(6)]
+            + [f"(declare-const Y_{i} Real)" for i in range(4)]
+            + [f"(assert ({op} X_{i} {i}))" for i in range(6) for op in (">=", "<=")]
+            + [
+                f"(assert ({op} Y_{i} {v}))"
+                for i, v in enumerate([11, 2, 7, 7])
+                for op in (">=", "<=")
+            ]
+        )
+    )
+    result = verify(Instance(network, prop), ExecutionLimits(30))
+    assert result.outcome == "sat", result.diagnostic
+    assert result.validation == "strict"
+    assert result.witness == {"inputs": [0, 1, 2, 3, 4, 5], "outputs": [11, 2, 7, 7]}
+
+
 def test_smooth_reshape_sat_replays_original_tensor_order(smooth_instance_factory):
     instance = smooth_instance_factory(
         "(assert (>= Y_0 2.25))\n(assert (<= Y_0 2.27))\n"

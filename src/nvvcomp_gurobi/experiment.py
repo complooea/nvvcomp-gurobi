@@ -26,6 +26,7 @@ from ._interpretation import (
     interpret_property,
     network_formulation,
 )
+from ._tensor_dag import lower
 from ._worker import TOOLING
 from .verification import ExecutionLimits, Instance, VerificationResult, verify
 
@@ -46,6 +47,7 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
         "sat_relu": (100, 100),
         "relusplitter_2026": (120, 180),
         "dist_shift_2023": (72, 300),
+        "ml4acopf_2024": (14, 600),
     }
     if category not in selections:
         raise ValueError(f"Unsupported pinned category: {category}")
@@ -88,6 +90,25 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
 
     manifest = download("instances.csv")
     rows = list(csv.reader(manifest.decode().splitlines()))
+    if category == "ml4acopf_2024":
+        # Preserve the entire source manifest separately; the execution manifest
+        # contains only the exact selected model, not its linear aliases.
+        source = destination / "source-instances.csv"
+        source.write_bytes(manifest)
+        files["source-instances.csv"] = files.pop("instances.csv")
+        rows = [r for r in rows if r and r[0] == "./onnx/14_ieee_ml4acopf.onnx"]
+        if {r[1] for r in rows if len(r) == 3} != {
+            f"./vnnlib/14_ieee_prop{i}.vnnlib" for i in range(1, 15)
+        }:
+            raise ValueError("Pinned ACOPF selection requires exactly properties 1–14")
+        manifest = "".join(",".join(r) + "\n" for r in rows).encode()
+        (destination / "instances.csv").write_bytes(manifest)
+        files["instances.csv"] = {
+            "derived_from": "source-instances.csv",
+            "selection": "exact ./onnx/14_ieee_ml4acopf.onnx",
+            "sha256": hashlib.sha256(manifest).hexdigest(),
+            "bytes": len(manifest),
+        }
     if len(rows) != expected_rows or any(
         len(row) != 3 or float(row[2]) != expected_budget for row in rows
     ):
@@ -193,11 +214,19 @@ def _audit(manifest: Path, threads: int) -> dict:
                 "eligible": True,
                 "exclusion_reason": None,
             }
+            if Path(network).name == "14_ieee_ml4acopf.onnx":
+                number = int(Path(prop).stem.removeprefix("14_ieee_prop"))
+                entry["property_class"] = (
+                    "structural_output_bound"
+                    if number in (3, 4)
+                    else "physical_residual"
+                )
             try:
                 model, inputs, outputs = interpret_network(content["onnx"])
                 property_ = interpret_property(
                     content["vnnlib"].decode(), inputs, outputs
                 )
+                dag = lower(model)
                 entry["architecture"] = {
                     "formulation": network_formulation(model),
                     "input_shape": [
@@ -211,6 +240,9 @@ def _audit(manifest: Path, threads: int) -> dict:
                     "inputs": inputs,
                     "outputs": outputs,
                     "operations": [node.op_type for node in model.graph.node],
+                    "scalar_relations": dict(
+                        Counter(r.operation for r in dag.relations)
+                    ),
                     "hidden_relu_layers": sum(
                         node.op_type == "Relu" for node in model.graph.node
                     ),
@@ -220,11 +252,7 @@ def _audit(manifest: Path, threads: int) -> dict:
                     .removesuffix(".gz")
                     .removesuffix(".onnx"),
                     "hidden_widths": [
-                        next(
-                            t.dims[-1]
-                            for t in model.graph.initializer
-                            if t.name == node.input[2]
-                        )
+                        dag.shapes[node.output[0]][-1]
                         for node in model.graph.node[:-1]
                         if node.op_type == "Gemm"
                     ],
@@ -408,7 +436,13 @@ def report_experiment(output: Path) -> dict:
     runtimes, solved_times, invocation_times, preparation_times = [], [], [], []
     missing, corrupt = [], []
     rows = []
+    property_classes = {}
     for entry in audit["instances"]:
+        group = None
+        if entry.get("property_class"):
+            group = property_classes.setdefault(entry["property_class"], Counter())
+            group["listed"] += 1
+            group["eligible"] += int(entry["eligible"])
         if not entry["eligible"]:
             exclusions[entry["exclusion_reason"]] += 1
             rows.append(
@@ -455,6 +489,8 @@ def report_experiment(output: Path) -> dict:
             rows.append(f"| {entry['id']} | corrupt | invalid saved record | — | — |")
             continue
         outcomes[result["outcome"]] += 1
+        if group is not None:
+            group[result["outcome"]] += 1
         validation[result["validation"] or "none"] += 1
         if record["invocation_seconds"] is not None:
             invocation_times.append(record["invocation_seconds"])
@@ -486,6 +522,9 @@ def report_experiment(output: Path) -> dict:
         "outcomes": dict(outcomes),
         "validation": dict(validation),
         "unresolved_reasons": dict(reasons),
+        "property_classes": {
+            name: dict(counts) for name, counts in property_classes.items()
+        },
         "runtime_seconds": {
             "all": _statistics(runtimes),
             "solved": _statistics(solved_times),
@@ -513,6 +552,7 @@ def report_experiment(output: Path) -> dict:
         f"Recorded eligible results: {summary['recorded']}; Missing records: {len(missing)}; corrupt records: {len(corrupt)}.",
         f"Solver-reported, accepted solves: {summary['solved_reported']}. Outcomes: {dict(outcomes)}.",
         f"Validation: {dict(validation)}. Unresolved reasons: {dict(reasons)}.",
+        f"Property classes (where selected): {summary['property_classes']}.",
         "",
         "## Interpretation",
         "",
@@ -530,7 +570,7 @@ def report_experiment(output: Path) -> dict:
         "",
         "## Architecture and numerical scope",
         "",
-        "Eligibility uses the verification contract's sequential FLOAT32 affine/ReLU/sigmoid/constant-reshape and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row's architecture descriptor records the actual formulation, tensor shapes, audited operations, hidden widths and ReLU depth, input/output dimensions, initializer count, and output comparison/alternative counts. Original-model groups are source-name groups, not evidence of functional equivalence. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
+        "Eligibility uses the verification contract's static FLOAT32 tensor-DAG and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row records the actual formulation, tensor shapes, operations, scalar relation counts, affine widths and ReLU node counts, input/output dimensions, initializer count, and output comparison/alternative counts. ReLU node counts describe hidden-layer depth only for sequential networks. Original-model groups are source-name groups, not evidence of functional equivalence. ACOPF properties 3/4 describe structural output bounds; the other 12 describe physical residuals. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
         "Gurobi numerical defaults are unchanged; effective settings, package versions, witnesses, and validation diagnostics are retained in individual records. These are floating-point results, not exact-arithmetic certification.",
         "",
         "## Competition scoring",
@@ -565,7 +605,7 @@ def main():
     acquire.add_argument("destination", type=Path)
     acquire.add_argument(
         "--category",
-        choices=["sat_relu", "relusplitter_2026", "dist_shift_2023"],
+        choices=["sat_relu", "relusplitter_2026", "dist_shift_2023", "ml4acopf_2024"],
         default="sat_relu",
     )
     for operation in ("audit", "run"):
