@@ -1,6 +1,6 @@
 # Sigmoid MNIST published-ABC comparison inputs and statistics
 
-See the shared [implementation review](../proof-comparison-review.md) for both review axes and final checks.
+See the shared [statistics implementation review](../reviews/proof-comparison-statistics-review.md) for both review axes and final checks.
 
 Issue #11, part of #7. This is comparison evidence, not interpretation. All **72**
 version-1.0 `dist_shift_2023` / `mnist_concat` manifest queries, 300 seconds each,
@@ -46,5 +46,5 @@ fields are separate: no automatic combined ratios, overhead subtraction, or
 timeout imputation. Ratios use only common-UNSAT runs with known times and a
 positive Gurobi denominator, not matched hardware. ABC execution resources and
 tool environment are absent. This population stays separate from ReLUSplitter,
-ACOPF and the [MVP](../sat-relu-v1-comparison/README.md), supplying inputs rather
-than a pooled claim for the subsequent analysis relating to #2.
+ACOPF and the MVP. The [comprehensive report](../proof-comparison-analysis.md)
+interprets each population separately and connects the findings to #2.
