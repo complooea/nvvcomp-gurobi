@@ -1,11 +1,13 @@
-# Gurobi versus published ABC: four-study comparison
+# Gurobi versus published ABC: four studies and larger-ACOPF follow-up
 
 Authored analysis for [#12](https://github.com/complooea/nvvcomp-gurobi/issues/12),
 part of [#7](https://github.com/complooea/nvvcomp-gurobi/issues/7), incorporating
 the MVP originating in [#2](https://github.com/complooea/nvvcomp-gurobi/issues/2)
 and its original [#5 comparison](https://github.com/complooea/nvvcomp-gurobi/issues/5).
-Updated: 2026-11-13 (MVP narrative consolidated; original analyses 2026-11-10/12).
-This report interprets completed experiments and #11's
+Updated: 2026-11-15 for [#22](https://github.com/complooea/nvvcomp-gurobi/issues/22),
+part of [#20](https://github.com/complooea/nvvcomp-gurobi/issues/20)
+(four-study consolidation 2026-11-13; original analyses 2026-11-10/12).
+This report interprets completed experiments and #11/#22's
 saved calculations; **neither verifier was rerun for this analysis**. No properties,
 models, deadlines or numerical settings were changed. Calculation code contains
 no new interpretation. Revisit this narrative if its input fingerprints or the
@@ -33,6 +35,12 @@ comparison definitions change.
 - **Relative to the MVP:** greater published ABC coverage persists, but the
   direction of common-proof runtime differences depends on the workload. There
   is no blanket winner, pooled speed ratio or arbitrary advantage threshold.
+- **Larger power-system graphs:** IEEE-118 physical-residual completion is 2/3
+  Gurobi versus 3/3 ABC; the two common proofs still favor Gurobi, but their
+  ABC/G sum ratio narrows to 1.773 from IEEE-14's 42.924. IEEE-300 has one common
+  residual proof, favoring ABC (ratio 0.4079), and a thermal timeout opposite
+  published cached-accepted SAT. This mixed progression is consistent with a scale
+  contribution, not persistent blanket Gurobi advantage or causal attribution.
 
 Every ABC comparison below is conditional on **source correspondence, not proven
 execution identity**, and uses unmatched execution environments. Numerical UNSAT
@@ -49,6 +57,8 @@ Manifest IDs identify original queries, not property disjunction branches.
 | `relusplitter_2026`, entire manifest | 120 / 180 s | [statistics](relusplitter-v1-comparison/statistics.md) | [table](relusplitter-v1-comparison/instances.md), [JSON](relusplitter-v1-comparison/evidence.json) | [audit](relusplitter-v1/experiment.json), [records](relusplitter-v1/records/) | [source](relusplitter-v1-comparison/published/source.json) |
 | `dist_shift_2023`, `mnist_concat` | 72 / 300 s | [statistics](mnist-sigmoid-v1-comparison/statistics.md) | [table](mnist-sigmoid-v1-comparison/instances.md), [JSON](mnist-sigmoid-v1-comparison/evidence.json) | [audit](mnist-sigmoid-v1/experiment.json), [records](mnist-sigmoid-v1/records/) | [source](mnist-sigmoid-v1-comparison/published/source.json) |
 | `ml4acopf_2024`, exactly `14_ieee_ml4acopf.onnx` | 14 / 600 s | [statistics](acopf-v1-comparison/statistics.md) | [table](acopf-v1-comparison/instances.md), [JSON](acopf-v1-comparison/evidence.json) | [audit](acopf-v1/experiment.json), [records](acopf-v1/records/) | [source](acopf-v1-comparison/published/source.json) |
+| `ml4acopf_2024`, exactly `118_ieee_ml4acopf.onnx` | 5 / 600 s | [statistics](acopf-118-v1-comparison/statistics.md) | [table](acopf-118-v1-comparison/instances.md), [JSON](acopf-118-v1-comparison/evidence.json) | [audit](acopf-118-v1/experiment.json), [records](acopf-118-v1/records/) | [source](acopf-118-v1-comparison/published/source.json) |
+| `ml4acopf_2024`, exactly `300_ieee_ml4acopf.onnx` | 4 / 600 s | [statistics](acopf-300-v1-comparison/statistics.md) | [table](acopf-300-v1-comparison/instances.md), [JSON](acopf-300-v1-comparison/evidence.json) | [audit](acopf-300-v1/experiment.json), [records](acopf-300-v1/records/) | [source](acopf-300-v1-comparison/published/source.json) |
 
 The MVP's 100 queries and the expansion's 120/72/14 queries each have eligible,
 non-corrupt Gurobi records and unique source-hash ABC matches; none were excluded
@@ -57,6 +67,11 @@ population. The MVP, ReLUSplitter and MNIST
 each retain an appended smoke row outside the population. ACOPF retains 56
 unselected rows (other models/aliases and a smoke row) outside its denominator.
 No version duplicates, alternative networks or additional families are pooled in.
+The follow-up likewise retains all five/four original larger-grid queries, with
+zero exclusions, missing or corrupt records and unique source matches. Its
+IEEE-118/300 inventories retain 65/66 unselected published rows respectively.
+The IEEE-14 14-query reference and all historical measurement/calculation bytes
+are preserved, not pooled or overwritten.
 
 ### Completion, including unresolved queries
 
@@ -66,6 +81,8 @@ No version duplicates, alternative networks or additional families are pooled in
 | ReLUSplitter | 1/120 | 96/120 | 2 / 24 | 117 / 0 | 117 timeouts |
 | Sigmoid MNIST | 42/72 | 64/72 | 6 / 8 | 24 / 0 | 24 timeouts |
 | IEEE-14 ACOPF | 13/14 | 14/14 | 0 / 0 | 1 / 0 | 1 rejected replay, not timeout |
+| IEEE-118 ACOPF | 3/5 | 5/5 | 0 / 0 | 2 / 0 | 1 timeout, 1 rejected replay |
+| IEEE-300 ACOPF | 1/4 | 3/4 | 0 / 1 | 3 / 0 | 3 timeouts |
 
 There are **zero accepted-answer disagreements** in each study, not independent
 confirmation of correctness. A timeout opposite ABC UNSAT is a coverage gap, not
@@ -90,10 +107,15 @@ records. Its proof-only timings below filter `instances` for mutual numerical UN
 | Shallow-ReLU MVP common UNSAT | 33 | 34.0201 | 210.2795 | 6.1810 | 5.504 |
 | ReLUSplitter common UNSAT | 1 | 22.284 | 6.526 | 0.2929 | 0.2929 |
 | MNIST common UNSAT | 42 | 5,259.061 | 255.022 | 0.04849 | 0.05247 |
-| ACOPF common UNSAT, all classes | 13 | 2.3325 | 101.3780 | 43.464 | 51.841 |
-| ACOPF physical-residual common UNSAT | 12 | 2.1821 | 93.6652 | 42.924 | 51.868 |
+| IEEE-14 ACOPF common UNSAT, all classes | 13 | 2.3325 | 101.3780 | 43.464 | 51.841 |
+| IEEE-14 ACOPF physical-residual common UNSAT | 12 | 2.1821 | 93.6652 | 42.924 | 51.868 |
+| IEEE-118 common UNSAT, all classes | 3 | 100.428847 | 25.494154 | 0.253853 | 1.382788 |
+| IEEE-118 physical-residual common UNSAT | 2 | 8.954166 | 15.875329 | 1.772954 | 1.925519 |
+| IEEE-118 structural-output-bound common UNSAT | 1 | 91.474681 | 9.618826 | 0.105153 | 0.105153 |
+| IEEE-300 physical-residual common UNSAT (also all classes) | 1 | 19.578616 | 7.985156 | 0.407851 | 0.407851 |
+| IEEE-300 structural-output-bound common UNSAT | 0 | unavailable | unavailable | unavailable | unavailable |
 
-Sources: expanded-study JSONs' `proof.paired_unsat`; the last row uses
+Sources: expanded-study JSONs' `proof.paired_unsat`; class-specific rows use
 `cohorts.property_class.physical_residual.paired_unsat`. Exact included IDs and
 unrounded numbers live there. Ratios above one mean lower observed Gurobi time;
 ratios below one mean lower observed ABC time. The median is of individual
@@ -315,7 +337,7 @@ The evidence therefore supports a numerical proof-completion/runtime comparison,
 not a claim that ABC's sigmoid bounds are tighter, or an explanation of why these
 queries differ. No such uncollected measurement or causal mechanism is inferred.
 
-## ACOPF: all 14 properties, two different classes
+## IEEE-14 ACOPF: all 14 properties, two different classes
 
 The [audit and formulation](acopf-v1/README.md#selection-and-graph-audit) represent
 the complete selected graph for every property, including property 2, with native
@@ -364,6 +386,104 @@ feasibility tolerance. That numerical context is **not a demonstrated cause** of
 the rejection. No retry or tolerance change repairs it in this report. ABC's
 UNSAT claim does not authorize replacing the unresolved local outcome.
 
+## Larger ACOPF: size progression
+
+The follow-up consumes the complete #21 archive, without new solver runs, tuning,
+changed properties or replacement of unresolved outcomes. Original selection was
+fixed before measurement: IEEE-118 properties **2, 4, 3, 5, 6**; IEEE-300
+**3, 105, 2, 4**, in manifest order. Model/property identities and original hashes
+are retained in the linked audits and source inventories.
+
+### Every larger-grid query
+
+| Model / local ID | Property / audited class | Gurobi outcome | G run s | Published ABC outcome | ABC run s | CSV row |
+| --- | --- | --- | ---: | --- | ---: | ---: |
+| IEEE-118 [0000](acopf-118-v1/records/0000.json) | 2 / thermal residual | unresolved: timeout | 600.014511 | UNSAT | 105.509718 | 15 |
+| IEEE-118 [0001](acopf-118-v1/records/0001.json) | 4 / structural voltage bound | numerical UNSAT | 91.474681 | UNSAT | 9.618826 | 16 |
+| IEEE-118 [0002](acopf-118-v1/records/0002.json) | 3 / structural generation bound | unresolved: invalid replay | 10.139917 | UNSAT | 23.460835 | 17 |
+| IEEE-118 [0003](acopf-118-v1/records/0003.json) | 5 / power-balance residual | numerical UNSAT | 5.735618 | UNSAT | 7.931145 | 18 |
+| IEEE-118 [0004](acopf-118-v1/records/0004.json) | 6 / power-balance residual | numerical UNSAT | 3.218548 | UNSAT | 7.944183 | 19 |
+| IEEE-300 [0000](acopf-300-v1/records/0000.json) | 3 / structural generation bound | unresolved: timeout | 600.022791 | UNSAT | 27.393859 | 66 |
+| IEEE-300 [0001](acopf-300-v1/records/0001.json) | 105 / power-balance residual | numerical UNSAT | 19.578616 | UNSAT | 7.985156 | 67 |
+| IEEE-300 [0002](acopf-300-v1/records/0002.json) | 2 / thermal residual | unresolved: timeout | 600.036884 | SAT, cached strict acceptance | 6.210085 | 68 |
+| IEEE-300 [0003](acopf-300-v1/records/0003.json) | 4 / structural voltage bound | unresolved: timeout | 600.017557 | UNSAT | 14.444493 | 69 |
+
+Sources: [IEEE-118 evidence](acopf-118-v1-comparison/evidence.json) and
+[IEEE-300 evidence](acopf-300-v1-comparison/evidence.json). Raw G/ABC cross-tabs
+are IEEE-118 `unknown/unsat=2`, `unsat/unsat=3`; IEEE-300
+`unknown/unsat=2`, `unknown/sat=1`, `unsat/unsat=1`. Zero accepted-answer
+disagreements; unresolved versus a published claim is not a disagreement or a
+correctness label. IEEE-118 property 3's status-2 candidate failed original
+FLOAT32 ONNX replay under strict and tolerated input bounds. It remains
+`unknown/validation_failed`, not SAT or UNSAT. Thresholds near `1e-6` and the
+unchanged feasibility tolerance supply numerical context, not a diagnosed cause.
+
+For selected IEEE-300 property 2, retained row/witness/benchmark/checker/provider
+identities correspond to a `correct` strict-acceptance cache. **No fresh replay**
+was performed for this comparison. Cached acceptance is conditional evidence;
+neither source correspondence nor cache correspondence binds the historical ABC
+execution to exact benchmark bytes.
+
+### Coverage and conditional runtime by class
+
+| Separate population | Selected | G / ABC UNSAT | G / ABC accepted SAT | G / ABC unresolved | Common-proof IDs |
+| --- | ---: | --- | --- | --- | --- |
+| IEEE-14 physical residual | 12 | 12 / 12 | 0 / 0 | 0 / 0 | 0000–0003, 0005–0009, 0011–0013 |
+| IEEE-14 structural output bound | 2 | 1 / 2 | 0 / 0 | 1 / 0 | 0004 |
+| IEEE-118 physical residual | 3 | 2 / 3 | 0 / 0 | 1 / 0 | 0003, 0004 |
+| IEEE-118 structural output bound | 2 | 1 / 2 | 0 / 0 | 1 / 0 | 0001 |
+| IEEE-300 physical residual | 2 | 1 / 1 | 0 / 1 | 1 / 0 | 0001 |
+| IEEE-300 structural output bound | 2 | 0 / 2 | 0 / 0 | 2 / 0 | none |
+
+IDs are local to each saved population; there is no shared denominator or pooled
+speed ratio. The larger classes are the audited five residual and four structural
+checks, not inferred from property-number aliases or the misleading property-4
+generation comment. Structural checks have physical meaning too; every property
+represents its entire graph.
+
+The user's physical-graph hypothesis predicts that a persistent Gurobi advantage
+would be consistent with physical-computation graphs being relatively unfavorable
+to ABC. **Partial persistence** is observed on both IEEE-118 common residual
+proofs (individual ratios 1.3828 and 2.4683), but the sum ratio narrows from
+IEEE-14's 42.924 to 1.773 and coverage falls to 2/3 versus ABC's 3/3.
+On IEEE-300 the single common residual proof reverses direction (0.4079), while
+the other residual query times out locally opposite cached-accepted SAT.
+This narrowing/reversal is **consistent with a scale contribution**, but the small,
+different common-proof populations and coverage loss leave the overall result
+mixed and exploratory, not a controlled scaling law.
+
+Structural results do not rescue a physical-residual trend: IEEE-118 voltage
+bounds favor ABC (0.1052), generation bounds remain invalid locally, and neither
+IEEE-300 structural query finishes locally. IEEE-118's all-class sum ratio
+(0.2539) favors ABC while its median individual ratio (1.3828) favors Gurobi,
+because the long voltage-bound proof dominates the sum. Neither statistic should
+replace the class-specific result or the unresolved-query denominator. An empty
+IEEE-300 structural common-proof population supplies no runtime comparison.
+
+### Scale descriptors and limitations
+
+| Model | Inputs / outputs | Initializer elements | Scalar ReLU / sigmoid / square / product / sin / cos | Measured pre-presolve variables |
+| --- | --- | ---: | --- | --- |
+| IEEE-14 | 22 / 186 | 4,150 | 96 / 24 / 134 / 60 / 20 / 20 | 1,255–1,311 |
+| IEEE-118 | 198 / 1,696 | 163,868 | 512 / 226 / 1,234 / 558 / 186 / 186 | 11,232–11,468 |
+| IEEE-300 | 402 / 3,804 | 680,014 | 1,024 / 438 / 2,766 / 1,233 / 411 / 411 | 24,027–24,627 |
+
+Descriptors and measured formulation sizes are distinct, not interchangeable
+difficulty metrics. The graph audits and experiment reports retain the additional
+constraint/nonzero counts. Model parameters, input boxes, property mix and
+thresholds, numerical conditioning and unmatched execution environments all
+prevent causal attribution to graph size or physical graph type. IEEE-14 overlaps
+some shallow-ReLU input/parameter/ReLU sizes but was never matched on full graph
+or encoding size. No graph-type ablation or raw ABC bound-tightness data exists.
+
+All-selected run sums G/ABC are IEEE-118 **710.583275/154.464708 s** and
+IEEE-300 **1,819.655848/56.033594 s**; separate preparation sums are
+**0/99.270815 s** and **0/80.269484 s**. These costs include local timeouts and
+invalid replay, not equal-coverage proof speed. Raw 600-second deadlines retain
+startup and all verification work, with actual timeout overshoots but no late
+solve credit, startup subtraction or timeout imputation. Acquisition and audit
+remain separate; no preparation-plus-run ratio is approved.
+
 ## Cross-study interpretation
 
 The [MVP evidence](sat-relu-v1-comparison/evidence.json) retains 100 separate queries,
@@ -381,6 +501,10 @@ ReLUSplitter and MNIST show greater published ABC proof coverage **and** lower
 ABC observed time on common proofs; ACOPF physical residuals show equal reported
 proof completion and lower Gurobi observed time. ACOPF's overall 13/14 versus
 14/14 coverage still includes a local validation failure, not a clean sweep.
+That ACOPF observation is specifically IEEE-14: the larger-grid follow-up has
+narrower IEEE-118 common-residual advantage and an IEEE-300 reversal, with
+unresolved queries at both sizes. It does not support extrapolating the small-grid
+result into a persistent physical-graph advantage.
 
 Different architectures, properties, dimensionality, deadlines, formulations and
 measured source revisions prevent pooling or treating this as a controlled
@@ -408,6 +532,8 @@ the MVP audit retains its own measured revision):
 | ReLUSplitter | `2ba2eb4242bd55cda799867d41e82a6a96b237d2` |
 | MNIST | `3633256b54f1f3daf8e9e4d970e41a216b6c4341` |
 | ACOPF | `54444759a50f54df94be2763689ffc51b351f0ba` |
+| IEEE-118 ACOPF | `9b954b35a438d9f549760db95fe6196fd42155ed` (properties 4/3/5/6); `f9dd28aa57279e435d07b8dc5e69bb2eb9b45c1c` (property 2) |
+| IEEE-300 ACOPF | `9b954b35a438d9f549760db95fe6196fd42155ed` |
 
 - **Identity:** source inventories verify original compressed benchmark Git blobs
   at the pinned revision and match decompressed ONNX/VNNLIB SHA256s with each
@@ -416,11 +542,13 @@ the MVP audit retains its own measured revision):
   zero have independent evidence tying the measured ABC execution to those bytes.
   SAT cache row/witness correspondence does not supply that missing binding or
   establish cache correctness. Comparison does not rerun the published checks.
-- **Hardware/resources:** all four Gurobi archives used Apple M4, 10 logical CPUs,
+- **Hardware/resources:** all four prior studies and both larger-grid archives used Apple M4, 10 logical CPUs,
   16 GiB RAM, macOS 26.6.2 arm64, Python 3.12.16, Gurobi 13.0.1 and
   gurobi-machinelearning 1.7.0; ONNX 1.21.0, ONNX Runtime 1.26.0, NumPy 2.2.6.
   Queries ran sequentially, Gurobi Threads=1, replay separately configured for
   12 intra/inter-op CPU threads, no memory cap or numerical/performance tuning.
+  One solver thread is a local study choice continued across sizes, not a
+  VNN-COMP requirement; the entire process is not single-threaded.
   ReLUSplitter's first query overlapped about 16 seconds of tiny-suite checking;
   [the archive](relusplitter-v1/README.md#reproduce) discloses it. The ABC inputs
   do not disclose execution CPU/GPU, thread/memory allocation, exclusive-node
@@ -432,7 +560,8 @@ the MVP audit retains its own measured revision):
   separately recorded; per-query preparation is a no-op, zero seconds. ABC's CSV
   supplies preparation and run fields, not comparable internal stage accounting.
   All-selected preparation sums G/ABC are 0/1,926.310 s (MVP), 0/2,390.793 s (ReLUSplitter),
-  0/1,385.976 s (MNIST), 0/273.099 s (ACOPF), from `runtime.*.preparation`.
+   0/1,385.976 s (MNIST), 0/273.099 s (IEEE-14), 0/99.271 s (IEEE-118),
+   0/80.269 s (IEEE-300), from `runtime.*.preparation`.
   These are **not added** to paired run ratios. No comparable prepare-plus-run
   opt-in exists here. The MVP's historical combined ratios predate that opt-in;
   they are not carried forward as comparable speed evidence.
@@ -464,6 +593,9 @@ For the expansion, use the commands in the [ReLUSplitter](relusplitter-v1-compar
 [MNIST](mnist-sigmoid-v1-comparison/README.md#regenerate-without-solver-or-network)
 and [ACOPF](acopf-v1-comparison/README.md#regenerate-without-solver-or-network)
 comparison READMEs, or write to a fresh output directory to preserve the archives.
+The follow-up has separate [IEEE-118](acopf-118-v1-comparison/README.md#regenerate-without-solver-or-network)
+and [IEEE-300](acopf-300-v1-comparison/README.md#regenerate-without-solver-or-network)
+commands, with solver-free experiment-report regeneration documented alongside.
 Inputs are `experiment.json`, `records/*.json` and each retained `published/`
 inventory/CSV/check-cache/witness snapshot. No benchmark download, solver license,
 network, ABC execution or new witness replay is needed to recalculate statistics.
@@ -478,17 +610,28 @@ The archived `evidence.json` fingerprints analyzed here are:
 | ReLUSplitter | `fc98c2215828159f32f14f02c9a8a8795d15cbc192a85ae5a0a77004278d8800` |
 | MNIST | `49a14f653ead958bfc6eeddb9630086fe14985365533a66e1c1b5344d3ff3fb6` |
 | ACOPF | `da345451ee8c930ccd2cf8e40f1a6c1566dabb200a89c26790fc0f4d193152e7` |
+| IEEE-118 ACOPF | `6ab9518af3ae72c44b9a59aab44d70fe01766d473df8b013b0673dc3bd89373e` |
+| IEEE-300 ACOPF | `a08ef70b90f9e406f98995cedb95cb9687b0ae6a96ec8fd291be1bb7b0371051` |
 
-Those three use calculation-source SHA256
+The historical ReLUSplitter, MNIST and IEEE-14 calculations use source SHA256
 `56fb07f6be040835f14cb331b6453977964f3f99651cc94dad0ddb8e70589abb`.
 The historical MVP JSON uses calculation-source SHA256
 `fb1d7bce1eb31ff73f590a93ef75d03ba9e94ba61c2dac60316ba5a34dfc14d4`;
 current regeneration intentionally differs in schema/provenance and removes
 unapproved combined ratios. Its retained inputs remain reproducible; do not
 overwrite the historical archive to obtain a purported byte-identical modern run.
+The two new larger-grid calculations use source SHA256
+`0d4cef2ca52ab6f6b5fc4441bf5b8dce021f3b097a2538ccf0a6d2abf8b868f3`.
+Their new network/class cohorts and unresolved-reason maps are not retrofitted
+into the older generated archives. Current regeneration of those older inputs
+therefore also changes schema/provenance; their saved numerical populations remain
+the historical reference, not a claim of byte-identical output under newer code.
 `provenance.experiment_sha256`, `published_source_sha256`, `record_sha256` and
 `published.files` retain the transitive input fingerprints. The review/check
 records are in [reviews/](reviews/): the [analysis and consolidation reviews](reviews/proof-comparison-analysis-review.md),
 [#11 statistics implementation review](reviews/proof-comparison-statistics-review.md)
 and [historical MVP review](reviews/sat-relu-comparison-review.md) identify their
 respective reviewed revisions, not blanket approval of subsequent edits.
+The [#22 review](reviews/larger-acopf-comparison-review.md) scopes the current
+larger-grid implementation, new evidence and narrative; it does not retroactively
+change the earlier reviews or historical calculation-source hashes.

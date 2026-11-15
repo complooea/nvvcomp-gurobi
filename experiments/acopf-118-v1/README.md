@@ -149,7 +149,9 @@ and repository lint/format/type checks passed. No tests ran concurrently with
 measurement. Final review and validation are recorded in the
 [revision-scoped review](../reviews/larger-acopf-experiment-review.md).
 Historical IEEE-14 and other archives are unchanged. Published ABC verdicts are
-not local correctness oracles; comparison belongs to the dependent ticket.
+not local correctness oracles. The subsequent [saved-result comparison](../acopf-118-v1-comparison/README.md)
+and [size-progression analysis](../proof-comparison-analysis.md#larger-acopf-size-progression)
+retain all outcomes without changing these measurements.
 
 ## Reproduction and handoff
 

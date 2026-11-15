@@ -141,7 +141,10 @@ Before measurement, 107 focused experiment/verifier/tiny real-Gurobi/runner test
 and lint/format/type checks passed. No tests ran concurrently with measurement.
 See the [revision-scoped review](../reviews/larger-acopf-experiment-review.md)
 for final checks and independent review. Historical archives are unchanged;
-published ABC verdicts are not local correctness oracles.
+published ABC verdicts are not local correctness oracles. See the subsequent
+[saved-result comparison](../acopf-300-v1-comparison/README.md) and
+[size-progression analysis](../proof-comparison-analysis.md#larger-acopf-size-progression);
+these consume, rather than change, the measurements.
 
 ## Reproduction and handoff
 

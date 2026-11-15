@@ -130,6 +130,13 @@ unavailable. Audit eligibility establishes supported semantics, not numerical
 correctness, matched hardware, a controlled scaling law or a causal graph-type
 effect. Cross-tool interpretation belongs in the comparison analysis.
 
+The completed archives now have separate solver-free
+[IEEE-118](../experiments/acopf-118-v1-comparison/README.md) and
+[IEEE-300](../experiments/acopf-300-v1-comparison/README.md) comparisons.
+[Comparison reproduction](comparisons.md#larger-acopf-follow-up-22) consumes saved
+measurements; it does not repeat this acquisition/audit/run workflow or either
+verifier. IEEE-14 stays a separate saved reference.
+
 ### IEEE-14 ACOPF 1.0
 
 Use the same workflow with `--category ml4acopf_2024`, benchmark directory

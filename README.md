@@ -39,11 +39,21 @@ See [experiment instructions](docs/experiments.md) for the pinned full-category
 audit, local execution, saved records, and solver-free reports.
 
 See the [comprehensive Gurobi–ABC comparison](experiments/proof-comparison-analysis.md)
-for the shallow-ReLU MVP, ReLUSplitter, internal-sigmoid MNIST and IEEE-14 ACOPF,
+for the shallow-ReLU MVP, ReLUSplitter, internal-sigmoid MNIST and IEEE-14/118/300 ACOPF,
 with separate proof coverage and common-proof timings for each workload.
 The [experiment index](experiments/README.md) links each study's reports and
 per-instance records, including unresolved outcomes, alongside comparison evidence
 and review records. See [comparison instructions](docs/comparisons.md) for reproduction.
+
+## Experimental resources
+
+All four prior studies—shallow-ReLU MVP, ReLUSplitter, sigmoid MNIST and IEEE-14
+ACOPF—used **one Gurobi solver thread (`Threads=1`)**, continued for IEEE-118/300.
+This is a local experimental choice, **not a VNN-COMP requirement**. Queries ran
+sequentially; witness replay separately uses **12 intra/inter-op CPU threads**, so
+the whole process is not single-threaded. Published ABC execution hardware,
+thread/GPU/memory resources and tool environment remain unknown. Observed runtime
+ratios are not matched-resource speedups.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for checks, testing, CI, and the solo
 development workflow, and [GLOSSARY.md](GLOSSARY.md) for domain terminology.

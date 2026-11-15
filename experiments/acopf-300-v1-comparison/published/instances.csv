@@ -1,0 +1,4 @@
+./onnx/300_ieee_ml4acopf.onnx,./vnnlib/300_ieee_prop3.vnnlib,600
+./onnx/300_ieee_ml4acopf.onnx,./vnnlib/300_ieee_prop105.vnnlib,600
+./onnx/300_ieee_ml4acopf.onnx,./vnnlib/300_ieee_prop2.vnnlib,600
+./onnx/300_ieee_ml4acopf.onnx,./vnnlib/300_ieee_prop4.vnnlib,600
