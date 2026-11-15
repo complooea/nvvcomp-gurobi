@@ -88,3 +88,27 @@ and regeneration results were supplied context, not independently rerun.
 
 **Summary:** Standards 0 findings; Spec 0 findings. Both reviews were read-only,
 without benchmark execution or fresh published witness replay.
+
+## Integrated narrative revision
+
+At the user's request, documentation commit **`48b9d9d`** integrates all three
+grid sizes into one ACOPF narrative rather than presenting IEEE-118/300 as an
+add-on to four earlier studies. The findings, index, reproduction guidance and
+report anchors are updated together. Model/class denominators, measurements,
+calculation bytes and claim limits are unchanged. PR #26 links the report using
+an absolute URL pinned to this commit, verified HTTP 200.
+
+Two fresh-context **GPT-6 Astra medium** reviewers examined
+`1d15bfe...48b9d9d` read-only:
+
+- **Standards:** 0 actionable breaches; no judgement-call smells warrant changes.
+  Durable navigation and historical/current calculation distinctions remain.
+- **Spec:** 0 findings. Integration is substantive, with one ACOPF section,
+  unified findings and class-specific progression while retaining separate
+  populations, unresolved outcomes, timing/provenance and causal limitations.
+
+Both reviewers accepted the supplied link/anchor and hook checks; neither ran
+tests or benchmarks. PR-body URL verification was performed separately, not
+inferred from the repository diff. This is a documentation-only revision:
+all affected local links/anchors and repository hooks passed; the earlier
+167-test result remains scoped to the unchanged implementation.
