@@ -11,7 +11,7 @@ Pinned benchmark revision `303f2327a8e8411efc4457da03d2016ce42733cf`,
 category `ml4acopf_2024`, version `1.0`, exact original model
 `300_ieee_ml4acopf.onnx`; properties **3, 105, 2, 4** in source order.
 The full source manifest and exact selection are retained here. All four
-original pairs passed the [pre-solve semantic audit](../acopf-larger-audit.md)
+original pairs passed the [pre-solve semantic audit](#graph-and-property-audit)
 before either population was executed. Variants and smoke rows are excluded
 from selection, not excluded because of outcomes. Compressed/decompressed hashes
 and acquisition URLs are retained; original gzip bytes live in ignored
@@ -19,8 +19,59 @@ and acquisition URLs are retained; original gzip bytes live in ignored
 
 The complete graph is represented for every query with existing ACOPF encoding
 semantics. Input/output shapes are `[1,402]` / `[1,3804]`; the graph has 168 tensor
-nodes, 680,014 stored initializer elements, and the scalar relations listed in
-the shared audit. These are not interchangeable size/difficulty metrics.
+nodes, 680,014 stored initializer elements, and the scalar relations listed
+below. These are not interchangeable size/difficulty metrics.
+
+## Graph and property audit
+
+All four original graph/property pairs are eligible under the existing
+interpreter; no unsupported semantics, interpreter expansion or approximation
+was needed. Both complete IEEE-118/300 populations were audited before execution.
+The [shared audit procedure](../../docs/experiments.md#acopf-semantic-audit-procedure)
+documents tensor attributes, finite input boxes, supported operator semantics,
+whole-graph lowering and the pinned original property generator.
+
+The opset-14 graph has one static FLOAT32 input/output tensor. Slice/Gather
+indices and shape scaffolding are constant; Equal/Where are not data-dependent
+branches. Every property represents the complete graph, with shared scalar
+relations, quadratic squares/products and global nonlinear Sigmoid/Sin/Cos
+relations (`FuncNonlinear=1`, angles in radians), not fixed piecewise
+approximations or property-dependent output-cone pruning.
+
+| Graph descriptor | Count |
+| --- | ---: |
+| Tensor nodes | 168 |
+| Stored initializer elements | 680,014 |
+| Scalar affine relations | 13,538 |
+| Scalar ReLUs | 1,024 |
+| Scalar sigmoids | 438 |
+| Scalar squares | 2,766 |
+| Scalar variable products | 1,233 |
+| Scalar sines | 411 |
+| Scalar cosines | 411 |
+
+These source-graph descriptors are distinct from measured pre-presolve
+variables and constraints, reported separately below and in each record.
+
+Classification follows original output definitions, not comments or published
+verdicts. This model has `G=69` generators, `N=300` buses and `E=411` branches.
+Generation occupies the first `2*G` outputs; voltage magnitude occupies the next
+`N`. Property 4 uses voltage `vmax/vmin ± 1e-6`, despite its generation-bounds
+comment. Property 3 uses active/reactive generation limits with `1e-6` offsets.
+Thermal and active-power residual blocks start at `outputs - 2*N - 2*E` and
+`outputs - 2*N` respectively.
+
+| Property | Class | Meaning | Asserted output indices (inclusive) | Comparisons |
+| --- | --- | --- | --- | ---: |
+| 3 | structural output bound | active/reactive generation bounds | 0–137 | 276 |
+| 105 | physical residual | active power balance residual | 3244 | 2 |
+| 2 | physical residual | thermal-limit residual | 2382 | 1 |
+| 4 | structural output bound | voltage magnitude bounds | 138–437 | 600 |
+
+All original scalar thresholds and finite input bounds are preserved, not
+regenerated from the generator or replaced with physical assumptions. Structural
+output bounds have physical meaning too; the classification does not distinguish
+physical versus nonphysical graphs or partial versus complete encodings.
 
 ## Outcomes and inventory
 

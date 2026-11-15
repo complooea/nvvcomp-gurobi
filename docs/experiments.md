@@ -83,6 +83,53 @@ See the separate [IEEE-118](../experiments/acopf-118-v1/README.md) and
 [IEEE-300](../experiments/acopf-300-v1/README.md) archives for audit and outcomes.
 Historical IEEE-14 measurements are not rerun or overwritten.
 
+#### ACOPF semantic audit procedure
+
+Before execution, use the existing `run_experiment(..., audit_only=True)` public
+interface (the `audit` CLI command). It reads every original graph/property pair
+through the same interpreter as verification. Check finite constants and finite
+input boxes, contiguous declarations, complete supported assertions, static
+tensor shapes and attributes through whole-graph lowering. Missing/corrupt
+inputs abort preflight for repair; genuine unsupported semantics are explicit
+blockers, not permission to reduce the selected population.
+
+The original IEEE-118/300 graphs use opset 14 and static FLOAT32 input/output
+tensors. Relevant attributes include Gemm `alpha/beta/transB`, Constant and
+ConstantOfShape tensor `value`, Concat/Gather `axis`, and Transpose `perm`.
+Slice indices/steps, Gather indices and Expand/shape scaffolding must be
+constant. Equal/Where are supported only on constant shape scaffolding, not
+data-dependent branches. Broadcasting, static views and sparse constant-weight
+MatMul follow the existing semantics; Pow uses supported squares and Sin/Cos
+use radians.
+
+Represent the complete graph for every query, including generation/voltage
+bound checks. Shared intermediates are represented once; zero coefficients,
+identity views and constant scaffolding are folded without property-dependent
+output-cone pruning. Quadratic equalities represent squares/products;
+Sigmoid/Sin/Cos use global nonlinear relations (`FuncNonlinear=1`), not fixed
+piecewise approximations. Intermediate bounds use the existing conservative
+interval policy, not additional physical assumptions. Data-dependent Boolean
+operations, variable division and general powers remain unsupported.
+
+Audit classifications against the
+[original property generator](https://github.com/AI4OPT/ml4acopf_benchmark/blob/cdbde645123927ec95a3c01b66ec934077725e19/generate_properties.py)
+at revision `cdbde645123927ec95a3c01b66ec934077725e19`, using original output
+definitions rather than comments or published verdicts. Preserve the original
+property bytes, scalar thresholds and input bounds; do not regenerate them.
+The separate archive READMEs retain model-specific descriptor counts, output
+indices and classifications: [IEEE-118](../experiments/acopf-118-v1/README.md#graph-and-property-audit)
+and [IEEE-300](../experiments/acopf-300-v1/README.md#graph-and-property-audit).
+Across these archives there are four structural-output-bound and five
+physical-residual checks.
+
+Keep initializer elements, tensor-node counts, scalar operation counts and
+measured formulation sizes distinct. Pre-presolve variables, binaries,
+linear/general/quadratic constraints and linear nonzeros are recorded in
+`result.provenance.formulation_size`; unavailable measurements remain
+unavailable. Audit eligibility establishes supported semantics, not numerical
+correctness, matched hardware, a controlled scaling law or a causal graph-type
+effect. Cross-tool interpretation belongs in the comparison analysis.
+
 ### IEEE-14 ACOPF 1.0
 
 Use the same workflow with `--category ml4acopf_2024`, benchmark directory
