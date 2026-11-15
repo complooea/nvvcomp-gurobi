@@ -10,7 +10,24 @@
       "completed_result_recovered": false,
       "timings_available": false,
       "cleanup": "Confirmed the supervisor PID 32877 was absent, sent SIGTERM to its orphan worker PID 32886, confirmed both were absent, and removed only the stale .running lock.",
-      "retention": "The original unknown/interrupted record was preserved unchanged. No retry, late-result credit, or replacement measurement. Resume executed only previously unattempted queries."
+      "retention": "At initial archive completion, the original unknown/interrupted record was preserved unchanged. Resume executed only previously unattempted queries. After an explicit user request, this record was moved byte-for-byte to history/before-recovery/records/0000.json and a separately measured recovery invocation was promoted to the active inventory.",
+      "partial_checkpoint": "history/property-2-recovery/interrupted-worker-checkpoint.json"
+    },
+    {
+      "id": "0000",
+      "property": "./vnnlib/118_ieee_prop2.vnnlib",
+      "event": "user_authorized_recovery_and_replacement",
+      "authorization": "User requested recovery, then explicitly requested replacing the interrupted record with the new invocation.",
+      "history_record": "history/before-recovery/records/0000.json",
+      "history_record_sha256": "2dc328481fe7ee148e5365d69552af89c28886a696681ac69d6388621b3a9186",
+      "recovery_audit": "history/property-2-recovery/experiment.json",
+      "recovery_record": "history/property-2-recovery/records/0000.json",
+      "active_record_sha256": "f3a1e6d946244ebab3f9c5e4607e9284b4a9b80b21638fa73610611848e9b995",
+      "verification_deadline_seconds": 600,
+      "solver_threads": 1,
+      "outcome": "unknown",
+      "reason": "timeout",
+      "policy": "Exactly one separately audited recovery invocation. Original artifact identities, architecture and maintained-source/lockfile hashes matched. No tuning, late-result credit or further retry. The active report counts this query once; historical interruption and recovery reports are not extra selected queries."
     }
   ]
 }

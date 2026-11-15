@@ -12,6 +12,9 @@ repos:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
+        # Preserve the recovered worker's exact bytes, including its absent final
+        # newline: recovery.json pins the original checkpoint SHA256.
+        exclude: ^experiments/acopf-118-v1/history/property-2-recovery/interrupted-worker-checkpoint\.json$
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.17.4
     hooks:

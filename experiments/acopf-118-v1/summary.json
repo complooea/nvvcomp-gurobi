@@ -18,7 +18,7 @@
     "invalid": 1
   },
   "unresolved_reasons": {
-    "interrupted": 1,
+    "timeout": 1,
     "validation_failed": 1
   },
   "property_classes": {
@@ -37,11 +37,11 @@
   },
   "runtime_seconds": {
     "all": {
-      "count": 4,
-      "sum": 110.5687641671393,
+      "count": 5,
+      "sum": 710.5832750003319,
       "min": 3.218548124888912,
-      "median": 7.93776764604263,
-      "max": 91.47468075016513
+      "median": 10.1399171249941,
+      "max": 600.0145108331926
     },
     "solved": {
       "count": 3,
@@ -52,11 +52,11 @@
     }
   },
   "invocation_seconds": {
-    "count": 4,
-    "sum": 110.56903250119649,
+    "count": 5,
+    "sum": 710.5837179182563,
     "min": 3.218603749992326,
-    "median": 7.937834375537932,
-    "max": 91.4747600001283
+    "median": 10.139981959015131,
+    "max": 600.0146854170598
   },
   "preparation_seconds": {
     "count": 5,

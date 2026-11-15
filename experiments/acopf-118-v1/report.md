@@ -3,7 +3,7 @@
 Listed: 5; eligible: 5; excluded: 0.
 Recorded eligible results: 5; Missing records: 0; corrupt records: 0.
 Solver-reported, accepted solves: 3. Outcomes: {'unknown': 2, 'unsat': 3}.
-Validation: {'none': 4, 'invalid': 1}. Unresolved reasons: {'interrupted': 1, 'validation_failed': 1}.
+Validation: {'none': 4, 'invalid': 1}. Unresolved reasons: {'timeout': 1, 'validation_failed': 1}.
 Property classes (where selected): {'physical_residual': {'listed': 3, 'eligible': 3, 'unknown': 1, 'unsat': 2}, 'structural_output_bound': {'listed': 2, 'eligible': 2, 'unsat': 1, 'unknown': 1}}.
 
 ## Interpretation
@@ -14,8 +14,8 @@ SAT is accepted only after pinned FLOAT32 ONNX replay. Strict and tolerance-only
 
 Whole-run time includes subprocess startup, reads/decompression, interpretation, encoding, solving, and validation. No startup overhead is subtracted; no kill-grace result gets solve credit. Invocation wall time additionally includes supervising/cleanup overhead. Preparation is a no-op (0 seconds); category eligibility audit is separately measured, not hidden preparation or cached solving analysis.
 
-Runtime seconds: `{'all': {'count': 4, 'sum': 110.5687641671393, 'min': 3.218548124888912, 'median': 7.93776764604263, 'max': 91.47468075016513}, 'solved': {'count': 3, 'sum': 100.42884704214521, 'min': 3.218548124888912, 'median': 5.735618167091161, 'max': 91.47468075016513}}`.
-Invocation seconds: `{'count': 4, 'sum': 110.56903250119649, 'min': 3.218603749992326, 'median': 7.937834375537932, 'max': 91.4747600001283}`.
+Runtime seconds: `{'all': {'count': 5, 'sum': 710.5832750003319, 'min': 3.218548124888912, 'median': 10.1399171249941, 'max': 600.0145108331926}, 'solved': {'count': 3, 'sum': 100.42884704214521, 'min': 3.218548124888912, 'median': 5.735618167091161, 'max': 91.47468075016513}}`.
+Invocation seconds: `{'count': 5, 'sum': 710.5837179182563, 'min': 3.218603749992326, 'median': 10.139981959015131, 'max': 600.0146854170598}`.
 Audit seconds: 0.656554.
 Resources: `{'platform': 'macOS-26.6.2-arm64-arm-64bit', 'machine': 'arm64', 'processor': 'arm', 'logical_cpus': 10, 'hw.memsize': '17179869184', 'hw.physicalcpu': '10', 'machdep.cpu.brand_string': 'Apple M4'}`; execution: `{'threads': 1, 'sequential': True, 'preparation_analysis': False}`.
 Pinned replay uses 12 intra/inter-op CPU threads separately from the Gurobi Threads limit. No memory cap, performance tuning, or numerical tolerance tuning is applied.
@@ -38,7 +38,7 @@ Manifest order identifies rows; original names and artifact hashes are in experi
 
 | ID | Outcome | Reason | Validation | Whole-run seconds |
 | --- | --- | --- | --- | --- |
-| 0000 | unknown | interrupted | — | unavailable |
+| 0000 | unknown | timeout | — | 600.0145108331926 |
 | 0001 | unsat | infeasible | — | 91.47468075016513 |
 | 0002 | unknown | validation_failed | invalid | 10.1399171249941 |
 | 0003 | unsat | infeasible | — | 5.735618167091161 |
