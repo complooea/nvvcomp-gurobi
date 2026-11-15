@@ -112,3 +112,18 @@ tests or benchmarks. PR-body URL verification was performed separately, not
 inferred from the repository diff. This is a documentation-only revision:
 all affected local links/anchors and repository hooks passed; the earlier
 167-test result remains scoped to the unchanged implementation.
+
+## Runtime-table clarity revision
+
+Documentation commit **`50f92e7`**, reviewed against `37a6e00`, separates the
+overall common-proof table from the two ACOPF class-specific tables. IEEE-300's
+empty structural population is explained in prose, with coverage retained.
+Partition counts explicitly prevent double-counting aggregate and class rows.
+All 11 displayed runtime rows reconcile with saved evidence to six decimals;
+report links/anchors and commit hooks pass. No code or saved evidence changed.
+
+Fresh-context **GPT-6 Astra medium** reviews: **Standards 0 actionable findings;
+Spec 0 findings**. The Standards reviewer found the repeated table headers
+appropriate to distinct comparison views and the empty-population distinction
+clear. Both reviews were read-only; numerical/link/hook checks were supplied
+context, not independently rerun.
