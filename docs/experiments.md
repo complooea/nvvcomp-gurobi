@@ -38,6 +38,98 @@ download, use a new directory rather than trusting a partial cache.
 
 ## Accounting and timing
 
+### Original IEEE-118/300 ACOPF 1.0
+
+Use the existing acquisition interface with `--category ml4acopf_2024` and
+`--acopf-model 118` or `--acopf-model 300` (the default remains 14).
+Each acquisition retains the full source manifest, but selects only the exact
+original model, never its linear/residual variants or smoke rows. Source order
+is preserved: IEEE-118 properties **2, 4, 3, 5, 6** and IEEE-300 properties
+**3, 105, 2, 4**. Missing, duplicate or wrong-budget selected rows abort acquisition.
+
+```sh
+uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-118-v1 --category ml4acopf_2024 --acopf-model 118
+uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-300-v1 --category ml4acopf_2024 --acopf-model 300
+uv run --locked python -m nvvcomp_gurobi.experiment audit .benchmarks/acopf-118-v1/instances.csv experiments/acopf-118-v1 --threads 1
+uv run --locked python -m nvvcomp_gurobi.experiment audit .benchmarks/acopf-300-v1/instances.csv experiments/acopf-300-v1 --threads 1
+# Inspect both complete audits before executing either population.
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/acopf-118-v1/instances.csv experiments/acopf-118-v1 --threads 1
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/acopf-300-v1/instances.csv experiments/acopf-300-v1 --threads 1
+uv run --locked python -m nvvcomp_gurobi.experiment report experiments/acopf-118-v1
+uv run --locked python -m nvvcomp_gurobi.experiment report experiments/acopf-300-v1
+```
+
+Use fresh acquisition/output paths for a new measurement; the paths above name
+the retained archives, not permission to replace them. Complete repository checks
+and tiny solver tests first. Run the populations sequentially, without concurrent
+tests or other experiment workloads. All nine queries retain **600-second
+whole-run deadlines: 90 minutes maximum run budget**, plus acquisition, audit,
+supervision and persistence overhead. Preparation performs no analysis and is
+separate; all per-query analysis remains inside the deadline. This is
+competition-aligned timing/accounting, not an official distributed-runner run.
+One Gurobi solver thread is a local study choice, not a competition rule.
+Original-ONNX replay retains 12 intra/inter-op CPU threads; the whole process
+is not single-threaded. Numerical defaults and replay tolerances are unchanged.
+
+All four structural checks concern generation (property 3) or voltage magnitude
+(property 4) bounds. The latter's upstream comment incorrectly says generation.
+The five physical-residual checks concern thermal limits (property 2 on each
+model) or power balance (IEEE-118 properties 5/6, IEEE-300 property 105).
+The complete graph is represented even for structural checks. Interpret these
+as distinct property populations, not partial versus complete graph encodings.
+Missing/corrupt artifacts require repair before execution; genuine unsupported
+semantics are blockers, not permission to shrink the nine-query population.
+See the separate [IEEE-118](../experiments/acopf-118-v1/README.md) and
+[IEEE-300](../experiments/acopf-300-v1/README.md) archives for audit and outcomes.
+Historical IEEE-14 measurements are not rerun or overwritten.
+
+#### ACOPF semantic audit procedure
+
+Before execution, use the existing `run_experiment(..., audit_only=True)` public
+interface (the `audit` CLI command). It reads every original graph/property pair
+through the same interpreter as verification. Check finite constants and finite
+input boxes, contiguous declarations, complete supported assertions, static
+tensor shapes and attributes through whole-graph lowering. Missing/corrupt
+inputs abort preflight for repair; genuine unsupported semantics are explicit
+blockers, not permission to reduce the selected population.
+
+The original IEEE-118/300 graphs use opset 14 and static FLOAT32 input/output
+tensors. Relevant attributes include Gemm `alpha/beta/transB`, Constant and
+ConstantOfShape tensor `value`, Concat/Gather `axis`, and Transpose `perm`.
+Slice indices/steps, Gather indices and Expand/shape scaffolding must be
+constant. Equal/Where are supported only on constant shape scaffolding, not
+data-dependent branches. Broadcasting, static views and sparse constant-weight
+MatMul follow the existing semantics; Pow uses supported squares and Sin/Cos
+use radians.
+
+Represent the complete graph for every query, including generation/voltage
+bound checks. Shared intermediates are represented once; zero coefficients,
+identity views and constant scaffolding are folded without property-dependent
+output-cone pruning. Quadratic equalities represent squares/products;
+Sigmoid/Sin/Cos use global nonlinear relations (`FuncNonlinear=1`), not fixed
+piecewise approximations. Intermediate bounds use the existing conservative
+interval policy, not additional physical assumptions. Data-dependent Boolean
+operations, variable division and general powers remain unsupported.
+
+Audit classifications against the
+[original property generator](https://github.com/AI4OPT/ml4acopf_benchmark/blob/cdbde645123927ec95a3c01b66ec934077725e19/generate_properties.py)
+at revision `cdbde645123927ec95a3c01b66ec934077725e19`, using original output
+definitions rather than comments or published verdicts. Preserve the original
+property bytes, scalar thresholds and input bounds; do not regenerate them.
+The separate archive READMEs retain model-specific descriptor counts, output
+indices and classifications: [IEEE-118](../experiments/acopf-118-v1/README.md#graph-and-property-audit)
+and [IEEE-300](../experiments/acopf-300-v1/README.md#graph-and-property-audit).
+Across these archives there are four structural-output-bound and five
+physical-residual checks.
+
+Keep initializer elements, tensor-node counts, scalar operation counts and
+measured formulation sizes distinct. Pre-presolve variables, binaries,
+linear/general/quadratic constraints and linear nonzeros are recorded in
+`result.provenance.formulation_size`; unavailable measurements remain
+unavailable. Audit eligibility establishes supported semantics, not numerical
+correctness, matched hardware, a controlled scaling law or a causal graph-type
+effect. Cross-tool interpretation belongs in the comparison analysis.
+
 ### IEEE-14 ACOPF 1.0
 
 Use the same workflow with `--category ml4acopf_2024`, benchmark directory

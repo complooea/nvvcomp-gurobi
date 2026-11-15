@@ -37,7 +37,9 @@ BENCHMARK_URL = (
 )
 
 
-def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
+def acquire_category(
+    destination: Path, *, category: str = "sat_relu", acopf_model: int = 14
+) -> Path:
     """Acquire the immutable category, retaining original compressed artifact bytes.
 
     Existing files must match the acquisition inventory; no silent overwrite.
@@ -51,7 +53,19 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
     }
     if category not in selections:
         raise ValueError(f"Unsupported pinned category: {category}")
+    acopf_properties = {
+        14: list(range(1, 15)),
+        118: [2, 4, 3, 5, 6],
+        300: [3, 105, 2, 4],
+    }
+    if acopf_model not in acopf_properties or (
+        category != "ml4acopf_2024" and acopf_model != 14
+    ):
+        raise ValueError("ACOPF model selection requires ml4acopf_2024 and 14/118/300")
     expected_rows, expected_budget = selections[category]
+    selection = f"exact ./onnx/{acopf_model}_ieee_ml4acopf.onnx"
+    if category == "ml4acopf_2024":
+        expected_rows = len(acopf_properties[acopf_model])
     benchmark_url = BENCHMARK_URL.replace("/sat_relu/", f"/{category}/")
     destination = destination.resolve()
     inventory = destination / "acquisition.json"
@@ -59,6 +73,10 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
         saved = json.loads(inventory.read_text())
         if saved["benchmark_url"] != benchmark_url:
             raise ValueError("Acquisition source differs")
+        if category == "ml4acopf_2024" and (
+            saved["files"]["instances.csv"]["selection"] != selection
+        ):
+            raise ValueError("Acquisition selection differs")
         for name, identity in saved["files"].items():
             if (
                 hashlib.sha256((destination / name).read_bytes()).hexdigest()
@@ -96,16 +114,21 @@ def acquire_category(destination: Path, *, category: str = "sat_relu") -> Path:
         source = destination / "source-instances.csv"
         source.write_bytes(manifest)
         files["source-instances.csv"] = files.pop("instances.csv")
-        rows = [r for r in rows if r and r[0] == "./onnx/14_ieee_ml4acopf.onnx"]
+        rows = [
+            r for r in rows if r and r[0] == f"./onnx/{acopf_model}_ieee_ml4acopf.onnx"
+        ]
         if {r[1] for r in rows if len(r) == 3} != {
-            f"./vnnlib/14_ieee_prop{i}.vnnlib" for i in range(1, 15)
+            f"./vnnlib/{acopf_model}_ieee_prop{i}.vnnlib"
+            for i in acopf_properties[acopf_model]
         }:
-            raise ValueError("Pinned ACOPF selection requires exactly properties 1–14")
+            raise ValueError(
+                "Pinned ACOPF selection requires exactly original properties"
+            )
         manifest = "".join(",".join(r) + "\n" for r in rows).encode()
         (destination / "instances.csv").write_bytes(manifest)
         files["instances.csv"] = {
             "derived_from": "source-instances.csv",
-            "selection": "exact ./onnx/14_ieee_ml4acopf.onnx",
+            "selection": selection,
             "sha256": hashlib.sha256(manifest).hexdigest(),
             "bytes": len(manifest),
         }
@@ -214,13 +237,27 @@ def _audit(manifest: Path, threads: int) -> dict:
                 "eligible": True,
                 "exclusion_reason": None,
             }
-            if Path(network).name == "14_ieee_ml4acopf.onnx":
-                number = int(Path(prop).stem.removeprefix("14_ieee_prop"))
+            grid = Path(network).name.split("_", 1)[0]
+            if (
+                grid in ("14", "118", "300")
+                and Path(network).name == f"{grid}_ieee_ml4acopf.onnx"
+                and Path(prop).stem.startswith(f"{grid}_ieee_prop")
+            ):
+                number = int(Path(prop).stem.removeprefix(f"{grid}_ieee_prop"))
                 entry["property_class"] = (
                     "structural_output_bound"
                     if number in (3, 4)
                     else "physical_residual"
                 )
+                if grid in ("118", "300"):
+                    entry["property_kind"] = {
+                        2: "thermal_limit_residual",
+                        3: "generation_bounds",
+                        4: "voltage_bounds",
+                        5: "power_balance_residual",
+                        6: "power_balance_residual",
+                        105: "power_balance_residual",
+                    }[number]
             try:
                 model, inputs, outputs = interpret_network(content["onnx"])
                 property_ = interpret_property(
@@ -570,7 +607,7 @@ def report_experiment(output: Path) -> dict:
         "",
         "## Architecture and numerical scope",
         "",
-        "Eligibility uses the verification contract's static FLOAT32 tensor-DAG and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row records the actual formulation, tensor shapes, operations, scalar relation counts, affine widths and ReLU node counts, input/output dimensions, initializer count, and output comparison/alternative counts. ReLU node counts describe hidden-layer depth only for sequential networks. Original-model groups are source-name groups, not evidence of functional equivalence. ACOPF properties 3/4 describe structural output bounds; the other 12 describe physical residuals. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
+        "Eligibility uses the verification contract's static FLOAT32 tensor-DAG and supported conjunctive/disjunctive property grammar, independently of solve outcomes. Each eligible row records the actual formulation, tensor shapes, operations, scalar relation counts, affine widths and ReLU node counts, input/output dimensions, initializer count, and output comparison/alternative counts. ReLU node counts describe hidden-layer depth only for sequential networks. Original-model groups are source-name groups, not evidence of functional equivalence. Original ACOPF properties 3/4 describe structural output bounds (generation/voltage respectively); other selected properties describe physical residuals. Every query represents the complete graph. Stored initializer elements, tensor nodes, scalar relations and measured optimization-encoding sizes are distinct metrics. Depth comparisons may also vary width and neuron stability; no causal depth effect is inferred.",
         "Gurobi numerical defaults are unchanged; effective settings, package versions, witnesses, and validation diagnostics are retained in individual records. These are floating-point results, not exact-arithmetic certification.",
         "",
         "## Competition scoring",
@@ -608,6 +645,7 @@ def main():
         choices=["sat_relu", "relusplitter_2026", "dist_shift_2023", "ml4acopf_2024"],
         default="sat_relu",
     )
+    acquire.add_argument("--acopf-model", type=int, choices=[14, 118, 300], default=14)
     for operation in ("audit", "run"):
         command = commands.add_parser(operation)
         command.add_argument("manifest", type=Path)
@@ -619,7 +657,11 @@ def main():
     report.add_argument("output", type=Path)
     args = parser.parse_args()
     if args.command == "acquire":
-        print(acquire_category(args.destination, category=args.category))
+        print(
+            acquire_category(
+                args.destination, category=args.category, acopf_model=args.acopf_model
+            )
+        )
     elif args.command == "report":
         print(json.dumps(report_experiment(args.output), indent=2))
     else:

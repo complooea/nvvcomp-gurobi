@@ -11,6 +11,8 @@ there is no pooled score or speed ratio.
 | ReLUSplitter | [experiment](relusplitter-v1/README.md) | [statistics and inputs](relusplitter-v1-comparison/README.md) |
 | Internal-sigmoid MNIST | [experiment](mnist-sigmoid-v1/README.md) | [statistics and inputs](mnist-sigmoid-v1-comparison/README.md) |
 | IEEE-14 ACOPF | [experiment](acopf-v1/README.md) | [statistics and inputs](acopf-v1-comparison/README.md) |
+| Original IEEE-118 ACOPF (#21) | [experiment](acopf-118-v1/README.md), [semantic audit](acopf-118-v1/README.md#graph-and-property-audit) | Comparison belongs to the dependent ticket |
+| Original IEEE-300 ACOPF (#21) | [experiment](acopf-300-v1/README.md), [semantic audit](acopf-300-v1/README.md#graph-and-property-audit) | Comparison belongs to the dependent ticket |
 
 The former MVP comparison narrative has been incorporated into the comprehensive
 report and deleted; its original text remains in Git history. Measurement records,
