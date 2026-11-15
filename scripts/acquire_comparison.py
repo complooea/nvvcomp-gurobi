@@ -28,7 +28,10 @@ def main():
         default="sat_relu",
         choices=["sat_relu", "relusplitter_2026", "dist_shift_2023", "ml4acopf_2024"],
     )
+    parser.add_argument("--acopf-model", type=int, choices=[14, 118, 300], default=14)
     args = parser.parse_args()
+    if args.category != "ml4acopf_2024" and args.acopf_model != 14:
+        parser.error("--acopf-model requires --category ml4acopf_2024")
     args.destination.mkdir(parents=True, exist_ok=False)
     category_path = f"alpha_beta_crown/2026_{args.category}/"
 
@@ -114,7 +117,11 @@ def main():
     source_rows = list(csv.reader(io.StringIO(data.decode())))
     selected_rows = list(csv.reader(io.StringIO(manifest.read_text())))
     expected_rows = (
-        [r for r in source_rows if r[0] == "./onnx/14_ieee_ml4acopf.onnx"]
+        [
+            r
+            for r in source_rows
+            if r[0] == f"./onnx/{args.acopf_model}_ieee_ml4acopf.onnx"
+        ]
         if args.category == "ml4acopf_2024"
         else source_rows
     )
@@ -139,7 +146,7 @@ def main():
         "benchmark_tree_sha256": hashlib.sha256(tree_bytes).hexdigest(),
         "manifest_sha256": hashlib.sha256(data).hexdigest(),
         "selected_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
-        "selection": "exact ./onnx/14_ieee_ml4acopf.onnx"
+        "selection": f"exact ./onnx/{args.acopf_model}_ieee_ml4acopf.onnx"
         if args.category == "ml4acopf_2024"
         else "entire version-1.0 manifest",
         "acquisition_source_sha256": hashlib.sha256(

@@ -1,0 +1,3173 @@
+{
+  "instances": [
+    {
+      "id": "0000",
+      "network": "./onnx/118_ieee_ml4acopf.onnx",
+      "property": "./vnnlib/118_ieee_prop2.vnnlib",
+      "architecture": {
+        "formulation": "native Gurobi shared tensor DAG; relations: Affine, Cos, Mul, Relu, Sigmoid, Sin, Square; nonlinear functions FuncNonlinear=1; quadratic squares/products; radians; C-order static tensor views; constant-only shape/Boolean folding; constant-objective feasibility",
+        "input_shape": [
+          1,
+          198
+        ],
+        "output_shape": [
+          1,
+          1696
+        ],
+        "inputs": 198,
+        "outputs": 1696,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Sigmoid",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Concat",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Gather",
+          "Constant",
+          "Gather",
+          "Sub",
+          "Gather",
+          "Gather",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Cos",
+          "Sin",
+          "Mul",
+          "Mul",
+          "Mul",
+          "Neg",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Pow",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Concat"
+        ],
+        "scalar_relations": {
+          "Affine": 6436,
+          "Relu": 512,
+          "Sigmoid": 226,
+          "Square": 1234,
+          "Cos": 186,
+          "Sin": 186,
+          "Mul": 558
+        },
+        "hidden_relu_layers": 3,
+        "original_model_group": "118_ieee_ml4acopf",
+        "hidden_widths": [
+          128,
+          128,
+          256,
+          344
+        ],
+        "initializer_elements": 163868,
+        "output_comparisons": 1,
+        "output_disjunction_alternatives": []
+      },
+      "exclusion_reason": null,
+      "property_class": "physical_residual",
+      "match": "source_verified_execution_unbound",
+      "comparison": "abc_only",
+      "gurobi": {
+        "outcome": "unknown",
+        "validation": null,
+        "reason": "timeout",
+        "run_seconds": 600.0145108331926,
+        "preparation_seconds": 0.0,
+        "solved": false
+      },
+      "abc": {
+        "row": 15,
+        "category": "ml4acopf_2024",
+        "version": "1.0",
+        "network": "onnx/118_ieee_ml4acopf.onnx",
+        "property": "vnnlib/118_ieee_prop2.vnnlib",
+        "outcome": "unsat",
+        "raw_outcome": "unsat",
+        "validation": null,
+        "check_status": "not_applicable",
+        "run_seconds": 105.509718394,
+        "preparation_seconds": 21.132091634,
+        "artifact_sha256": {
+          "onnx": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "vnnlib": "20a27fab8e8e5f110fcfcb8d8159a4876c3fdcdc39ff3769930c017ef72fd1c7"
+        },
+        "execution_artifact_binding": false,
+        "solved": true
+      },
+      "conflict": "none",
+      "conflict_execution_bound": false,
+      "abc_over_gurobi_run_ratio": null,
+      "abc_over_gurobi_prepare_plus_run_ratio": null,
+      "structural_width_group": null
+    },
+    {
+      "id": "0001",
+      "network": "./onnx/118_ieee_ml4acopf.onnx",
+      "property": "./vnnlib/118_ieee_prop4.vnnlib",
+      "architecture": {
+        "formulation": "native Gurobi shared tensor DAG; relations: Affine, Cos, Mul, Relu, Sigmoid, Sin, Square; nonlinear functions FuncNonlinear=1; quadratic squares/products; radians; C-order static tensor views; constant-only shape/Boolean folding; constant-objective feasibility",
+        "input_shape": [
+          1,
+          198
+        ],
+        "output_shape": [
+          1,
+          1696
+        ],
+        "inputs": 198,
+        "outputs": 1696,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Sigmoid",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Concat",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Gather",
+          "Constant",
+          "Gather",
+          "Sub",
+          "Gather",
+          "Gather",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Cos",
+          "Sin",
+          "Mul",
+          "Mul",
+          "Mul",
+          "Neg",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Pow",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Concat"
+        ],
+        "scalar_relations": {
+          "Affine": 6436,
+          "Relu": 512,
+          "Sigmoid": 226,
+          "Square": 1234,
+          "Cos": 186,
+          "Sin": 186,
+          "Mul": 558
+        },
+        "hidden_relu_layers": 3,
+        "original_model_group": "118_ieee_ml4acopf",
+        "hidden_widths": [
+          128,
+          128,
+          256,
+          344
+        ],
+        "initializer_elements": 163868,
+        "output_comparisons": 236,
+        "output_disjunction_alternatives": [
+          236
+        ]
+      },
+      "exclusion_reason": null,
+      "property_class": "structural_output_bound",
+      "match": "source_verified_execution_unbound",
+      "comparison": "both_same_answer",
+      "gurobi": {
+        "outcome": "unsat",
+        "validation": null,
+        "reason": "infeasible",
+        "run_seconds": 91.47468075016513,
+        "preparation_seconds": 0.0,
+        "solved": true
+      },
+      "abc": {
+        "row": 16,
+        "category": "ml4acopf_2024",
+        "version": "1.0",
+        "network": "onnx/118_ieee_ml4acopf.onnx",
+        "property": "vnnlib/118_ieee_prop4.vnnlib",
+        "outcome": "unsat",
+        "raw_outcome": "unsat",
+        "validation": null,
+        "check_status": "not_applicable",
+        "run_seconds": 9.618825788,
+        "preparation_seconds": 19.720577913,
+        "artifact_sha256": {
+          "onnx": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "vnnlib": "66f03e8e0c0dea3f1f7804e2792cb97aee8e6c1d67be25d8150b03fd4e2eea58"
+        },
+        "execution_artifact_binding": false,
+        "solved": true
+      },
+      "conflict": "none",
+      "conflict_execution_bound": false,
+      "abc_over_gurobi_run_ratio": 0.10515287628355714,
+      "abc_over_gurobi_prepare_plus_run_ratio": null,
+      "structural_width_group": null
+    },
+    {
+      "id": "0002",
+      "network": "./onnx/118_ieee_ml4acopf.onnx",
+      "property": "./vnnlib/118_ieee_prop3.vnnlib",
+      "architecture": {
+        "formulation": "native Gurobi shared tensor DAG; relations: Affine, Cos, Mul, Relu, Sigmoid, Sin, Square; nonlinear functions FuncNonlinear=1; quadratic squares/products; radians; C-order static tensor views; constant-only shape/Boolean folding; constant-objective feasibility",
+        "input_shape": [
+          1,
+          198
+        ],
+        "output_shape": [
+          1,
+          1696
+        ],
+        "inputs": 198,
+        "outputs": 1696,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Sigmoid",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Concat",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Gather",
+          "Constant",
+          "Gather",
+          "Sub",
+          "Gather",
+          "Gather",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Cos",
+          "Sin",
+          "Mul",
+          "Mul",
+          "Mul",
+          "Neg",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Pow",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Concat"
+        ],
+        "scalar_relations": {
+          "Affine": 6436,
+          "Relu": 512,
+          "Sigmoid": 226,
+          "Square": 1234,
+          "Cos": 186,
+          "Sin": 186,
+          "Mul": 558
+        },
+        "hidden_relu_layers": 3,
+        "original_model_group": "118_ieee_ml4acopf",
+        "hidden_widths": [
+          128,
+          128,
+          256,
+          344
+        ],
+        "initializer_elements": 163868,
+        "output_comparisons": 216,
+        "output_disjunction_alternatives": [
+          216
+        ]
+      },
+      "exclusion_reason": null,
+      "property_class": "structural_output_bound",
+      "match": "source_verified_execution_unbound",
+      "comparison": "abc_only",
+      "gurobi": {
+        "outcome": "unknown",
+        "validation": "invalid",
+        "reason": "validation_failed",
+        "run_seconds": 10.1399171249941,
+        "preparation_seconds": 0.0,
+        "solved": false
+      },
+      "abc": {
+        "row": 17,
+        "category": "ml4acopf_2024",
+        "version": "1.0",
+        "network": "onnx/118_ieee_ml4acopf.onnx",
+        "property": "vnnlib/118_ieee_prop3.vnnlib",
+        "outcome": "unsat",
+        "raw_outcome": "unsat",
+        "validation": null,
+        "check_status": "not_applicable",
+        "run_seconds": 23.460834998,
+        "preparation_seconds": 19.494861726,
+        "artifact_sha256": {
+          "onnx": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "vnnlib": "89cbe8898abbd6d628d48a929d24f7eb1b19c6307ae6046e139bc027898a1d1a"
+        },
+        "execution_artifact_binding": false,
+        "solved": true
+      },
+      "conflict": "none",
+      "conflict_execution_bound": false,
+      "abc_over_gurobi_run_ratio": null,
+      "abc_over_gurobi_prepare_plus_run_ratio": null,
+      "structural_width_group": null
+    },
+    {
+      "id": "0003",
+      "network": "./onnx/118_ieee_ml4acopf.onnx",
+      "property": "./vnnlib/118_ieee_prop5.vnnlib",
+      "architecture": {
+        "formulation": "native Gurobi shared tensor DAG; relations: Affine, Cos, Mul, Relu, Sigmoid, Sin, Square; nonlinear functions FuncNonlinear=1; quadratic squares/products; radians; C-order static tensor views; constant-only shape/Boolean folding; constant-objective feasibility",
+        "input_shape": [
+          1,
+          198
+        ],
+        "output_shape": [
+          1,
+          1696
+        ],
+        "inputs": 198,
+        "outputs": 1696,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Sigmoid",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Concat",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Gather",
+          "Constant",
+          "Gather",
+          "Sub",
+          "Gather",
+          "Gather",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Cos",
+          "Sin",
+          "Mul",
+          "Mul",
+          "Mul",
+          "Neg",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Pow",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Concat"
+        ],
+        "scalar_relations": {
+          "Affine": 6436,
+          "Relu": 512,
+          "Sigmoid": 226,
+          "Square": 1234,
+          "Cos": 186,
+          "Sin": 186,
+          "Mul": 558
+        },
+        "hidden_relu_layers": 3,
+        "original_model_group": "118_ieee_ml4acopf",
+        "hidden_widths": [
+          128,
+          128,
+          256,
+          344
+        ],
+        "initializer_elements": 163868,
+        "output_comparisons": 2,
+        "output_disjunction_alternatives": [
+          2
+        ]
+      },
+      "exclusion_reason": null,
+      "property_class": "physical_residual",
+      "match": "source_verified_execution_unbound",
+      "comparison": "both_same_answer",
+      "gurobi": {
+        "outcome": "unsat",
+        "validation": null,
+        "reason": "infeasible",
+        "run_seconds": 5.735618167091161,
+        "preparation_seconds": 0.0,
+        "solved": true
+      },
+      "abc": {
+        "row": 18,
+        "category": "ml4acopf_2024",
+        "version": "1.0",
+        "network": "onnx/118_ieee_ml4acopf.onnx",
+        "property": "vnnlib/118_ieee_prop5.vnnlib",
+        "outcome": "unsat",
+        "raw_outcome": "unsat",
+        "validation": null,
+        "check_status": "not_applicable",
+        "run_seconds": 7.931145067,
+        "preparation_seconds": 19.525217551,
+        "artifact_sha256": {
+          "onnx": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "vnnlib": "2604fa91d81cf8ec17d6e1d9209c23fd611e1b56ec110c4100a34faf284fa3e9"
+        },
+        "execution_artifact_binding": false,
+        "solved": true
+      },
+      "conflict": "none",
+      "conflict_execution_bound": false,
+      "abc_over_gurobi_run_ratio": 1.382788190557376,
+      "abc_over_gurobi_prepare_plus_run_ratio": null,
+      "structural_width_group": null
+    },
+    {
+      "id": "0004",
+      "network": "./onnx/118_ieee_ml4acopf.onnx",
+      "property": "./vnnlib/118_ieee_prop6.vnnlib",
+      "architecture": {
+        "formulation": "native Gurobi shared tensor DAG; relations: Affine, Cos, Mul, Relu, Sigmoid, Sin, Square; nonlinear functions FuncNonlinear=1; quadratic squares/products; radians; C-order static tensor views; constant-only shape/Boolean folding; constant-objective feasibility",
+        "input_shape": [
+          1,
+          198
+        ],
+        "output_shape": [
+          1,
+          1696
+        ],
+        "inputs": 198,
+        "outputs": 1696,
+        "operations": [
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Relu",
+          "Gemm",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Sigmoid",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Concat",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Slice",
+          "Constant",
+          "Gather",
+          "Constant",
+          "Gather",
+          "Sub",
+          "Gather",
+          "Gather",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Cos",
+          "Sin",
+          "Mul",
+          "Mul",
+          "Mul",
+          "Neg",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Constant",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Constant",
+          "ConstantOfShape",
+          "Constant",
+          "Mul",
+          "Equal",
+          "Where",
+          "Expand",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Pow",
+          "Add",
+          "Sub",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "Constant",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Transpose",
+          "MatMul",
+          "Transpose",
+          "Constant",
+          "Pow",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Constant",
+          "Mul",
+          "Add",
+          "Concat"
+        ],
+        "scalar_relations": {
+          "Affine": 6436,
+          "Relu": 512,
+          "Sigmoid": 226,
+          "Square": 1234,
+          "Cos": 186,
+          "Sin": 186,
+          "Mul": 558
+        },
+        "hidden_relu_layers": 3,
+        "original_model_group": "118_ieee_ml4acopf",
+        "hidden_widths": [
+          128,
+          128,
+          256,
+          344
+        ],
+        "initializer_elements": 163868,
+        "output_comparisons": 2,
+        "output_disjunction_alternatives": [
+          2
+        ]
+      },
+      "exclusion_reason": null,
+      "property_class": "physical_residual",
+      "match": "source_verified_execution_unbound",
+      "comparison": "both_same_answer",
+      "gurobi": {
+        "outcome": "unsat",
+        "validation": null,
+        "reason": "infeasible",
+        "run_seconds": 3.218548124888912,
+        "preparation_seconds": 0.0,
+        "solved": true
+      },
+      "abc": {
+        "row": 19,
+        "category": "ml4acopf_2024",
+        "version": "1.0",
+        "network": "onnx/118_ieee_ml4acopf.onnx",
+        "property": "vnnlib/118_ieee_prop6.vnnlib",
+        "outcome": "unsat",
+        "raw_outcome": "unsat",
+        "validation": null,
+        "check_status": "not_applicable",
+        "run_seconds": 7.944183497,
+        "preparation_seconds": 19.39806613,
+        "artifact_sha256": {
+          "onnx": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "vnnlib": "09ecf4257bda06fdbf43118763c34d7376c9eb728d7f46906945005d1c0bdceb"
+        },
+        "execution_artifact_binding": false,
+        "solved": true
+      },
+      "conflict": "none",
+      "conflict_execution_bound": false,
+      "abc_over_gurobi_run_ratio": 2.4682506486598497,
+      "abc_over_gurobi_prepare_plus_run_ratio": null,
+      "structural_width_group": null
+    }
+  ],
+  "proof": {
+    "selected_count": 5,
+    "ids": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004"
+    ],
+    "matched_ids": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004"
+    ],
+    "outcome_cross_tab": {
+      "unknown": {
+        "unsat": 2
+      },
+      "unsat": {
+        "unsat": 3
+      }
+    },
+    "numerical_unsat_ids": {
+      "gurobi": [
+        "0001",
+        "0003",
+        "0004"
+      ],
+      "abc": [
+        "0000",
+        "0001",
+        "0002",
+        "0003",
+        "0004"
+      ]
+    },
+    "accepted_sat_ids": {
+      "gurobi": [],
+      "abc": []
+    },
+    "unresolved_ids": {
+      "gurobi": [
+        "0000",
+        "0002"
+      ],
+      "abc": []
+    },
+    "timeout_ids": {
+      "gurobi": [
+        "0000"
+      ],
+      "abc": []
+    },
+    "disagreement_ids": [],
+    "paired_unsat": {
+      "ids": [
+        "0001",
+        "0003",
+        "0004"
+      ],
+      "gurobi_run_seconds": {
+        "count": 3,
+        "sum": 100.42884704214521,
+        "min": 3.218548124888912,
+        "median": 5.735618167091161,
+        "max": 91.47468075016513
+      },
+      "abc_run_seconds": {
+        "count": 3,
+        "sum": 25.494154352000002,
+        "min": 7.931145067,
+        "median": 7.944183497,
+        "max": 9.618825788
+      },
+      "abc_over_gurobi_ratio_of_sums": 0.25385290285470785,
+      "median_abc_over_gurobi_run_ratio": 1.382788190557376
+    },
+    "numerical_unsat_counts": {
+      "gurobi": 3,
+      "abc": 5
+    },
+    "unresolved_reasons": {
+      "gurobi": {
+        "timeout": [
+          "0000"
+        ],
+        "validation_failed": [
+          "0002"
+        ]
+      },
+      "abc": {}
+    }
+  },
+  "cohorts": {
+    "property_class": {
+      "physical_residual": {
+        "selected_count": 3,
+        "ids": [
+          "0000",
+          "0003",
+          "0004"
+        ],
+        "matched_ids": [
+          "0000",
+          "0003",
+          "0004"
+        ],
+        "outcome_cross_tab": {
+          "unknown": {
+            "unsat": 1
+          },
+          "unsat": {
+            "unsat": 2
+          }
+        },
+        "numerical_unsat_ids": {
+          "gurobi": [
+            "0003",
+            "0004"
+          ],
+          "abc": [
+            "0000",
+            "0003",
+            "0004"
+          ]
+        },
+        "accepted_sat_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "unresolved_ids": {
+          "gurobi": [
+            "0000"
+          ],
+          "abc": []
+        },
+        "timeout_ids": {
+          "gurobi": [
+            "0000"
+          ],
+          "abc": []
+        },
+        "disagreement_ids": [],
+        "paired_unsat": {
+          "ids": [
+            "0003",
+            "0004"
+          ],
+          "gurobi_run_seconds": {
+            "count": 2,
+            "sum": 8.954166291980073,
+            "min": 3.218548124888912,
+            "median": 4.477083145990036,
+            "max": 5.735618167091161
+          },
+          "abc_run_seconds": {
+            "count": 2,
+            "sum": 15.875328564,
+            "min": 7.931145067,
+            "median": 7.937664282,
+            "max": 7.944183497
+          },
+          "abc_over_gurobi_ratio_of_sums": 1.7729544042775893,
+          "median_abc_over_gurobi_run_ratio": 1.9255194196086127
+        },
+        "numerical_unsat_counts": {
+          "gurobi": 2,
+          "abc": 3
+        },
+        "unresolved_reasons": {
+          "gurobi": {
+            "timeout": [
+              "0000"
+            ]
+          },
+          "abc": {}
+        }
+      },
+      "structural_output_bound": {
+        "selected_count": 2,
+        "ids": [
+          "0001",
+          "0002"
+        ],
+        "matched_ids": [
+          "0001",
+          "0002"
+        ],
+        "outcome_cross_tab": {
+          "unsat": {
+            "unsat": 1
+          },
+          "unknown": {
+            "unsat": 1
+          }
+        },
+        "numerical_unsat_ids": {
+          "gurobi": [
+            "0001"
+          ],
+          "abc": [
+            "0001",
+            "0002"
+          ]
+        },
+        "accepted_sat_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "unresolved_ids": {
+          "gurobi": [
+            "0002"
+          ],
+          "abc": []
+        },
+        "timeout_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "disagreement_ids": [],
+        "paired_unsat": {
+          "ids": [
+            "0001"
+          ],
+          "gurobi_run_seconds": {
+            "count": 1,
+            "sum": 91.47468075016513,
+            "min": 91.47468075016513,
+            "median": 91.47468075016513,
+            "max": 91.47468075016513
+          },
+          "abc_run_seconds": {
+            "count": 1,
+            "sum": 9.618825788,
+            "min": 9.618825788,
+            "median": 9.618825788,
+            "max": 9.618825788
+          },
+          "abc_over_gurobi_ratio_of_sums": 0.10515287628355714,
+          "median_abc_over_gurobi_run_ratio": 0.10515287628355714
+        },
+        "numerical_unsat_counts": {
+          "gurobi": 1,
+          "abc": 2
+        },
+        "unresolved_reasons": {
+          "gurobi": {
+            "validation_failed": [
+              "0002"
+            ]
+          },
+          "abc": {}
+        }
+      }
+    },
+    "network": {
+      "onnx/118_ieee_ml4acopf.onnx": {
+        "selected_count": 5,
+        "ids": [
+          "0000",
+          "0001",
+          "0002",
+          "0003",
+          "0004"
+        ],
+        "matched_ids": [
+          "0000",
+          "0001",
+          "0002",
+          "0003",
+          "0004"
+        ],
+        "outcome_cross_tab": {
+          "unknown": {
+            "unsat": 2
+          },
+          "unsat": {
+            "unsat": 3
+          }
+        },
+        "numerical_unsat_ids": {
+          "gurobi": [
+            "0001",
+            "0003",
+            "0004"
+          ],
+          "abc": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ]
+        },
+        "accepted_sat_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "unresolved_ids": {
+          "gurobi": [
+            "0000",
+            "0002"
+          ],
+          "abc": []
+        },
+        "timeout_ids": {
+          "gurobi": [
+            "0000"
+          ],
+          "abc": []
+        },
+        "disagreement_ids": [],
+        "paired_unsat": {
+          "ids": [
+            "0001",
+            "0003",
+            "0004"
+          ],
+          "gurobi_run_seconds": {
+            "count": 3,
+            "sum": 100.42884704214521,
+            "min": 3.218548124888912,
+            "median": 5.735618167091161,
+            "max": 91.47468075016513
+          },
+          "abc_run_seconds": {
+            "count": 3,
+            "sum": 25.494154352000002,
+            "min": 7.931145067,
+            "median": 7.944183497,
+            "max": 9.618825788
+          },
+          "abc_over_gurobi_ratio_of_sums": 0.25385290285470785,
+          "median_abc_over_gurobi_run_ratio": 1.382788190557376
+        },
+        "numerical_unsat_counts": {
+          "gurobi": 3,
+          "abc": 5
+        },
+        "unresolved_reasons": {
+          "gurobi": {
+            "timeout": [
+              "0000"
+            ],
+            "validation_failed": [
+              "0002"
+            ]
+          },
+          "abc": {}
+        }
+      }
+    },
+    "network_property_class": {
+      "onnx/118_ieee_ml4acopf.onnx: physical_residual": {
+        "selected_count": 3,
+        "ids": [
+          "0000",
+          "0003",
+          "0004"
+        ],
+        "matched_ids": [
+          "0000",
+          "0003",
+          "0004"
+        ],
+        "outcome_cross_tab": {
+          "unknown": {
+            "unsat": 1
+          },
+          "unsat": {
+            "unsat": 2
+          }
+        },
+        "numerical_unsat_ids": {
+          "gurobi": [
+            "0003",
+            "0004"
+          ],
+          "abc": [
+            "0000",
+            "0003",
+            "0004"
+          ]
+        },
+        "accepted_sat_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "unresolved_ids": {
+          "gurobi": [
+            "0000"
+          ],
+          "abc": []
+        },
+        "timeout_ids": {
+          "gurobi": [
+            "0000"
+          ],
+          "abc": []
+        },
+        "disagreement_ids": [],
+        "paired_unsat": {
+          "ids": [
+            "0003",
+            "0004"
+          ],
+          "gurobi_run_seconds": {
+            "count": 2,
+            "sum": 8.954166291980073,
+            "min": 3.218548124888912,
+            "median": 4.477083145990036,
+            "max": 5.735618167091161
+          },
+          "abc_run_seconds": {
+            "count": 2,
+            "sum": 15.875328564,
+            "min": 7.931145067,
+            "median": 7.937664282,
+            "max": 7.944183497
+          },
+          "abc_over_gurobi_ratio_of_sums": 1.7729544042775893,
+          "median_abc_over_gurobi_run_ratio": 1.9255194196086127
+        },
+        "numerical_unsat_counts": {
+          "gurobi": 2,
+          "abc": 3
+        },
+        "unresolved_reasons": {
+          "gurobi": {
+            "timeout": [
+              "0000"
+            ]
+          },
+          "abc": {}
+        }
+      },
+      "onnx/118_ieee_ml4acopf.onnx: structural_output_bound": {
+        "selected_count": 2,
+        "ids": [
+          "0001",
+          "0002"
+        ],
+        "matched_ids": [
+          "0001",
+          "0002"
+        ],
+        "outcome_cross_tab": {
+          "unsat": {
+            "unsat": 1
+          },
+          "unknown": {
+            "unsat": 1
+          }
+        },
+        "numerical_unsat_ids": {
+          "gurobi": [
+            "0001"
+          ],
+          "abc": [
+            "0001",
+            "0002"
+          ]
+        },
+        "accepted_sat_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "unresolved_ids": {
+          "gurobi": [
+            "0002"
+          ],
+          "abc": []
+        },
+        "timeout_ids": {
+          "gurobi": [],
+          "abc": []
+        },
+        "disagreement_ids": [],
+        "paired_unsat": {
+          "ids": [
+            "0001"
+          ],
+          "gurobi_run_seconds": {
+            "count": 1,
+            "sum": 91.47468075016513,
+            "min": 91.47468075016513,
+            "median": 91.47468075016513,
+            "max": 91.47468075016513
+          },
+          "abc_run_seconds": {
+            "count": 1,
+            "sum": 9.618825788,
+            "min": 9.618825788,
+            "median": 9.618825788,
+            "max": 9.618825788
+          },
+          "abc_over_gurobi_ratio_of_sums": 0.10515287628355714,
+          "median_abc_over_gurobi_run_ratio": 0.10515287628355714
+        },
+        "numerical_unsat_counts": {
+          "gurobi": 1,
+          "abc": 2
+        },
+        "unresolved_reasons": {
+          "gurobi": {
+            "validation_failed": [
+              "0002"
+            ]
+          },
+          "abc": {}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "selected": "Every original audited query, including missing, corrupt, excluded and unresolved records. Property alternatives are not queries.",
+    "outcome_cross_tab": "Raw Gurobi claims versus uniquely source-hash-matched ABC claims; unavailable/corrupt/unverified ABC measurements use missing_or_corrupt.",
+    "numerical_unsat": "Recorded UNSAT with run time within the original deadline when known; no exact-real certificate. ABC additionally requires a unique source-hash match, not execution binding.",
+    "unresolved": "No deadline-qualified accepted solve, including missing/corrupt/identity-unverified measurements, errors, timeouts and rejected or unvalidated SAT.",
+    "paired_unsat": "Common deadline-qualified numerical UNSAT, both run times available, positive Gurobi time. Each summary includes exact IDs and timing counts; no timeout imputation.",
+    "ratios": "ABC/Gurobi observed run seconds, not matched-hardware speedups. Preparation is separate; combined ratios require explicit source.prepare_plus_run_comparable=true.",
+    "cohorts": "Audited ReLUSplitter depth/original-model descriptors, matched published MNIST outcome claims, or exact ACOPF networks and audited property classes. Unavailable labels remain explicit. No cross-study pooling."
+  },
+  "structural_width_groups": [],
+  "unmatched_abc": [
+    {
+      "row": 1,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop9.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.131918704,
+      "preparation_seconds": 21.538719897,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 2,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop7.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.986316913,
+      "preparation_seconds": 19.529136517,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 3,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop2.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.069524669,
+      "preparation_seconds": 19.421880866,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 4,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop8.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.999753715,
+      "preparation_seconds": 19.407906693,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 5,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.80884309,
+      "preparation_seconds": 19.446593346,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 6,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop6.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.996646957,
+      "preparation_seconds": 19.396777818,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 7,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop12.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.013907894,
+      "preparation_seconds": 19.44172292,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 8,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop13.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.001773975,
+      "preparation_seconds": 19.449473413,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 9,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop11.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.035316189,
+      "preparation_seconds": 19.414925901,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 10,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop1.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 6.004792589,
+      "preparation_seconds": 19.390508017,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 11,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.982248279,
+      "preparation_seconds": 19.396966645,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 12,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop14.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.022623199,
+      "preparation_seconds": 19.406901182,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 13,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop10.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.996385079,
+      "preparation_seconds": 19.419857724,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 14,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/14_ieee_prop5.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.029582291,
+      "preparation_seconds": 19.387276491,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 20,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/300_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 75.216856226,
+      "preparation_seconds": 22.676247362,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 21,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/300_ieee_prop105.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.770772552,
+      "preparation_seconds": 19.504150284,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 22,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/300_ieee_prop2.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 6.134151062,
+      "preparation_seconds": 19.402097494,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 23,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/300_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 276.376908524,
+      "preparation_seconds": 20.510802549,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 24,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop9.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.585142782,
+      "preparation_seconds": 21.042569161,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 25,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop7.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.558575013,
+      "preparation_seconds": 19.396026768,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 26,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop2.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.594456208,
+      "preparation_seconds": 19.398375029,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 27,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop8.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.545480088,
+      "preparation_seconds": 19.400422842,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 28,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.512027854,
+      "preparation_seconds": 19.394719356,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 29,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop6.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.566045036,
+      "preparation_seconds": 19.407861327,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 30,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop12.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.542843659,
+      "preparation_seconds": 19.438474865,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 31,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop13.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.54112753,
+      "preparation_seconds": 19.382476206,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 32,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop11.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.55758282,
+      "preparation_seconds": 19.384414326,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 33,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop1.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 6.062600569,
+      "preparation_seconds": 19.408552352,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 34,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.639232496,
+      "preparation_seconds": 19.400166702,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 35,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop14.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.548376346,
+      "preparation_seconds": 19.409617806,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 36,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop10.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.535109738,
+      "preparation_seconds": 19.443359611,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 37,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/14_ieee_prop5.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.555943999,
+      "preparation_seconds": 19.427248053,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 38,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/118_ieee_prop2.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 77.69233453,
+      "preparation_seconds": 21.205078689,
+      "artifact_sha256": {
+        "vnnlib": "20a27fab8e8e5f110fcfcb8d8159a4876c3fdcdc39ff3769930c017ef72fd1c7"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 39,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/118_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 24.386241558,
+      "preparation_seconds": 19.478843193,
+      "artifact_sha256": {
+        "vnnlib": "66f03e8e0c0dea3f1f7804e2792cb97aee8e6c1d67be25d8150b03fd4e2eea58"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 40,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/118_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 26.285860571,
+      "preparation_seconds": 19.461893214,
+      "artifact_sha256": {
+        "vnnlib": "89cbe8898abbd6d628d48a929d24f7eb1b19c6307ae6046e139bc027898a1d1a"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 41,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/118_ieee_prop5.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 5.905206305,
+      "preparation_seconds": 19.524951568,
+      "artifact_sha256": {
+        "vnnlib": "2604fa91d81cf8ec17d6e1d9209c23fd611e1b56ec110c4100a34faf284fa3e9"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 42,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-nonresidual.onnx",
+      "property": "vnnlib/118_ieee_prop6.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.70251645,
+      "preparation_seconds": 19.380896887,
+      "artifact_sha256": {
+        "vnnlib": "09ecf4257bda06fdbf43118763c34d7376c9eb728d7f46906945005d1c0bdceb"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 43,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop9.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.856594821,
+      "preparation_seconds": 20.923695592,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 44,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop7.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.786240561,
+      "preparation_seconds": 19.410763163,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 45,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop2.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.85624464,
+      "preparation_seconds": 19.384077451,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 46,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop8.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.789269688,
+      "preparation_seconds": 19.399243285,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 47,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.712828834,
+      "preparation_seconds": 19.408319736,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 48,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop6.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.792860494,
+      "preparation_seconds": 19.404003594,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 49,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop12.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.821793356,
+      "preparation_seconds": 19.396861641,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 50,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop13.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.783760477,
+      "preparation_seconds": 19.421875595,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 51,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop11.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.784515062,
+      "preparation_seconds": 19.374815062,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 52,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop1.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.808368088,
+      "preparation_seconds": 19.386315647,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 53,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.029991616,
+      "preparation_seconds": 19.401580151,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 54,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop14.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.800394806,
+      "preparation_seconds": 19.401177175,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 55,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop10.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.799210904,
+      "preparation_seconds": 19.418756841,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 56,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/14_ieee_ml4acopf.onnx",
+      "property": "vnnlib/14_ieee_prop5.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.785914656,
+      "preparation_seconds": 19.367899858,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 57,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/300_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 79.183889662,
+      "preparation_seconds": 22.507277238,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 58,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/300_ieee_prop105.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.244473685,
+      "preparation_seconds": 19.489227157,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 59,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/300_ieee_prop2.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 6.151468912,
+      "preparation_seconds": 19.402656579,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 60,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/300_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 313.180126112,
+      "preparation_seconds": 19.332948236,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 61,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/118_ieee_prop2.vnnlib",
+      "outcome": "timeout",
+      "raw_outcome": "timeout",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 607.788178023,
+      "preparation_seconds": 21.779804708,
+      "artifact_sha256": {
+        "vnnlib": "20a27fab8e8e5f110fcfcb8d8159a4876c3fdcdc39ff3769930c017ef72fd1c7"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 62,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/118_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 25.482689508,
+      "preparation_seconds": 19.439580913,
+      "artifact_sha256": {
+        "vnnlib": "66f03e8e0c0dea3f1f7804e2792cb97aee8e6c1d67be25d8150b03fd4e2eea58"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 63,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/118_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 27.338587728,
+      "preparation_seconds": 19.438030499,
+      "artifact_sha256": {
+        "vnnlib": "89cbe8898abbd6d628d48a929d24f7eb1b19c6307ae6046e139bc027898a1d1a"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 64,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/118_ieee_prop5.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.123120349,
+      "preparation_seconds": 19.469347881,
+      "artifact_sha256": {
+        "vnnlib": "2604fa91d81cf8ec17d6e1d9209c23fd611e1b56ec110c4100a34faf284fa3e9"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 65,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+      "property": "vnnlib/118_ieee_prop6.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 8.088559149,
+      "preparation_seconds": 19.456154354,
+      "artifact_sha256": {
+        "vnnlib": "09ecf4257bda06fdbf43118763c34d7376c9eb728d7f46906945005d1c0bdceb"
+      },
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 66,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf.onnx",
+      "property": "vnnlib/300_ieee_prop3.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 27.393858683,
+      "preparation_seconds": 21.98336461,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 67,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf.onnx",
+      "property": "vnnlib/300_ieee_prop105.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 7.985156332,
+      "preparation_seconds": 19.537712838,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 68,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf.onnx",
+      "property": "vnnlib/300_ieee_prop2.vnnlib",
+      "outcome": "sat",
+      "raw_outcome": "sat",
+      "validation": "strict",
+      "check_status": "published_cache_row_and_witness_verified_execution_unbound",
+      "run_seconds": 6.210085112,
+      "preparation_seconds": 19.440534247,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 69,
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "network": "onnx/300_ieee_ml4acopf.onnx",
+      "property": "vnnlib/300_ieee_prop4.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 14.444493426,
+      "preparation_seconds": 19.307872751,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    },
+    {
+      "row": 70,
+      "category": "inconsistent_paths",
+      "version": "1.0",
+      "network": "onnx/test_nano.onnx",
+      "property": "vnnlib/test_nano.vnnlib",
+      "outcome": "unsat",
+      "raw_outcome": "unsat",
+      "validation": null,
+      "check_status": "not_applicable",
+      "run_seconds": 5.787142915,
+      "preparation_seconds": 19.19837343,
+      "artifact_sha256": {},
+      "execution_artifact_binding": false
+    }
+  ],
+  "populations": {
+    "candidate_matched": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004"
+    ],
+    "execution_bound": [],
+    "abc_only": [
+      "0000",
+      "0002"
+    ],
+    "both_same_answer": [
+      "0001",
+      "0003",
+      "0004"
+    ]
+  },
+  "counts": {
+    "abc_only": 2,
+    "both_same_answer": 3
+  },
+  "outcomes": {
+    "gurobi": {
+      "unknown": 2,
+      "unsat": 3
+    },
+    "abc": {
+      "unsat": 5
+    }
+  },
+  "unresolved_reasons": {
+    "gurobi": {
+      "timeout": 1,
+      "validation_failed": 1
+    },
+    "abc": {}
+  },
+  "scoring": {
+    "accepted_sat_subset": {
+      "ids": [],
+      "gurobi_points": 0,
+      "abc_points": 0,
+      "ids_by_tool": {
+        "gurobi": [],
+        "abc": []
+      },
+      "abc_execution_binding_required": true
+    },
+    "unassessed_unsat_ids": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004"
+    ],
+    "full_subset_points": null,
+    "missing_inputs": [
+      "Execution-bound benchmark identities for published measurements and checks",
+      "Complete artifact-matched participating-tool conflict context for UNSAT and category normalization"
+    ]
+  },
+  "runtime": {
+    "per_tool": {
+      "gurobi": {
+        "all_recorded": {
+          "ids": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 5,
+            "sum": 710.5832750003319,
+            "min": 3.218548124888912,
+            "median": 10.1399171249941,
+            "max": 600.0145108331926
+          }
+        },
+        "solved": {
+          "ids": [
+            "0001",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 3,
+            "sum": 100.42884704214521,
+            "min": 3.218548124888912,
+            "median": 5.735618167091161,
+            "max": 91.47468075016513
+          }
+        },
+        "preparation": {
+          "ids": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 5,
+            "sum": 0.0,
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "abc": {
+        "all_recorded": {
+          "ids": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 5,
+            "sum": 154.464707744,
+            "min": 7.931145067,
+            "median": 9.618825788,
+            "max": 105.509718394
+          }
+        },
+        "solved": {
+          "ids": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 5,
+            "sum": 154.464707744,
+            "min": 7.931145067,
+            "median": 9.618825788,
+            "max": 105.509718394
+          }
+        },
+        "preparation": {
+          "ids": [
+            "0000",
+            "0001",
+            "0002",
+            "0003",
+            "0004"
+          ],
+          "seconds": {
+            "count": 5,
+            "sum": 99.270814954,
+            "min": 19.39806613,
+            "median": 19.525217551,
+            "max": 21.132091634
+          }
+        }
+      }
+    },
+    "paired_same_answer": {
+      "ids": [
+        "0001",
+        "0003",
+        "0004"
+      ],
+      "gurobi_run_seconds": {
+        "count": 3,
+        "sum": 100.42884704214521,
+        "min": 3.218548124888912,
+        "median": 5.735618167091161,
+        "max": 91.47468075016513
+      },
+      "abc_run_seconds": {
+        "count": 3,
+        "sum": 25.494154352000002,
+        "min": 7.931145067,
+        "median": 7.944183497,
+        "max": 9.618825788
+      },
+      "abc_over_gurobi_ratio_of_sums": 0.25385290285470785,
+      "median_abc_over_gurobi_run_ratio": 1.382788190557376,
+      "prepare_plus_run_ratio_ids": [],
+      "median_abc_over_gurobi_prepare_plus_run_ratio": null
+    }
+  },
+  "provenance": {
+    "experiment_context": {
+      "hardware": {
+        "platform": "macOS-26.6.2-arm64-arm-64bit",
+        "machine": "arm64",
+        "processor": "arm",
+        "logical_cpus": 10,
+        "hw.memsize": "17179869184",
+        "hw.physicalcpu": "10",
+        "machdep.cpu.brand_string": "Apple M4"
+      },
+      "execution": {
+        "threads": 1,
+        "sequential": true,
+        "preparation_analysis": false
+      },
+      "revision": {
+        "git_commit": "9b954b35a438d9f549760db95fe6196fd42155ed",
+        "source_sha256": {
+          "src/nvvcomp_gurobi/__init__.py": "5037aeb736fd12183790bd49ba11511a5d4fdaef51682895c7513700898bdbc8",
+          "src/nvvcomp_gurobi/_construction.py": "183ca4d47d12f5279b639ea9521f1d9e5b31ca75a6c76fb1f50cdad1ea5ad968",
+          "src/nvvcomp_gurobi/_format.py": "257baa7a2053e6bfd820cc105d55295be59baee7ad4aedaaf7a81968ff15d6e4",
+          "src/nvvcomp_gurobi/_interpretation.py": "73d45a7927b3723906e34b5276a180a42c1e48d4880efd2cb49936b1d23bd8d9",
+          "src/nvvcomp_gurobi/_tensor_dag.py": "b3d8bb5e6de8bc96305453b72da3ea62bd2828c2afe2e757394cc5d88815ae93",
+          "src/nvvcomp_gurobi/_vendor/LICENSE": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c",
+          "src/nvvcomp_gurobi/_vendor/__init__.py": "3909efc44f5d14dcee5e61e3d4beed771d81c3111b588e5f33c2e39e2c528b1d",
+          "src/nvvcomp_gurobi/_vendor/counterexamples.py": "1f926f16d16ced7aa26d113b1f4fc3a2a1f383fffbe62c9e0acfdd760ca9bd28",
+          "src/nvvcomp_gurobi/_vendor/sources.json": "034078ea743311496ca6af16b3da3be9d6e5848f6a82015872f7e55c6ab1a259",
+          "src/nvvcomp_gurobi/_vendor/vnnlib_v1.py": "f1731b74d3c20419cf5a70a7065b772f585a1ba2f82a1bcd0b1fc7b5c8d3c576",
+          "src/nvvcomp_gurobi/_worker.py": "b8e1676922f57e7700a58e80cf5ea82180362dca1884c5460ad1987526f9d67f",
+          "src/nvvcomp_gurobi/comparison.py": "56fb07f6be040835f14cb331b6453977964f3f99651cc94dad0ddb8e70589abb",
+          "src/nvvcomp_gurobi/competition.py": "4aea8500609af76ffe11ca1349dc27d275042fb1c55e12a3eeca8cf5f77f2472",
+          "src/nvvcomp_gurobi/experiment.py": "839317d20dc5a96718fc801bfea7a746d7e62d0210561e88580195f89d837996",
+          "src/nvvcomp_gurobi/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "src/nvvcomp_gurobi/verification.py": "6fd8455dbc8ebf7b8da67c039879c2d05a4539e022bbefd04354292e89f7bc56",
+          "uv.lock": "f429e6502e43024f9132aae8042dc83a2a0fb99d298f1ce39cbb2e88a7bf9d2b"
+        }
+      },
+      "packages": {
+        "onnx": "1.21.0",
+        "numpy": "2.2.6",
+        "onnxruntime": "1.26.0"
+      },
+      "python": "3.12.16",
+      "reference_revisions": {
+        "benchmark": "303f2327a8e8411efc4457da03d2016ce42733cf",
+        "rules": "b0ec5ac3c8f39262f07a1c67919fbb89fa42a245",
+        "validator_scoring": "eea564f5d0a8751d8321a409214db14d03f452b8",
+        "runner": "3d5a8848169fc5f0cc03ab9722865235e9857f16"
+      },
+      "measurement_commits": {
+        "0000": "f9dd28aa57279e435d07b8dc5e69bb2eb9b45c1c",
+        "0001": "9b954b35a438d9f549760db95fe6196fd42155ed",
+        "0002": "9b954b35a438d9f549760db95fe6196fd42155ed",
+        "0003": "9b954b35a438d9f549760db95fe6196fd42155ed",
+        "0004": "9b954b35a438d9f549760db95fe6196fd42155ed"
+      },
+      "measurement_source_policy": "All measurement commits have the exact maintained-source and lockfile hashes recorded in revision.source_sha256.",
+      "audit_seconds": 0.6565543750766665
+    },
+    "acquisition_seconds": 20.482279707910493,
+    "published": {
+      "results_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+      "benchmark_revision": "303f2327a8e8411efc4457da03d2016ce42733cf",
+      "category": "ml4acopf_2024",
+      "version": "1.0",
+      "results_csv": "raw/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+      "benchmark_tree_url": "https://api.github.com/repos/VNN-COMP/vnncomp2026_benchmarks/git/trees/303f2327a8e8411efc4457da03d2016ce42733cf?recursive=1",
+      "benchmark_tree_sha256": "58e9fb79dafe91d662b7ca6efae7e13f298e375affb2b0402f52ed8c18d0bbb6",
+      "manifest_sha256": "473d65e4247729162129d112d6388b0c942c9daed27438a77f38e58e608d022d",
+      "selected_manifest_sha256": "7de4f05ef426b97418f9c40f8e2e33d1b87f8495d88a12896fbcb2a959ec4fb9",
+      "selection": "exact ./onnx/118_ieee_ml4acopf.onnx",
+      "acquisition_source_sha256": "d1473d1621f0799017d6c32fd5d6346a381f230c57ea3d901053d9f7306b505b",
+      "artifacts": {
+        "onnx/118_ieee_ml4acopf.onnx": {
+          "sha256": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+          "stored_sha256": "b6b2b4420e78481bd8536ab878af9385881314dc19bf3caedf3003749aed3054",
+          "git_blob": "8a1e0591432c0c140aeebc1672b2b256fb4b0d6e",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/onnx/118_ieee_ml4acopf.onnx.gz"
+        },
+        "vnnlib/118_ieee_prop2.vnnlib": {
+          "sha256": "20a27fab8e8e5f110fcfcb8d8159a4876c3fdcdc39ff3769930c017ef72fd1c7",
+          "stored_sha256": "6480a626761c6ecf3542f2fcabd51f0d221e643d95e2784cc122470734d9ba38",
+          "git_blob": "faf7f76a8cdfc8ecebdffe805513ef5320774c75",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop2.vnnlib.gz"
+        },
+        "vnnlib/118_ieee_prop4.vnnlib": {
+          "sha256": "66f03e8e0c0dea3f1f7804e2792cb97aee8e6c1d67be25d8150b03fd4e2eea58",
+          "stored_sha256": "4cdf722b0e48095df087b4bf77b4a270b76bdfd50bdc80b2fa258124edd62af4",
+          "git_blob": "93f647b30163fa85e979c66adb9d0bcd8aa9adb8",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop4.vnnlib.gz"
+        },
+        "vnnlib/118_ieee_prop3.vnnlib": {
+          "sha256": "89cbe8898abbd6d628d48a929d24f7eb1b19c6307ae6046e139bc027898a1d1a",
+          "stored_sha256": "55798e6c8f9227e01aad3b53102bf7a9d2066aa11014a22577649c99e04315a1",
+          "git_blob": "9d0b5f456990cc2fdfad693d42fe99a23ed99e7b",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop3.vnnlib.gz"
+        },
+        "vnnlib/118_ieee_prop5.vnnlib": {
+          "sha256": "2604fa91d81cf8ec17d6e1d9209c23fd611e1b56ec110c4100a34faf284fa3e9",
+          "stored_sha256": "943cf7daacba005cf000efa25f1ab79e35edc21f37dd15350a4ad846a7aaef0a",
+          "git_blob": "c5d43a4c50c4fe349797c73df5c0a725ccac5a88",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop5.vnnlib.gz"
+        },
+        "vnnlib/118_ieee_prop6.vnnlib": {
+          "sha256": "09ecf4257bda06fdbf43118763c34d7376c9eb728d7f46906945005d1c0bdceb",
+          "stored_sha256": "313c034ca109f781d57a6b403071a61c73fb21760305cd3ffb553b1576e857c4",
+          "git_blob": "56adc2f36cbd8b5b2f595818935970926d6e2086",
+          "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop6.vnnlib.gz"
+        }
+      },
+      "files": [
+        {
+          "path": "raw/LICENSE",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/LICENSE",
+          "sha256": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c"
+        },
+        {
+          "path": "raw/README.md",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/README.md",
+          "sha256": "cd83a8600ce489dc36d12bef663d748afe71775d2ec8a3affb2cbe18aa35579f"
+        },
+        {
+          "path": "raw/SCORING/process_results.py.txt",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/process_results.py",
+          "sha256": "2d396e1aad58694cc9d1cae7c8a0bce2cdd92b0c89371b70f757b89181ddc2bc"
+        },
+        {
+          "path": "raw/SCORING/settings.py.txt",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/settings.py",
+          "sha256": "dbd190e5cd127a1e1ef8caa19d6416cf6c0d2e94e7698b9b22e96d43661d2039"
+        },
+        {
+          "path": "raw/SCORING/cex_checks.py.txt",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/cex_checks.py",
+          "sha256": "695fcd436ddf354d6dd206fdac64f7c52a045bfb56edf0f2bfaa8b30e7dacfc5"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+          "sha256": "0e2c54bb6e504ed965583e30b39dc442e675324033bc6445adb927791912d6c5"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.gz",
+          "sha256": "c265df0667076a45d657e638cf8376ff9f97e94b30dcdd61a175ec3e052d516c"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.check.json",
+          "sha256": "92ef016a8d73b90dd5e47c9a6c158ac1112a532e5398170ceece28f04d8e856c"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.gz",
+          "sha256": "59871e86ec02fc32572323cb0b05f300518bfa48a45847f979d22f3538933e75"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.check.json",
+          "sha256": "ecbabe9404bad5ddec6edf42febb8c8e6304e1aca2780a167ef6c5c9b2d13708"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.gz",
+          "sha256": "823685fe76e8291d017aa8d1907c6c30e3a9a1507d03c1ad0fe6011f8f9874a0"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.check.json",
+          "sha256": "74982b7aabf82ff5c8ecdd1725b0dafa153b576b22c7d5dc4a9c4ce9919c3ed4"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.gz",
+          "sha256": "2461c807362dfae616dfa46d623777cc92b0467086997541824a4a6eea3f2212"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.check.json",
+          "sha256": "fe52bfd0e65bb96e3202ddbf303d5233c2442492a737b0f2b6f4514261944013"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.gz",
+          "sha256": "94f9fb7955026cbd07ead04610f04de33f2cc482d545c936c79054584708a530"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.check.json",
+          "sha256": "98d7745fd8fe7fbdcc43c847a84e72bef73f5fccabe9d6dc50fb3a467aa25bdf"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.gz",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.gz",
+          "sha256": "3b5988b5cc0e35451032982b9d15552f4dee5dbd7c58b5a044036c28bbc4ddde"
+        },
+        {
+          "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.check.json",
+          "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.check.json",
+          "sha256": "ac384ba277e17f729a40aa5e90326f3639679845a6cb736857e6e18851dc1235"
+        },
+        {
+          "path": "source-instances.csv",
+          "sha256": "473d65e4247729162129d112d6388b0c942c9daed27438a77f38e58e608d022d"
+        },
+        {
+          "path": "instances.csv",
+          "sha256": "7de4f05ef426b97418f9c40f8e2e33d1b87f8495d88a12896fbcb2a959ec4fb9"
+        }
+      ],
+      "execution_artifact_binding": false,
+      "limitations": [
+        "Published CSV and check caches do not pin execution benchmark bytes or commit",
+        "ABC execution hardware, resources, tool revision and environment are absent from this result folder"
+      ]
+    },
+    "experiment_sha256": "e89e658ec69ba00b829726f26188175c72a82d8032300f56d2c265b86a5c6fc8",
+    "comparison_source_sha256": "0d4cef2ca52ab6f6b5fc4441bf5b8dce021f3b097a2538ccf0a6d2abf8b868f3",
+    "published_source_sha256": "5b32446d5b6a7855034433f07ea40f81f3be0199022fcf727414b34585a8bf1a",
+    "record_sha256": {
+      "0000.json": "f3a1e6d946244ebab3f9c5e4607e9284b4a9b80b21638fa73610611848e9b995",
+      "0001.json": "39c12d2fefd78bd491cb25bf7e8737608a290633a63359af318cf7bc473af655",
+      "0002.json": "d68809f29940dd17cdab1cfb6409d7e130f37a62220a1dcae8d76217c41b1adc",
+      "0003.json": "baa0c1a4039790a0610d9849b21bda62e95490f89e94216125d628275ec992e0",
+      "0004.json": "7070e12dc0add8acf281da05a962e90079d9bca7a2e85bee94bc796397f1d2a0"
+    }
+  }
+}

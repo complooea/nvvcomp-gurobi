@@ -1,0 +1,156 @@
+{
+  "results_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+  "benchmark_revision": "303f2327a8e8411efc4457da03d2016ce42733cf",
+  "category": "ml4acopf_2024",
+  "version": "1.0",
+  "results_csv": "raw/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+  "benchmark_tree_url": "https://api.github.com/repos/VNN-COMP/vnncomp2026_benchmarks/git/trees/303f2327a8e8411efc4457da03d2016ce42733cf?recursive=1",
+  "benchmark_tree_sha256": "58e9fb79dafe91d662b7ca6efae7e13f298e375affb2b0402f52ed8c18d0bbb6",
+  "manifest_sha256": "473d65e4247729162129d112d6388b0c942c9daed27438a77f38e58e608d022d",
+  "selected_manifest_sha256": "7de4f05ef426b97418f9c40f8e2e33d1b87f8495d88a12896fbcb2a959ec4fb9",
+  "selection": "exact ./onnx/118_ieee_ml4acopf.onnx",
+  "acquisition_source_sha256": "d1473d1621f0799017d6c32fd5d6346a381f230c57ea3d901053d9f7306b505b",
+  "artifacts": {
+    "onnx/118_ieee_ml4acopf.onnx": {
+      "sha256": "3d0349900e62a5a4f9150ecca398ab1b87a718ece18cccc52b6f808b58161834",
+      "stored_sha256": "b6b2b4420e78481bd8536ab878af9385881314dc19bf3caedf3003749aed3054",
+      "git_blob": "8a1e0591432c0c140aeebc1672b2b256fb4b0d6e",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/onnx/118_ieee_ml4acopf.onnx.gz"
+    },
+    "vnnlib/118_ieee_prop2.vnnlib": {
+      "sha256": "20a27fab8e8e5f110fcfcb8d8159a4876c3fdcdc39ff3769930c017ef72fd1c7",
+      "stored_sha256": "6480a626761c6ecf3542f2fcabd51f0d221e643d95e2784cc122470734d9ba38",
+      "git_blob": "faf7f76a8cdfc8ecebdffe805513ef5320774c75",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop2.vnnlib.gz"
+    },
+    "vnnlib/118_ieee_prop4.vnnlib": {
+      "sha256": "66f03e8e0c0dea3f1f7804e2792cb97aee8e6c1d67be25d8150b03fd4e2eea58",
+      "stored_sha256": "4cdf722b0e48095df087b4bf77b4a270b76bdfd50bdc80b2fa258124edd62af4",
+      "git_blob": "93f647b30163fa85e979c66adb9d0bcd8aa9adb8",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop4.vnnlib.gz"
+    },
+    "vnnlib/118_ieee_prop3.vnnlib": {
+      "sha256": "89cbe8898abbd6d628d48a929d24f7eb1b19c6307ae6046e139bc027898a1d1a",
+      "stored_sha256": "55798e6c8f9227e01aad3b53102bf7a9d2066aa11014a22577649c99e04315a1",
+      "git_blob": "9d0b5f456990cc2fdfad693d42fe99a23ed99e7b",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop3.vnnlib.gz"
+    },
+    "vnnlib/118_ieee_prop5.vnnlib": {
+      "sha256": "2604fa91d81cf8ec17d6e1d9209c23fd611e1b56ec110c4100a34faf284fa3e9",
+      "stored_sha256": "943cf7daacba005cf000efa25f1ab79e35edc21f37dd15350a4ad846a7aaef0a",
+      "git_blob": "c5d43a4c50c4fe349797c73df5c0a725ccac5a88",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop5.vnnlib.gz"
+    },
+    "vnnlib/118_ieee_prop6.vnnlib": {
+      "sha256": "09ecf4257bda06fdbf43118763c34d7376c9eb728d7f46906945005d1c0bdceb",
+      "stored_sha256": "313c034ca109f781d57a6b403071a61c73fb21760305cd3ffb553b1576e857c4",
+      "git_blob": "56adc2f36cbd8b5b2f595818935970926d6e2086",
+      "source_path": "benchmarks/ml4acopf_2024/1.0/vnnlib/118_ieee_prop6.vnnlib.gz"
+    }
+  },
+  "files": [
+    {
+      "path": "raw/LICENSE",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/LICENSE",
+      "sha256": "b2f0968580a87febdb5efa95e3295f68c5e2800ed7ed8054cfee80f9dbcfe61c"
+    },
+    {
+      "path": "raw/README.md",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/README.md",
+      "sha256": "cd83a8600ce489dc36d12bef663d748afe71775d2ec8a3affb2cbe18aa35579f"
+    },
+    {
+      "path": "raw/SCORING/process_results.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/process_results.py",
+      "sha256": "2d396e1aad58694cc9d1cae7c8a0bce2cdd92b0c89371b70f757b89181ddc2bc"
+    },
+    {
+      "path": "raw/SCORING/settings.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/settings.py",
+      "sha256": "dbd190e5cd127a1e1ef8caa19d6416cf6c0d2e94e7698b9b22e96d43661d2039"
+    },
+    {
+      "path": "raw/SCORING/cex_checks.py.txt",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/SCORING/cex_checks.py",
+      "sha256": "695fcd436ddf354d6dd206fdac64f7c52a045bfb56edf0f2bfaa8b30e7dacfc5"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/results.csv",
+      "sha256": "0e2c54bb6e504ed965583e30b39dc442e675324033bc6445adb927791912d6c5"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.gz",
+      "sha256": "c265df0667076a45d657e638cf8376ff9f97e94b30dcdd61a175ec3e052d516c"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-residual_14_ieee_prop1.counterexample.check.json",
+      "sha256": "92ef016a8d73b90dd5e47c9a6c158ac1112a532e5398170ceece28f04d8e856c"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.gz",
+      "sha256": "59871e86ec02fc32572323cb0b05f300518bfa48a45847f979d22f3538933e75"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-nonresidual_300_ieee_prop2.counterexample.check.json",
+      "sha256": "ecbabe9404bad5ddec6edf42febb8c8e6304e1aca2780a167ef6c5c9b2d13708"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.gz",
+      "sha256": "823685fe76e8291d017aa8d1907c6c30e3a9a1507d03c1ad0fe6011f8f9874a0"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/14_ieee_ml4acopf-linear-nonresidual_14_ieee_prop1.counterexample.check.json",
+      "sha256": "74982b7aabf82ff5c8ecdd1725b0dafa153b576b22c7d5dc4a9c4ce9919c3ed4"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.gz",
+      "sha256": "2461c807362dfae616dfa46d623777cc92b0467086997541824a4a6eea3f2212"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/118_ieee_ml4acopf-linear-nonresidual_118_ieee_prop5.counterexample.check.json",
+      "sha256": "fe52bfd0e65bb96e3202ddbf303d5233c2442492a737b0f2b6f4514261944013"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.gz",
+      "sha256": "94f9fb7955026cbd07ead04610f04de33f2cc482d545c936c79054584708a530"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf-linear-residual_300_ieee_prop2.counterexample.check.json",
+      "sha256": "98d7745fd8fe7fbdcc43c847a84e72bef73f5fccabe9d6dc50fb3a467aa25bdf"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.gz",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.gz",
+      "sha256": "3b5988b5cc0e35451032982b9d15552f4dee5dbd7c58b5a044036c28bbc4ddde"
+    },
+    {
+      "path": "raw/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.check.json",
+      "url": "https://raw.githubusercontent.com/VNN-COMP/vnncomp2026_results/eea564f5d0a8751d8321a409214db14d03f452b8/alpha_beta_crown/2026_ml4acopf_2024/300_ieee_ml4acopf_300_ieee_prop2.counterexample.check.json",
+      "sha256": "ac384ba277e17f729a40aa5e90326f3639679845a6cb736857e6e18851dc1235"
+    },
+    {
+      "path": "source-instances.csv",
+      "sha256": "473d65e4247729162129d112d6388b0c942c9daed27438a77f38e58e608d022d"
+    },
+    {
+      "path": "instances.csv",
+      "sha256": "7de4f05ef426b97418f9c40f8e2e33d1b87f8495d88a12896fbcb2a959ec4fb9"
+    }
+  ],
+  "execution_artifact_binding": false,
+  "limitations": [
+    "Published CSV and check caches do not pin execution benchmark bytes or commit",
+    "ABC execution hardware, resources, tool revision and environment are absent from this result folder"
+  ]
+}

@@ -49,3 +49,8 @@ and tool environment are unavailable. ACOPF is not pooled with MNIST,
 ReLUSplitter, or the MVP. The [comprehensive report](../proof-comparison-analysis.md)
 interprets each population separately and connects the findings to #2, without
 ABC bound-tightness claims or predictions about other solver populations.
+
+The [ACOPF analysis](../proof-comparison-analysis.md#acopf-grid-size-property-classes-and-runtime)
+covers IEEE-14, IEEE-118 and IEEE-300 as separate saved populations. This IEEE-14 archive
+and its historical calculation fingerprints remain unchanged. The linked old
+review does not approve the newer implementation or narrative revisions.

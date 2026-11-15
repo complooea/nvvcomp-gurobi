@@ -161,6 +161,86 @@ def test_study_cohorts_use_matched_published_outcomes_and_audited_classes(
         assert evidence["cohorts"][dimension]["unmatched"]["ids"] == ["0000"]
 
 
+def test_acopf_model_class_cohorts_keep_same_property_numbers_separate():
+    audit, records, published = saved_pair()
+    audit["category"] = "ml4acopf_2024"
+    audit["instances"] = []
+    records.clear()
+    template = published["records"].pop()
+    for ident, grid, kind, outcome in [
+        ("0000", 118, "physical_residual", "unsat"),
+        ("0001", 300, "physical_residual", "unknown"),
+        ("0002", 300, "structural_output_bound", "unsat"),
+    ]:
+        entry = {
+            **saved_pair()[0]["instances"][0],
+            "id": ident,
+            "network": f"./onnx/{grid}_ieee_ml4acopf.onnx",
+            "property": f"./vnnlib/{grid}_ieee_prop{4 if ident == '0002' else 2}.vnnlib",
+            "property_class": kind,
+        }
+        audit["instances"].append(entry)
+        records[ident] = {
+            **copy.deepcopy(entry),
+            "result": {
+                "outcome": outcome,
+                "validation": None,
+                "reason": "timeout" if outcome == "unknown" else "infeasible",
+                "timings": {"total": 2},
+            },
+        }
+        published["records"].append(
+            {
+                **template,
+                "category": audit["category"],
+                "network": entry["network"],
+                "property": entry["property"],
+                "outcome": "unsat",
+                "validation": None,
+            }
+        )
+    variant = {
+        **published["records"][0],
+        "network": "onnx/118_ieee_ml4acopf-linear-residual.onnx",
+    }
+    published["records"].append(variant)
+    evidence = compare(audit, records, published)
+    cohorts = evidence["cohorts"]["network_property_class"]
+    residual = cohorts["onnx/118_ieee_ml4acopf.onnx: physical_residual"]
+    assert residual["selected_count"] == 1
+    assert residual["paired_unsat"]["ids"] == ["0000"]
+    larger = cohorts["onnx/300_ieee_ml4acopf.onnx: physical_residual"]
+    assert larger["ids"] == ["0001"]
+    assert larger["unresolved_ids"]["gurobi"] == ["0001"]
+    assert larger["unresolved_reasons"]["gurobi"] == {"timeout": ["0001"]}
+    assert larger["paired_unsat"]["abc_over_gurobi_ratio_of_sums"] is None
+    assert evidence["unmatched_abc"] == [variant]
+
+
+@pytest.mark.parametrize(
+    "gtime,atime,gout,validation,expected",
+    [
+        (0, 8, "unsat", None, []),
+        (None, 8, "unsat", None, []),
+        (2, None, "unsat", None, []),
+        (101, 8, "unsat", None, []),
+        (2, 101, "unsat", None, []),
+        (2, 8, "sat", "invalid", []),
+        (2, 8, "unsat", None, ["0000"]),
+    ],
+)
+def test_common_proof_timing_eligibility(gtime, atime, gout, validation, expected):
+    audit, records, published = saved_pair()
+    records["0000"]["result"].update(outcome=gout, validation=validation)
+    records["0000"]["result"]["timings"]["total"] = gtime
+    published["records"][0].update(outcome="unsat", validation=None, run_seconds=atime)
+    paired = compare(audit, records, published)["proof"]["paired_unsat"]
+    assert paired["ids"] == expected
+    assert paired["abc_over_gurobi_ratio_of_sums"] == (4 if expected else None)
+    assert paired["gurobi_run_seconds"]["sum"] == (2 if expected else None)
+    assert paired["abc_run_seconds"]["sum"] == (8 if expected else None)
+
+
 @pytest.mark.parametrize(
     "change, expected",
     [
@@ -404,8 +484,9 @@ def test_structural_width_groups_hold_other_dimensions_fixed_not_weights_or_prop
         ("correct", False, None, "gurobi_only"),
     ],
 )
+@pytest.mark.parametrize("retained", [True, False])
 def test_cli_regenerates_evidence_from_raw_saved_files_without_networks(
-    tmp_path, check_result, identity, classification, status
+    tmp_path, check_result, identity, classification, status, retained
 ):
     audit, records, published = saved_pair()
     experiment = tmp_path / "experiment"
@@ -450,6 +531,7 @@ def test_cli_regenerates_evidence_from_raw_saved_files_without_networks(
     files = [
         {"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
         for p in source_dir.iterdir()
+        if retained or p.name == "results.csv"
     ]
     source = {
         "category": "family",
@@ -479,8 +561,11 @@ def test_cli_regenerates_evidence_from_raw_saved_files_without_networks(
     ]
     subprocess.run(command, check=True, capture_output=True, text=True)
     evidence = json.loads((output / "evidence.json").read_text())
-    assert evidence["counts"] == {status: 1}
-    assert evidence["instances"][0]["abc"]["validation"] == classification
+    assert evidence["counts"] == {status if retained else "gurobi_only": 1}
+    abc = evidence["instances"][0]["abc"]
+    assert abc["validation"] == (classification if retained else None)
+    if not retained:
+        assert abc["check_status"] == "unretained_check_or_witness"
     assert "0000" in (output / "instances.md").read_text()
     summary = (output / "statistics.md").read_text()
     assert "Common UNSAT" in summary

@@ -99,8 +99,14 @@ def _paired_statistics(rows: list[dict]) -> dict:
     abc_times = [row["abc"]["run_seconds"] for row in rows]
     return {
         "ids": [row["id"] for row in rows],
-        "gurobi_run_seconds": _statistics(gurobi_times),
-        "abc_run_seconds": _statistics(abc_times),
+        "gurobi_run_seconds": {
+            **_statistics(gurobi_times),
+            "sum": sum(gurobi_times) if rows else None,
+        },
+        "abc_run_seconds": {
+            **_statistics(abc_times),
+            "sum": sum(abc_times) if rows else None,
+        },
         "abc_over_gurobi_ratio_of_sums": sum(abc_times) / sum(gurobi_times)
         if rows
         else None,
@@ -179,6 +185,20 @@ def _proof_summary(rows: list[dict]) -> dict:
     summary["numerical_unsat_counts"] = {
         tool: len(ids) for tool, ids in summary["numerical_unsat_ids"].items()
     }
+    summary["unresolved_reasons"] = {}
+    for tool in ("gurobi", "abc"):
+        reasons = defaultdict(list)
+        for row in rows:
+            if row["id"] in summary["unresolved_ids"][tool]:
+                saved = measurement(row, tool)
+                reason = (
+                    saved.get("reason")
+                    or saved.get("check_status")
+                    or saved.get("outcome")
+                    or row["comparison"]
+                )
+                reasons[reason].append(row["id"])
+        summary["unresolved_reasons"][tool] = dict(reasons)
     return summary
 
 
@@ -186,7 +206,7 @@ def _cohorts(instances: list[dict], category: str) -> dict:
     dimensions = {
         "relusplitter_2026": ("hidden_relu_layers", "original_model_group"),
         "dist_shift_2023": ("published_outcome",),
-        "ml4acopf_2024": ("property_class",),
+        "ml4acopf_2024": ("property_class", "network", "network_property_class"),
     }.get(category, ())
     cohorts = {}
     for dimension in dimensions:
@@ -199,7 +219,11 @@ def _cohorts(instances: list[dict], category: str) -> dict:
                     else "unmatched"
                 )
             elif dimension == "property_class":
-                label = row.get(dimension, "unavailable")
+                label = row.get(dimension) or "unavailable"
+            elif dimension == "network":
+                label = str(Path(row["network"]))
+            elif dimension == "network_property_class":
+                label = f"{Path(row['network'])}: {row.get('property_class') or 'unavailable'}"
             else:
                 label = str(row["architecture"].get(dimension, "unavailable"))
             groups[label].append(row)
@@ -430,7 +454,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
             "unresolved": "No deadline-qualified accepted solve, including missing/corrupt/identity-unverified measurements, errors, timeouts and rejected or unvalidated SAT.",
             "paired_unsat": "Common deadline-qualified numerical UNSAT, both run times available, positive Gurobi time. Each summary includes exact IDs and timing counts; no timeout imputation.",
             "ratios": "ABC/Gurobi observed run seconds, not matched-hardware speedups. Preparation is separate; combined ratios require explicit source.prepare_plus_run_comparable=true.",
-            "cohorts": "Audited ReLUSplitter depth/original-model descriptors, matched published MNIST outcome claims, or audited ACOPF property classes. Unavailable labels remain explicit. No cross-study pooling.",
+            "cohorts": "Audited ReLUSplitter depth/original-model descriptors, matched published MNIST outcome claims, or exact ACOPF networks and audited property classes. Unavailable labels remain explicit. No cross-study pooling.",
         },
         "structural_width_groups": groups,
         "unmatched_abc": [
@@ -503,6 +527,7 @@ def compare(audit: dict, records: dict, published: dict) -> dict:
 
 def _published(directory: Path) -> dict:
     source = json.loads((directory / "source.json").read_text())
+    retained = {item["path"] for item in source["files"]}
     for item in source["files"]:
         if (
             hashlib.sha256((directory / item["path"]).read_bytes()).hexdigest()
@@ -546,7 +571,16 @@ def _published(directory: Path) -> dict:
                 check_path = path.parent / (stem + ".check.json")
                 witness_path = path.parent / (stem + ".gz")
                 check_status = "missing_check"
-                if check_path.exists() and witness_path.exists():
+                if (
+                    check_path.exists()
+                    and witness_path.exists()
+                    and not all(
+                        str(p.relative_to(directory)) in retained
+                        for p in (check_path, witness_path)
+                    )
+                ):
+                    check_status = "unretained_check_or_witness"
+                elif check_path.exists() and witness_path.exists():
                     check = json.loads(check_path.read_text())
                     row_for_check = [*raw[:4], "violated", raw[5]]
                     row_hash = hashlib.sha256(
@@ -717,6 +751,8 @@ def main():
                 "packages",
                 "python",
                 "reference_revisions",
+                "measurement_commits",
+                "measurement_source_policy",
                 "audit_seconds",
             )
             if key in audit
