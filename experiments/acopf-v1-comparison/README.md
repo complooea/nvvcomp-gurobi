@@ -50,7 +50,7 @@ ReLUSplitter, or the MVP. The [comprehensive report](../proof-comparison-analysi
 interprets each population separately and connects the findings to #2, without
 ABC bound-tightness claims or predictions about other solver populations.
 
-The [larger-grid follow-up](../proof-comparison-analysis.md#larger-acopf-size-progression)
-uses IEEE-118 and IEEE-300 as separate saved populations. This IEEE-14 archive
+The [ACOPF analysis](../proof-comparison-analysis.md#acopf-grid-size-property-classes-and-runtime)
+covers IEEE-14, IEEE-118 and IEEE-300 as separate saved populations. This IEEE-14 archive
 and its historical calculation fingerprints remain unchanged. The linked old
 review does not approve the newer implementation or narrative revisions.

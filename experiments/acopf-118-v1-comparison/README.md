@@ -27,7 +27,7 @@ Ratios are observed ABC/Gurobi whole-run seconds, not hardware-normalized
 speedups. Both residual pairs favor Gurobi, but the structural voltage check
 favors ABC and dominates the all-class sum ratio; that sum and the individual
 median point in different directions. The unresolved thermal query is not a
-paired proof. See the [size-progression analysis](../proof-comparison-analysis.md#larger-acopf-size-progression)
+paired proof. See the [size-progression analysis](../proof-comparison-analysis.md#coverage-and-size-progression-by-class)
 for interpretation alongside separate IEEE-14 and IEEE-300 populations.
 
 ## Sources and accounting
@@ -73,5 +73,5 @@ uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-11
 uv run --locked python scripts/acquire_comparison.py .benchmarks/acopf-118-v1 new-118-published --category ml4acopf_2024 --acopf-model 118
 ```
 
-See [reproduction guidance](../../docs/comparisons.md#larger-acopf-follow-up-22)
+See [reproduction guidance](../../docs/comparisons.md#acopf-comparisons)
 and the [revision-scoped review](../reviews/larger-acopf-comparison-review.md).

@@ -163,25 +163,30 @@ experiment hardware/resource/revision context alongside input hashes. The MVP
 archive remains the separate population for subsequent analysis relating to #2.
 
 See the [comprehensive comparison report](../experiments/proof-comparison-analysis.md)
-for interpretation of all four completed studies, exact
+for interpretation of all workloads, including all three ACOPF grid sizes, exact
 evidence links, timing denominators and claim limitations. Regeneration does not
 overwrite this report; reconsider it if input fingerprints or definitions change.
 The [experiment index](../experiments/README.md) separates the research narrative,
 archived measurements/calculations and scoped review records.
 
-## Larger ACOPF follow-up (#22)
+## ACOPF comparisons
 
-The same `compare` interface and CLI consume all nine saved original queries,
-with separate [IEEE-118](../experiments/acopf-118-v1-comparison/README.md) and
+The same `compare` interface and CLI consume the original saved ACOPF queries,
+with separate [IEEE-14](../experiments/acopf-v1-comparison/README.md),
+[IEEE-118](../experiments/acopf-118-v1-comparison/README.md) and
 [IEEE-300](../experiments/acopf-300-v1-comparison/README.md) reports:
 
 ```sh
+uv run --locked python -m nvvcomp_gurobi.comparison experiments/acopf-v1 experiments/acopf-v1-comparison/published fresh-14 --category ml4acopf_2024 --version 1.0
 uv run --locked python -m nvvcomp_gurobi.comparison experiments/acopf-118-v1 experiments/acopf-118-v1-comparison/published fresh-118 --category ml4acopf_2024 --version 1.0
 uv run --locked python -m nvvcomp_gurobi.comparison experiments/acopf-300-v1 experiments/acopf-300-v1-comparison/published fresh-300 --category ml4acopf_2024 --version 1.0
 ```
 
 Compare `evidence.json`, `instances.md` and `statistics.md` with their respective
 archives, then regenerate into another fresh directory to check determinism.
+IEEE-14's historical generated files predate the current schema/provenance;
+its current regeneration preserves numerical populations but is not byte-identical
+to that historical snapshot.
 No solver, license, benchmark artifact reads, network or fresh replay is required.
 To regenerate the experiment reports separately, copy each saved `experiment.json`
 and `records/` into a fresh directory and use `python -m nvvcomp_gurobi.experiment report`.

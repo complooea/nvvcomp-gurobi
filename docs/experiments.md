@@ -133,7 +133,7 @@ effect. Cross-tool interpretation belongs in the comparison analysis.
 The completed archives now have separate solver-free
 [IEEE-118](../experiments/acopf-118-v1-comparison/README.md) and
 [IEEE-300](../experiments/acopf-300-v1-comparison/README.md) comparisons.
-[Comparison reproduction](comparisons.md#larger-acopf-follow-up-22) consumes saved
+[Comparison reproduction](comparisons.md#acopf-comparisons) consumes saved
 measurements; it does not repeat this acquisition/audit/run workflow or either
 verifier. IEEE-14 stays a separate saved reference.
 

@@ -1,10 +1,9 @@
 # Experiment reports and evidence
 
 Start with the [comprehensive Gurobi–ABC comparison](proof-comparison-analysis.md).
-It covers the shallow-ReLU MVP originating in #2 and the three expanded studies
-in #7, plus the larger-ACOPF follow-up in #20/#22. Each workload retains its own
-population, deadlines and runtime denominators;
-there is no pooled score or speed ratio.
+It covers shallow ReLU, deeper ReLU, internal-sigmoid MNIST and ACOPF across
+IEEE-14/118/300. Each workload and grid size retains its own population, deadlines
+and runtime denominators; there is no pooled score or speed ratio.
 
 | Study | Gurobi measurements and formulation | Published-ABC comparison evidence |
 | --- | --- | --- |

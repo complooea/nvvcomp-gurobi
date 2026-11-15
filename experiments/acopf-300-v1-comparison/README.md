@@ -23,7 +23,7 @@ ABC/Gurobi ratio are both **0.407851** (n=1). ABC has lower observed time on
 this pair. The structural common-proof population is empty: IDs `[]`, n=0,
 timing sums/ratios **unavailable**, not zero runtime or an inferred speedup.
 The published SAT thermal check is falsification evidence, not proof runtime.
-See the [size-progression analysis](../proof-comparison-analysis.md#larger-acopf-size-progression).
+See the [size-progression analysis](../proof-comparison-analysis.md#coverage-and-size-progression-by-class).
 
 ## Sources, SAT cache and accounting
 
@@ -75,5 +75,5 @@ uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-30
 uv run --locked python scripts/acquire_comparison.py .benchmarks/acopf-300-v1 new-300-published --category ml4acopf_2024 --acopf-model 300
 ```
 
-See [reproduction guidance](../../docs/comparisons.md#larger-acopf-follow-up-22)
+See [reproduction guidance](../../docs/comparisons.md#acopf-comparisons)
 and the [revision-scoped review](../reviews/larger-acopf-comparison-review.md).

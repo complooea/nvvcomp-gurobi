@@ -143,7 +143,7 @@ See the [revision-scoped review](../reviews/larger-acopf-experiment-review.md)
 for final checks and independent review. Historical archives are unchanged;
 published ABC verdicts are not local correctness oracles. See the subsequent
 [saved-result comparison](../acopf-300-v1-comparison/README.md) and
-[size-progression analysis](../proof-comparison-analysis.md#larger-acopf-size-progression);
+[size-progression analysis](../proof-comparison-analysis.md#coverage-and-size-progression-by-class);
 these consume, rather than change, the measurements.
 
 ## Reproduction and handoff
