@@ -99,20 +99,47 @@ records. Its proof-only timings below filter `instances` for mutual numerical UN
 
 ### Runtime on commonly completed numerical proofs only
 
-| Population | n | Gurobi run sum s | ABC run sum s | ABC/Gurobi ratio of sums | Median individual ABC/Gurobi ratio |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Shallow-ReLU MVP common UNSAT | 33 | 34.0201 | 210.2795 | 6.1810 | 5.504 |
-| ReLUSplitter common UNSAT | 1 | 22.284 | 6.526 | 0.2929 | 0.2929 |
-| MNIST common UNSAT | 42 | 5,259.061 | 255.022 | 0.04849 | 0.05247 |
-| IEEE-14 ACOPF common UNSAT, all classes | 13 | 2.3325 | 101.3780 | 43.464 | 51.841 |
-| IEEE-14 ACOPF physical-residual common UNSAT | 12 | 2.1821 | 93.6652 | 42.924 | 51.868 |
-| IEEE-118 common UNSAT, all classes | 3 | 100.428847 | 25.494154 | 0.253853 | 1.382788 |
-| IEEE-118 physical-residual common UNSAT | 2 | 8.954166 | 15.875329 | 1.772954 | 1.925519 |
-| IEEE-118 structural-output-bound common UNSAT | 1 | 91.474681 | 9.618826 | 0.105153 | 0.105153 |
-| IEEE-300 physical-residual common UNSAT (also all classes) | 1 | 19.578616 | 7.985156 | 0.407851 | 0.407851 |
-| IEEE-300 structural-output-bound common UNSAT | 0 | unavailable | unavailable | unavailable | unavailable |
+**Overall common-proof runtime:** one row per workload/grid, including all its
+property classes. These are the common-UNSAT subsets of the selected populations
+in the completion table above, not all selected queries.
 
-Sources: each non-MVP JSON's `proof.paired_unsat`; class-specific rows use
+| Workload / grid | Common proofs n | Gurobi run sum s | ABC run sum s | ABC/Gurobi ratio of sums | Median individual ABC/Gurobi ratio |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Shallow-ReLU MVP | 33 | 34.020135 | 210.279466 | 6.181030 | 5.504431 |
+| ReLUSplitter | 1 | 22.283989 | 6.526107 | 0.292861 | 0.292861 |
+| Sigmoid MNIST | 42 | 5,259.060665 | 255.022016 | 0.048492 | 0.052465 |
+| IEEE-14 ACOPF | 13 | 2.332472 | 101.377996 | 43.463749 | 51.841219 |
+| IEEE-118 ACOPF | 3 | 100.428847 | 25.494154 | 0.253853 | 1.382788 |
+| IEEE-300 ACOPF | 1 | 19.578616 | 7.985156 | 0.407851 | 0.407851 |
+
+**ACOPF physical-residual proofs:** use this like-for-class view for the
+physical-graph discussion, rather than the all-class rows above.
+
+| Grid | Common proofs n | Gurobi run sum s | ABC run sum s | ABC/Gurobi ratio of sums | Median individual ABC/Gurobi ratio |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| IEEE-14 | 12 | 2.182123 | 93.665168 | 42.923864 | 51.867973 |
+| IEEE-118 | 2 | 8.954166 | 15.875329 | 1.772954 | 1.925519 |
+| IEEE-300 | 1 | 19.578616 | 7.985156 | 0.407851 | 0.407851 |
+
+**ACOPF structural-output-bound proofs:** a separate task class, not additional
+physical-residual evidence.
+
+| Grid | Common proofs n | Gurobi run sum s | ABC run sum s | ABC/Gurobi ratio of sums | Median individual ABC/Gurobi ratio |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| IEEE-14 | 1 | 0.150349 | 7.712829 | 51.299473 | 51.299473 |
+| IEEE-118 | 1 | 91.474681 | 9.618826 | 0.105153 | 0.105153 |
+
+IEEE-300 has **no common structural proof**: both selected structural checks
+timed out locally. It therefore has no structural runtime estimate, not a zero
+runtime. Its one overall common proof is the same physical-residual query shown
+in the physical table. The class tables partition each grid's overall common-proof
+population; they are **not additional queries** and must not be added to the
+overall row. Counts reconcile as 13 = 12 + 1, 3 = 2 + 1 and 1 = 1 + 0.
+The [ACOPF coverage table](#coverage-and-size-progression-by-class) retains every
+selected class, including the empty common-proof population, alongside exact IDs.
+
+Sources: the overall table uses each non-MVP JSON's `proof.paired_unsat`;
+the MVP uses its mutual-UNSAT instance records. Class-specific tables use
 `cohorts.property_class.<class>.paired_unsat`. Exact included IDs and
 unrounded numbers live there. Ratios above one mean lower observed Gurobi time;
 ratios below one mean lower observed ABC time. The median is of individual
