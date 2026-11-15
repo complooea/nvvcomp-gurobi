@@ -47,8 +47,8 @@ and review records. See [comparison instructions](docs/comparisons.md) for repro
 
 ## Experimental resources
 
-All four prior studies—shallow-ReLU MVP, ReLUSplitter, sigmoid MNIST and IEEE-14
-ACOPF—used **one Gurobi solver thread (`Threads=1`)**, continued for IEEE-118/300.
+All experiments—shallow-ReLU MVP, ReLUSplitter, sigmoid MNIST and IEEE-14/118/300
+ACOPF—used **one Gurobi solver thread (`Threads=1`)**.
 This is a local experimental choice, **not a VNN-COMP requirement**. Queries ran
 sequentially; witness replay separately uses **12 intra/inter-op CPU threads**, so
 the whole process is not single-threaded. Published ABC execution hardware,
