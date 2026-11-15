@@ -11,6 +11,46 @@ from nvvcomp_gurobi.experiment import (
 from nvvcomp_gurobi.verification import VerificationResult
 
 
+@pytest.mark.parametrize(
+    ("grid", "properties"), [(118, [2, 4, 3, 5, 6]), (300, [3, 105, 2, 4])]
+)
+def test_acquire_larger_acopf_selection(tmp_path, monkeypatch, grid, properties):
+    import io
+
+    selected = "".join(
+        f"./onnx/{grid}_ieee_ml4acopf.onnx,./vnnlib/{grid}_ieee_prop{i}.vnnlib,600\n"
+        for i in properties
+    ).encode()
+    source = (
+        b"./onnx/14_ieee_ml4acopf.onnx,./vnnlib/14_ieee_prop2.vnnlib,600\n"
+        + selected
+        + f"./onnx/{grid}_ieee_ml4acopf-linear-residual.onnx,./vnnlib/alias.vnnlib,600\n".encode()
+        + b"./onnx/smoke.onnx,./vnnlib/smoke.vnnlib,1\n"
+    )
+    urls = []
+
+    def download(url, timeout):
+        urls.append(url)
+        return io.BytesIO(source if url.endswith("instances.csv") else b"artifact")
+
+    monkeypatch.setattr("urllib.request.urlopen", download)
+    path = acquire_category(
+        tmp_path / "acopf", category="ml4acopf_2024", acopf_model=grid
+    )
+    assert path.read_bytes() == selected
+    assert (path.parent / "source-instances.csv").read_bytes() == source
+    assert len(urls) == len(properties) + 2
+    assert not any(
+        "linear-residual" in u or "smoke" in u or "/14_ieee" in u for u in urls
+    )
+    assert (
+        acquire_category(path.parent, category="ml4acopf_2024", acopf_model=grid)
+        == path
+    )
+    with pytest.raises(ValueError, match="selection differs"):
+        acquire_category(path.parent, category="ml4acopf_2024", acopf_model=14)
+
+
 def test_acquire_pinned_acopf_exact_model_only(tmp_path, monkeypatch):
     import io
 
@@ -37,6 +77,31 @@ def test_acquire_pinned_acopf_exact_model_only(tmp_path, monkeypatch):
     assert not any("linear-residual.onnx" in u or "118_ieee" in u for u in urls)
     assert all("/303f2327a8e8411efc4457da03d2016ce42733cf/" in u for u in urls)
     assert acquire_category(path.parent, category="ml4acopf_2024") == path
+
+
+@pytest.mark.parametrize("damage", ["missing", "duplicate", "wrong_budget"])
+def test_acquire_larger_acopf_rejects_incomplete_population(
+    tmp_path, monkeypatch, damage
+):
+    import io
+
+    rows = [
+        f"./onnx/300_ieee_ml4acopf.onnx,./vnnlib/300_ieee_prop{i}.vnnlib,600\n"
+        for i in (3, 105, 2, 4)
+    ]
+    if damage == "missing":
+        rows.pop()
+    elif damage == "duplicate":
+        rows.append(rows[0])
+    else:
+        rows[0] = rows[0].replace(",600", ",1")
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda *_args, **_kwargs: io.BytesIO("".join(rows).encode()),
+    )
+    with pytest.raises(ValueError, match="Pinned"):
+        acquire_category(tmp_path / "acopf", category="ml4acopf_2024", acopf_model=300)
+    assert not (tmp_path / "acopf/acquisition.json").exists()
 
 
 def test_acquire_pinned_mnist_only(tmp_path, monkeypatch):
@@ -89,6 +154,71 @@ def test_acopf_audit_and_report_distinguish_property_classes(
         "structural_output_bound": {"listed": 1, "eligible": 1, "unsat": 1},
         "physical_residual": {"listed": 1, "eligible": 1, "unsat": 1},
     }
+
+
+def test_larger_acopf_run_and_solver_free_report(tmp_path, dag_instance_factory):
+    instance = dag_instance_factory("(assert (<= Y_0 0))")
+    queries = [
+        (118, 2, "thermal_limit_residual"),
+        (118, 4, "voltage_bounds"),
+        (118, 3, "generation_bounds"),
+        (118, 5, "power_balance_residual"),
+        (118, 6, "power_balance_residual"),
+        (300, 3, "generation_bounds"),
+        (300, 105, "power_balance_residual"),
+        (300, 2, "thermal_limit_residual"),
+        (300, 4, "voltage_bounds"),
+    ]
+    for grid, number, _ in queries:
+        (tmp_path / f"{grid}_ieee_ml4acopf.onnx").write_bytes(
+            instance.onnx_path.read_bytes()
+        )
+        (tmp_path / f"{grid}_ieee_prop{number}.vnnlib").write_bytes(
+            instance.vnnlib_path.read_bytes()
+        )
+    manifest = tmp_path / "instances.csv"
+    manifest.write_text(
+        "".join(
+            f"{grid}_ieee_ml4acopf.onnx,{grid}_ieee_prop{number}.vnnlib,600\n"
+            for grid, number, _ in queries
+        )
+    )
+    output = tmp_path / "experiment"
+    calls = []
+
+    def verification(original, limits):
+        assert limits.timeout_seconds == 600
+        assert limits.threads == 1
+        calls.append(original.vnnlib_path.name)
+        return VerificationResult(reason="timeout")
+
+    audit = run_experiment(manifest, output, verification=verification)
+    assert [e["property_kind"] for e in audit["instances"]] == [
+        kind for _, _, kind in queries
+    ]
+    assert [e["property_class"] for e in audit["instances"]].count(
+        "structural_output_bound"
+    ) == 4
+    saved = (output / "records/0000.json").read_bytes()
+    run_experiment(manifest, output, verification=verification)
+    assert len(calls) == 9
+    assert (output / "records/0000.json").read_bytes() == saved
+    for path in tmp_path.glob("*.onnx"):
+        path.unlink()
+    summary = report_experiment(output)
+    assert summary["recorded"] == summary["listed"] == 9
+    assert summary["missing"] == 0
+    assert summary["corrupt"] == []
+    assert summary["unresolved_reasons"] == {"timeout": 9}
+    assert summary["property_classes"] == {
+        "physical_residual": {"listed": 5, "eligible": 5, "unknown": 5},
+        "structural_output_bound": {"listed": 4, "eligible": 4, "unknown": 4},
+    }
+    assert summary["runtime_seconds"]["all"]["count"] == 0
+    assert "the other 12" not in (output / "report.md").read_text()
+    report = (output / "report.md").read_bytes()
+    assert report_experiment(output) == summary
+    assert (output / "report.md").read_bytes() == report
 
 
 def test_smooth_audit_retains_shape_and_actual_formulation(
