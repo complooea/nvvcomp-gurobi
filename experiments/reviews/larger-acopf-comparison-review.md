@@ -59,3 +59,32 @@ Evidence SHA256s:
   selected counts, outcome counts and stored/decompressed artifact identities
   reconciled with saved evidence. Historical measurement/generated paths have
   no diff against the baseline.
+
+## Independent review
+
+Reviewed implementation commit **`29040f7`** against baseline
+`5e30a3ec0eaa6f91eb1d7278935ba0ddcddeadd6`, using two fresh-context
+**GPT-6 Astra medium** reviewers. This section records that revision's review;
+it is not blanket approval of later edits.
+
+### Standards
+
+No actionable findings. No documented-standard violations or baseline smells
+warranting changes were identified. The reviewer checked acquisition boundaries,
+saved-evidence calculations, strengthened cache acceptance, behavior tests at
+the documented seams, and historical review scope. Tooling-enforced issues were
+excluded; supplied passing checks were not independently rerun.
+
+### Spec
+
+No actionable findings against #22 and parent #20: no missing/partial
+requirements, scope creep or wrong-looking implementation identified. The
+reviewer independently checked retained-file hashes, selected published-row and
+source-hash correspondence, selected SAT cache row/witness correspondence, record
+runtimes, common-proof ratios/medians and all-run sums against the narrative.
+All nine queries, separate model/classes, unresolved outcomes, unavailable empty
+timings, conditional provenance and causal limits were retained. Reported test
+and regeneration results were supplied context, not independently rerun.
+
+**Summary:** Standards 0 findings; Spec 0 findings. Both reviews were read-only,
+without benchmark execution or fresh published witness replay.
