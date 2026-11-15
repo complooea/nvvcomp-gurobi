@@ -61,3 +61,19 @@ was written after the reviewed archive revision; raw records and reporter source
 were not changed by it.
 
 **Summary: Standards 0 findings; Spec 0 actionable findings.**
+
+## Audit documentation organization
+
+Independent GPT-6 Astra medium Standards and Spec reviews of
+`git diff 0e0c036...2753e7a` found **no actionable findings**.
+Model-specific audit descriptors and classifications now live in the respective
+archive READMEs; shared procedures live in
+[docs/experiments.md](../../docs/experiments.md#acopf-semantic-audit-procedure).
+The standalone audit was removed and incoming links updated.
+
+Source pins, scalar counts, output indices, property distinctions and
+attribute/operator semantics are preserved. Records, generated reports and
+`proof-comparison-analysis.md` are unchanged, with no new numerical or
+cross-tool claims. All repository hooks and 20 experiment-interface tests
+passed; local links/anchors and migrated graph counts were checked.
+Both reviews were read-only, with no tests or benchmarks run by reviewers.
