@@ -1,5 +1,19 @@
 {
   "schema_version": 1,
+  "measurement_commits": {
+    "0000": "f9dd28aa57279e435d07b8dc5e69bb2eb9b45c1c",
+    "0001": "9b954b35a438d9f549760db95fe6196fd42155ed",
+    "0002": "9b954b35a438d9f549760db95fe6196fd42155ed",
+    "0003": "9b954b35a438d9f549760db95fe6196fd42155ed",
+    "0004": "9b954b35a438d9f549760db95fe6196fd42155ed"
+  },
+  "measurement_source_policy": "All measurement commits have the exact maintained-source and lockfile hashes recorded in revision.source_sha256.",
+  "supplementary_audit": {
+    "ids": ["0000"],
+    "created_utc": "2026-11-15T11:36:41.063273+00:00",
+    "audit_seconds": 0.14435491594485939,
+    "artifact_architecture_hardware_packages_match_primary_audit": true
+  },
   "created_utc": "2026-11-15T09:30:45.292612+00:00",
   "manifest_sha256": "7de4f05ef426b97418f9c40f8e2e33d1b87f8495d88a12896fbcb2a959ec4fb9",
   "manifest_path": "/Users/complooea/.local/share/opencode/worktree/54e14147069e346ee87c551f10dbee3f1ce7f9a7/eager-iguana/.benchmarks/acopf-118-v1/instances.csv",

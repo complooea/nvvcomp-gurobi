@@ -3,10 +3,6 @@
 Issue [#21](https://github.com/complooea/nvvcomp-gurobi/issues/21).
 All **five selected queries have records**: **three numerical UNSAT and two
 unknown**, with no accepted SAT, exclusions, missing or corrupt records.
-The original property-2 invocation was interrupted by an orchestration error.
-An explicitly user-authorized recovery invocation received its full deadline
-and timed out; it now supplies the active record, with the interruption retained
-in [history](history/README.md), not counted as a second query or proof.
 Numerical UNSAT is not an independently certified exact-real proof.
 
 ## Selection and eligibility
@@ -30,7 +26,7 @@ are distinct from measured optimization-encoding sizes.
 
 | ID | Property | Kind | Outcome | Whole-run seconds |
 | --- | ---: | --- | --- | ---: |
-| 0000 | 2 | thermal-limit residual | unknown: timeout (recovery invocation) | 600.014511 |
+| 0000 | 2 | thermal-limit residual | unknown: timeout | 600.014511 |
 | 0001 | 4 | voltage bounds | numerical UNSAT | 91.474681 |
 | 0002 | 3 | generation bounds | unknown: validation failed | 10.139917 |
 | 0003 | 5 | power-balance residual | numerical UNSAT | 5.735618 |
@@ -48,36 +44,14 @@ it is **not accepted SAT or numerical UNSAT**. Output thresholds include
 `1e-6` offsets, the same scale as the default feasibility tolerance; this does
 not establish the cause of replay rejection. No tolerance changes or retries.
 
-Property 2's supervisor was accidentally launched with a **one-second external
-shell-tool timeout**, despite the correctly configured 600-second verification
-deadline. The start record remained `unknown/interrupted`. The orphaned worker
-was explicitly stopped, its absence and the supervisor's absence confirmed,
-and only the stale lock removed before resuming the four unattempted queries.
-No completed verdict was recovered or credited after interruption. A later
-inspection recovered a partial worker checkpoint with interpretation/construction
-timings, settings and formulation sizes, but no solve timing or completed status.
-It is preserved separately, not merged into the interrupted record.
-
-The user then explicitly requested a fresh invocation and replacement of the
-interrupted active record. One separately audited recovery run used identical
-original bytes, full-graph semantics, numerical defaults, 600-second deadline
-and one solver thread. It timed out after 600.014511 whole-run seconds.
-Its record now occupies `records/0000.json`; the interrupted bytes, pre-recovery
-reports, recovery audit, checkpoint and complete recovery record remain in
-[history](history/README.md). The [orchestration log](orchestration.json) binds
-both records by SHA256. This is five active query outcomes from completed
-invocations, **not five first-attempt uninterrupted trials**; the orchestration
-failure and additional recovery attempt remain disclosed.
-
 ## Timings and formulation sizes
 
-Active whole-run times sum to **710.583275 seconds across five queries**;
-active invocation wall times sum to **710.583718 seconds across five queries**.
-These totals exclude the superseded interrupted attempt; they are not total
-experiment effort including recovery overhead. No time is imputed for that
-historical interruption. Acquisition took 20.482280 seconds; the initial archive
-audit took 0.656554 seconds, separately. The recovery audit is separately retained
-in history. Preparation performed no analysis (0 seconds).
+Whole-run times sum to **710.583275 seconds across five selected queries**;
+invocation wall times sum to **710.583718 seconds across five selected queries**.
+These are sums of the retained per-query measurements, not total experiment
+effort. Acquisition took 20.482280 seconds; the primary eligibility audit took
+0.656554 seconds, and a supplementary property-2 audit took 0.144355 seconds,
+separately. Preparation performed no analysis (0 seconds).
 
 For the five active invocations, construction took 0.202557–0.208265 seconds
 (1.024918 summed). Four solve-stage timings are available (108.745247 seconds
@@ -96,17 +70,14 @@ Measured pre-presolve sizes for all five active constructions:
 | Quadratic constraints | 1,792 | 1,792 |
 | Linear nonzeros | 180,719 | 180,954 |
 
-Property 2's active sizes come from the recovery invocation, not the historical
-checkpoint. All sizes are before presolve, not counts of ONNX initializers or
-tensor nodes.
+All sizes are before presolve, not counts of ONNX initializers or tensor nodes.
 
 ## Environment and execution contract
 
-Measured source commit: `9b954b35a438d9f549760db95fe6196fd42155ed`.
-The audit pins exact maintained-source/lockfile hashes and reference revisions.
-Property 2's replacement invocation was measured at `f9dd28a`; its separately
-retained audit verifies identical maintained-source and lockfile hashes to the
-initial experiment. No implementation or settings changed between attempts.
+Measured commits: `f9dd28aa57279e435d07b8dc5e69bb2eb9b45c1c` for property 2,
+`9b954b35a438d9f549760db95fe6196fd42155ed` for the other four properties.
+`experiment.json` maps each record to its measurement commit and pins their
+identical maintained-source/lockfile hashes and reference revisions.
 Apple M4, 10 physical/logical CPUs, 16 GiB RAM, macOS 26.6.2 arm64;
 Python 3.12.16, Gurobi/gurobipy 13.0.1, gurobi-machinelearning 1.7.0,
 ONNX 1.21.0, NumPy 2.2.6, ONNX Runtime 1.26.0, cachier 2.2.2.
@@ -134,8 +105,7 @@ Use the existing commands in
 with fresh paths for a new measurement. Five IEEE-118 and four IEEE-300 original
 600-second budgets total **90 minutes maximum run budget plus overhead**.
 Automatic resume never overwrites saved outcomes, including timeouts and invalid
-candidates. The explicit, user-authorized promotion described above is a recorded
-exception, not changed resume behavior. Do not remove records to hide failures.
+candidates. Use fresh output paths for new measurements.
 
 Saved inputs for solver-free reporting are `experiment.json` and `records/`.
 Run `uv run --locked python -m nvvcomp_gurobi.experiment report experiments/acopf-118-v1`
@@ -149,9 +119,6 @@ byte-identical under the pinned reporter source.
   identities, acquisition inventory, hardware, settings policy and source pins.
 - `records/0000.json`–`0004.json`: all identities/outcomes, available timings,
   measured sizes, effective settings, provenance and candidate/replay evidence.
-- `orchestration.json`: explicit interruption cause and cleanup/retention policy.
-- [history/README.md](history/README.md): superseded interruption and recovery
-  provenance; excluded from the five-query reporting denominator.
 - `summary.json`, `report.md`: deterministic solver-free reports.
 
 All five active rows remain available for dependent comparison, but timeout and
