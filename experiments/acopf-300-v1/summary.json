@@ -1,0 +1,77 @@
+{
+  "reporter_sha256": "839317d20dc5a96718fc801bfea7a746d7e62d0210561e88580195f89d837996",
+  "listed": 4,
+  "eligible": 4,
+  "excluded": 0,
+  "exclusion_reasons": {},
+  "recorded": 4,
+  "missing": 0,
+  "missing_ids": [],
+  "corrupt": [],
+  "solved_reported": 1,
+  "outcomes": {
+    "unknown": 3,
+    "unsat": 1
+  },
+  "validation": {
+    "none": 4
+  },
+  "unresolved_reasons": {
+    "timeout": 3
+  },
+  "property_classes": {
+    "structural_output_bound": {
+      "listed": 2,
+      "eligible": 2,
+      "unknown": 2
+    },
+    "physical_residual": {
+      "listed": 2,
+      "eligible": 2,
+      "unsat": 1,
+      "unknown": 1
+    }
+  },
+  "runtime_seconds": {
+    "all": {
+      "count": 4,
+      "sum": 1819.6558479168452,
+      "min": 19.578616457991302,
+      "median": 600.0201738750329,
+      "max": 600.0368837087881
+    },
+    "solved": {
+      "count": 1,
+      "sum": 19.578616457991302,
+      "min": 19.578616457991302,
+      "median": 19.578616457991302,
+      "max": 19.578616457991302
+    }
+  },
+  "invocation_seconds": {
+    "count": 4,
+    "sum": 1819.6565664173104,
+    "min": 19.578796916175634,
+    "median": 600.0203349795192,
+    "max": 600.0370995420963
+  },
+  "preparation_seconds": {
+    "count": 4,
+    "sum": 0.0,
+    "min": 0.0,
+    "median": 0.0,
+    "max": 0.0
+  },
+  "audit_seconds": 1.871125082951039,
+  "scoring": {
+    "points": null,
+    "accepted_sat_subset_points": 0,
+    "accepted_sat_subset_instances": 0,
+    "reference_revision": "eea564f5d0a8751d8321a409214db14d03f452b8",
+    "missing_inputs": [
+      "Artifact-matched other-tool outcomes and strict witness checks needed to assess conflicts and UNSAT correctness",
+      "Complete participating-tool context for category normalization; cross-tool caches do not bind benchmark artifact hashes"
+    ],
+    "policy": "Pinned get_score awards 10 per accepted solve; time bonus disabled. Strict witnesses can refute UNSAT; tolerance-only witnesses earn SAT credit but cannot refute UNSAT. No score inferred from our own verdicts or filenames."
+  }
+}

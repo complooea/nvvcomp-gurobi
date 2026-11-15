@@ -38,6 +38,51 @@ download, use a new directory rather than trusting a partial cache.
 
 ## Accounting and timing
 
+### Original IEEE-118/300 ACOPF 1.0
+
+Use the existing acquisition interface with `--category ml4acopf_2024` and
+`--acopf-model 118` or `--acopf-model 300` (the default remains 14).
+Each acquisition retains the full source manifest, but selects only the exact
+original model, never its linear/residual variants or smoke rows. Source order
+is preserved: IEEE-118 properties **2, 4, 3, 5, 6** and IEEE-300 properties
+**3, 105, 2, 4**. Missing, duplicate or wrong-budget selected rows abort acquisition.
+
+```sh
+uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-118-v1 --category ml4acopf_2024 --acopf-model 118
+uv run --locked python -m nvvcomp_gurobi.experiment acquire .benchmarks/acopf-300-v1 --category ml4acopf_2024 --acopf-model 300
+uv run --locked python -m nvvcomp_gurobi.experiment audit .benchmarks/acopf-118-v1/instances.csv experiments/acopf-118-v1 --threads 1
+uv run --locked python -m nvvcomp_gurobi.experiment audit .benchmarks/acopf-300-v1/instances.csv experiments/acopf-300-v1 --threads 1
+# Inspect both complete audits before executing either population.
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/acopf-118-v1/instances.csv experiments/acopf-118-v1 --threads 1
+uv run --locked --extra solver python -m nvvcomp_gurobi.experiment run .benchmarks/acopf-300-v1/instances.csv experiments/acopf-300-v1 --threads 1
+uv run --locked python -m nvvcomp_gurobi.experiment report experiments/acopf-118-v1
+uv run --locked python -m nvvcomp_gurobi.experiment report experiments/acopf-300-v1
+```
+
+Use fresh acquisition/output paths for a new measurement; the paths above name
+the retained archives, not permission to replace them. Complete repository checks
+and tiny solver tests first. Run the populations sequentially, without concurrent
+tests or other experiment workloads. All nine queries retain **600-second
+whole-run deadlines: 90 minutes maximum run budget**, plus acquisition, audit,
+supervision and persistence overhead. Preparation performs no analysis and is
+separate; all per-query analysis remains inside the deadline. This is
+competition-aligned timing/accounting, not an official distributed-runner run.
+One Gurobi solver thread is a local study choice, not a competition rule.
+Original-ONNX replay retains 12 intra/inter-op CPU threads; the whole process
+is not single-threaded. Numerical defaults and replay tolerances are unchanged.
+
+All four structural checks concern generation (property 3) or voltage magnitude
+(property 4) bounds. The latter's upstream comment incorrectly says generation.
+The five physical-residual checks concern thermal limits (property 2 on each
+model) or power balance (IEEE-118 properties 5/6, IEEE-300 property 105).
+The complete graph is represented even for structural checks. Interpret these
+as distinct property populations, not partial versus complete graph encodings.
+Missing/corrupt artifacts require repair before execution; genuine unsupported
+semantics are blockers, not permission to shrink the nine-query population.
+See the separate [IEEE-118](../experiments/acopf-118-v1/README.md) and
+[IEEE-300](../experiments/acopf-300-v1/README.md) archives for audit and outcomes.
+Historical IEEE-14 measurements are not rerun or overwritten.
+
 ### IEEE-14 ACOPF 1.0
 
 Use the same workflow with `--category ml4acopf_2024`, benchmark directory
